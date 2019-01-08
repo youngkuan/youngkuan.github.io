@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>yangkuan</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://yoursite.com/"/>
+  <updated>2019-01-08T03:30:03.509Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name>Yang Kuan</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>智慧教育师范应用表格接口规范</title>
+    <link href="http://yoursite.com/2019/01/08/%E6%99%BA%E6%85%A7%E6%95%99%E8%82%B2%E5%B8%88%E8%8C%83%E5%BA%94%E7%94%A8%E8%A1%A8%E6%A0%BC%E6%8E%A5%E5%8F%A3%E8%A7%84%E8%8C%83/"/>
+    <id>http://yoursite.com/2019/01/08/智慧教育师范应用表格接口规范/</id>
+    <published>2019-01-08T03:28:21.000Z</published>
+    <updated>2019-01-08T03:30:03.509Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Yotta系统错误记录及性能优化</title>
+    <link href="http://yoursite.com/2019/01/08/Yotta%E7%B3%BB%E7%BB%9F%E9%94%99%E8%AF%AF%E8%AE%B0%E5%BD%95%E5%8F%8A%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
+    <id>http://yoursite.com/2019/01/08/Yotta系统错误记录及性能优化/</id>
+    <published>2019-01-08T03:28:21.000Z</published>
+    <updated>2019-01-08T04:24:41.428Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="错误记录"><a href="#错误记录" class="headerlink" title="错误记录"></a>错误记录</h2><ol><li>在日志系统运行期间，每隔几天kafka平台就会自动崩溃，控制台窗口关闭，并且重新启动kafka平台也会出现日志文件冲突问题，从而导致日志系统无法正常记录用户行为日志。</li></ol><p>解决方法：</p><ul><li>首先，我们查阅了官网的各种文档，在全面了解kafka的实现原理与应用之后仍然没有找到解决问题的方法。然后我们在StackOverflow和Quora上进行了相关问题的查看，尝试后发现类似问题解决方法，将kafka平台对应的日志文件删除就可以正常启动kafka平台。虽然通过删除日志文件的方式使得日志记录正常进行，但是依旧没有解决每隔几天kafka平台就会自动崩溃的问题，频繁人工启动不稳定的服务耗费人力开销。</li><li>为了彻底解决这个问题，我们维护人员仔细阅读kafka生成的日志文件，了解到崩溃的发生是因为日志文件大小达到阈值时kafka程序会对日志文件重命名，而此时日志文件又被自身所占用，就产生了程序异常，在Apache官网issues下发现这是此版本kafka在windows下的一个错误，所以我们将日志系统整体迁移到linux系统下，将问题完美解决。</li></ul><h2 id="性能优化"><a href="#性能优化" class="headerlink" title="性能优化"></a>性能优化</h2><ol><li>Optimizing MySQL LIKE ‘%string%’ queries</li></ol><ul><li>方法1：建立fulltext索引，全文索引只能用于数据库引擎为MYISAM的数据表，但是全文索引不支持中文；</li><li>方法2：</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;错误记录&quot;&gt;&lt;a href=&quot;#错误记录&quot; class=&quot;headerlink&quot; title=&quot;错误记录&quot;&gt;&lt;/a&gt;错误记录&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;在日志系统运行期间，每隔几天kafka平台就会自动崩溃，控制台窗口关闭，并且重新启动kafka平台也会出现日志文
+      
+    
+    </summary>
+    
+    
+      <category term="工程" scheme="http://yoursite.com/tags/%E5%B7%A5%E7%A8%8B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="http://yoursite.com/2019/01/07/hello-world/"/>
+    <id>http://yoursite.com/2019/01/07/hello-world/</id>
+    <published>2019-01-07T14:12:51.450Z</published>
+    <updated>2019-01-07T14:12:51.451Z</updated>
+    
+    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+</feed>
