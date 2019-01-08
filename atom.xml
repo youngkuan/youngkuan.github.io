@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-01-08T03:30:03.509Z</updated>
+  <updated>2019-01-08T04:24:41.428Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,20 +15,6 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>智慧教育师范应用表格接口规范</title>
-    <link href="http://yoursite.com/2019/01/08/%E6%99%BA%E6%85%A7%E6%95%99%E8%82%B2%E5%B8%88%E8%8C%83%E5%BA%94%E7%94%A8%E8%A1%A8%E6%A0%BC%E6%8E%A5%E5%8F%A3%E8%A7%84%E8%8C%83/"/>
-    <id>http://yoursite.com/2019/01/08/智慧教育师范应用表格接口规范/</id>
-    <published>2019-01-08T03:28:21.000Z</published>
-    <updated>2019-01-08T03:30:03.509Z</updated>
-    
-    <summary type="html">
-    
-    </summary>
-    
-    
-  </entry>
   
   <entry>
     <title>Yotta系统错误记录及性能优化</title>
@@ -55,23 +41,25 @@
   </entry>
   
   <entry>
-    <title>Hello World</title>
-    <link href="http://yoursite.com/2019/01/07/hello-world/"/>
-    <id>http://yoursite.com/2019/01/07/hello-world/</id>
-    <published>2019-01-07T14:12:51.450Z</published>
-    <updated>2019-01-07T14:12:51.451Z</updated>
+    <title>智慧教育师范应用表格接口规范</title>
+    <link href="http://yoursite.com/2019/01/08/%E6%99%BA%E6%85%A7%E6%95%99%E8%82%B2%E5%B8%88%E8%8C%83%E5%BA%94%E7%94%A8%E8%A1%A8%E6%A0%BC%E6%8E%A5%E5%8F%A3%E8%A7%84%E8%8C%83/"/>
+    <id>http://yoursite.com/2019/01/08/智慧教育师范应用表格接口规范/</id>
+    <published>2019-01-08T03:28:21.000Z</published>
+    <updated>2019-01-08T09:19:43.012Z</updated>
     
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
+    <content type="html"><![CDATA[<h1 id="智慧教育-网络学院示范应用"><a href="#智慧教育-网络学院示范应用" class="headerlink" title="智慧教育-网络学院示范应用"></a>智慧教育-网络学院示范应用</h1><h2 id="后端数据访问接口"><a href="#后端数据访问接口" class="headerlink" title="后端数据访问接口"></a>后端数据访问接口</h2><h3 id="主题状态"><a href="#主题状态" class="headerlink" title="主题状态"></a>主题状态</h3><h5 id="1-主题状态表"><a href="#1-主题状态表" class="headerlink" title="1. 主题状态表"></a>1. <strong>主题状态表</strong></h5><table><thead><tr><th>列名</th><th>类型</th><th>长度</th></tr></thead><tbody><tr><td>state_id</td><td>bigint(long)</td><td>20</td></tr><tr><td>domain_id</td><td>bigint(long)</td><td>20</td></tr><tr><td>states</td><td>varchar(string)</td><td>255</td></tr><tr><td>user_id</td><td>bigint(long)</td><td>20</td></tr><tr><td>created_time</td><td>datetime</td><td>1</td></tr><tr><td>modified_time</td><td>datetime</td><td>1</td></tr></tbody></table><blockquote><p>说明：</p></blockquote><blockquote><ul><li>（1）    学习状态：0表示未学习，1表示正在学习，2表示已学习；</li></ul></blockquote><blockquote><ul><li>（2）    states（主题状态列表）形式：学习状态1，学习状态2，学习状态3，……</li></ul></blockquote><blockquote><pre><code>举例： 1， 0， 1， 2，……</code></pre></blockquote><hr><h5 id="2-主题状态接口"><a href="#2-主题状态接口" class="headerlink" title="2.  主题状态接口"></a>2.  <strong>主题状态接口</strong></h5><blockquote><ul><li>（1）    /topicState/getByDomainIdAndUserId</li></ul></blockquote><blockquote><p>查询主题状态，参数</p></blockquote><table><thead><tr><th>long domainId</th><th>long userId</th></tr></thead><tbody><tr><td>课程id</td><td>用户id</td></tr></tbody></table><blockquote><ul><li>（2）    /topicState/saveStateByDomainIdAndUserId</li></ul></blockquote><blockquote><p>保存主题状态，参数</p></blockquote><table><thead><tr><th>long domainId</th><th>String states</th><th>long userId</th></tr></thead><tbody><tr><td>课程id</td><td>主题状态列表</td><td>用户id</td></tr></tbody></table><blockquote><ul><li>（3）    /topicState/saveStateByDomainNameAndUserId</li></ul></blockquote><blockquote><p>保存主题状态，参数</p></blockquote><table><thead><tr><th>long domainName</th><th>String states</th><th>long userId</th></tr></thead><tbody><tr><td>课程名</td><td>主题状态列表</td><td>用户id</td></tr></tbody></table><hr><h3 id="分面状态"><a href="#分面状态" class="headerlink" title="分面状态"></a>分面状态</h3><h5 id="1-分面状态表"><a href="#1-分面状态表" class="headerlink" title="1. 分面状态表"></a>1. <strong>分面状态表</strong></h5><table><thead><tr><th>列名</th><th>类型</th><th>长度</th></tr></thead><tbody><tr><td>state_id</td><td>bigint(long)</td><td>20</td></tr><tr><td>domain_id</td><td>bigint(long)</td><td>20</td></tr><tr><td>topic_id</td><td>bigint(long)</td><td>20</td></tr><tr><td>states</td><td>varchar(string)</td><td>255</td></tr><tr><td>user_id</td><td>bigint(long)</td><td>20</td></tr><tr><td>created_time</td><td>datetime</td><td>1</td></tr><tr><td>modified_time</td><td>datetime</td><td>1</td></tr></tbody></table><blockquote><p>说明：</p></blockquote><blockquote><ul><li>（1）    学习状态：0表示未学习，1表示已在学习；</li></ul></blockquote><blockquote><ul><li>（2）    states（分面状态列表）形式：学习状态1，学习状态2，学习状态3，……</li></ul></blockquote><blockquote><pre><code>举例： 1， 0， 1， 0，……</code></pre></blockquote><h5 id="2-分面状态接口"><a href="#2-分面状态接口" class="headerlink" title="2.  分面状态接口"></a>2.  <strong>分面状态接口</strong></h5><blockquote><ul><li>（1）/facetState/getByDomainIdAndTopicIdAndUserId</li></ul></blockquote><blockquote><p>查询分面状态，参数</p></blockquote><table><thead><tr><th>long domainId</th><th>long userId</th><th>long topicId</th></tr></thead><tbody><tr><td>课程id</td><td>用户id</td><td>主题id</td></tr></tbody></table><blockquote><ul><li>（2）/facetState/saveStateByDomainIdAndTopicIdAndUserId</li></ul></blockquote><blockquote><p>保存分面状态，参数</p></blockquote><table><thead><tr><th>long domainId</th><th>long topicId</th><th>String states</th><th>long userId</th></tr></thead><tbody><tr><td>课程id</td><td>主题id</td><td>分面状态列表</td><td>用户id</td></tr></tbody></table><blockquote><ul><li>（3）/facetState/saveStateByDomainNameAndTopicNameAndUserId</li></ul></blockquote><blockquote><p>保存分面状态，参数</p></blockquote><table><thead><tr><th>string domainName</th><th>string topicName</th><th>String states</th><th>long userId</th></tr></thead><tbody><tr><td>课程名</td><td>主题名</td><td>分面状态列表</td><td>用户id</td></tr></tbody></table><blockquote><ul><li>（4）/facetState/saveStateByDomainIdAndUserId</li></ul></blockquote><blockquote><p>保存分面状态，参数</p></blockquote><table><thead><tr><th>long domainId</th><th>String states</th><th>long userId</th></tr></thead><tbody><tr><td>课程id</td><td>分面状态列表</td><td>用户id</td></tr></tbody></table><blockquote><ul><li>（5）/facetState/saveStateByDomainNameAndUserId</li></ul></blockquote><blockquote><p>保存主题状态，参数</p></blockquote><table><thead><tr><th>long domainName</th><th>String states</th><th>long userId</th></tr></thead><tbody><tr><td>课程名</td><td>分面状态列表</td><td>用户id</td></tr></tbody></table><p><strong><em>注</em></strong>：states：分面状态的矩阵（行（主题）之间以分号隔开，行内以逗号隔开）</p><h2 id="例如：0-0-1-0-0-0-1-1-1-0-1-0-1-1-1-……"><a href="#例如：0-0-1-0-0-0-1-1-1-0-1-0-1-1-1-……" class="headerlink" title="例如：0,0,1,0;0,0,1;1,1,0;1,0,1,1,1;……"></a>例如：0,0,1,0;0,0,1;1,1,0;1,0,1,1,1;……</h2><h3 id="推荐主题"><a href="#推荐主题" class="headerlink" title="推荐主题"></a>推荐主题</h3><h5 id="1-推荐主题表"><a href="#1-推荐主题表" class="headerlink" title="1. 推荐主题表"></a>1. <strong>推荐主题表</strong></h5><table><thead><tr><th>列名</th><th>类型</th><th>长度</th></tr></thead><tbody><tr><td>recommendation_id</td><td>bigint(long)</td><td>20</td></tr><tr><td>domain_id</td><td>bigint(long)</td><td>20</td></tr><tr><td>recommendation_topics</td><td>varchar(string)</td><td>255</td></tr><tr><td>user_id</td><td>bigint(long)</td><td>20</td></tr><tr><td>created_time</td><td>datetime</td><td>1</td></tr><tr><td>modified_time</td><td>datetime</td><td>1</td></tr></tbody></table><blockquote><p>说明：</p></blockquote><blockquote><ul><li>（1）recommendation_topics（推荐主题列表）形式：：推荐主题1 id，推荐主题2 id，推荐主题3 id；推荐主题3 id，推荐主题1 id，推荐主题4 id；……<br>即，不同推荐方式之间以分号隔开，同一推荐方式内的主题id以逗号分隔开</li></ul></blockquote><h5 id="2-2-推荐主题接口"><a href="#2-2-推荐主题接口" class="headerlink" title="2.  2.    推荐主题接口"></a>2.  <strong>2.    推荐主题接口</strong></h5><blockquote><ul><li>（1）    recommendation/getByDomainIdAndUserId</li></ul></blockquote><blockquote><p>查询推荐主题，参数</p></blockquote><table><thead><tr><th>long domainId</th><th>long userId </th></tr></thead><tbody><tr><td>课程id</td><td>用户id</td></tr></tbody></table><blockquote><ul><li>（2）    recommendation/saveRecommendationByDomainIdAndUserId</li></ul></blockquote><blockquote><p>保存推荐主题，参数</p></blockquote><table><thead><tr><th>long domainId</th><th>String recommendationTopics</th><th>long userId</th></tr></thead><tbody><tr><td>课程id</td><td>推荐主题列表</td><td>用户id</td></tr></tbody></table><blockquote><ul><li>（3）    recommendation/saveRecommendationByDomainNameAndUserId</li></ul></blockquote><blockquote><p>保存推荐主题，参数</p></blockquote><table><thead><tr><th>long domainName</th><th>String recommendationTopics</th><th>long userId</th></tr></thead><tbody><tr><td>课程名</td><td>推荐主题列表</td><td>用户id</td></tr></tbody></table><hr>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
+        &lt;h1 id=&quot;智慧教育-网络学院示范应用&quot;&gt;&lt;a href=&quot;#智慧教育-网络学院示范应用&quot; class=&quot;headerlink&quot; title=&quot;智慧教育-网络学院示范应用&quot;&gt;&lt;/a&gt;智慧教育-网络学院示范应用&lt;/h1&gt;&lt;h2 id=&quot;后端数据访问接口&quot;&gt;&lt;a href=&quot;#后
       
     
     </summary>
     
+    
+      <category term="数据库" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     
   </entry>
   
