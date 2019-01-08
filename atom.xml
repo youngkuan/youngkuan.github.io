@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-01-08T10:29:32.567Z</updated>
+  <updated>2019-01-08T13:34:20.326Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Hierarchical Object Detection with Deep Reinforcement Learning</title>
+    <link href="http://yoursite.com/2019/01/08/Hierarchical-Object-Detection-with-Deep-Reinforcement-Learning/"/>
+    <id>http://yoursite.com/2019/01/08/Hierarchical-Object-Detection-with-Deep-Reinforcement-Learning/</id>
+    <published>2019-01-08T13:31:17.000Z</published>
+    <updated>2019-01-08T13:34:20.326Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Hierarchical-Object-Detection-with-Deep-Reinforcement-Learning"><a href="#Hierarchical-Object-Detection-with-Deep-Reinforcement-Learning" class="headerlink" title="Hierarchical Object Detection with Deep Reinforcement Learning"></a>Hierarchical Object Detection with Deep Reinforcement Learning</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><blockquote><p>关键的思想在于关注图像中包含更丰富信息的那些部分并放大它们。</p></blockquote><h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ol><li>考虑区域之间的联系，</li><li>利用top-down的扫描方式，首先获取整个图像，关注局部区域的相关信息，</li><li>基于增强学习训练的代理（agent）有能力检测图像中的对象</li></ol><h2 id="Hierarchical-Object-Detection-Model"><a href="#Hierarchical-Object-Detection-Model" class="headerlink" title="Hierarchical Object Detection Model"></a>Hierarchical Object Detection Model</h2><h6 id="1-Markov-Decision-Process（马尔科夫决策过程）"><a href="#1-Markov-Decision-Process（马尔科夫决策过程）" class="headerlink" title="1. Markov Decision Process（马尔科夫决策过程）"></a><strong>1. Markov Decision Process（马尔科夫决策过程）</strong></h6><blockquote><p>State:当前区域描述符（the descriptor of current region）和记忆向量（memory vector）</p></blockquote><blockquote><p>Actions:move actions和terminal actions</p></blockquote><blockquote><p>Reward:<br>保证move action都是朝着更靠近ground truth的方向移动；<br>当IOU超过threshold，则终止移动。</p></blockquote><h6 id="2-Q-learning"><a href="#2-Q-learning" class="headerlink" title="2. Q-learning"></a><strong>2. Q-learning</strong></h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Q(s,a) = r+\lambda&#123;max&#125;_&#123;a&apos;&#125;Q(s&apos;,a&apos;)</span><br></pre></td></tr></table></figure><h6 id="3-Model"><a href="#3-Model" class="headerlink" title="3. Model"></a><strong>3. Model</strong></h6><ul><li><p>the Image-Zooms model</p><blockquote><p>使用VGG-16提取图像区域特征向量<code>$(7*7*512)$</code>,<br>拼接区域特征向量与记忆向量（memory vector）<code>$(7*7*512+24=25088+24)$</code>,<br>经过两个1024维的全连接层，输出6个可能的动作（actions），<br>反复迭代，直到终止动作</p></blockquote></li><li><p>the Pool45-Crops model<br><img src="/2019/01/08/Hierarchical-Object-Detection-with-Deep-Reinforcement-Learning/Hierarchical-Object-Detection-Models.png" alt="image"></p></li></ul><h6 id="4-Training"><a href="#4-Training" class="headerlink" title="4. Training"></a><strong>4. Training</strong></h6><h2 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h2><h6 id="1-Qualitative-Results"><a href="#1-Qualitative-Results" class="headerlink" title="1. Qualitative Results"></a><strong>1. Qualitative Results</strong></h6><p><img src="/2019/01/08/Hierarchical-Object-Detection-with-Deep-Reinforcement-Learning/aeroplane20180626.png" alt="image"></p><h2 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a><a href="https://github.com/imatge-upc/detection-2016-nipsws" target="_blank" rel="noopener">Implementation</a></h2><h6 id="1-keras实现"><a href="#1-keras实现" class="headerlink" title="1. keras实现"></a><strong>1. keras实现</strong></h6><ul><li>提取区域特征</li></ul><p><img src="/2019/01/08/Hierarchical-Object-Detection-with-Deep-Reinforcement-Learning/vgg16.png" alt="image"></p><ul><li><p>state不断更新，并作为model的输入</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(7*7*512)</span><br></pre></td></tr></table></figure></li><li></li></ul><h2 id="代码问题总结"><a href="#代码问题总结" class="headerlink" title="代码问题总结"></a>代码问题总结</h2><ol><li>数据类型错误<strong>TypeError: slice indices must be integers or None or have an <strong>index</strong> method</strong></li></ol><p>这是由于数组，矩阵等类型数据的下标是整数，而在</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">region_mask[offset[0]:offset[0] + size_mask[0]</span><br><span class="line">                         , offset[1]:offset[1] + size_mask[1]] = 1</span><br></pre></td></tr></table></figure><p>offset是float类型，所以报错，解决方法就是数据类型转换：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">region_mask[int(offset[0]):int(offset[0] + size_mask[0])</span><br><span class="line">                          , int(offset[1]):int(offset[1] + size_mask[1])] = 1</span><br></pre></td></tr></table></figure><ol start="2"><li>VGG16提取图像特征尺寸不对</li></ol><p><img src="/2019/01/08/Hierarchical-Object-Detection-with-Deep-Reinforcement-Learning/error1.png" alt="image"></p><p>解决方法：在图片提取特征之前，对图像进行resize；</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">im = images[z].resize((224, 224))</span><br></pre></td></tr></table></figure><ol start="3"><li>除0错误</li></ol><p><img src="/2019/01/08/Hierarchical-Object-Detection-with-Deep-Reinforcement-Learning/error2.png" alt="image"></p><p>对图像进行resize的位置错误</p><h2 id="问题总结"><a href="#问题总结" class="headerlink" title="问题总结"></a>问题总结</h2><ol><li>问题：记忆向量的哪儿来的？</li><li>问题：哪6个动作？<blockquote><p>move actions:左上、右上、左下、右下和中；<br>terminal actions</p></blockquote></li><li>问题：每个类训练一个模型？<blockquote><p>是的，这篇文章中只训练了飞机类（aeroplane）的检测模型</p></blockquote></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;Hierarchical-Object-Detection-with-Deep-Reinforcement-Learning&quot;&gt;&lt;a href=&quot;#Hierarchical-Object-Detection-with-Deep-Reinforcement-Lear
+      
+    
+    </summary>
+    
+      <category term="科研" scheme="http://yoursite.com/categories/%E7%A7%91%E7%A0%94/"/>
+    
+    
+      <category term="对象检测" scheme="http://yoursite.com/tags/%E5%AF%B9%E8%B1%A1%E6%A3%80%E6%B5%8B/"/>
+    
+  </entry>
   
   <entry>
     <title>Yotta系统错误记录及性能优化</title>
@@ -39,6 +64,31 @@
     
     
       <category term="yotta系统" scheme="http://yoursite.com/tags/yotta%E7%B3%BB%E7%BB%9F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>研究生数学建模：恐怖袭击事件分级</title>
+    <link href="http://yoursite.com/2018/09/15/%E7%A0%94%E7%A9%B6%E7%94%9F%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%EF%BC%9A%E6%81%90%E6%80%96%E8%A2%AD%E5%87%BB%E4%BA%8B%E4%BB%B6%E5%88%86%E7%BA%A7/"/>
+    <id>http://yoursite.com/2018/09/15/研究生数学建模：恐怖袭击事件分级/</id>
+    <published>2018-09-15T13:21:13.000Z</published>
+    <updated>2019-01-08T13:26:04.060Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="研究生数学建模：恐怖袭击事件分级"><a href="#研究生数学建模：恐怖袭击事件分级" class="headerlink" title="研究生数学建模：恐怖袭击事件分级"></a>研究生数学建模：恐怖袭击事件分级</h1><p><strong>特征：人员伤亡、经济损失、时间、地点（人口容量、GDP）等</strong></p><h3 id="财产损失"><a href="#财产损失" class="headerlink" title="财产损失"></a>财产损失</h3><h4 id="特征："><a href="#特征：" class="headerlink" title="特征："></a><strong>特征：</strong></h4><p>攻击类型、武器类型、受害子类型、国家、地区、入选标准（1、2、3、doubtterr）</p><h6 id="攻击类型"><a href="#攻击类型" class="headerlink" title="攻击类型"></a><strong>攻击类型</strong></h6><ol><li>暗杀（1/0）</li><li>武装袭击（1/0）</li><li>轰炸爆炸（1/0）</li><li>劫持（1/0）</li><li>设施攻击（1/0）</li><li>徒手攻击（1/0）</li><li>未知（1/0）</li></ol><ol start="8"><li>攻击成功（1/0）</li><li>自杀式袭击（suicide）<h6 id="武器类型"><a href="#武器类型" class="headerlink" title="武器类型"></a><strong>武器类型</strong></h6></li></ol><ol start="9"><li>生化武器、放射性武器（1/0）</li><li>核武器</li><li>轻武器</li><li>炸弹</li><li>燃烧武器</li><li>治乱武器</li><li>交通工具</li><li>破坏设备</li><li>未知</li></ol><h6 id="受害者类型"><a href="#受害者类型" class="headerlink" title="受害者类型"></a><strong>受害者类型</strong></h6><ol start="18"><li>商业</li><li>政府</li><li>警察</li><li>军事</li><li>流产有关</li><li>运输（机场（飞机）或巴士、火车、高铁运输）</li><li>教育机构</li><li>食物或水供应</li><li>媒体设施</li><li>海事</li><li>非政府组织</li><li>其他</li></ol><h6 id="地区"><a href="#地区" class="headerlink" title="地区"></a><strong>地区</strong></h6><ol start="30"><li>北美</li><li>南美</li><li>东亚</li><li>东南亚</li><li>南亚</li><li>中亚</li><li>西欧</li><li>东欧</li><li>中东和北非</li><li>撒哈拉以南非洲</li><li>澳大利亚</li></ol><h6 id="入选标准"><a href="#入选标准" class="headerlink" title="入选标准"></a><strong>入选标准</strong></h6><ol start="41"><li>标准1</li><li>标准2</li><li>标准3</li></ol><p>–</p><ol start="44"><li>疑似恐怖主义</li></ol><h4 id="输出："><a href="#输出：" class="headerlink" title="输出："></a><strong>输出：</strong></h4><ol><li>灾难性的</li><li>重大的</li><li>较小的</li><li>无损失</li><li>未知</li></ol><ol><li>设置propextent中为空的部分为0，这样就可以去除property</li></ol><h4 id="K-means聚类结果分析"><a href="#K-means聚类结果分析" class="headerlink" title="K-means聚类结果分析"></a><strong>K-means聚类结果分析</strong></h4><blockquote><p>样本数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">10953\times 17</span><br></pre></td></tr></table></figure></p></blockquote><blockquote><p>聚类结果（5类）</p></blockquote><table><thead><tr><th>统计</th><th>类1</th><th>类2</th><th>类3</th><th>类4</th><th>类5</th></tr></thead><tbody><tr><td>数量</td><td>2497</td><td>4645</td><td>134</td><td>1854</td><td>1823</td></tr></tbody></table><h4 id="Spectral-Clustering聚类结果分析"><a href="#Spectral-Clustering聚类结果分析" class="headerlink" title="Spectral Clustering聚类结果分析"></a><strong>Spectral Clustering聚类结果分析</strong></h4><blockquote><p>样本数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">10953\times 17</span><br></pre></td></tr></table></figure></p></blockquote><blockquote><p>聚类结果（5类）</p></blockquote><table><thead><tr><th>统计</th><th>类1</th><th>类2</th><th>类3</th><th>类4</th><th>类5</th></tr></thead><tbody><tr><td>数量</td><td>10883</td><td>1</td><td>15</td><td>1</td><td>53</td></tr></tbody></table><h4 id="分段后K-means聚类结果分析"><a href="#分段后K-means聚类结果分析" class="headerlink" title="分段后K-means聚类结果分析"></a><strong>分段后K-means聚类结果分析</strong></h4><blockquote><p>样本数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">10953\times 36</span><br></pre></td></tr></table></figure></p></blockquote><blockquote><p>聚类结果（5类）</p></blockquote><table><thead><tr><th>统计</th><th>类1</th><th>类2</th><th>类3</th><th>类4</th><th>类5</th></tr></thead><tbody><tr><td>数量</td><td>6339</td><td>1541</td><td>1474</td><td>725</td><td>874</td></tr></tbody></table><h4 id="分段后Spectral-Clustering聚类结果分析"><a href="#分段后Spectral-Clustering聚类结果分析" class="headerlink" title="分段后Spectral Clustering聚类结果分析"></a><strong>分段后Spectral Clustering聚类结果分析</strong></h4><blockquote><p>样本数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">10953\times 36</span><br></pre></td></tr></table></figure></p></blockquote><blockquote><p>聚类结果（5类）</p></blockquote><table><thead><tr><th>统计</th><th>类1</th><th>类2</th><th>类3</th><th>类4</th><th>类5</th></tr></thead><tbody><tr><td>数量</td><td>9472</td><td>26</td><td>1343</td><td>93</td><td>19</td></tr></tbody></table><h4 id="增大死亡数以及财产损失权重，分段后K-means聚类结果分析"><a href="#增大死亡数以及财产损失权重，分段后K-means聚类结果分析" class="headerlink" title="增大死亡数以及财产损失权重，分段后K-means聚类结果分析"></a><strong>增大死亡数以及财产损失权重，分段后K-means聚类结果分析</strong></h4><blockquote><p>样本数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">10953\times 36</span><br></pre></td></tr></table></figure></p></blockquote><blockquote><p>聚类结果（5类）</p></blockquote><table><thead><tr><th>统计</th><th>类1</th><th>类2</th><th>类3</th><th>类4</th><th>类5</th></tr></thead><tbody><tr><td>数量</td><td>1541</td><td>735</td><td>7203</td><td>1474</td><td>0</td></tr></tbody></table><h4 id="增大死亡数以及财产损失权重，分段后Spectral-Clustering聚类结果分析"><a href="#增大死亡数以及财产损失权重，分段后Spectral-Clustering聚类结果分析" class="headerlink" title="增大死亡数以及财产损失权重，分段后Spectral Clustering聚类结果分析"></a><strong>增大死亡数以及财产损失权重，分段后Spectral Clustering聚类结果分析</strong></h4><blockquote><p>样本数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">10953\times 36</span><br></pre></td></tr></table></figure></p></blockquote><blockquote><p>聚类结果（5类）</p></blockquote><table><thead><tr><th>统计</th><th>类1</th><th>类2</th><th>类3</th><th>类4</th><th>类5</th></tr></thead><tbody><tr><td>数量</td><td>9471</td><td>1</td><td>1349</td><td>39</td><td>93</td></tr></tbody></table>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;研究生数学建模：恐怖袭击事件分级&quot;&gt;&lt;a href=&quot;#研究生数学建模：恐怖袭击事件分级&quot; class=&quot;headerlink&quot; title=&quot;研究生数学建模：恐怖袭击事件分级&quot;&gt;&lt;/a&gt;研究生数学建模：恐怖袭击事件分级&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;特征：人员伤
+      
+    
+    </summary>
+    
+      <category term="竞赛" scheme="http://yoursite.com/categories/%E7%AB%9E%E8%B5%9B/"/>
+    
+    
+      <category term="编程" scheme="http://yoursite.com/tags/%E7%BC%96%E7%A8%8B/"/>
     
   </entry>
   
