@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[cuda安装]]></title>
+    <url>%2F2019%2F01%2F08%2Fcuda%E5%AE%89%E8%A3%85%2F</url>
+    <content type="text"><![CDATA[cuda安装cuda和cudnn版本查看 cuda版本 1cat /usr/local/cuda/version.txt cudnn版本 1cat /usr/local/cuda/include/cudnn.h | grep CUDNN_MAJOR -A 2 cuda8.0卸载 卸载 1apt autoremove cuda 清除残留文件 12cd /usr/local/rm -rf cuda-8.0/ cuda9.0及对应cudnn安装cuda9.0安装cuda9.0官方网站 运行压缩.run 1sudo sh cuda_9.0.176_384.81_linux.run 一般在不需要图形驱动（Grphics Driver）和 样例（cuda samples） cudnn官方网站 2.~/.bashrc配置 123export CUDA_HOME=/usr/local/cudaexport LD_LIBRARY_PATH=$&#123;CUDA_HOME&#125;/lib64export PATH=$&#123;CUDA_HOME&#125;/bin:$&#123;PATH&#125; 刷新使得配置生效 1source ~/.bashrc cudnn安装本次版本是cuDNN v7.4.2 (Dec 14, 2018), for CUDA 9.0，选择cuDNN Library for Linux。 解压cudnn-9.0-linux-x64-v7.4.2.24.tgz压缩包 1tar -zxvf cudnn-9.0-linux-x64-v7.4.2.24.tgz 复制文件到cuda库下 12cp cuda/lib64/* /usr/local/cuda-9.0/lib64/cp cuda/include/* /usr/local/cuda-9.0/include/ 查看cudnn版本信息 1cat /usr/local/cuda/include/cudnn.h | grep CUDNN_MAJOR -A 2 cuda切换当一台服务器上既安装了cuda8.0和cuda9.0，使用ls命令查看/usr/local下的文件包含三个文件夹cuda、cuda8.0和cuda9.0。 1ls -l /usr/local/ 可以看到，当前cuda文件夹链接到cuda-9.0,当需要切换到cuda8.0时，使用以下命令： 123rm -rf /usr/local/cuda #删除之前创建的软链接sudo ln -s /usr/local/cuda-8.0/ /usr/local/cudanvcc --version #查看当前 cuda 版本 参考博客：http://geyao1995.com/CUDA8_CUDA9/]]></content>
+      <categories>
+        <category>科研</category>
+      </categories>
+      <tags>
+        <tag>环境配置</tag>
+        <tag>软件安装</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Hierarchical Object Detection with Deep Reinforcement Learning]]></title>
+    <url>%2F2019%2F01%2F08%2FHierarchical-Object-Detection-with-Deep-Reinforcement-Learning%2F</url>
+    <content type="text"><![CDATA[Hierarchical Object Detection with Deep Reinforcement LearningAbstract 关键的思想在于关注图像中包含更丰富信息的那些部分并放大它们。 Introduction 考虑区域之间的联系， 利用top-down的扫描方式，首先获取整个图像，关注局部区域的相关信息， 基于增强学习训练的代理（agent）有能力检测图像中的对象 Hierarchical Object Detection Model1. Markov Decision Process（马尔科夫决策过程） State:当前区域描述符（the descriptor of current region）和记忆向量（memory vector） Actions:move actions和terminal actions Reward:保证move action都是朝着更靠近ground truth的方向移动；当IOU超过threshold，则终止移动。 2. Q-learning1Q(s,a) = r+\lambda&#123;max&#125;_&#123;a&apos;&#125;Q(s&apos;,a&apos;) 3. Model the Image-Zooms model 使用VGG-16提取图像区域特征向量$(7*7*512)$,拼接区域特征向量与记忆向量（memory vector）$(7*7*512+24=25088+24)$,经过两个1024维的全连接层，输出6个可能的动作（actions），反复迭代，直到终止动作 the Pool45-Crops model 4. TrainingExperiments1. Qualitative Results Implementation1. keras实现 提取区域特征 state不断更新，并作为model的输入 1(7*7*512) 代码问题总结 数据类型错误TypeError: slice indices must be integers or None or have an index method 这是由于数组，矩阵等类型数据的下标是整数，而在 12region_mask[offset[0]:offset[0] + size_mask[0] , offset[1]:offset[1] + size_mask[1]] = 1 offset是float类型，所以报错，解决方法就是数据类型转换： 12region_mask[int(offset[0]):int(offset[0] + size_mask[0]) , int(offset[1]):int(offset[1] + size_mask[1])] = 1 VGG16提取图像特征尺寸不对 解决方法：在图片提取特征之前，对图像进行resize； 1im = images[z].resize((224, 224)) 除0错误 对图像进行resize的位置错误 问题总结 问题：记忆向量的哪儿来的？ 问题：哪6个动作？ move actions:左上、右上、左下、右下和中；terminal actions 问题：每个类训练一个模型？ 是的，这篇文章中只训练了飞机类（aeroplane）的检测模型]]></content>
+      <categories>
+        <category>科研</category>
+      </categories>
+      <tags>
+        <tag>对象检测</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Yotta系统错误记录及性能优化]]></title>
+    <url>%2F2019%2F01%2F07%2FYotta%E7%B3%BB%E7%BB%9F%E9%94%99%E8%AF%AF%E8%AE%B0%E5%BD%95%E5%8F%8A%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%2F</url>
+    <content type="text"><![CDATA[错误记录 在日志系统运行期间，每隔几天kafka平台就会自动崩溃，控制台窗口关闭，并且重新启动kafka平台也会出现日志文件冲突问题，从而导致日志系统无法正常记录用户行为日志。 解决方法： 首先，我们查阅了官网的各种文档，在全面了解kafka的实现原理与应用之后仍然没有找到解决问题的方法。然后我们在StackOverflow和Quora上进行了相关问题的查看，尝试后发现类似问题解决方法，将kafka平台对应的日志文件删除就可以正常启动kafka平台。虽然通过删除日志文件的方式使得日志记录正常进行，但是依旧没有解决每隔几天kafka平台就会自动崩溃的问题，频繁人工启动不稳定的服务耗费人力开销。 为了彻底解决这个问题，我们维护人员仔细阅读kafka生成的日志文件，了解到崩溃的发生是因为日志文件大小达到阈值时kafka程序会对日志文件重命名，而此时日志文件又被自身所占用，就产生了程序异常，在Apache官网issues下发现这是此版本kafka在windows下的一个错误，所以我们将日志系统整体迁移到linux系统下，将问题完美解决。 性能优化 Optimizing MySQL LIKE ‘%string%’ queries 方法1：建立fulltext索引，全文索引只能用于数据库引擎为MYISAM的数据表，但是全文索引不支持中文； 方法2：]]></content>
+      <categories>
+        <category>工程</category>
+      </categories>
+      <tags>
+        <tag>yotta系统</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[研究生数学建模：恐怖袭击事件分级]]></title>
+    <url>%2F2018%2F09%2F15%2F%E7%A0%94%E7%A9%B6%E7%94%9F%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%EF%BC%9A%E6%81%90%E6%80%96%E8%A2%AD%E5%87%BB%E4%BA%8B%E4%BB%B6%E5%88%86%E7%BA%A7%2F</url>
+    <content type="text"><![CDATA[研究生数学建模：恐怖袭击事件分级特征：人员伤亡、经济损失、时间、地点（人口容量、GDP）等 财产损失特征：攻击类型、武器类型、受害子类型、国家、地区、入选标准（1、2、3、doubtterr） 攻击类型 暗杀（1/0） 武装袭击（1/0） 轰炸爆炸（1/0） 劫持（1/0） 设施攻击（1/0） 徒手攻击（1/0） 未知（1/0） 攻击成功（1/0） 自杀式袭击（suicide）武器类型 生化武器、放射性武器（1/0） 核武器 轻武器 炸弹 燃烧武器 治乱武器 交通工具 破坏设备 未知 受害者类型 商业 政府 警察 军事 流产有关 运输（机场（飞机）或巴士、火车、高铁运输） 教育机构 食物或水供应 媒体设施 海事 非政府组织 其他 地区 北美 南美 东亚 东南亚 南亚 中亚 西欧 东欧 中东和北非 撒哈拉以南非洲 澳大利亚 入选标准 标准1 标准2 标准3 – 疑似恐怖主义 输出： 灾难性的 重大的 较小的 无损失 未知 设置propextent中为空的部分为0，这样就可以去除property K-means聚类结果分析 样本数110953\times 17 聚类结果（5类） 统计 类1 类2 类3 类4 类5 数量 2497 4645 134 1854 1823 Spectral Clustering聚类结果分析 样本数110953\times 17 聚类结果（5类） 统计 类1 类2 类3 类4 类5 数量 10883 1 15 1 53 分段后K-means聚类结果分析 样本数110953\times 36 聚类结果（5类） 统计 类1 类2 类3 类4 类5 数量 6339 1541 1474 725 874 分段后Spectral Clustering聚类结果分析 样本数110953\times 36 聚类结果（5类） 统计 类1 类2 类3 类4 类5 数量 9472 26 1343 93 19 增大死亡数以及财产损失权重，分段后K-means聚类结果分析 样本数110953\times 36 聚类结果（5类） 统计 类1 类2 类3 类4 类5 数量 1541 735 7203 1474 0 增大死亡数以及财产损失权重，分段后Spectral Clustering聚类结果分析 样本数110953\times 36 聚类结果（5类） 统计 类1 类2 类3 类4 类5 数量 9471 1 1349 39 93]]></content>
+      <categories>
+        <category>竞赛</category>
+      </categories>
+      <tags>
+        <tag>编程</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[智慧教育师范应用表格接口规范]]></title>
+    <url>%2F2018%2F07%2F10%2F%E6%99%BA%E6%85%A7%E6%95%99%E8%82%B2%E5%B8%88%E8%8C%83%E5%BA%94%E7%94%A8%E8%A1%A8%E6%A0%BC%E6%8E%A5%E5%8F%A3%E8%A7%84%E8%8C%83%2F</url>
+    <content type="text"><![CDATA[智慧教育-网络学院示范应用后端数据访问接口主题状态1. 主题状态表 列名 类型 长度 state_id bigint(long) 20 domain_id bigint(long) 20 states varchar(string) 255 user_id bigint(long) 20 created_time datetime 1 modified_time datetime 1 说明： （1） 学习状态：0表示未学习，1表示正在学习，2表示已学习； （2） states（主题状态列表）形式：学习状态1，学习状态2，学习状态3，…… 举例： 1， 0， 1， 2，…… 2. 主题状态接口 （1） /topicState/getByDomainIdAndUserId 查询主题状态，参数 long domainId long userId 课程id 用户id （2） /topicState/saveStateByDomainIdAndUserId 保存主题状态，参数 long domainId String states long userId 课程id 主题状态列表 用户id （3） /topicState/saveStateByDomainNameAndUserId 保存主题状态，参数 long domainName String states long userId 课程名 主题状态列表 用户id 分面状态1. 分面状态表 列名 类型 长度 state_id bigint(long) 20 domain_id bigint(long) 20 topic_id bigint(long) 20 states varchar(string) 255 user_id bigint(long) 20 created_time datetime 1 modified_time datetime 1 说明： （1） 学习状态：0表示未学习，1表示已在学习； （2） states（分面状态列表）形式：学习状态1，学习状态2，学习状态3，…… 举例： 1， 0， 1， 0，…… 2. 分面状态接口 （1）/facetState/getByDomainIdAndTopicIdAndUserId 查询分面状态，参数 long domainId long userId long topicId 课程id 用户id 主题id （2）/facetState/saveStateByDomainIdAndTopicIdAndUserId 保存分面状态，参数 long domainId long topicId String states long userId 课程id 主题id 分面状态列表 用户id （3）/facetState/saveStateByDomainNameAndTopicNameAndUserId 保存分面状态，参数 string domainName string topicName String states long userId 课程名 主题名 分面状态列表 用户id （4）/facetState/saveStateByDomainIdAndUserId 保存分面状态，参数 long domainId String states long userId 课程id 分面状态列表 用户id （5）/facetState/saveStateByDomainNameAndUserId 保存主题状态，参数 long domainName String states long userId 课程名 分面状态列表 用户id 注：states：分面状态的矩阵（行（主题）之间以分号隔开，行内以逗号隔开） 例如：0,0,1,0;0,0,1;1,1,0;1,0,1,1,1;……推荐主题1. 推荐主题表 列名 类型 长度 recommendation_id bigint(long) 20 domain_id bigint(long) 20 recommendation_topics varchar(string) 255 user_id bigint(long) 20 created_time datetime 1 modified_time datetime 1 说明： （1）recommendation_topics（推荐主题列表）形式：：推荐主题1 id，推荐主题2 id，推荐主题3 id；推荐主题3 id，推荐主题1 id，推荐主题4 id；……即，不同推荐方式之间以分号隔开，同一推荐方式内的主题id以逗号分隔开 2. 2. 推荐主题接口 （1） recommendation/getByDomainIdAndUserId 查询推荐主题，参数 long domainId long userId 课程id 用户id （2） recommendation/saveRecommendationByDomainIdAndUserId 保存推荐主题，参数 long domainId String recommendationTopics long userId 课程id 推荐主题列表 用户id （3） recommendation/saveRecommendationByDomainNameAndUserId 保存推荐主题，参数 long domainName String recommendationTopics long userId 课程名 推荐主题列表 用户id]]></content>
+      <categories>
+        <category>工程</category>
+      </categories>
+      <tags>
+        <tag>数据库</tag>
+        <tag>智慧教育系统</tag>
+      </tags>
+  </entry>
+</search>
