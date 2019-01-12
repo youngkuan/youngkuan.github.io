@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[垃圾收集(一)]]></title>
+    <url>%2F2019%2F01%2F12%2F%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%2F</url>
+    <content type="text"><![CDATA[垃圾收集垃圾回收需要关注的事情： 哪些内存需要回收？ Java堆和方法区 什么时候回收？ 如何回收？ java内存运行时各个区域，其中程序计数器、java虚拟机栈、本地方法栈3个区域随线程而生，随线程而灭；栈中的栈帧随着方法的进入和退出而有条不紊地进行出栈和入栈操作。而Java堆和方法区则不一样，一个接口中的多个实现类需要的内存可能不一样，一个方法中的多个分支需要的内存也可能不一样，我们只有在程序处于运行期间时才能知道会创建哪些对象，这部分内存的分配和回收都是动态的，垃圾回收器所关注的就是这部分内存。 对象存活判断引用计数法（Reference Counting）算法描述：给对象中添加一个引用计数器，每当有一个引用指向这个对象，计数器值就加1；当引用失效时，计数器值就减1；任何时刻计数器值为0的对象就不可能再被使用。引用计数法存在一个问题：它很难解决对象之间的相互循环引用问题，举个例子，示例代码如下。对象123456789101112131415161718192021222324252627```/** * 对象objA和objB存在相互引用 * @author yangkuan */public class ReferenceCounteringGC &#123; public Object instance = null; private static final int _1MB = 1024 * 1024; /** * 这个成员变量的意义是通过其占用的内存，通过GC日志查看对象是否被回收 */ private byte[] bigSize = new byte[2 * _1MB]; public static void testGC()&#123; ReferenceCounteringGC objA = new ReferenceCounteringGC(); ReferenceCounteringGC objB = new ReferenceCounteringGC(); objA.instance = objB; objB.instance = objA; objA = null; objB = null; // 假设此处发生垃圾回收，如果回收算法是引用计数法，那么objA和objB将不会被回收 System.gc(); &#125;&#125; 可达性分析算法（Reachability Analysis）算法描述这个算法的基本思想就是通过一系列的称为“GC Roots”的对象作为起始点，从这些节点开始向下搜索，搜索所走过的路径称为引用链（Reference Chain），当一个对象到GC Roots没有任何引用链相连（即该对象到GC Roots不可达）时，则证明这个对象不可用。那这些不可达的对象就可以判定为可回收对象。可作为GC Roots的对象包括以下几种： 虚拟机栈（栈帧中的本地变量表）中引用的对象； 方法区中类静态属性引用的对象； 方法区中常量引用的对象； 本地方法栈中JNI（即Native方法）引用的对象。 引用类型 强引用（Strong Reference）强引用就是指在程序代码之中普遍存在的，类似Object obj = new Object()这类的引用，只要强引用还存在，垃圾收集器永远不会回收掉被引用的对象。 软引用（Soft Reference）软引用是用来描述一些还有用但并非必须的对象。对于软引用关联着的对象，在系统将要发生内存溢出异常之前，将会把这些对象列进回收范围之中进行第二次回收。如果这次回收之后还没有足够的内存，那么程序就会抛出内存溢出异常。 弱引用（Weak Reference）弱引用也是用来描述非必须对象的，但是它的强度比软引用还要更弱一些，被弱引用关联的对象只能生存到下一次垃圾回收之前。当垃圾收集器工作时，无论当内存是否足够，都会回收掉只被弱引用关联的对象。 虚引用（Phantom Reference）虚引用也被称为幽灵引用或者幻影引用，它是最弱的一种引用关系。一个对象是否有虚引用的存在，完全不会对其生存时间构成威胁，也无法通过虚引用来取得一个对象实例。为一个对象设置虚引用关联的唯一目的就是能在这个对象被收集器回收时收到一个系统通知。 对象的两次标记过程 如果对象再进行可达性分析的时候发现其与GC Roots之间不可达，那么它将会被第一次标记并进行下一次筛选，筛选的条件是此对象是否有必要执行finalize()方法。当对象没有覆盖finalize()方法或者finalize()方法已经被虚拟机执行过，都会被认为没有必要执行。 如果这个对象被虚拟机认为有必要执行finalize()方法，那么这个对象将会放置在一个叫F-Queue的队列中，并在稍后由一个由虚拟机自动建立的、低优先级的Finalizer线程去执行它。如果对象想要拯救自己，那么覆盖finalize()方法在方法中重新将自身与引用链上的任意一个对象关联起来就可以避免自己被回收。 回收方法区方法区（永久代）的垃圾回收主要包括两个部分：废弃常量和无用的类。 废弃常量指的是没有任何地方引用这个常量，这个常量会被系统清理出常量池； 无用的类需要同时满足以下三个条件： 该类的所有实例都已经被回收，也就是Java堆中不存在该类的任何实例； 加载该类的ClassLoader已经被回收； 该类对应的java.lang.Class对象没有在任何地方被引用，无法再任何地方通过反射访问该类的方法。]]></content>
+      <categories>
+        <category>深入理解Java虚拟机</category>
+      </categories>
+      <tags>
+        <tag>内存分配策略</tag>
+        <tag>引用计数法</tag>
+        <tag>可达性算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Java内存区域]]></title>
+    <url>%2F2019%2F01%2F10%2FJava%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%2F</url>
+    <content type="text"><![CDATA[Java内存区域Java虚拟机在执行Java程序的过程中，把其所管理的内存划分成多个区域，如下图所示。每个数据区域都有各自的用途，有的区域随着虚拟机进程的启动而存在，是线程公有的；有些区域依赖于特定的线程而存在，是线程私有的。 程序计数器程序计数器是一小块内存区域，可以看作是当前线程执行的字节码的行号指示器。每条线程都独立拥有一个程序计数器，因此程序计数器是线程私有的。 Java虚拟机栈Java虚拟机栈描述的是Java方法执行的内存模型：每个方法在执行时都会创建一个栈帧（stack frame）用于存储局部变量表、操作数栈、动态链接、方法出口等信息。每个方法从被调用开始执行到执行完成返回的过程，就对应这一个栈帧在虚拟机栈中入栈和出栈的过程。Java内存区域经常被简单地划分为堆内存和栈内存，其中的栈内存粗略来讲就是指的Java虚拟机栈，当然实际上内存划分肯定更加复杂。虚拟机栈与程序计数器一样的线程私有的。局部变量表存放了编译器可知的各种基本数据类型（boolean、byte、char、short、int、float、long、double）、对象引用（reference类型，直观上相当于C语言中的指针，存放的是对象地址）。64位长度的long和double类型的数据会占用2个局部变量空间（Slot），其余的数据类型只占用1个Slot。与Java虚拟机栈相关的两个异常：如果线程请求的栈深度大于虚拟机所允许的深度，就会抛出StackOverflowError异常，一般Java程序中递归调用一个方法而不设置终止条件就会出现这个异常，例如下面样例程序求解斐波那契数列，注释了终止条件就会出现异常；如果虚拟机栈可以动态扩展，但是扩展时无法申请到足够的内存空间，就会抛出OutOfMemoryError异常。 123456public int getFibonacci(int n) &#123; // if(n == 0||n == 1)&#123; // return n; // &#125; return getFibonacciByRecursion(n-1)+getFibonacciByRecursion(n-2);&#125; 本地方法栈本地方法栈（Native Method Stack）与虚拟机栈所发挥的作用相似，只不过区别在于虚拟机栈为虚拟机执行Java方法服务，本地方法栈为虚拟机中使用到的Native方法服务。有的虚拟机，如Sun HotSpot虚拟机将本地方法栈和虚拟机栈合二为一。那什么是Native方法呢？简单来讲，一个native method就是一个java调用非java代码的接口，也就是该方法由非java语言实现，比如C语言。那么可以知道，在定义一个native方法时，不需要提供实现，只需要定义方法名，参数以及返回类型，如下面实例：123456public class IHaveNatives &#123; native public void Native1( int x ) ; native static public long Native2() ; native synchronized private float Native3( Object o ) ; native void Native4( int[] ary ) throws Exception ;&#125; Java堆Java堆（Java Heap）一般是Java虚拟机所管理的内存中最大的一块，被Java虚拟机进程下的所有线程共享的一块内存区域。Java堆的唯一目的就是存放对象实例，几乎所有的对象实例都要在堆上分配内存。Java虚拟机规范中描述：所有的对象实例以及数组都要在堆上分配（The heap is the runtime data area from which memory for all class instances and arrays is allocated），但是随着JIT编译器的发展以及逃逸分析技术的成熟，栈上分配、标量替换优化技术使得所有对象在堆上分配内存就变得不那么“绝对”。Java堆是垃圾收集器管理的主要区域，很多时候也被称之为“GC 堆（Garbage Collected Heap）”。从垃圾回收的角度来看，目前垃圾收集器都采用分代算法，所以Java堆还细分为：新生代和老年代，其中新生代又可以分为Eden空间、From Survivor空间、To Survivor空间，HotSpot虚拟机默认Eden和Survivor的大小比例是8:1。根据Java虚拟机规范规定，Java堆可以处在物理上不连续的内存空间中，只要逻辑连续就行了。目前主流的虚拟机都可以通过命令来自主设置Java堆的大小，其中命令-Xms1024m指的是Java堆的初始大小，-Xmx2048m指的是分配给Java堆的最大内存。 方法区方法区和Java堆一样也是所有线程共享的内存区域，它用于存储已被虚拟机加载的类信息、常量、静态变量、即时编译器编译后的代码等数据。有些在HotSpot虚拟机上开发、部署程序的开发者习惯称方法区为“永久代（Permanent Generation）”，这是由于HotSpot虚拟机的垃圾收集器可以像管理Java堆一样管理方法区这块内存区域，省去了专门为方法区编写内存管理代码的工作。 运行时常量池运行时常量池（Runtime Constant Pool）是方法区的一部分。Class文件中除了有类的版本、字段、方法、接口等描述信息外，还有一项信息是常量池，用于存放编译期生成的各种字面量和符号引用，这部分内容将在类加载后进入方法区的运行时常量池。运行时常量池相对于Class文件常量池的另一个重要特征是具备动态性，Java语言并不要求常量一定只有编译期才能产生，也就是并非预置入Class文件中常量池的内容才能进入方法区运行时常量池，运行期间也可能将新的常量放入池中，比如String类中的intern()方法。 直接内存直接内存（Direct Memory）并不是虚拟机运行时数据区的一部分，也不是Java虚拟机规范中定义的内存区域，但是这部分内存也被频繁使用。自从JDK1.4中引入NIO（New Input/Output）类，提出一种基于通道（Channel）和缓冲区（Buffer）的I/O方式，它可以使用Native方法直接分配堆外内存，然后通过一个存储在Java堆中的DirectByteBuffer对象作为这块内存的引用进行操作。 对象创建过程虚拟机遇到一条new指令，首先检查这个指令的参数是否能在常量池中定位到一个类的符号引用，并且检查这个符号引用代表的类是否已被加载、解析和初始化过。如果没有就必须先执行相关的类加载过程。在类加载检查通过之后，接下来虚拟机将为新生对象分配内存。对象所需内存的大小在类加载完成后就可以完全确定，为对象分配空间的任务就是把一块确定大小的内存从Java堆中划分出来。假设Java堆中内存是绝对规整的，所有用过的内存都放在一边，空闲的内存放在另一边，中间放着一个指针作为分界点的指示器，那么分配内存就是把指针往空闲内存的方向挪动一段与对象大小相等的距离，这种分配方式称为“指针碰撞（Bump the Pointer）”；如果Java堆中的内存不规整，那么虚拟机就必须维护一个列表，记录哪些内存块可用，在为对象分配内存的时候就从列表中寻找一块足够大的空间划分给对象实例，并更新表上的记录，这种分配方式称为“空闲列表（Free List）”。]]></content>
+      <categories>
+        <category>深入理解Java虚拟机</category>
+      </categories>
+      <tags>
+        <tag>Java堆</tag>
+        <tag>方法区</tag>
+        <tag>Java虚拟机栈</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[cuda安装]]></title>
+    <url>%2F2019%2F01%2F08%2Fcuda%E5%AE%89%E8%A3%85%2F</url>
+    <content type="text"><![CDATA[cuda安装cuda和cudnn版本查看 cuda版本 1cat /usr/local/cuda/version.txt cudnn版本 1cat /usr/local/cuda/include/cudnn.h | grep CUDNN_MAJOR -A 2 cuda8.0卸载 卸载 1apt autoremove cuda 清除残留文件 12cd /usr/local/rm -rf cuda-8.0/ cuda9.0及对应cudnn安装cuda9.0安装cuda9.0官方网站 运行压缩.run 1sudo sh cuda_9.0.176_384.81_linux.run 一般在不需要图形驱动（Grphics Driver）和 样例（cuda samples） cudnn官方网站 2.~/.bashrc配置 123export CUDA_HOME=/usr/local/cudaexport LD_LIBRARY_PATH=$&#123;CUDA_HOME&#125;/lib64export PATH=$&#123;CUDA_HOME&#125;/bin:$&#123;PATH&#125; 刷新使得配置生效 1source ~/.bashrc cudnn安装本次版本是cuDNN v7.4.2 (Dec 14, 2018), for CUDA 9.0，选择cuDNN Library for Linux。 解压cudnn-9.0-linux-x64-v7.4.2.24.tgz压缩包 1tar -zxvf cudnn-9.0-linux-x64-v7.4.2.24.tgz 复制文件到cuda库下 12cp cuda/lib64/* /usr/local/cuda-9.0/lib64/cp cuda/include/* /usr/local/cuda-9.0/include/ 查看cudnn版本信息 1cat /usr/local/cuda/include/cudnn.h | grep CUDNN_MAJOR -A 2 cuda切换当一台服务器上既安装了cuda8.0和cuda9.0，使用ls命令查看/usr/local下的文件包含三个文件夹cuda、cuda8.0和cuda9.0。 1ls -l /usr/local/ 可以看到，当前cuda文件夹链接到cuda-9.0,当需要切换到cuda8.0时，使用以下命令： 123rm -rf /usr/local/cuda #删除之前创建的软链接sudo ln -s /usr/local/cuda-8.0/ /usr/local/cudanvcc --version #查看当前 cuda 版本 参考博客：http://geyao1995.com/CUDA8_CUDA9/]]></content>
+      <categories>
+        <category>科研</category>
+      </categories>
+      <tags>
+        <tag>环境配置</tag>
+        <tag>软件安装</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Hierarchical Object Detection with Deep Reinforcement Learning]]></title>
+    <url>%2F2019%2F01%2F08%2FHierarchical-Object-Detection-with-Deep-Reinforcement-Learning%2F</url>
+    <content type="text"><![CDATA[Hierarchical Object Detection with Deep Reinforcement LearningAbstract 关键的思想在于关注图像中包含更丰富信息的那些部分并放大它们。 Introduction 考虑区域之间的联系， 利用top-down的扫描方式，首先获取整个图像，关注局部区域的相关信息， 基于增强学习训练的代理（agent）有能力检测图像中的对象 Hierarchical Object Detection Model1. Markov Decision Process（马尔科夫决策过程） State:当前区域描述符（the descriptor of current region）和记忆向量（memory vector） Actions:move actions和terminal actions Reward:保证move action都是朝着更靠近ground truth的方向移动；当IOU超过threshold，则终止移动。 2. Q-learning1Q(s,a) = r+\lambda&#123;max&#125;_&#123;a&apos;&#125;Q(s&apos;,a&apos;) 3. Model the Image-Zooms model 使用VGG-16提取图像区域特征向量$(7*7*512)$,拼接区域特征向量与记忆向量（memory vector）$(7*7*512+24=25088+24)$,经过两个1024维的全连接层，输出6个可能的动作（actions），反复迭代，直到终止动作 the Pool45-Crops model 4. TrainingExperiments1. Qualitative Results Implementation1. keras实现 提取区域特征 state不断更新，并作为model的输入 1(7*7*512) 代码问题总结 数据类型错误TypeError: slice indices must be integers or None or have an index method 这是由于数组，矩阵等类型数据的下标是整数，而在 12region_mask[offset[0]:offset[0] + size_mask[0] , offset[1]:offset[1] + size_mask[1]] = 1 offset是float类型，所以报错，解决方法就是数据类型转换： 12region_mask[int(offset[0]):int(offset[0] + size_mask[0]) , int(offset[1]):int(offset[1] + size_mask[1])] = 1 VGG16提取图像特征尺寸不对 解决方法：在图片提取特征之前，对图像进行resize； 1im = images[z].resize((224, 224)) 除0错误 对图像进行resize的位置错误 问题总结 问题：记忆向量的哪儿来的？ 问题：哪6个动作？ move actions:左上、右上、左下、右下和中；terminal actions 问题：每个类训练一个模型？ 是的，这篇文章中只训练了飞机类（aeroplane）的检测模型]]></content>
+      <categories>
+        <category>科研</category>
+      </categories>
+      <tags>
+        <tag>对象检测</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Yotta系统错误记录及性能优化]]></title>
+    <url>%2F2019%2F01%2F07%2FYotta%E7%B3%BB%E7%BB%9F%E9%94%99%E8%AF%AF%E8%AE%B0%E5%BD%95%E5%8F%8A%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%2F</url>
+    <content type="text"><![CDATA[错误记录 在日志系统运行期间，每隔几天kafka平台就会自动崩溃，控制台窗口关闭，并且重新启动kafka平台也会出现日志文件冲突问题，从而导致日志系统无法正常记录用户行为日志。 解决方法： 首先，我们查阅了官网的各种文档，在全面了解kafka的实现原理与应用之后仍然没有找到解决问题的方法。然后我们在StackOverflow和Quora上进行了相关问题的查看，尝试后发现类似问题解决方法，将kafka平台对应的日志文件删除就可以正常启动kafka平台。虽然通过删除日志文件的方式使得日志记录正常进行，但是依旧没有解决每隔几天kafka平台就会自动崩溃的问题，频繁人工启动不稳定的服务耗费人力开销。 为了彻底解决这个问题，我们维护人员仔细阅读kafka生成的日志文件，了解到崩溃的发生是因为日志文件大小达到阈值时kafka程序会对日志文件重命名，而此时日志文件又被自身所占用，就产生了程序异常，在Apache官网issues下发现这是此版本kafka在windows下的一个错误，所以我们将日志系统整体迁移到linux系统下，将问题完美解决。 性能优化 Optimizing MySQL LIKE ‘%string%’ queries 方法1：建立fulltext索引，全文索引只能用于数据库引擎为MYISAM的数据表，但是全文索引不支持中文； 方法2：]]></content>
+      <categories>
+        <category>工程</category>
+      </categories>
+      <tags>
+        <tag>yotta系统</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[图像文本匹配相关工作]]></title>
+    <url>%2F2018%2F11%2F07%2F%E5%9B%BE%E5%83%8F%E6%96%87%E6%9C%AC%E5%8C%B9%E9%85%8D%E7%9B%B8%E5%85%B3%E5%B7%A5%E4%BD%9C%2F</url>
+    <content type="text"><![CDATA[图像文本匹配相关工作introduction 什么是图像文本匹配？计算机视觉任务逐渐不在满足于简单的图像分类、或者为图像分配一个或几个标签的任务，越来越多的研究者希望能够通过匹配图像和文本，为图像生成丰富的文本描述，从而更好地理解图像的语义。 已经有大量的研究工作，这些工作的方法怎么做的？ 我的工作在别人的工作上有什么改进？有什么优点、贡献？ 通过生成网络生成更多的正例(positive fact), 从而扩充训练数据集; 设计了一个高效的训练算法，交替优化生成网络和判别网络的参数，得到强判别器； 在多个数据集上实现了与其他方法可比较甚至更优异的结果。 related work1. CCA Canonical Correlation Analysis (CCA) Kernel Canonical Correlation Analysis (KCCA) deep CCA Sparse Kernel CCA Randomized CCA Nonparametric CCA 2. ranking based method Y. Verma and C. Jawahar, “Im2text and text2im: Associating images and texts for cross-modal retrieval,” in British Machine Vision Conference (BMVC), vol. 1, 2014, p. 2. R. Socher, A. Karpathy, Q. V. Le, C. D. Manning, and A. Y. Ng, “Grounded compositional semantics for finding and describing images with sentences,” Transactions of the Association for Computational Linguistics, vol. 2, pp. 207–218, 2014. OK A. Karpathy, A. Joulin, and F. F. F. Li, “Deep fragment embeddings for bidirectional image sentence mapping,” in Neural Information Processing Systems (NIPS), 2014, pp. 1889–1897. OK R. Kiros, R. Salakhutdinov, and R. S. Zemel, “Unifying visual-semantic embeddings with multimodal neural language models,” arXiv preprint arXiv:1411.2539, 2014. OK L. Wang, Y. Li, and S. Lazebnik, “Learning deep structure-preserving image-text embeddings,” in Computer Vision and Pattern Recognition (CVPR), 2016, pp. 5005–5013. “Learning two-branch neural networks for image-text matching tasks,” arXiv preprint arXiv:1704.03470, 2017. Huang Y, Wang W, Wang L. Instance-aware image and sentence matching with selective multimodal lstm[C]//The IEEE Conference on Computer Vision and Pattern Recognition (CVPR). 2017, 2(6): 7. Huang Y, Wu Q, Wang L. Learning semantic concepts and order for image and sentence matching[C]//Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition. 2018: 6163-6171. 3.Generative Adversarial Networks(GANs) @inproceedings{goodfellow2014generative,title={Generative adversarial nets},author={Goodfellow, Ian and Pouget-Abadie, Jean and Mirza, Mehdi and Xu, Bing and Warde-Farley, David and Ozair, Sherjil and Courville, Aaron and Bengio, Yoshua},booktitle={Advances in neural information processing systems},pages={2672–2680},year={2014}} @article{mirza2014conditional,title={Conditional generative adversarial nets},author={Mirza, Mehdi and Osindero, Simon},journal={arXiv preprint arXiv:1411.1784},year={2014}} @article{radford2015unsupervised,title={Unsupervised representation learning with deep convolutional generative adversarial networks},author={Radford, Alec and Metz, Luke and Chintala, Soumith},journal={arXiv preprint arXiv:1511.06434},year={2015}} @article{reed2016generative,title={Generative adversarial text to image synthesis},author={Reed, Scott and Akata, Zeynep and Yan, Xinchen and Logeswaran, Lajanugen and Schiele, Bernt and Lee, Honglak},journal={arXiv preprint arXiv:1605.05396},year={2016}} @inproceedings{wang2017irgan,title={Irgan: A minimax game for unifying generative and discriminative information retrieval models},author={Wang, Jun and Yu, Lantao and Zhang, Weinan and Gong, Yu and Xu, Yinghui and Wang, Benyou and Zhang, Peng and Zhang, Dell},booktitle={Proceedings of the 40th International ACM SIGIR conference on Research and Development in Information Retrieval},pages={515–524},year={2017},organization={ACM}} @article{cai2017kbgan,title={Kbgan: Adversarial learning for knowledge graph embeddings},author={Cai, Liwei and Wang, William Yang},journal={arXiv preprint arXiv:1711.04071},year={2017}} experiment 数据集的扩充：对每一张图片进行裁剪，4个角以及中间，并将这5个裁剪的图翻转，一张图片扩充得到10张尺寸为$128 \times 128$的图片。]]></content>
+      <categories>
+        <category>科研</category>
+      </categories>
+      <tags>
+        <tag>图文匹配</tag>
+        <tag>典型相关分析</tag>
+        <tag>排序损失</tag>
+        <tag>数据集</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[研究生数学建模：恐怖袭击事件分级]]></title>
+    <url>%2F2018%2F09%2F15%2F%E7%A0%94%E7%A9%B6%E7%94%9F%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%EF%BC%9A%E6%81%90%E6%80%96%E8%A2%AD%E5%87%BB%E4%BA%8B%E4%BB%B6%E5%88%86%E7%BA%A7%2F</url>
+    <content type="text"><![CDATA[研究生数学建模：恐怖袭击事件分级特征：人员伤亡、经济损失、时间、地点（人口容量、GDP）等 财产损失特征：攻击类型、武器类型、受害子类型、国家、地区、入选标准（1、2、3、doubtterr） 攻击类型 暗杀（1/0） 武装袭击（1/0） 轰炸爆炸（1/0） 劫持（1/0） 设施攻击（1/0） 徒手攻击（1/0） 未知（1/0） 攻击成功（1/0） 自杀式袭击（suicide）武器类型 生化武器、放射性武器（1/0） 核武器 轻武器 炸弹 燃烧武器 治乱武器 交通工具 破坏设备 未知 受害者类型 商业 政府 警察 军事 流产有关 运输（机场（飞机）或巴士、火车、高铁运输） 教育机构 食物或水供应 媒体设施 海事 非政府组织 其他 地区 北美 南美 东亚 东南亚 南亚 中亚 西欧 东欧 中东和北非 撒哈拉以南非洲 澳大利亚 入选标准 标准1 标准2 标准3 – 疑似恐怖主义 输出： 灾难性的 重大的 较小的 无损失 未知 设置propextent中为空的部分为0，这样就可以去除property K-means聚类结果分析 样本数110953\times 17 聚类结果（5类） 统计 类1 类2 类3 类4 类5 数量 2497 4645 134 1854 1823 Spectral Clustering聚类结果分析 样本数110953\times 17 聚类结果（5类） 统计 类1 类2 类3 类4 类5 数量 10883 1 15 1 53 分段后K-means聚类结果分析 样本数110953\times 36 聚类结果（5类） 统计 类1 类2 类3 类4 类5 数量 6339 1541 1474 725 874 分段后Spectral Clustering聚类结果分析 样本数110953\times 36 聚类结果（5类） 统计 类1 类2 类3 类4 类5 数量 9472 26 1343 93 19 增大死亡数以及财产损失权重，分段后K-means聚类结果分析 样本数110953\times 36 聚类结果（5类） 统计 类1 类2 类3 类4 类5 数量 1541 735 7203 1474 0 增大死亡数以及财产损失权重，分段后Spectral Clustering聚类结果分析 样本数110953\times 36 聚类结果（5类） 统计 类1 类2 类3 类4 类5 数量 9471 1 1349 39 93]]></content>
+      <categories>
+        <category>竞赛</category>
+      </categories>
+      <tags>
+        <tag>编程</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[智慧教育师范应用表格接口规范]]></title>
+    <url>%2F2018%2F07%2F10%2F%E6%99%BA%E6%85%A7%E6%95%99%E8%82%B2%E5%B8%88%E8%8C%83%E5%BA%94%E7%94%A8%E8%A1%A8%E6%A0%BC%E6%8E%A5%E5%8F%A3%E8%A7%84%E8%8C%83%2F</url>
+    <content type="text"><![CDATA[智慧教育-网络学院示范应用后端数据访问接口主题状态1. 主题状态表 列名 类型 长度 state_id bigint(long) 20 domain_id bigint(long) 20 states varchar(string) 255 user_id bigint(long) 20 created_time datetime 1 modified_time datetime 1 说明： （1） 学习状态：0表示未学习，1表示正在学习，2表示已学习； （2） states（主题状态列表）形式：学习状态1，学习状态2，学习状态3，…… 举例： 1， 0， 1， 2，…… 2. 主题状态接口 （1） /topicState/getByDomainIdAndUserId 查询主题状态，参数 long domainId long userId 课程id 用户id （2） /topicState/saveStateByDomainIdAndUserId 保存主题状态，参数 long domainId String states long userId 课程id 主题状态列表 用户id （3） /topicState/saveStateByDomainNameAndUserId 保存主题状态，参数 long domainName String states long userId 课程名 主题状态列表 用户id 分面状态1. 分面状态表 列名 类型 长度 state_id bigint(long) 20 domain_id bigint(long) 20 topic_id bigint(long) 20 states varchar(string) 255 user_id bigint(long) 20 created_time datetime 1 modified_time datetime 1 说明： （1） 学习状态：0表示未学习，1表示已在学习； （2） states（分面状态列表）形式：学习状态1，学习状态2，学习状态3，…… 举例： 1， 0， 1， 0，…… 2. 分面状态接口 （1）/facetState/getByDomainIdAndTopicIdAndUserId 查询分面状态，参数 long domainId long userId long topicId 课程id 用户id 主题id （2）/facetState/saveStateByDomainIdAndTopicIdAndUserId 保存分面状态，参数 long domainId long topicId String states long userId 课程id 主题id 分面状态列表 用户id （3）/facetState/saveStateByDomainNameAndTopicNameAndUserId 保存分面状态，参数 string domainName string topicName String states long userId 课程名 主题名 分面状态列表 用户id （4）/facetState/saveStateByDomainIdAndUserId 保存分面状态，参数 long domainId String states long userId 课程id 分面状态列表 用户id （5）/facetState/saveStateByDomainNameAndUserId 保存主题状态，参数 long domainName String states long userId 课程名 分面状态列表 用户id 注：states：分面状态的矩阵（行（主题）之间以分号隔开，行内以逗号隔开） 例如：0,0,1,0;0,0,1;1,1,0;1,0,1,1,1;……推荐主题1. 推荐主题表 列名 类型 长度 recommendation_id bigint(long) 20 domain_id bigint(long) 20 recommendation_topics varchar(string) 255 user_id bigint(long) 20 created_time datetime 1 modified_time datetime 1 说明： （1）recommendation_topics（推荐主题列表）形式：：推荐主题1 id，推荐主题2 id，推荐主题3 id；推荐主题3 id，推荐主题1 id，推荐主题4 id；……即，不同推荐方式之间以分号隔开，同一推荐方式内的主题id以逗号分隔开 2. 2. 推荐主题接口 （1） recommendation/getByDomainIdAndUserId 查询推荐主题，参数 long domainId long userId 课程id 用户id （2） recommendation/saveRecommendationByDomainIdAndUserId 保存推荐主题，参数 long domainId String recommendationTopics long userId 课程id 推荐主题列表 用户id （3） recommendation/saveRecommendationByDomainNameAndUserId 保存推荐主题，参数 long domainName String recommendationTopics long userId 课程名 推荐主题列表 用户id]]></content>
+      <categories>
+        <category>工程</category>
+      </categories>
+      <tags>
+        <tag>数据库</tag>
+        <tag>智慧教育系统</tag>
+      </tags>
+  </entry>
+</search>
