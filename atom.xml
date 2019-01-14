@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-01-14T08:33:30.955Z</updated>
+  <updated>2019-01-14T11:31:58.223Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>图片服务器搭建</title>
+    <link href="http://yoursite.com/2019/01/14/%E5%9B%BE%E7%89%87%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA/"/>
+    <id>http://yoursite.com/2019/01/14/图片服务器搭建/</id>
+    <published>2019-01-14T09:17:23.000Z</published>
+    <updated>2019-01-14T11:31:58.223Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="图片服务器搭建"><a href="#图片服务器搭建" class="headerlink" title="图片服务器搭建"></a>图片服务器搭建</h1><p><strong>环境</strong>：window server 2016 Datacenter</p><ol><li>首先下载<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">- [nginx下载地址](http://nginx.org/en/download.html) </span><br><span class="line">- [nginx英文安装教程](http://nginx.org/en/docs/windows.html) </span><br><span class="line"></span><br><span class="line">2. 解压```nginx-1.15.8.zip```，目录结构如下图所示：  </span><br><span class="line"></span><br><span class="line">![image](图片服务器搭建/1.png)</span><br><span class="line"></span><br><span class="line">3. 运行```nginx.exe```,并查看通过命令查看运行状态，如下所示：  </span><br><span class="line"></span><br><span class="line">![image](图片服务器搭建/2.png)</span><br><span class="line"></span><br><span class="line">如果没有运行成功，可以通过打开```logs\error.log```查看错误记录。</span><br><span class="line"></span><br><span class="line">4. 打开浏览器，输入```localhost```测试是否成功，如下图所示：</span><br><span class="line"></span><br><span class="line">![image](图片服务器搭建/3.png)</span><br><span class="line"></span><br><span class="line">5. 搭建图片服务器</span><br><span class="line"></span><br><span class="line">首先打开```conf```目录下的```nginx.conf```配置文件，修改如下：</span><br><span class="line"></span><br><span class="line">![image](图片服务器搭建/4.png)</span><br><span class="line"></span><br><span class="line">6. 重新启动```nginx```，一些命令如下：</span><br></pre></td></tr></table></figure></li></ol><p>nginx -s stop       fast shutdown<br>nginx -s quit       graceful shutdown<br>nginx -s reload       changing configuration, starting new worker processes with a new configuration, graceful shutdown of old worker processes<br>nginx -s reopen       re-opening log files<br><code>`</code></p><ol start="7"><li>此时在images文件夹下放一张随意图片（我放了一张nginx网站的截图），打开浏览器，输入链接<code>http://47.95.145.72:8090/1.png</code>，就可以看到我们的图片，如下所示：</li></ol><p><img src="/2019/01/14/图片服务器搭建/5.png" alt="image"></p><p><strong>到这里，图片服务器就搭建完成了！</strong></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;图片服务器搭建&quot;&gt;&lt;a href=&quot;#图片服务器搭建&quot; class=&quot;headerlink&quot; title=&quot;图片服务器搭建&quot;&gt;&lt;/a&gt;图片服务器搭建&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;环境&lt;/strong&gt;：window server 2016 Datacenter&lt;
+      
+    
+    </summary>
+    
+      <category term="工程" scheme="http://yoursite.com/categories/%E5%B7%A5%E7%A8%8B/"/>
+    
+    
+      <category term="nginx" scheme="http://yoursite.com/tags/nginx/"/>
+    
+  </entry>
   
   <entry>
     <title>垃圾收集（二）</title>
