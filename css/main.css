@@ -1976,7 +1976,7 @@ img:hover {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #6fd0fe;
+  background: #ff2208;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3094,7 +3094,7 @@ pre {
   margin-top: 60px;
   padding: 60px 60px 60px 60px;
   background: #fff;
-  opacity: 1;
+  opacity: 0.97;
   min-height: 500px;
 }
 .post {
@@ -3105,8 +3105,8 @@ pre {
   -moz-box-shadow: 0 0 5px rgba(202,203,204,0.5);
 }
 body {
-  background-image: url("/images/background.jpg");
-  background-size: cover;
+  background-image: url("/images/background2.jpg");
+  background-size: 100% 100%;
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: 50% 50%;
