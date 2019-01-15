@@ -88,20 +88,24 @@
 
 
 
-<meta name="description" content="图片服务器搭建环境：window server 2016 Datacenter  首先下载12345678910111213141516171819202122232425[nginx下载地址](http://nginx.org/en/download.html) [nginx英文安装教程](http://nginx.org/en/docs/windows.html) 2. 解压```nginx-">
+<meta name="description" content="图片服务器搭建环境：window server 2016 Datacenter  首先下载nginx软件包，我下在的版本是nginx-1.15.8，下载链接和英文安装教程如下:   nginx下载地址  nginx英文安装教程    解压nginx-1.15.8.zip，目录结构如下图所示：      运行nginx.exe,并查看通过命令查看运行状态，如下所示：     如果没有运行成功，可以通">
 <meta name="keywords" content="nginx">
 <meta property="og:type" content="article">
 <meta property="og:title" content="图片服务器搭建">
 <meta property="og:url" content="http://yoursite.com/2019/01/14/图片服务器搭建/index.html">
 <meta property="og:site_name" content="yangkuan">
-<meta property="og:description" content="图片服务器搭建环境：window server 2016 Datacenter  首先下载12345678910111213141516171819202122232425[nginx下载地址](http://nginx.org/en/download.html) [nginx英文安装教程](http://nginx.org/en/docs/windows.html) 2. 解压```nginx-">
+<meta property="og:description" content="图片服务器搭建环境：window server 2016 Datacenter  首先下载nginx软件包，我下在的版本是nginx-1.15.8，下载链接和英文安装教程如下:   nginx下载地址  nginx英文安装教程    解压nginx-1.15.8.zip，目录结构如下图所示：      运行nginx.exe,并查看通过命令查看运行状态，如下所示：     如果没有运行成功，可以通">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/01/14/图片服务器搭建/1.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/14/图片服务器搭建/2.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/14/图片服务器搭建/3.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/14/图片服务器搭建/4.png">
 <meta property="og:image" content="http://yoursite.com/2019/01/14/图片服务器搭建/5.png">
-<meta property="og:updated_time" content="2019-01-15T13:26:48.149Z">
+<meta property="og:updated_time" content="2019-01-15T13:33:30.831Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="图片服务器搭建">
-<meta name="twitter:description" content="图片服务器搭建环境：window server 2016 Datacenter  首先下载12345678910111213141516171819202122232425[nginx下载地址](http://nginx.org/en/download.html) [nginx英文安装教程](http://nginx.org/en/docs/windows.html) 2. 解压```nginx-">
-<meta name="twitter:image" content="http://yoursite.com/2019/01/14/图片服务器搭建/5.png">
+<meta name="twitter:description" content="图片服务器搭建环境：window server 2016 Datacenter  首先下载nginx软件包，我下在的版本是nginx-1.15.8，下载链接和英文安装教程如下:   nginx下载地址  nginx英文安装教程    解压nginx-1.15.8.zip，目录结构如下图所示：      运行nginx.exe,并查看通过命令查看运行状态，如下所示：     如果没有运行成功，可以通">
+<meta name="twitter:image" content="http://yoursite.com/2019/01/14/图片服务器搭建/1.png">
 
 
 
@@ -401,7 +405,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  308
+                  276
                 </span>
               
 
@@ -440,11 +444,36 @@
       
         <h1 id="图片服务器搭建"><a href="#图片服务器搭建" class="headerlink" title="图片服务器搭建"></a>图片服务器搭建</h1><p><strong>环境</strong>：window server 2016 Datacenter</p>
 <ol>
-<li>首先下载<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">[nginx下载地址](http://nginx.org/en/download.html) </span><br><span class="line">[nginx英文安装教程](http://nginx.org/en/docs/windows.html) </span><br><span class="line"></span><br><span class="line">2. 解压```nginx-1.15.8.zip```，目录结构如下图所示：  </span><br><span class="line"></span><br><span class="line">![image](图片服务器搭建/1.png)</span><br><span class="line"></span><br><span class="line">3. 运行```nginx.exe```,并查看通过命令查看运行状态，如下所示：  </span><br><span class="line"></span><br><span class="line">![image](图片服务器搭建/2.png)</span><br><span class="line"></span><br><span class="line">如果没有运行成功，可以通过打开```logs\error.log```查看错误记录。</span><br><span class="line"></span><br><span class="line">4. 打开浏览器，输入```localhost```测试是否成功，如下图所示：</span><br><span class="line"></span><br><span class="line">![image](图片服务器搭建/3.png)</span><br><span class="line"></span><br><span class="line">5. 搭建图片服务器</span><br><span class="line"></span><br><span class="line">首先打开```conf```目录下的```nginx.conf```配置文件，修改如下：</span><br><span class="line"></span><br><span class="line">![image](图片服务器搭建/4.png)</span><br><span class="line"></span><br><span class="line">6. 重新启动```nginx```，一些命令如下：</span><br></pre></td></tr></table></figure></li>
+<li>首先下载<code>nginx</code>软件包，我下在的版本是<code>nginx-1.15.8</code>，下载链接和英文安装教程如下:</li>
 </ol>
-<p>nginx -s stop       fast shutdown<br>nginx -s quit       graceful shutdown<br>nginx -s reload       changing configuration, starting new worker processes with a new configuration, graceful shutdown of old worker processes<br>nginx -s reopen       re-opening log files<br><code>`</code></p>
+<ul>
+<li><a href="http://nginx.org/en/download.html" target="_blank" rel="noopener">nginx下载地址</a> </li>
+<li><a href="http://nginx.org/en/docs/windows.html" target="_blank" rel="noopener">nginx英文安装教程</a> </li>
+</ul>
+<ol start="2">
+<li>解压<code>nginx-1.15.8.zip</code>，目录结构如下图所示：  </li>
+</ol>
+<p><img src="/2019/01/14/图片服务器搭建/1.png" alt="image"></p>
+<ol start="3">
+<li>运行<code>nginx.exe</code>,并查看通过命令查看运行状态，如下所示：  </li>
+</ol>
+<p><img src="/2019/01/14/图片服务器搭建/2.png" alt="image"></p>
+<p>如果没有运行成功，可以通过打开<code>logs\error.log</code>查看错误记录。</p>
+<ol start="4">
+<li>打开浏览器，输入<code>localhost</code>测试是否成功，如下图所示：</li>
+</ol>
+<p><img src="/2019/01/14/图片服务器搭建/3.png" alt="image"></p>
+<ol start="5">
+<li>搭建图片服务器</li>
+</ol>
+<p>首先打开<code>conf</code>目录下的<code>nginx.conf</code>配置文件，修改如下：</p>
+<p><img src="/2019/01/14/图片服务器搭建/4.png" alt="image"></p>
+<ol start="6">
+<li>重新启动<code>nginx</code>，一些命令如下：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">nginx -s stop	   fast shutdown</span><br><span class="line">nginx -s quit	   graceful shutdown</span><br><span class="line">nginx -s reload	   changing configuration, starting new worker processes with a new configuration, graceful shutdown of old worker processes</span><br><span class="line">nginx -s reopen	   re-opening log files</span><br></pre></td></tr></table></figure>
 <ol start="7">
-<li>此时在images文件夹下放一张随意图片（我放了一张nginx网站的截图），打开浏览器，输入链接<code>http://47.95.145.72:8090/1.png</code>，就可以看到我们的图片，如下所示：</li>
+<li>此时在<code>images</code>文件夹下放一张随意图片（我放了一张<code>nginx</code>网站的截图），打开浏览器，输入链接<code>http://47.95.145.72:8090/1.png</code>，就可以看到我们的图片，如下所示：</li>
 </ol>
 <p><img src="/2019/01/14/图片服务器搭建/5.png" alt="image"></p>
 <p><strong>到这里，图片服务器就搭建完成了！</strong></p>
@@ -727,7 +756,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">9.5k</span>
+    <span title="Site words total count">9.4k</span>
   
 </div>
 
@@ -741,7 +770,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共9.5k字</span>
+  <span class="post-count">博客全站共9.4k字</span>
 </div>
         
 <div class="busuanzi-count">
