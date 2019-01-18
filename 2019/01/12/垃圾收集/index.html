@@ -88,18 +88,18 @@
 
 
 
-<meta name="description" content="垃圾收集垃圾回收需要关注的事情：    哪些内存需要回收？ Java堆和方法区 什么时候回收？ 如何回收？    java内存运行时各个区域，其中程序计数器、java虚拟机栈、本地方法栈3个区域随线程而生，随线程而灭；栈中的栈帧随着方法的进入和退出而有条不紊地进行出栈和入栈操作。而Java堆和方法区则不一样，一个接口中的多个实现类需要的内存可能不一样，一个方法中的多个分支需要的内存也可能不一样，我">
+<meta name="description" content="垃圾收集垃圾回收需要关注的事情：    哪些内存需要回收？ Java堆和方法区 什么时候回收？ 如何回收？">
 <meta name="keywords" content="内存分配策略,引用计数法,可达性算法">
 <meta property="og:type" content="article">
 <meta property="og:title" content="垃圾收集(一)">
 <meta property="og:url" content="http://yoursite.com/2019/01/12/垃圾收集/index.html">
 <meta property="og:site_name" content="yangkuan">
-<meta property="og:description" content="垃圾收集垃圾回收需要关注的事情：    哪些内存需要回收？ Java堆和方法区 什么时候回收？ 如何回收？    java内存运行时各个区域，其中程序计数器、java虚拟机栈、本地方法栈3个区域随线程而生，随线程而灭；栈中的栈帧随着方法的进入和退出而有条不紊地进行出栈和入栈操作。而Java堆和方法区则不一样，一个接口中的多个实现类需要的内存可能不一样，一个方法中的多个分支需要的内存也可能不一样，我">
+<meta property="og:description" content="垃圾收集垃圾回收需要关注的事情：    哪些内存需要回收？ Java堆和方法区 什么时候回收？ 如何回收？">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-12T11:46:35.696Z">
+<meta property="og:updated_time" content="2019-01-18T04:40:35.523Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="垃圾收集(一)">
-<meta name="twitter:description" content="垃圾收集垃圾回收需要关注的事情：    哪些内存需要回收？ Java堆和方法区 什么时候回收？ 如何回收？    java内存运行时各个区域，其中程序计数器、java虚拟机栈、本地方法栈3个区域随线程而生，随线程而灭；栈中的栈帧随着方法的进入和退出而有条不紊地进行出栈和入栈操作。而Java堆和方法区则不一样，一个接口中的多个实现类需要的内存可能不一样，一个方法中的多个分支需要的内存也可能不一样，我">
+<meta name="twitter:description" content="垃圾收集垃圾回收需要关注的事情：    哪些内存需要回收？ Java堆和方法区 什么时候回收？ 如何回收？">
 
 
 
@@ -440,9 +440,9 @@
 <ol>
 <li>哪些内存需要回收？ Java堆和方法区</li>
 <li>什么时候回收？</li>
-<li>如何回收？  </li>
+<li>如何回收？  <a id="more"></a> 
+java内存运行时各个区域，其中程序计数器、java虚拟机栈、本地方法栈3个区域随线程而生，随线程而灭；栈中的栈帧随着方法的进入和退出而有条不紊地进行出栈和入栈操作。而Java堆和方法区则不一样，一个接口中的多个实现类需要的内存可能不一样，一个方法中的多个分支需要的内存也可能不一样，我们只有在程序处于运行期间时才能知道会创建哪些对象，这部分内存的分配和回收都是动态的，垃圾回收器所关注的就是这部分内存。</li>
 </ol>
-<p>java内存运行时各个区域，其中程序计数器、java虚拟机栈、本地方法栈3个区域随线程而生，随线程而灭；栈中的栈帧随着方法的进入和退出而有条不紊地进行出栈和入栈操作。而Java堆和方法区则不一样，一个接口中的多个实现类需要的内存可能不一样，一个方法中的多个分支需要的内存也可能不一样，我们只有在程序处于运行期间时才能知道会创建哪些对象，这部分内存的分配和回收都是动态的，垃圾回收器所关注的就是这部分内存。</p>
 <h2 id="对象存活判断"><a href="#对象存活判断" class="headerlink" title="对象存活判断"></a>对象存活判断</h2><h3 id="引用计数法（Reference-Counting）"><a href="#引用计数法（Reference-Counting）" class="headerlink" title="引用计数法（Reference Counting）"></a>引用计数法（Reference Counting）</h3><p>算法描述：给对象中添加一个引用计数器，每当有一个引用指向这个对象，计数器值就加1；当引用失效时，计数器值就减1；任何时刻计数器值为0的对象就不可能再被使用。<br>引用计数法存在一个问题：它很难解决对象之间的相互循环引用问题，举个例子，示例代码如下。对象<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line">/**</span><br><span class="line"> * 对象objA和objB存在相互引用</span><br><span class="line"> * @author yangkuan</span><br><span class="line"> */</span><br><span class="line">public class ReferenceCounteringGC &#123;</span><br><span class="line">    public Object instance = null;</span><br><span class="line"></span><br><span class="line">    private static final int _1MB = 1024 * 1024;</span><br><span class="line">    /**</span><br><span class="line">     * 这个成员变量的意义是通过其占用的内存，通过GC日志查看对象是否被回收</span><br><span class="line">     */</span><br><span class="line">    private byte[] bigSize = new byte[2 * _1MB];</span><br><span class="line"></span><br><span class="line">    public static void testGC()&#123;</span><br><span class="line">        ReferenceCounteringGC objA = new ReferenceCounteringGC();</span><br><span class="line">        ReferenceCounteringGC objB = new ReferenceCounteringGC();</span><br><span class="line">        objA.instance = objB;</span><br><span class="line">        objB.instance = objA;</span><br><span class="line"></span><br><span class="line">        objA = null;</span><br><span class="line">        objB = null;</span><br><span class="line"></span><br><span class="line">        // 假设此处发生垃圾回收，如果回收算法是引用计数法，那么objA和objB将不会被回收</span><br><span class="line">        System.gc();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h3 id="可达性分析算法（Reachability-Analysis）"><a href="#可达性分析算法（Reachability-Analysis）" class="headerlink" title="可达性分析算法（Reachability Analysis）"></a>可达性分析算法（Reachability Analysis）</h3><h4 id="算法描述"><a href="#算法描述" class="headerlink" title="算法描述"></a>算法描述</h4><p>这个算法的基本思想就是通过一系列的称为“GC Roots”的对象作为起始点，从这些节点开始向下搜索，搜索所走过的路径称为引用链（Reference Chain），当一个对象到GC Roots没有任何引用链相连（即该对象到GC Roots不可达）时，则证明这个对象不可用。那这些不可达的对象就可以判定为可回收对象。<br>可作为GC Roots的对象包括以下几种：  </p>
 <ul>

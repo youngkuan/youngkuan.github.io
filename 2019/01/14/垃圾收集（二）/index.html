@@ -99,7 +99,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/01/14/垃圾收集（二）/gc1.png">
 <meta property="og:image" content="http://yoursite.com/2019/01/14/垃圾收集（二）/gc2.png">
 <meta property="og:image" content="http://yoursite.com/2019/01/14/垃圾收集（二）/gc3.png">
-<meta property="og:updated_time" content="2019-01-14T08:33:30.955Z">
+<meta property="og:updated_time" content="2019-01-18T04:40:40.615Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="垃圾收集（二）">
 <meta name="twitter:description" content="垃圾收集垃圾收集算法标记-清除算法算法分为标记阶段和清除阶段 ，首先标记出所有需要回收的对象，在标记完成后统一回收所有被标记的对象，它的标记过程就是引用计数法或者可达性算法判断对象是否存活的过程。不足：    效率问题，标记和清除两个阶段的效率都不高； 空间问题，标记清除之后会产生大量不连续的内存碎片，空间碎片太多可能会导致以后程序运行过程中需要分配较大对象时，无法找到足够的内存碎片而不得不提前出">
@@ -445,7 +445,7 @@
 <li>效率问题，标记和清除两个阶段的效率都不高；</li>
 <li>空间问题，标记清除之后会产生大量不连续的内存碎片，空间碎片太多可能会导致以后程序运行过程中需要分配较大对象时，无法找到足够的内存碎片而不得不提前出发一次垃圾收集动作。<br>标记清除算法的执行过程如下图所示：  </li>
 </ol>
-<p><img src="/2019/01/14/垃圾收集（二）/gc1.png" alt="image"></p>
+<p><img src="/2019/01/14/垃圾收集（二）/gc1.png" alt="image"><br><a id="more"></a> </p>
 <h3 id="复制算法"><a href="#复制算法" class="headerlink" title="复制算法"></a>复制算法</h3><p>为了解决效率问题，一种“复制”的垃圾收集算法出现了，它将可用的内存分成大小相等的两个区域，每次只使用其中的一块区域。当这块区域用完之后，就将还存活着的对象复制到另一块内存区域上，然后再把已使用过的内存空间一次清理掉。这样使得每次都是对整个半区进行垃圾回收，内存分配时也就不用再考虑内存碎片等复杂情况，只要移动堆顶指针，按顺序分配内存即可，实现简单，运行高效。只是这种算法每次只能使用一半的内存，相当于将内存缩小为原来的一半，代价太高。复制算法的执行过程如下图所示：</p>
 <p><img src="/2019/01/14/垃圾收集（二）/gc2.png" alt="image"></p>
 <p>目前的商业虚拟机都是采用复制算法回收新生代，但是并不按照<code>1:1</code>划分内存空间，而是将内存分为一块较大的Eden空间和两块较小的<code>Survivor</code>空间，每次使用<code>Eden</code>和其中一块<code>Survivor</code>。当回收时，将Eden和Survivor中还存活的对象一次性复制到另一块<code>Survivor</code>空间上，最后清理掉Eden和刚才用过的Survivor空间。<code>HotSpot</code>虚拟机默认<code>Eden：Survivor=8:1</code>，也就是每次新生代中可用内存空间为整个新生代容量的<code>90%</code>，只有<code>10%</code>的内存被“浪费”。当然在大多数（<code>98%</code>）情况下，只有不超过<code>10%</code>的对象存活，而当超过<code>10%</code>时，也就意味着<code>Survivor</code>空间不够用，这个时候就需要依赖老年代进行分配担保（无法再<code>Survivor</code>区存放的对象直接进入老年代）。</p>
