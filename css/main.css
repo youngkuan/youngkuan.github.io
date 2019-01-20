@@ -1976,7 +1976,7 @@ img:hover {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #86b134;
+  background: #468712;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3009,6 +3009,10 @@ hr {
 }
 .post-button a:hover {
   border-bottom-color: #222;
+}
+.post {
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 .links-of-blogroll-inline .links-of-blogroll-item {
   display: inline-block;
