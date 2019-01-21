@@ -88,18 +88,18 @@
 
 
 
-<meta name="description" content="错误记录 在日志系统运行期间，每隔几天kafka平台就会自动崩溃，控制台窗口关闭，并且重新启动kafka平台也会出现日志文件冲突问题，从而导致日志系统无法正常记录用户行为日志。  解决方法：  首先，我们查阅了官网的各种文档，在全面了解kafka的实现原理与应用之后仍然没有找到解决问题的方法。然后我们在StackOverflow和Quora上进行了相关问题的查看，尝试后发现类似问题解决方法，将ka">
+<meta name="description" content="错误记录 在日志系统运行期间，每隔几天kafka平台就会自动崩溃，控制台窗口关闭，并且重新启动kafka平台也会出现日志文件冲突问题，从而导致日志系统无法正常记录用户行为日志。">
 <meta name="keywords" content="yotta系统">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Yotta系统错误记录及性能优化">
 <meta property="og:url" content="http://yoursite.com/2019/01/07/Yotta系统错误记录及性能优化/index.html">
 <meta property="og:site_name" content="yangkuan">
-<meta property="og:description" content="错误记录 在日志系统运行期间，每隔几天kafka平台就会自动崩溃，控制台窗口关闭，并且重新启动kafka平台也会出现日志文件冲突问题，从而导致日志系统无法正常记录用户行为日志。  解决方法：  首先，我们查阅了官网的各种文档，在全面了解kafka的实现原理与应用之后仍然没有找到解决问题的方法。然后我们在StackOverflow和Quora上进行了相关问题的查看，尝试后发现类似问题解决方法，将ka">
+<meta property="og:description" content="错误记录 在日志系统运行期间，每隔几天kafka平台就会自动崩溃，控制台窗口关闭，并且重新启动kafka平台也会出现日志文件冲突问题，从而导致日志系统无法正常记录用户行为日志。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-08T10:29:32.567Z">
+<meta property="og:updated_time" content="2019-01-18T04:40:21.240Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Yotta系统错误记录及性能优化">
-<meta name="twitter:description" content="错误记录 在日志系统运行期间，每隔几天kafka平台就会自动崩溃，控制台窗口关闭，并且重新启动kafka平台也会出现日志文件冲突问题，从而导致日志系统无法正常记录用户行为日志。  解决方法：  首先，我们查阅了官网的各种文档，在全面了解kafka的实现原理与应用之后仍然没有找到解决问题的方法。然后我们在StackOverflow和Quora上进行了相关问题的查看，尝试后发现类似问题解决方法，将ka">
+<meta name="twitter:description" content="错误记录 在日志系统运行期间，每隔几天kafka平台就会自动崩溃，控制台窗口关闭，并且重新启动kafka平台也会出现日志文件冲突问题，从而导致日志系统无法正常记录用户行为日志。">
 
 
 
@@ -387,6 +387,11 @@
           
 
           
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>  阅读数
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
 
           
             <div class="post-wordcount">
@@ -437,9 +442,9 @@
 
       
         <h2 id="错误记录"><a href="#错误记录" class="headerlink" title="错误记录"></a>错误记录</h2><ol>
-<li>在日志系统运行期间，每隔几天kafka平台就会自动崩溃，控制台窗口关闭，并且重新启动kafka平台也会出现日志文件冲突问题，从而导致日志系统无法正常记录用户行为日志。</li>
+<li>在日志系统运行期间，每隔几天kafka平台就会自动崩溃，控制台窗口关闭，并且重新启动kafka平台也会出现日志文件冲突问题，从而导致日志系统无法正常记录用户行为日志。<a id="more"></a> 
+解决方法：</li>
 </ol>
-<p>解决方法：</p>
 <ul>
 <li>首先，我们查阅了官网的各种文档，在全面了解kafka的实现原理与应用之后仍然没有找到解决问题的方法。然后我们在StackOverflow和Quora上进行了相关问题的查看，尝试后发现类似问题解决方法，将kafka平台对应的日志文件删除就可以正常启动kafka平台。虽然通过删除日志文件的方式使得日志记录正常进行，但是依旧没有解决每隔几天kafka平台就会自动崩溃的问题，频繁人工启动不稳定的服务耗费人力开销。</li>
 <li>为了彻底解决这个问题，我们维护人员仔细阅读kafka生成的日志文件，了解到崩溃的发生是因为日志文件大小达到阈值时kafka程序会对日志文件重命名，而此时日志文件又被自身所占用，就产生了程序异常，在Apache官网issues下发现这是此版本kafka在windows下的一个错误，所以我们将日志系统整体迁移到linux系统下，将问题完美解决。</li>
@@ -602,7 +607,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -613,7 +618,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -624,7 +629,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">28</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -718,9 +723,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        
-<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -734,7 +737,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">6.7k</span>
+    <span title="Site words total count">13.2k</span>
   
 </div>
 
@@ -748,20 +751,26 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共6.7k字</span>
+  <span class="post-count">博客全站共13.2k字</span>
 </div>
         
 <div class="busuanzi-count">
-  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
   
     <span class="site-uv">
       本站访客数
       <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
-      人次
+      人
     </span>
   
 
+  
+    <span class="site-pv">
+      总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
   
 </div>
 

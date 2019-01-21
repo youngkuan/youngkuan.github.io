@@ -14,7 +14,7 @@ categories: 科研
 ```
 cat /usr/local/cuda/version.txt
 ```
-
+<!-- more --> 
 2. cudnn版本
 
 ```

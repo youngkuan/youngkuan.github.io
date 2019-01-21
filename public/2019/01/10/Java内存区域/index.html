@@ -88,19 +88,19 @@
 
 
 
-<meta name="description" content="Java内存区域Java虚拟机在执行Java程序的过程中，把其所管理的内存划分成多个区域，如下图所示。每个数据区域都有各自的用途，有的区域随着虚拟机进程的启动而存在，是线程公有的；有些区域依赖于特定的线程而存在，是线程私有的。 程序计数器程序计数器是一小块内存区域，可以看作是当前线程执行的字节码的行号指示器。每条线程都独立拥有一个程序计数器，因此程序计数器是线程私有的。 Java虚拟机栈Java虚">
+<meta name="description" content="Java内存区域Java虚拟机在执行Java程序的过程中，把其所管理的内存划分成多个区域，如下图所示。每个数据区域都有各自的用途，有的区域随着虚拟机进程的启动而存在，是线程公有的；有些区域依赖于特定的线程而存在，是线程私有的。">
 <meta name="keywords" content="Java堆,方法区,Java虚拟机栈">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java内存区域">
 <meta property="og:url" content="http://yoursite.com/2019/01/10/Java内存区域/index.html">
 <meta property="og:site_name" content="yangkuan">
-<meta property="og:description" content="Java内存区域Java虚拟机在执行Java程序的过程中，把其所管理的内存划分成多个区域，如下图所示。每个数据区域都有各自的用途，有的区域随着虚拟机进程的启动而存在，是线程公有的；有些区域依赖于特定的线程而存在，是线程私有的。 程序计数器程序计数器是一小块内存区域，可以看作是当前线程执行的字节码的行号指示器。每条线程都独立拥有一个程序计数器，因此程序计数器是线程私有的。 Java虚拟机栈Java虚">
+<meta property="og:description" content="Java内存区域Java虚拟机在执行Java程序的过程中，把其所管理的内存划分成多个区域，如下图所示。每个数据区域都有各自的用途，有的区域随着虚拟机进程的启动而存在，是线程公有的；有些区域依赖于特定的线程而存在，是线程私有的。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/01/10/Java内存区域/运行时内存.png">
-<meta property="og:updated_time" content="2019-01-10T08:03:58.107Z">
+<meta property="og:updated_time" content="2019-01-18T04:19:10.584Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java内存区域">
-<meta name="twitter:description" content="Java内存区域Java虚拟机在执行Java程序的过程中，把其所管理的内存划分成多个区域，如下图所示。每个数据区域都有各自的用途，有的区域随着虚拟机进程的启动而存在，是线程公有的；有些区域依赖于特定的线程而存在，是线程私有的。 程序计数器程序计数器是一小块内存区域，可以看作是当前线程执行的字节码的行号指示器。每条线程都独立拥有一个程序计数器，因此程序计数器是线程私有的。 Java虚拟机栈Java虚">
+<meta name="twitter:description" content="Java内存区域Java虚拟机在执行Java程序的过程中，把其所管理的内存划分成多个区域，如下图所示。每个数据区域都有各自的用途，有的区域随着虚拟机进程的启动而存在，是线程公有的；有些区域依赖于特定的线程而存在，是线程私有的。">
 <meta name="twitter:image" content="http://yoursite.com/2019/01/10/Java内存区域/运行时内存.png">
 
 
@@ -389,6 +389,11 @@
           
 
           
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>  阅读数
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
 
           
             <div class="post-wordcount">
@@ -438,7 +443,7 @@
       
 
       
-        <h1 id="Java内存区域"><a href="#Java内存区域" class="headerlink" title="Java内存区域"></a>Java内存区域</h1><p>Java虚拟机在执行Java程序的过程中，把其所管理的内存划分成多个区域，如下图所示。每个数据区域都有各自的用途，有的区域随着虚拟机进程的启动而存在，是线程公有的；有些区域依赖于特定的线程而存在，是线程私有的。<br><img src="/2019/01/10/Java内存区域/运行时内存.png" alt="image"></p>
+        <h1 id="Java内存区域"><a href="#Java内存区域" class="headerlink" title="Java内存区域"></a>Java内存区域</h1><p>Java虚拟机在执行Java程序的过程中，把其所管理的内存划分成多个区域，如下图所示。每个数据区域都有各自的用途，有的区域随着虚拟机进程的启动而存在，是线程公有的；有些区域依赖于特定的线程而存在，是线程私有的。<br><img src="/2019/01/10/Java内存区域/运行时内存.png" alt="image"><br><a id="more"></a></p>
 <h2 id="程序计数器"><a href="#程序计数器" class="headerlink" title="程序计数器"></a>程序计数器</h2><p>程序计数器是一小块内存区域，可以看作是当前线程执行的字节码的行号指示器。每条线程都独立拥有一个程序计数器，因此程序计数器是线程私有的。</p>
 <h2 id="Java虚拟机栈"><a href="#Java虚拟机栈" class="headerlink" title="Java虚拟机栈"></a>Java虚拟机栈</h2><p>Java虚拟机栈描述的是Java方法执行的内存模型：每个方法在执行时都会创建一个栈帧（stack frame）用于存储局部变量表、操作数栈、动态链接、方法出口等信息。每个方法从被调用开始执行到执行完成返回的过程，就对应这一个栈帧在虚拟机栈中入栈和出栈的过程。Java内存区域经常被简单地划分为堆内存和栈内存，其中的栈内存粗略来讲就是指的Java虚拟机栈，当然实际上内存划分肯定更加复杂。虚拟机栈与程序计数器一样的线程私有的。<br>局部变量表存放了编译器可知的各种基本数据类型（boolean、byte、char、short、int、float、long、double）、对象引用（reference类型，直观上相当于C语言中的指针，存放的是对象地址）。64位长度的long和double类型的数据会占用2个局部变量空间（Slot），其余的数据类型只占用1个Slot。<br>与Java虚拟机栈相关的两个异常：如果线程请求的栈深度大于虚拟机所允许的深度，就会抛出StackOverflowError异常，一般Java程序中递归调用一个方法而不设置终止条件就会出现这个异常，例如下面样例程序求解斐波那契数列，注释了终止条件就会出现异常；如果虚拟机栈可以动态扩展，但是扩展时无法申请到足够的内存空间，就会抛出OutOfMemoryError异常。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public int getFibonacci(int n) &#123;</span><br><span class="line">    // if(n == 0||n == 1)&#123;</span><br><span class="line">    //     return n;</span><br><span class="line">    // &#125;</span><br><span class="line">    return getFibonacciByRecursion(n-1)+getFibonacciByRecursion(n-2);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -603,7 +608,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -614,7 +619,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -625,7 +630,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">28</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -719,9 +724,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        
-<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -735,7 +738,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">6.7k</span>
+    <span title="Site words total count">13.2k</span>
   
 </div>
 
@@ -749,20 +752,26 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共6.7k字</span>
+  <span class="post-count">博客全站共13.2k字</span>
 </div>
         
 <div class="busuanzi-count">
-  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
   
     <span class="site-uv">
       本站访客数
       <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
-      人次
+      人
     </span>
   
 
+  
+    <span class="site-pv">
+      总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
   
 </div>
 

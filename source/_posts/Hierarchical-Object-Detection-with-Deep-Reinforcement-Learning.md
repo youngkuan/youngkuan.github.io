@@ -16,7 +16,7 @@ categories: 科研
 1. 考虑区域之间的联系，
 2. 利用top-down的扫描方式，首先获取整个图像，关注局部区域的相关信息，
 3. 基于增强学习训练的代理（agent）有能力检测图像中的对象
-
+<!-- more --> 
 
 ## Hierarchical Object Detection Model
 ###### **1. Markov Decision Process（马尔科夫决策过程）**

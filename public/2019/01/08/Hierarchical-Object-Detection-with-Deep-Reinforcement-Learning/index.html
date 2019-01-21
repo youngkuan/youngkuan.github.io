@@ -88,23 +88,23 @@
 
 
 
-<meta name="description" content="Hierarchical Object Detection with Deep Reinforcement LearningAbstract 关键的思想在于关注图像中包含更丰富信息的那些部分并放大它们。  Introduction 考虑区域之间的联系， 利用top-down的扫描方式，首先获取整个图像，关注局部区域的相关信息， 基于增强学习训练的代理（agent）有能力检测图像中的对象  Hier">
+<meta name="description" content="Hierarchical Object Detection with Deep Reinforcement LearningAbstract 关键的思想在于关注图像中包含更丰富信息的那些部分并放大它们。  Introduction 考虑区域之间的联系， 利用top-down的扫描方式，首先获取整个图像，关注局部区域的相关信息， 基于增强学习训练的代理（agent）有能力检测图像中的对象">
 <meta name="keywords" content="对象检测">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hierarchical Object Detection with Deep Reinforcement Learning">
 <meta property="og:url" content="http://yoursite.com/2019/01/08/Hierarchical-Object-Detection-with-Deep-Reinforcement-Learning/index.html">
 <meta property="og:site_name" content="yangkuan">
-<meta property="og:description" content="Hierarchical Object Detection with Deep Reinforcement LearningAbstract 关键的思想在于关注图像中包含更丰富信息的那些部分并放大它们。  Introduction 考虑区域之间的联系， 利用top-down的扫描方式，首先获取整个图像，关注局部区域的相关信息， 基于增强学习训练的代理（agent）有能力检测图像中的对象  Hier">
+<meta property="og:description" content="Hierarchical Object Detection with Deep Reinforcement LearningAbstract 关键的思想在于关注图像中包含更丰富信息的那些部分并放大它们。  Introduction 考虑区域之间的联系， 利用top-down的扫描方式，首先获取整个图像，关注局部区域的相关信息， 基于增强学习训练的代理（agent）有能力检测图像中的对象">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/01/08/Hierarchical-Object-Detection-with-Deep-Reinforcement-Learning/Hierarchical-Object-Detection-Models.png">
 <meta property="og:image" content="http://yoursite.com/2019/01/08/Hierarchical-Object-Detection-with-Deep-Reinforcement-Learning/aeroplane20180626.png">
 <meta property="og:image" content="http://yoursite.com/2019/01/08/Hierarchical-Object-Detection-with-Deep-Reinforcement-Learning/vgg16.png">
 <meta property="og:image" content="http://yoursite.com/2019/01/08/Hierarchical-Object-Detection-with-Deep-Reinforcement-Learning/error1.png">
 <meta property="og:image" content="http://yoursite.com/2019/01/08/Hierarchical-Object-Detection-with-Deep-Reinforcement-Learning/error2.png">
-<meta property="og:updated_time" content="2019-01-08T13:34:20.326Z">
+<meta property="og:updated_time" content="2019-01-18T04:40:03.656Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hierarchical Object Detection with Deep Reinforcement Learning">
-<meta name="twitter:description" content="Hierarchical Object Detection with Deep Reinforcement LearningAbstract 关键的思想在于关注图像中包含更丰富信息的那些部分并放大它们。  Introduction 考虑区域之间的联系， 利用top-down的扫描方式，首先获取整个图像，关注局部区域的相关信息， 基于增强学习训练的代理（agent）有能力检测图像中的对象  Hier">
+<meta name="twitter:description" content="Hierarchical Object Detection with Deep Reinforcement LearningAbstract 关键的思想在于关注图像中包含更丰富信息的那些部分并放大它们。  Introduction 考虑区域之间的联系， 利用top-down的扫描方式，首先获取整个图像，关注局部区域的相关信息， 基于增强学习训练的代理（agent）有能力检测图像中的对象">
 <meta name="twitter:image" content="http://yoursite.com/2019/01/08/Hierarchical-Object-Detection-with-Deep-Reinforcement-Learning/Hierarchical-Object-Detection-Models.png">
 
 
@@ -393,6 +393,11 @@
           
 
           
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>  阅读数
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
 
           
             <div class="post-wordcount">
@@ -448,7 +453,8 @@
 <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ol>
 <li>考虑区域之间的联系，</li>
 <li>利用top-down的扫描方式，首先获取整个图像，关注局部区域的相关信息，</li>
-<li>基于增强学习训练的代理（agent）有能力检测图像中的对象</li>
+<li>基于增强学习训练的代理（agent）有能力检测图像中的对象<a id="more"></a> 
+</li>
 </ol>
 <h2 id="Hierarchical-Object-Detection-Model"><a href="#Hierarchical-Object-Detection-Model" class="headerlink" title="Hierarchical Object Detection Model"></a>Hierarchical Object Detection Model</h2><h6 id="1-Markov-Decision-Process（马尔科夫决策过程）"><a href="#1-Markov-Decision-Process（马尔科夫决策过程）" class="headerlink" title="1. Markov Decision Process（马尔科夫决策过程）"></a><strong>1. Markov Decision Process（马尔科夫决策过程）</strong></h6><blockquote>
 <p>State:当前区域描述符（the descriptor of current region）和记忆向量（memory vector）</p>
@@ -660,7 +666,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -671,7 +677,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -682,7 +688,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">28</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -776,9 +782,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        
-<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -792,7 +796,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">6.7k</span>
+    <span title="Site words total count">13.2k</span>
   
 </div>
 
@@ -806,20 +810,26 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共6.7k字</span>
+  <span class="post-count">博客全站共13.2k字</span>
 </div>
         
 <div class="busuanzi-count">
-  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
   
     <span class="site-uv">
       本站访客数
       <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
-      人次
+      人
     </span>
   
 
+  
+    <span class="site-pv">
+      总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
   
 </div>
 
