@@ -88,20 +88,20 @@
 
 
 
-<meta name="description" content="StackGAN: Text to Photo-realistic Image Synthesis with Stacked Generative Adversarial NetworksAbstract源码地址：https://github.com/hanzhanggit/StackGAN 这篇文章提出Stacked Generative Adversarial Networks (StackG">
+<meta name="description" content="Abstract源码地址：https://github.com/hanzhanggit/StackGAN 这篇文章提出Stacked Generative Adversarial Networks (StackGAN)合成高分辨率（$256 \times 256$）的逼真图像。这个模型将困难的图像合成问题分成两个子问题：Stage-I GAN根据输入的文本描述合成对象的基本形状和颜色；Stage-">
 <meta name="keywords" content="论文阅读,text2image,图像合成,生成对抗网络">
 <meta property="og:type" content="article">
 <meta property="og:title" content="StackGAN: Text to Photo-realistic Image Synthesis with Stacked Generative Adversarial Networks">
 <meta property="og:url" content="http://yoursite.com/2019/02/19/StackGAN-Text-to-Photo-realistic-Image-Synthesis-with-Stacked-Generative-Adversarial-Networks/index.html">
 <meta property="og:site_name" content="yangkuan">
-<meta property="og:description" content="StackGAN: Text to Photo-realistic Image Synthesis with Stacked Generative Adversarial NetworksAbstract源码地址：https://github.com/hanzhanggit/StackGAN 这篇文章提出Stacked Generative Adversarial Networks (StackG">
+<meta property="og:description" content="Abstract源码地址：https://github.com/hanzhanggit/StackGAN 这篇文章提出Stacked Generative Adversarial Networks (StackGAN)合成高分辨率（$256 \times 256$）的逼真图像。这个模型将困难的图像合成问题分成两个子问题：Stage-I GAN根据输入的文本描述合成对象的基本形状和颜色；Stage-">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/02/19/StackGAN-Text-to-Photo-realistic-Image-Synthesis-with-Stacked-Generative-Adversarial-Networks/StackGAN0.png">
 <meta property="og:image" content="http://yoursite.com/2019/02/19/StackGAN-Text-to-Photo-realistic-Image-Synthesis-with-Stacked-Generative-Adversarial-Networks/StackGAN.png">
-<meta property="og:updated_time" content="2019-02-19T13:53:25.619Z">
+<meta property="og:updated_time" content="2019-02-19T13:55:19.722Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="StackGAN: Text to Photo-realistic Image Synthesis with Stacked Generative Adversarial Networks">
-<meta name="twitter:description" content="StackGAN: Text to Photo-realistic Image Synthesis with Stacked Generative Adversarial NetworksAbstract源码地址：https://github.com/hanzhanggit/StackGAN 这篇文章提出Stacked Generative Adversarial Networks (StackG">
+<meta name="twitter:description" content="Abstract源码地址：https://github.com/hanzhanggit/StackGAN 这篇文章提出Stacked Generative Adversarial Networks (StackGAN)合成高分辨率（$256 \times 256$）的逼真图像。这个模型将困难的图像合成问题分成两个子问题：Stage-I GAN根据输入的文本描述合成对象的基本形状和颜色；Stage-">
 <meta name="twitter:image" content="http://yoursite.com/2019/02/19/StackGAN-Text-to-Photo-realistic-Image-Synthesis-with-Stacked-Generative-Adversarial-Networks/StackGAN0.png">
 
 
@@ -407,7 +407,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  999
+                  988
                 </span>
               
 
@@ -444,7 +444,7 @@
       
 
       
-        <h1 id="StackGAN-Text-to-Photo-realistic-Image-Synthesis-with-Stacked-Generative-Adversarial-Networks"><a href="#StackGAN-Text-to-Photo-realistic-Image-Synthesis-with-Stacked-Generative-Adversarial-Networks" class="headerlink" title="StackGAN: Text to Photo-realistic Image Synthesis with Stacked Generative Adversarial Networks"></a>StackGAN: Text to Photo-realistic Image Synthesis with Stacked Generative Adversarial Networks</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p><a href="https://github.com/hanzhanggit/StackGAN" target="_blank" rel="noopener">源码地址：https://github.com/hanzhanggit/StackGAN</a></p>
+        <h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p><a href="https://github.com/hanzhanggit/StackGAN" target="_blank" rel="noopener">源码地址：https://github.com/hanzhanggit/StackGAN</a></p>
 <p>这篇文章提出<code>Stacked Generative Adversarial Networks (StackGAN)</code>合成高分辨率（$256 \times 256$）的逼真图像。这个模型将困难的图像合成问题分成两个子问题：<code>Stage-I GAN</code>根据输入的文本描述合成对象的基本形状和颜色；<code>Stage-II GAN</code>根据<code>Stage-I GAN</code>以合成的图像结果和文本描述作为输入，丰富合成图像的细节，生成逼真的高分辨率图像。 </p>
 <p><img src="/2019/02/19/StackGAN-Text-to-Photo-realistic-Image-Synthesis-with-Stacked-Generative-Adversarial-Networks/StackGAN0.png" alt="image"></p>
 <a id="more"></a> 
@@ -711,7 +711,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#StackGAN-Text-to-Photo-realistic-Image-Synthesis-with-Stacked-Generative-Adversarial-Networks"><span class="nav-number">1.</span> <span class="nav-text">StackGAN: Text to Photo-realistic Image Synthesis with Stacked Generative Adversarial Networks</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract"><span class="nav-number">1.1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Stacked-Generative-Adversarial-Networks"><span class="nav-number">1.2.</span> <span class="nav-text">Stacked Generative Adversarial Networks</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Stage-I-GAN"><span class="nav-number">1.2.1.</span> <span class="nav-text">Stage-I GAN</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#KL散度（Kullback–Leibler-divergence-KL-divergence）"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">KL散度（Kullback–Leibler divergence,KL divergence）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#模型框架"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">模型框架</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Stage-II-GAN"><span class="nav-number">1.2.2.</span> <span class="nav-text">Stage-II GAN</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Stacked-Generative-Adversarial-Networks"><span class="nav-number">2.</span> <span class="nav-text">Stacked Generative Adversarial Networks</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Stage-I-GAN"><span class="nav-number">2.1.</span> <span class="nav-text">Stage-I GAN</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#KL散度（Kullback–Leibler-divergence-KL-divergence）"><span class="nav-number">2.1.1.</span> <span class="nav-text">KL散度（Kullback–Leibler divergence,KL divergence）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#模型框架"><span class="nav-number">2.1.2.</span> <span class="nav-text">模型框架</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Stage-II-GAN"><span class="nav-number">2.2.</span> <span class="nav-text">Stage-II GAN</span></a></li></ol></li></ol></div>
             
 
           </div>
