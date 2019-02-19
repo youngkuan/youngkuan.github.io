@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[StackGAN: Text to Photo-realistic Image Synthesis with Stacked Generative Adversarial Networks]]></title>
+    <url>%2F2019%2F02%2F19%2FStackGAN-Text-to-Photo-realistic-Image-Synthesis-with-Stacked-Generative-Adversarial-Networks%2F</url>
+    <content type="text"><![CDATA[StackGAN: Text to Photo-realistic Image Synthesis with Stacked Generative Adversarial NetworksAbstract源码地址：https://github.com/hanzhanggit/StackGAN 这篇文章提出Stacked Generative Adversarial Networks (StackGAN)合成高分辨率（$256 \times 256$）的逼真图像。这个模型将困难的图像合成问题分成两个子问题：Stage-I GAN根据输入的文本描述合成对象的基本形状和颜色；Stage-II GAN根据Stage-I GAN以合成的图像结果和文本描述作为输入，丰富合成图像的细节，生成逼真的高分辨率图像。 我们都知道生成对抗网络的训练过程存在不稳定性，作者提出了一种新的条件增强技术促进潜在条件流形（latent conditioning manifold）的平滑性，从而改善了合成图像的多样性和训练生成对抗网络过程的稳定性。 Stacked Generative Adversarial Networks Stacked Generative Adversarial Networks的结构如下图所示分为Stage-I GAN和Stage-II GAN两个子网络： Stage-I GAN：以文本描述和噪声向量为输入，文本描述控制对象的基本形状和颜色，噪声控制背景布局，从而生成一张低分辨率图像； Stage-II GAN：纠正Stage-I生成的低分辨率图像的缺陷，再次通过读取文本描述来补全图像的细节，从而生成高分辨率的逼真图像。 Stage-I GANKL散度（Kullback–Leibler divergence,KL divergence）本文章中的条件增强技术中计算标准高斯分布和条件高斯分布之间的KL散度，所以先简单介绍KL散度。KL散度又被称为相对熵（relative entropy）或者信息散度，是连个概率分布间差异的非对称性度量。 $$KL(p(x)||q(x))=\sum_x{p(x)\log{\frac{p(x)}{q(x)}}}\=\sum_x{p(x)\log{p(x)}-p(x)\log{q(x)}}$$ KL散度是衡量两个分布之间的差异大小的，KL散度大于等于0，并且越接近0说明p与q这两个分布越像，当且仅当p与q相等时KL散度取0。 模型框架对于生成器$G_0$，为了获得文本条件变量$\hat{c}_0$，文本嵌入$\varphi_t$首先通过全连接层生成$\mu_0$和$\delta_0$（$\delta_0$是$\sum_0$的对角线元素值）。$\hat{c}_0$由高斯分布$N(\mu(\varphi(t)),\sum_0(\varphi(t)))$抽样得到。$N_g$维的条件向量$\hat{c}_0$由公式$\hat{c}_0=\mu_0+\delta_0 \bigodot\epsilon$计算得到，其中$\bigodot$表示元素乘积（element-wise multiplication），$\epsilon\sim\N(0,I)$。之后，$\hat{c}_0$与$N_z$维的噪声向量拼接并通过一系列的上采样块生成尺寸为$W_0\times H_0$的图像。对于判别器$D_0$,文本嵌入$\varphi(t)$通过全连接压缩为$N_d$维然后通过复制将其转换成$M_d \times M_d \times N_d$大小的张量。同时图像经过一系列下采样块，输出$M_d \times M_d$大小的张量。最后把图像和文本得到的张量拼接在一起，经过$1\times 1$的卷积层以及一个只有一个节点的全连接层，从而得到决策值。Stage-I训练过程损失函数如下，目的在于最大化$L_{D_0}$以训练判别器，最小化$L_{G_0}$以训练生成器。 $$L_{D_0}=E_{(I_0,t)\sim{p_{data}}}[\log D_0(I_0,\varphi_t)]+E_{z\sim{p_z},t\sim p_{data}}[\log {1-D_0(G_0(z,\hat{c}_0),\varphi_t)}]\L_{G_0}=E_{z\sim{p_z},t\sim p_{data}}[\log {1-D_0(G_0(z,\hat{c}_0),\varphi_t)}]+\lambda{D_{KL}}(N(\mu_0(\varphi_t),\sum_0(\varphi_t))||N(0,I),$$ Stage-II GANStage-II GAN的模型框架和Stage-I GAN相似，只不过没有了噪声输入，换成了Stage-I合成的低分率图像。Stage-II其损失函数如下，目的在于最大化$L_D$以训练判别器，最小化$L_G$以训练生成器。 $$L_D=E_{(I,t)\sim{p_{data}}}[\log D(I,\varphi_t)]+E_{s_0\sim{p_{G_0}},t\sim p_{data}}[\log {1-D(G(s_0,\hat{c}),\varphi_t)}]\L_G=E_{s_0\sim{p_{G_0}},t\sim p_{data}}[\log {1-D(G(s_0,\hat{c}),\varphi_t)}]+\lambda{D_{KL}}(N(\mu(\varphi_t),\sum(\varphi_t))||N(0,I),$$]]></content>
+      <categories>
+        <category>科研</category>
+      </categories>
+      <tags>
+        <tag>论文阅读</tag>
+        <tag>text2image</tag>
+        <tag>图像合成</tag>
+        <tag>生成对抗网络</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Java内存模型（二）]]></title>
     <url>%2F2019%2F02%2F19%2FJava%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%EF%BC%88%E4%BA%8C%EF%BC%89%2F</url>
     <content type="text"><![CDATA[Java内存模型重排序重排序是指编译器和处理器为了优化程序性能而对指令序列进行重新排序的手段。 数据依赖性如果两个操作访问同一个变量，且这两个操作中有一为写操作，此时这两个操作时间就存在数据依赖性。数据依赖分为三种类型：写后读、写后写、读后写。上述三种情况，只要重排序这两个操作的执行顺序，程序的执行结果就会改变。因此编译器和处理器在重排序时，会遵守数据依赖性，编译器和处理器不会改变存在数据依赖关系的两个操作顺序。这类所说的数据依赖性仅针对单个处理器中执行的指令序列和单个线程中执行的操作，不同处理器之间和不同线程之间的数据依赖性不被编译器和处理器考虑。 as-if-serial语义as-if-serial语义的意思是：不管怎么重排序（编译器和处理器为了提高并行度），（单线程）程序的执行结果不会被改变。as-if-serial语义把单线程程序保护起来，遵循as-if-serial语义的编译器、runtime和处理器保证单线程程序执行的结果与其按照顺序执行的结果一致。 程序顺序规则123double pi = 3.14; //Adouble r = 1.0; //Bdouble area = pi * r * r; //C 根据happens-before的程序顺序规则，上面计算圆面积的示例代码存在3个happens-before关系： A happens-before B B happens-before C A happens-before C 这里A happens-before B，但在实际执行时B却可以在A之前执行。如果A happens-before B，JMM并不一定要求A在B之前执行。JMM仅仅要求前一个操作对后一个操作可见，且前一个操作按顺序排在后一操作之前。这里操作A的执行结果并不需要对操作B可见；而且重排序操作A和操作B后的执行结果，与操作A和操作B按照A happens-before B顺序执行的结果一致。在这种情况下，JMM会认为这种重排序不非法（not illegal）,JMM允许这种重排序。在计算机中，软件技术和硬件技术有一个共同目的：在不改变程序执行结果的前提下，尽可能提高并行度。 重排序对多线程的影响多线程程序中，对存在控制依赖的操作重排序，可能会改变程序的执行结果。 顺序一致性数据竞争与顺序一致性当程序未正确同步时，就可能会存在数据竞争。Java内存模型规范对数据竞争的定义如下： 在一个线程中写入一个变量； 在另一个线程中读同一个变量； 而且写和读没有通过同步来排序。 当代码中包含数据竞争时，程序的执行往往产生违反直觉的结果。如果一个多线程程序能够同步，这个程序将是一个没有数据竞争的程序。JMM对正确同步的多线程程序的内存一致性做了如下保证：如果程序时正确同步的，程序的执行将具有顺序一致性——即程序的执行结果与改程序在顺序一致性内存模型中的执行结果相同。 顺序一致性内存模型顺序一致性内存模型是一个被计算机科学家理想化的理论参考模型。它为程序员提供了极强的内存可见性保证。顺序一致性内存模型有两大特性： 一个线程中的所有操作都必须按照程序的顺序来执行； （不管线程是否同步）所有线程都只能看到一个单一的操作执行顺序。在顺序一致性内存模型中，每个操作都必须原子执行且立刻对所有线程可见。]]></content>
@@ -135,6 +149,7 @@
       </categories>
       <tags>
         <tag>对象检测</tag>
+        <tag>论文阅读</tag>
       </tags>
   </entry>
   <entry>
