@@ -100,7 +100,7 @@
 <meta property="og:site_name" content="yangkuan">
 <meta property="og:description" content="面向对象的三个基本特征和五种设计原则三个基本特征封装封装就是把客观事物封装成抽象的类，并且类可以把自己的数据和方法只让可信的类或者对象操作，对不可信的进行信息隐藏； 继承继承是指这样一种能力：它可以使用现有类的所有功能，并在无需重写原有类的情况下对这些功能进行扩展。通过继承创建的新类称为“子类”或“派生类”，被继承的类称为“父类”或“基类”。继承的过程就是从一般到特殊的过程。要实现继承可以通过“继">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-02-20T04:28:04.260Z">
+<meta property="og:updated_time" content="2019-02-20T04:57:20.190Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java面向对象编程知识点">
 <meta name="twitter:description" content="面向对象的三个基本特征和五种设计原则三个基本特征封装封装就是把客观事物封装成抽象的类，并且类可以把自己的数据和方法只让可信的类或者对象操作，对不可信的进行信息隐藏； 继承继承是指这样一种能力：它可以使用现有类的所有功能，并在无需重写原有类的情况下对这些功能进行扩展。通过继承创建的新类称为“子类”或“派生类”，被继承的类称为“父类”或“基类”。继承的过程就是从一般到特殊的过程。要实现继承可以通过“继">
@@ -408,7 +408,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  498
+                  767
                 </span>
               
 
@@ -424,7 +424,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  2
                 </span>
               
             </div>
@@ -446,7 +446,7 @@
 
       
         <h2 id="面向对象的三个基本特征和五种设计原则"><a href="#面向对象的三个基本特征和五种设计原则" class="headerlink" title="面向对象的三个基本特征和五种设计原则"></a>面向对象的三个基本特征和五种设计原则</h2><h3 id="三个基本特征"><a href="#三个基本特征" class="headerlink" title="三个基本特征"></a>三个基本特征</h3><h4 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h4><p>封装就是把客观事物封装成抽象的类，并且类可以把自己的数据和方法只让可信的类或者对象操作，对不可信的进行信息隐藏；</p>
-<h4 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h4><p>继承是指这样一种能力：它可以使用现有类的所有功能，并在无需重写原有类的情况下对这些功能进行扩展。通过继承创建的新类称为“子类”或“派生类”，被继承的类称为“父类”或“基类”。继承的过程就是从一般到特殊的过程。<br>要实现继承可以通过“继承”和“组合”两种方式实现。在某些OOP语言中，一个子类可以继承多个基类，但一般情况下（Java语言），一个子类只有一个基类，实现多重继承可以通过多级继承来实现。<br>继承概念的实现方式有三类：  </p>
+<h4 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h4><p>继承是指这样一种能力：它可以使用现有类的所有功能，并在无需重写原有类的情况下对这些功能进行扩展。通过继承创建的新类称为“子类”或“派生类”，被继承的类称为“父类”或“基类”。继承的过程就是从一般到特殊的过程。<br>要实现继承可以通过“继承”和“组合”两种方式实现。在某些OOP语言中，一个子类可以继承多个基类，但一般情况下（Java语言），一个子类只有一个基类，实现多重继承可以通过多级继承来实现。<br><a id="more"></a><br>继承概念的实现方式有三类：  </p>
 <ul>
 <li>实现继承：指使用基类的属性和方法而无需额外编码的能力；</li>
 <li>接口继承：指仅使用基类的属性和方法名称，但子类必须提供实现的能力；</li>
@@ -457,6 +457,16 @@
 <li>覆盖是指子类重新定义父类的虚函数的做法；</li>
 <li>重载是指允许多个同名函数，这些函数的参数不同（参数个数不同，或参数类型不同，或两者都不同）。</li>
 </ul>
+<h3 id="五种设计原则"><a href="#五种设计原则" class="headerlink" title="五种设计原则"></a>五种设计原则</h3><h4 id="单一职责原则-Single-Responsibility-Principle，SRP"><a href="#单一职责原则-Single-Responsibility-Principle，SRP" class="headerlink" title="单一职责原则(Single Responsibility Principle，SRP)"></a>单一职责原则(Single Responsibility Principle，SRP)</h4><p>单一职责原则是指一个类的功能要单一，不能包罗万象。一个类应该只有一个引起它变化的原因。</p>
+<h4 id="开放封闭原则-Open－Close-Principle，OCP"><a href="#开放封闭原则-Open－Close-Principle，OCP" class="headerlink" title="开放封闭原则(Open－Close Principle，OCP)"></a>开放封闭原则(Open－Close Principle，OCP)</h4><p> 开放封闭原则指的是对扩展性的开放和对修改的封闭：</p>
+<ul>
+<li>对扩展性的开放：模块的行为应该是可扩展的，从而该模块可表现出行的行为以满足需求的变化；</li>
+<li><p>对修改的封闭：模块自身的代码时不应该被修改的，扩展模块的一般途径是修改内部实现。</p>
+<h4 id="里氏替换原则-the-Liskov-Substitution-Principle，LSP"><a href="#里氏替换原则-the-Liskov-Substitution-Principle，LSP" class="headerlink" title="里氏替换原则(the Liskov Substitution Principle，LSP)"></a>里氏替换原则(the Liskov Substitution Principle，LSP)</h4><p>子类型必须能够替换掉它们的父类型，并出现在父类能够出现的任何地方。</p>
+</li>
+</ul>
+<h4 id="依赖倒置原则-the-Dependency-Inversion-Principle，PIP"><a href="#依赖倒置原则-the-Dependency-Inversion-Principle，PIP" class="headerlink" title="依赖倒置原则(the Dependency Inversion Principle，PIP)"></a>依赖倒置原则(the Dependency Inversion Principle，PIP)</h4><p>具体依赖抽象，上层依赖下层。</p>
+<h4 id="接口隔离原则-the-Interface-Segregation-Principle，ISP"><a href="#接口隔离原则-the-Interface-Segregation-Principle，ISP" class="headerlink" title="接口隔离原则(the Interface Segregation Principle，ISP)"></a>接口隔离原则(the Interface Segregation Principle，ISP)</h4><p>模块间要通过抽象接口隔离开，而不是通过具体的类强耦合起来。</p>
 
       
     </div>
@@ -702,7 +712,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#面向对象的三个基本特征和五种设计原则"><span class="nav-number">1.</span> <span class="nav-text">面向对象的三个基本特征和五种设计原则</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#三个基本特征"><span class="nav-number">1.1.</span> <span class="nav-text">三个基本特征</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#封装"><span class="nav-number">1.1.1.</span> <span class="nav-text">封装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#继承"><span class="nav-number">1.1.2.</span> <span class="nav-text">继承</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多态"><span class="nav-number">1.1.3.</span> <span class="nav-text">多态</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#面向对象的三个基本特征和五种设计原则"><span class="nav-number">1.</span> <span class="nav-text">面向对象的三个基本特征和五种设计原则</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#三个基本特征"><span class="nav-number">1.1.</span> <span class="nav-text">三个基本特征</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#封装"><span class="nav-number">1.1.1.</span> <span class="nav-text">封装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#继承"><span class="nav-number">1.1.2.</span> <span class="nav-text">继承</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多态"><span class="nav-number">1.1.3.</span> <span class="nav-text">多态</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五种设计原则"><span class="nav-number">1.2.</span> <span class="nav-text">五种设计原则</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#单一职责原则-Single-Responsibility-Principle，SRP"><span class="nav-number">1.2.1.</span> <span class="nav-text">单一职责原则(Single Responsibility Principle，SRP)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#开放封闭原则-Open－Close-Principle，OCP"><span class="nav-number">1.2.2.</span> <span class="nav-text">开放封闭原则(Open－Close Principle，OCP)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#里氏替换原则-the-Liskov-Substitution-Principle，LSP"><span class="nav-number">1.2.3.</span> <span class="nav-text">里氏替换原则(the Liskov Substitution Principle，LSP)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#依赖倒置原则-the-Dependency-Inversion-Principle，PIP"><span class="nav-number">1.2.4.</span> <span class="nav-text">依赖倒置原则(the Dependency Inversion Principle，PIP)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#接口隔离原则-the-Interface-Segregation-Principle，ISP"><span class="nav-number">1.2.5.</span> <span class="nav-text">接口隔离原则(the Interface Segregation Principle，ISP)</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -736,7 +746,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">16.8k</span>
+    <span title="Site words total count">17.1k</span>
   
 </div>
 
@@ -750,7 +760,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共16.8k字</span>
+  <span class="post-count">博客全站共17.1k字</span>
 </div>
         
 <div class="busuanzi-count">
