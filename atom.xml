@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-02-20T04:57:20.190Z</updated>
+  <updated>2019-02-21T12:22:19.791Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>面向切面编程</title>
+    <link href="http://yoursite.com/2019/02/21/%E9%9D%A2%E5%90%91%E5%88%87%E9%9D%A2%E7%BC%96%E7%A8%8B/"/>
+    <id>http://yoursite.com/2019/02/21/面向切面编程/</id>
+    <published>2019-02-21T09:08:56.000Z</published>
+    <updated>2019-02-21T12:22:19.791Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="面向切面编程（Aspect-Oriented-Programming，AOP）是什么？"><a href="#面向切面编程（Aspect-Oriented-Programming，AOP）是什么？" class="headerlink" title="面向切面编程（Aspect Oriented Programming，AOP）是什么？"></a>面向切面编程（Aspect Oriented Programming，AOP）是什么？</h2><ol><li>AOP是一种编程范式，不是编程语言；</li><li>AOP解决特定问题，但不能解决所有问题；</li><li>OOP的补充，而不是其替代。<a id="more"></a> <h2 id="AOP为什么出现？"><a href="#AOP为什么出现？" class="headerlink" title="AOP为什么出现？"></a>AOP为什么出现？</h2></li><li>提高代码重用性；</li><li>概念分离：分离功能性需求和非功能性需求。将功能性需求从非功能性需求中分离出来。</li></ol><h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><ol><li>权限控制</li><li>缓存控制</li><li>事务控制</li><li>审计日志</li><li>性能监控</li><li>分布式追踪</li><li>异常处理</li></ol><h2 id="Spring-AOP的通过代理实现"><a href="#Spring-AOP的通过代理实现" class="headerlink" title="Spring AOP的通过代理实现"></a>Spring AOP的通过代理实现</h2><p>通过DefaultAopProxyFactory.java源码可以看到AOP由jdk和cglib两种方式实现。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">public AopProxy createAopProxy(AdvisedSupport config) throws AopConfigException &#123;</span><br><span class="line">    if (config.isOptimize() || config.isProxyTargetClass() || hasNoUserSuppliedProxyInterfaces(config)) &#123;</span><br><span class="line">        Class&lt;?&gt; targetClass = config.getTargetClass();</span><br><span class="line">        if (targetClass == null) &#123;</span><br><span class="line">            throw new AopConfigException(&quot;TargetSource cannot determine target class: &quot; +</span><br><span class="line">                    &quot;Either an interface or a target is required for proxy creation.&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        if (targetClass.isInterface() || Proxy.isProxyClass(targetClass)) &#123;</span><br><span class="line">            return new JdkDynamicAopProxy(config);</span><br><span class="line">        &#125;</span><br><span class="line">        return new ObjenesisCglibAopProxy(config);</span><br><span class="line">    &#125;</span><br><span class="line">    else &#123;</span><br><span class="line">        return new JdkDynamicAopProxy(config);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;面向切面编程（Aspect-Oriented-Programming，AOP）是什么？&quot;&gt;&lt;a href=&quot;#面向切面编程（Aspect-Oriented-Programming，AOP）是什么？&quot; class=&quot;headerlink&quot; title=&quot;面向切面编程（Aspect Oriented Programming，AOP）是什么？&quot;&gt;&lt;/a&gt;面向切面编程（Aspect Oriented Programming，AOP）是什么？&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;AOP是一种编程范式，不是编程语言；&lt;/li&gt;
+&lt;li&gt;AOP解决特定问题，但不能解决所有问题；&lt;/li&gt;
+&lt;li&gt;OOP的补充，而不是其替代。&lt;/li&gt;&lt;/ol&gt;
+    
+    </summary>
+    
+      <category term="面试" scheme="http://yoursite.com/categories/%E9%9D%A2%E8%AF%95/"/>
+    
+    
+      <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
+    
+      <category term="spring" scheme="http://yoursite.com/tags/spring/"/>
+    
+  </entry>
   
   <entry>
     <title>Java面向对象编程知识点</title>
