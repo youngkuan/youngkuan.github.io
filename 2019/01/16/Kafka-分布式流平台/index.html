@@ -103,7 +103,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/01/16/Kafka-分布式流平台/kafka1.png">
 <meta property="og:image" content="http://yoursite.com/2019/01/16/Kafka-分布式流平台/kafka2.png">
 <meta property="og:image" content="http://yoursite.com/2019/01/16/Kafka-分布式流平台/kafka3.png">
-<meta property="og:updated_time" content="2019-01-18T04:40:14.345Z">
+<meta property="og:updated_time" content="2019-02-25T07:57:30.847Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Kafka:分布式流平台">
 <meta name="twitter:description" content="Kafka:分布式流平台参考链接：Kafka官网 Apache Kafka是一个分布式流平台，具有以下三个关键能力：  发布和订阅记录流（streams of records），类似于一个消息队列或者是企业消息系统； 以具有容错性和持久性的方式存储记录流； 即时处理记录流">
@@ -412,7 +412,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1k
+                  1.2k
                 </span>
               
 
@@ -428,7 +428,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3
+                  4
                 </span>
               
             </div>
@@ -482,6 +482,14 @@
 <p><img src="/2019/01/16/Kafka-分布式流平台/kafka3.png" alt="主题解剖">  </p>
 <p>这些特性的组合意味着Kafka消费者非常方便，消费者的加入移除对集群或其他消费者没有太大影响。 例如，您可以使用我们的命令行工具“拖尾（tail，此处不太理解）”任何主题的内容，而无需更改任何现有使用者所消耗的内容。</p>
 <p>日志中的分区有多种用途。 首先，它们允许日志扩展到超出适合单个服务器的规模。 每个独立分区必须适合托管它的服务器，但一个主题可能有多个分区，因此它可以处理任意数量的数据。 其次，分区充当了并行性的单元。</p>
+<h2 id="一些基本概念"><a href="#一些基本概念" class="headerlink" title="一些基本概念"></a>一些基本概念</h2><ol>
+<li>Consumer Group：逻辑概念，对于同一个topic，会广播给不同的group。同一个group中只有一个consumer可以消费该topic。</li>
+<li>Broker：物理概念，Kafka集群中的每个Kafka节点。</li>
+<li>Partition：物理概念，Kafka下数据存储的基本单元。一个Topic数据，会被分散存储到多个Partition，每个Partition是有序的。</li>
+<li>Replication：同一个Partition可能会有多个副本（replication），多个副本之间数据是一致的。</li>
+<li>Replication Leader：一个Partition的多个副本需要选举一个leader负责partition上与Producer和Consumer消息传递。</li>
+<li>ReplicaManager：负责管理当前Broker所有分区和副本的信息，处理KafkaController发起的请求，如副本状态的切换（重新选举Replication Leader）、添加消息、消费消息等。</li>
+</ol>
 
       
     </div>
@@ -729,7 +737,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Kafka-分布式流平台"><span class="nav-number">1.</span> <span class="nav-text">Kafka:分布式流平台</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#主题（Topics）和记录（Logs）"><span class="nav-number">1.1.</span> <span class="nav-text">主题（Topics）和记录（Logs）</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Kafka-分布式流平台"><span class="nav-number">1.</span> <span class="nav-text">Kafka:分布式流平台</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#主题（Topics）和记录（Logs）"><span class="nav-number">1.1.</span> <span class="nav-text">主题（Topics）和记录（Logs）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一些基本概念"><span class="nav-number">1.2.</span> <span class="nav-text">一些基本概念</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -763,7 +771,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">18.1k</span>
+    <span title="Site words total count">18.3k</span>
   
 </div>
 
@@ -777,7 +785,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共18.1k字</span>
+  <span class="post-count">博客全站共18.3k字</span>
 </div>
         
 <div class="busuanzi-count">
