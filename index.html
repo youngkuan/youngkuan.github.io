@@ -442,56 +442,18 @@
 
       
         
-          
-            <h2 id="系统环境"><a href="#系统环境" class="headerlink" title="系统环境"></a>系统环境</h2><p><img src="/2019/02/26/Ubuntu配置shadowsocks科学上网/科学上网1.png" alt="科学上网"></p>
+          <h2 id="系统环境"><a href="#系统环境" class="headerlink" title="系统环境"></a>系统环境</h2><p><img src="/2019/02/26/Ubuntu配置shadowsocks科学上网/科学上网1.png" alt="科学上网"></p>
 <h2 id="showsocks配置"><a href="#showsocks配置" class="headerlink" title="showsocks配置"></a>showsocks配置</h2><ol>
 <li>安装shadowsocks客户端,命令如下</li>
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install shadowsocks</span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li>查看shadowsocks命令：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sslocal --help</span><br></pre></td></tr></table></figure>
-<p><img src="/2019/02/26/Ubuntu配置shadowsocks科学上网/科学上网2.png" alt="科学上网"></p>
-<ol start="3">
-<li>启动shadowsocks两种方式：</li>
-</ol>
-<ul>
-<li>通过设置各个参数，如下</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sslocal -s 11.22.33.44 -p 50003 -k &quot;123456&quot; -l 1080 -t 600 -m aes-256-cfb</span><br></pre></td></tr></table></figure>
-<ul>
-<li>或者，直接加载json配置文件</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sslocal -c file_path/shadowsocks.json</span><br></pre></td></tr></table></figure>
-<p>启动shadowsocks如下所示：</p>
-<p><img src="/2019/02/26/Ubuntu配置shadowsocks科学上网/科学上网3.png" alt="科学上网"></p>
-<p>配置好shadowsocks客户端后，我们介绍一下三种方式设置代理模式。</p>
-<h2 id="方式一：不要关闭上面的终端，重新打开一个终端，配置全局变量："><a href="#方式一：不要关闭上面的终端，重新打开一个终端，配置全局变量：" class="headerlink" title="方式一：不要关闭上面的终端，重新打开一个终端，配置全局变量："></a>方式一：不要关闭上面的终端，重新打开一个终端，配置全局变量：</h2><p>使用<code>vim ~/.bashrc</code>添加语句<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alias hp=&quot;http_proxy=http://localhost:8123&quot;</span><br></pre></td></tr></table></figure></p>
-<p>使用<code>source ~/.bashrc</code>使更改生效。</p>
-<ol start="5">
-<li>测试效果</li>
-</ol>
-<ul>
-<li>使用命令<code>hp curl ip.gs</code>查看代理服务器网址，结果如下所示：</li>
-</ul>
-<p><img src="/2019/02/26/Ubuntu配置shadowsocks科学上网/科学上网4.png" alt="科学上网"></p>
-<p>可以看出，<code>alias hp=&quot;http_proxy=http://localhost:8123&quot;</code>这句语句的作用就是用命令<code>hp</code>替换<code>http_proxy=http://localhost:8123</code>这一串长命令。</p>
-<h2 id="那我们不想每条指令前面都加上命令hp怎么办，这就需要设置全局代理："><a href="#那我们不想每条指令前面都加上命令hp怎么办，这就需要设置全局代理：" class="headerlink" title="那我们不想每条指令前面都加上命令hp怎么办，这就需要设置全局代理："></a>那我们不想每条指令前面都加上命令<code>hp</code>怎么办，这就需要设置全局代理：</h2><h3 id="方式二：为当前窗口设置全局代理"><a href="#方式二：为当前窗口设置全局代理" class="headerlink" title="方式二：为当前窗口设置全局代理"></a>方式二：为当前窗口设置全局代理</h3><p>命令如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export http_proxy=http://localhost:8123 # 当前终端使用代理</span><br><span class="line">unset http_proxy # 当前终端取消代理</span><br></pre></td></tr></table></figure></p>
-<p>测试如下所示，可以看出上设置全局代理后，就不需要<code>hp</code>命令了，取消代理（<code>unset</code>）后可以看到<code>ip</code>变成了陕西西安。<br><img src="/2019/02/26/Ubuntu配置shadowsocks科学上网/科学上网5.png" alt="科学上网"></p>
-<h3 id="方式三：设置当前用户的全局代理"><a href="#方式三：设置当前用户的全局代理" class="headerlink" title="方式三：设置当前用户的全局代理"></a>方式三：设置当前用户的全局代理</h3><p>在<code>~/.bashrc</code>中添加<code>export http_proxy=http://localhost:8123</code>命令设置当前用户的全局代理。别忘了使用<code>source ~/.bashrc</code>使更改生效。</p>
-<p>如下所示，</p>
-<p><img src="/2019/02/26/Ubuntu配置shadowsocks科学上网/科学上网6.png" alt="科学上网"></p>
-<h2 id="经过测试，推荐方式二为当前窗口设置全局代理，命令如下："><a href="#经过测试，推荐方式二为当前窗口设置全局代理，命令如下：" class="headerlink" title="经过测试，推荐方式二为当前窗口设置全局代理，命令如下："></a>经过测试，推荐方式二为当前窗口设置全局代理，命令如下：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export http_proxy=http://localhost:8123 # 当前终端使用代理</span><br><span class="line">unset http_proxy # 当前终端取消代理</span><br></pre></td></tr></table></figure>
-<p>这种方式可以开启一个窗口运行export作为科学上网窗口，而其他窗口依旧正常上网，这样可以<strong>节约流量</strong>。<br>除此之外，这是我测试的上述三种上网方式中最稳定的一种，建议使用。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>配置好之后，科学上网的过程，先打开一个终端窗口，运行：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sslocal -c file_path/shadowsocks.json</span><br></pre></td></tr></table></figure>
-<p>再打开新窗口，运行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export http_proxy=http://localhost:8123</span><br></pre></td></tr></table></figure></p>
-<p>我使用R-3D中下载YouTube视频的代码作为测试，运行<code>python download_video.py</code>就可以看到下载视频并保存在当前目录的videos目录下。</p>
-<p>示意结果如下，<code>sslocal -c shadowsocks.json</code>启动窗口下方会出现与<code>www.youtube.com</code>连接的日志信息：</p>
-<p><img src="/2019/02/26/Ubuntu配置shadowsocks科学上网/科学上网7.png" alt="科学上网"></p>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/02/26/Ubuntu配置shadowsocks科学上网/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
