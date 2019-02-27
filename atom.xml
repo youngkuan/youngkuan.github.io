@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-02-26T12:08:14.048Z</updated>
+  <updated>2019-02-27T14:23:13.626Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,41 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Java并发编程基础</title>
+    <link href="http://yoursite.com/2019/02/27/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/"/>
+    <id>http://yoursite.com/2019/02/27/Java并发编程基础/</id>
+    <published>2019-02-27T13:49:16.000Z</published>
+    <updated>2019-02-27T14:23:13.626Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h2><p>现代操作系统在运行一个程序的时候就会创建一个进程。线程是现在操作系统系统调度的最小单元，也称为轻量级进程（Light Weight Process），在一个进程里可以创建多个线程，每个线程都有自己的程序计数器、堆栈和局部变量等属性，并且能够访问内存中共享的变量。</p><h3 id="使用多线程的原因"><a href="#使用多线程的原因" class="headerlink" title="使用多线程的原因"></a>使用多线程的原因</h3><ol><li>更多的处理器核心：随着处理器上的核心数量越来越多，以及超线程技术的广泛应用，现在的计算机比以往更加擅长并行计算；</li><li>更快的响应时间：当业务逻辑过于复杂，使用多线程技术，将对数据一致性要求不高的操作派发给多个线程处理，这样做能更快地处理完一个复杂任务，缩短响应时间，提升用户体验；</li><li>更好的编程模型：Java为多线程提供了良好、考究并且一致的编程模型，使开发人员能够更加专注于问题的解决，即为所遇到的问题建立合适的模型，而不是绞尽脑汁地考虑如何将任务多线程化。</li></ol><a id="more"></a>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;线程&quot;&gt;&lt;a href=&quot;#线程&quot; class=&quot;headerlink&quot; title=&quot;线程&quot;&gt;&lt;/a&gt;线程&lt;/h2&gt;&lt;p&gt;现代操作系统在运行一个程序的时候就会创建一个进程。线程是现在操作系统系统调度的最小单元，也称为轻量级进程（Light Weight Process），在一个进程里可以创建多个线程，每个线程都有自己的程序计数器、堆栈和局部变量等属性，并且能够访问内存中共享的变量。&lt;/p&gt;
+&lt;h3 id=&quot;使用多线程的原因&quot;&gt;&lt;a href=&quot;#使用多线程的原因&quot; class=&quot;headerlink&quot; title=&quot;使用多线程的原因&quot;&gt;&lt;/a&gt;使用多线程的原因&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;更多的处理器核心：随着处理器上的核心数量越来越多，以及超线程技术的广泛应用，现在的计算机比以往更加擅长并行计算；&lt;/li&gt;
+&lt;li&gt;更快的响应时间：当业务逻辑过于复杂，使用多线程技术，将对数据一致性要求不高的操作派发给多个线程处理，这样做能更快地处理完一个复杂任务，缩短响应时间，提升用户体验；&lt;/li&gt;
+&lt;li&gt;更好的编程模型：Java为多线程提供了良好、考究并且一致的编程模型，使开发人员能够更加专注于问题的解决，即为所遇到的问题建立合适的模型，而不是绞尽脑汁地考虑如何将任务多线程化。&lt;/li&gt;
+&lt;/ol&gt;
+    
+    </summary>
+    
+      <category term="Java并发编程" scheme="http://yoursite.com/categories/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/"/>
+    
+    
+      <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
+    
+      <category term="多线程" scheme="http://yoursite.com/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
+    
+      <category term="线程" scheme="http://yoursite.com/tags/%E7%BA%BF%E7%A8%8B/"/>
+    
+      <category term="synchronized" scheme="http://yoursite.com/tags/synchronized/"/>
+    
+      <category term="volatile" scheme="http://yoursite.com/tags/volatile/"/>
+    
+  </entry>
   
   <entry>
     <title>Ubuntu配置shadowsocks科学上网</title>
@@ -209,9 +244,9 @@
       <category term="Java并发编程" scheme="http://yoursite.com/categories/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/"/>
     
     
-      <category term="volatile" scheme="http://yoursite.com/tags/volatile/"/>
-    
       <category term="synchronized" scheme="http://yoursite.com/tags/synchronized/"/>
+    
+      <category term="volatile" scheme="http://yoursite.com/tags/volatile/"/>
     
       <category term="原子操作" scheme="http://yoursite.com/tags/%E5%8E%9F%E5%AD%90%E6%93%8D%E4%BD%9C/"/>
     

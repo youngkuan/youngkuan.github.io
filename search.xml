@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Java并发编程基础]]></title>
+    <url>%2F2019%2F02%2F27%2FJava%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80%2F</url>
+    <content type="text"><![CDATA[线程现代操作系统在运行一个程序的时候就会创建一个进程。线程是现在操作系统系统调度的最小单元，也称为轻量级进程（Light Weight Process），在一个进程里可以创建多个线程，每个线程都有自己的程序计数器、堆栈和局部变量等属性，并且能够访问内存中共享的变量。 使用多线程的原因 更多的处理器核心：随着处理器上的核心数量越来越多，以及超线程技术的广泛应用，现在的计算机比以往更加擅长并行计算； 更快的响应时间：当业务逻辑过于复杂，使用多线程技术，将对数据一致性要求不高的操作派发给多个线程处理，这样做能更快地处理完一个复杂任务，缩短响应时间，提升用户体验； 更好的编程模型：Java为多线程提供了良好、考究并且一致的编程模型，使开发人员能够更加专注于问题的解决，即为所遇到的问题建立合适的模型，而不是绞尽脑汁地考虑如何将任务多线程化。]]></content>
+      <categories>
+        <category>Java并发编程</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>多线程</tag>
+        <tag>线程</tag>
+        <tag>synchronized</tag>
+        <tag>volatile</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Ubuntu配置shadowsocks科学上网]]></title>
     <url>%2F2019%2F02%2F26%2FUbuntu%E9%85%8D%E7%BD%AEshadowsocks%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91%2F</url>
     <content type="text"><![CDATA[系统环境 showsocks配置 安装shadowsocks客户端,命令如下 1sudo apt install shadowsocks 查看shadowsocks命令： 1sslocal --help 启动shadowsocks两种方式： 通过设置各个参数，如下 1sslocal -s 11.22.33.44 -p 50003 -k &quot;123456&quot; -l 1080 -t 600 -m aes-256-cfb 或者，直接加载json配置文件 1sslocal -c file_path/shadowsocks.json 启动shadowsocks如下所示： 配置好shadowsocks客户端后，我们介绍一下三种方式设置代理模式。 方式一：不要关闭上面的终端，重新打开一个终端，配置全局变量：使用vim ~/.bashrc添加语句1alias hp=&quot;http_proxy=http://localhost:8123&quot; 使用source ~/.bashrc使更改生效。 测试效果 使用命令hp curl ip.gs查看代理服务器网址，结果如下所示： 可以看出，alias hp=&quot;http_proxy=http://localhost:8123&quot;这句语句的作用就是用命令hp替换http_proxy=http://localhost:8123这一串长命令。 那我们不想每条指令前面都加上命令hp怎么办，这就需要设置全局代理：方式二：为当前窗口设置全局代理命令如下：12export http_proxy=http://localhost:8123 # 当前终端使用代理unset http_proxy # 当前终端取消代理 测试如下所示，可以看出上设置全局代理后，就不需要hp命令了，取消代理（unset）后可以看到ip变成了陕西西安。 方式三：设置当前用户的全局代理在~/.bashrc中添加export http_proxy=http://localhost:8123命令设置当前用户的全局代理。别忘了使用source ~/.bashrc使更改生效。 如下所示， 经过测试，推荐方式二为当前窗口设置全局代理，命令如下：12export http_proxy=http://localhost:8123 # 当前终端使用代理unset http_proxy # 当前终端取消代理 这种方式可以开启一个窗口运行export作为科学上网窗口，而其他窗口依旧正常上网，这样可以节约流量。除此之外，这是我测试的上述三种上网方式中最稳定的一种，建议使用。 总结配置好之后，科学上网的过程，先打开一个终端窗口，运行： 1sslocal -c file_path/shadowsocks.json 再打开新窗口，运行1export http_proxy=http://localhost:8123 我使用R-3D中下载YouTube视频的代码作为测试，运行python download_video.py就可以看到下载视频并保存在当前目录的videos目录下。 示意结果如下，sslocal -c shadowsocks.json启动窗口下方会出现与www.youtube.com连接的日志信息：]]></content>
@@ -88,8 +103,8 @@
         <category>Java并发编程</category>
       </categories>
       <tags>
-        <tag>volatile</tag>
         <tag>synchronized</tag>
+        <tag>volatile</tag>
         <tag>原子操作</tag>
       </tags>
   </entry>
