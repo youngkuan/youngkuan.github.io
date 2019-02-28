@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-02-27T14:23:13.626Z</updated>
+  <updated>2019-02-28T03:30:55.444Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>垃圾收集器</title>
+    <link href="http://yoursite.com/2019/02/28/%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/"/>
+    <id>http://yoursite.com/2019/02/28/垃圾收集器/</id>
+    <published>2019-02-28T02:28:49.000Z</published>
+    <updated>2019-02-28T03:30:55.444Z</updated>
+    
+    <content type="html"><![CDATA[<p>垃圾收集算法是内存回收的方法论，垃圾收集器是垃圾回收的具体实现。在JDK1.7 Update 14之后的HotSpot虚拟机所包含的收集器如下图所示：</p><p><img src="/2019/02/28/垃圾收集器/垃圾收集器1.jpg" alt="垃圾收集器"></p><h2 id="Serial收集器"><a href="#Serial收集器" class="headerlink" title="Serial收集器"></a>Serial收集器</h2><p>Serial收集器是最基本、发展历史最悠久的收集器。这是一个单线程的收集器，但它的“单线程”的意义并不仅仅说明它只会使用一个CPU或者一条收集线程去完成垃圾收集工作，更重要的是在它进行垃圾收集时，必须暂停其他所有的工作线程，直到它收集结束。Serial收集器运行示意图如下：</p><p><img src="/2019/02/28/垃圾收集器/垃圾收集器2.jpg" alt="垃圾收集器"></p><p>也就是说，虚拟机在使用Serial垃圾收集器时会在用户不可见的情况下把所有用户正常工作的线程暂停，这种“Stop The World”操作在很多程序中是难以接受的，带给用户不良体验。<br>举个例子“你妈妈在打扫房间的时候，肯定也会让你老老实实待在椅子上或者房间外待着，如果她一边打扫，你一边丢垃圾，这房间还能打扫完？你妈妈不会崩溃？”，因此看起来“Stop The World”操作情有可原。<br>但是，从JDK1.3开始，HotSpot虚拟机开发团队一直在努力消除或减少工作线程因内存回收而导致的停顿，从Serial收集器到Parallel收集器，再到Concurrent Mark Sweep（CMS）乃至GC收集器最前沿的成果Garbage First（G1）收集器，用户线程的停顿时间在不断缩短，但是仍然没有办法完全消除垃圾回收带来的停顿。<br>Serial收集器虽然很老，可以说很陈旧，但是目前为止它依旧是虚拟机运行在Client模式下的默认新生代收集器。那是因为Serial收集器简单而高效，对于限定单个GPU的情况而言，Serial收集器由于没有线程交互的开销，专心进行垃圾收集自然可以获得最高的单线程收集效率。  </p><h2 id="ParNew收集器"><a href="#ParNew收集器" class="headerlink" title="ParNew收集器"></a>ParNew收集器</h2><p>ParNew收集器就是Serial收集器的多线程版本，除了使用多线程进行垃圾收集外，其余行为包括Serial收集器的所有可用控制参数、收集算法、Stop The World、对象分配规则、回收策略等都与Serial收集器完全一样。ParNew收集器进行垃圾收集的示意图如下：  </p><p><img src="/2019/02/28/垃圾收集器/垃圾收集器3.jpg" alt="垃圾收集器"></p><p>ParNew收集器除了多线程收集外，其他与Serial收集器相比没有太多创新之处，但它却是虚拟机运行在Server模式下的首选新生代收集器，其中一个与性能无关的重要原因是除了Serial收集器外，目前只有它能与CMS收集器配合工作。</p><h2 id="Parallel-Scavenge收集器"><a href="#Parallel-Scavenge收集器" class="headerlink" title="Parallel Scavenge收集器"></a>Parallel Scavenge收集器</h2><p>Parallel Scavenge收集器也是新生代收集器，并且使用复制算法收集内存，同时还是并行的多线程收集器。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;垃圾收集算法是内存回收的方法论，垃圾收集器是垃圾回收的具体实现。在JDK1.7 Update 14之后的HotSpot虚拟机所包含的收集器如下图所示：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/2019/02/28/垃圾收集器/垃圾收集器1.jpg&quot; alt=&quot;垃圾收集器&quot;&gt;&lt;/
+      
+    
+    </summary>
+    
+      <category term="深入理解Java虚拟机" scheme="http://yoursite.com/categories/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/"/>
+    
+    
+      <category term="垃圾收集器" scheme="http://yoursite.com/tags/%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/"/>
+    
+      <category term="垃圾收集算法" scheme="http://yoursite.com/tags/%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
   
   <entry>
     <title>Java并发编程基础</title>
@@ -354,9 +382,9 @@
       <category term="深入理解Java虚拟机" scheme="http://yoursite.com/categories/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/"/>
     
     
-      <category term="垃圾收集算法" scheme="http://yoursite.com/tags/%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E7%AE%97%E6%B3%95/"/>
-    
       <category term="垃圾收集器" scheme="http://yoursite.com/tags/%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/"/>
+    
+      <category term="垃圾收集算法" scheme="http://yoursite.com/tags/%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E7%AE%97%E6%B3%95/"/>
     
       <category term="安全点" scheme="http://yoursite.com/tags/%E5%AE%89%E5%85%A8%E7%82%B9/"/>
     
@@ -556,70 +584,6 @@
     
     
       <category term="编程" scheme="http://yoursite.com/tags/%E7%BC%96%E7%A8%8B/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>智慧教育师范应用表格接口规范</title>
-    <link href="http://yoursite.com/2018/07/10/%E6%99%BA%E6%85%A7%E6%95%99%E8%82%B2%E5%B8%88%E8%8C%83%E5%BA%94%E7%94%A8%E8%A1%A8%E6%A0%BC%E6%8E%A5%E5%8F%A3%E8%A7%84%E8%8C%83/"/>
-    <id>http://yoursite.com/2018/07/10/智慧教育师范应用表格接口规范/</id>
-    <published>2018-07-10T09:33:01.000Z</published>
-    <updated>2019-01-18T04:40:47.818Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="智慧教育-网络学院示范应用"><a href="#智慧教育-网络学院示范应用" class="headerlink" title="智慧教育-网络学院示范应用"></a>智慧教育-网络学院示范应用</h1><h2 id="后端数据访问接口"><a href="#后端数据访问接口" class="headerlink" title="后端数据访问接口"></a>后端数据访问接口</h2><h3 id="主题状态"><a href="#主题状态" class="headerlink" title="主题状态"></a>主题状态</h3><h5 id="1-主题状态表"><a href="#1-主题状态表" class="headerlink" title="1. 主题状态表"></a>1. <strong>主题状态表</strong></h5><table><thead><tr><th>列名</th><th>类型</th><th>长度</th></tr></thead><tbody><tr><td>state_id</td><td>bigint(long)</td><td>20</td></tr><tr><td>domain_id</td><td>bigint(long)</td><td>20</td></tr><tr><td>states</td><td>varchar(string)</td><td>255</td></tr><tr><td>user_id</td><td>bigint(long)</td><td>20</td></tr><tr><td>created_time</td><td>datetime</td><td>1</td></tr><tr><td>modified_time</td><td>datetime</td><td>1</td></tr></tbody></table><a id="more"></a> <blockquote><p>说明：</p></blockquote><blockquote><ul><li>（1）    学习状态：0表示未学习，1表示正在学习，2表示已学习；</li></ul></blockquote><blockquote><ul><li>（2）    states（主题状态列表）形式：学习状态1，学习状态2，学习状态3，……</li></ul></blockquote><blockquote><pre><code>举例： 1， 0， 1， 2，……</code></pre></blockquote><hr><h5 id="2-主题状态接口"><a href="#2-主题状态接口" class="headerlink" title="2.  主题状态接口"></a>2.  <strong>主题状态接口</strong></h5><blockquote><ul><li>（1）    /topicState/getByDomainIdAndUserId</li></ul></blockquote><blockquote><p>查询主题状态，参数</p></blockquote><table><thead><tr><th>long domainId</th><th>long userId</th></tr></thead><tbody><tr><td>课程id</td><td>用户id</td></tr></tbody></table><blockquote><ul><li>（2）    /topicState/saveStateByDomainIdAndUserId</li></ul></blockquote><blockquote><p>保存主题状态，参数</p></blockquote><table><thead><tr><th>long domainId</th><th>String states</th><th>long userId</th></tr></thead><tbody><tr><td>课程id</td><td>主题状态列表</td><td>用户id</td></tr></tbody></table><blockquote><ul><li>（3）    /topicState/saveStateByDomainNameAndUserId</li></ul></blockquote><blockquote><p>保存主题状态，参数</p></blockquote><table><thead><tr><th>long domainName</th><th>String states</th><th>long userId</th></tr></thead><tbody><tr><td>课程名</td><td>主题状态列表</td><td>用户id</td></tr></tbody></table><hr><h3 id="分面状态"><a href="#分面状态" class="headerlink" title="分面状态"></a>分面状态</h3><h5 id="1-分面状态表"><a href="#1-分面状态表" class="headerlink" title="1. 分面状态表"></a>1. <strong>分面状态表</strong></h5><table><thead><tr><th>列名</th><th>类型</th><th>长度</th></tr></thead><tbody><tr><td>state_id</td><td>bigint(long)</td><td>20</td></tr><tr><td>domain_id</td><td>bigint(long)</td><td>20</td></tr><tr><td>topic_id</td><td>bigint(long)</td><td>20</td></tr><tr><td>states</td><td>varchar(string)</td><td>255</td></tr><tr><td>user_id</td><td>bigint(long)</td><td>20</td></tr><tr><td>created_time</td><td>datetime</td><td>1</td></tr><tr><td>modified_time</td><td>datetime</td><td>1</td></tr></tbody></table><blockquote><p>说明：</p></blockquote><blockquote><ul><li>（1）    学习状态：0表示未学习，1表示已在学习；</li></ul></blockquote><blockquote><ul><li>（2）    states（分面状态列表）形式：学习状态1，学习状态2，学习状态3，……</li></ul></blockquote><blockquote><pre><code>举例： 1， 0， 1， 0，……</code></pre></blockquote><h5 id="2-分面状态接口"><a href="#2-分面状态接口" class="headerlink" title="2.  分面状态接口"></a>2.  <strong>分面状态接口</strong></h5><blockquote><ul><li>（1）/facetState/getByDomainIdAndTopicIdAndUserId</li></ul></blockquote><blockquote><p>查询分面状态，参数</p></blockquote><table><thead><tr><th>long domainId</th><th>long userId</th><th>long topicId</th></tr></thead><tbody><tr><td>课程id</td><td>用户id</td><td>主题id</td></tr></tbody></table><blockquote><ul><li>（2）/facetState/saveStateByDomainIdAndTopicIdAndUserId</li></ul></blockquote><blockquote><p>保存分面状态，参数</p></blockquote><table><thead><tr><th>long domainId</th><th>long topicId</th><th>String states</th><th>long userId</th></tr></thead><tbody><tr><td>课程id</td><td>主题id</td><td>分面状态列表</td><td>用户id</td></tr></tbody></table><blockquote><ul><li>（3）/facetState/saveStateByDomainNameAndTopicNameAndUserId</li></ul></blockquote><blockquote><p>保存分面状态，参数</p></blockquote><table><thead><tr><th>string domainName</th><th>string topicName</th><th>String states</th><th>long userId</th></tr></thead><tbody><tr><td>课程名</td><td>主题名</td><td>分面状态列表</td><td>用户id</td></tr></tbody></table><blockquote><ul><li>（4）/facetState/saveStateByDomainIdAndUserId</li></ul></blockquote><blockquote><p>保存分面状态，参数</p></blockquote><table><thead><tr><th>long domainId</th><th>String states</th><th>long userId</th></tr></thead><tbody><tr><td>课程id</td><td>分面状态列表</td><td>用户id</td></tr></tbody></table><blockquote><ul><li>（5）/facetState/saveStateByDomainNameAndUserId</li></ul></blockquote><blockquote><p>保存主题状态，参数</p></blockquote><table><thead><tr><th>long domainName</th><th>String states</th><th>long userId</th></tr></thead><tbody><tr><td>课程名</td><td>分面状态列表</td><td>用户id</td></tr></tbody></table><p><strong><em>注</em></strong>：states：分面状态的矩阵（行（主题）之间以分号隔开，行内以逗号隔开）</p><h2 id="例如：0-0-1-0-0-0-1-1-1-0-1-0-1-1-1-……"><a href="#例如：0-0-1-0-0-0-1-1-1-0-1-0-1-1-1-……" class="headerlink" title="例如：0,0,1,0;0,0,1;1,1,0;1,0,1,1,1;……"></a>例如：0,0,1,0;0,0,1;1,1,0;1,0,1,1,1;……</h2><h3 id="推荐主题"><a href="#推荐主题" class="headerlink" title="推荐主题"></a>推荐主题</h3><h5 id="1-推荐主题表"><a href="#1-推荐主题表" class="headerlink" title="1. 推荐主题表"></a>1. <strong>推荐主题表</strong></h5><table><thead><tr><th>列名</th><th>类型</th><th>长度</th></tr></thead><tbody><tr><td>recommendation_id</td><td>bigint(long)</td><td>20</td></tr><tr><td>domain_id</td><td>bigint(long)</td><td>20</td></tr><tr><td>recommendation_topics</td><td>varchar(string)</td><td>255</td></tr><tr><td>user_id</td><td>bigint(long)</td><td>20</td></tr><tr><td>created_time</td><td>datetime</td><td>1</td></tr><tr><td>modified_time</td><td>datetime</td><td>1</td></tr></tbody></table><blockquote><p>说明：</p></blockquote><blockquote><ul><li>（1）recommendation_topics（推荐主题列表）形式：：推荐主题1 id，推荐主题2 id，推荐主题3 id；推荐主题3 id，推荐主题1 id，推荐主题4 id；……<br>即，不同推荐方式之间以分号隔开，同一推荐方式内的主题id以逗号分隔开</li></ul></blockquote><h5 id="2-2-推荐主题接口"><a href="#2-2-推荐主题接口" class="headerlink" title="2.  2.    推荐主题接口"></a>2.  <strong>2.    推荐主题接口</strong></h5><blockquote><ul><li>（1）    recommendation/getByDomainIdAndUserId</li></ul></blockquote><blockquote><p>查询推荐主题，参数</p></blockquote><table><thead><tr><th>long domainId</th><th>long userId </th></tr></thead><tbody><tr><td>课程id</td><td>用户id</td></tr></tbody></table><blockquote><ul><li>（2）    recommendation/saveRecommendationByDomainIdAndUserId</li></ul></blockquote><blockquote><p>保存推荐主题，参数</p></blockquote><table><thead><tr><th>long domainId</th><th>String recommendationTopics</th><th>long userId</th></tr></thead><tbody><tr><td>课程id</td><td>推荐主题列表</td><td>用户id</td></tr></tbody></table><blockquote><ul><li>（3）    recommendation/saveRecommendationByDomainNameAndUserId</li></ul></blockquote><blockquote><p>保存推荐主题，参数</p></blockquote><table><thead><tr><th>long domainName</th><th>String recommendationTopics</th><th>long userId</th></tr></thead><tbody><tr><td>课程名</td><td>推荐主题列表</td><td>用户id</td></tr></tbody></table><hr>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;智慧教育-网络学院示范应用&quot;&gt;&lt;a href=&quot;#智慧教育-网络学院示范应用&quot; class=&quot;headerlink&quot; title=&quot;智慧教育-网络学院示范应用&quot;&gt;&lt;/a&gt;智慧教育-网络学院示范应用&lt;/h1&gt;&lt;h2 id=&quot;后端数据访问接口&quot;&gt;&lt;a href=&quot;#后端数据访问接口&quot; class=&quot;headerlink&quot; title=&quot;后端数据访问接口&quot;&gt;&lt;/a&gt;后端数据访问接口&lt;/h2&gt;&lt;h3 id=&quot;主题状态&quot;&gt;&lt;a href=&quot;#主题状态&quot; class=&quot;headerlink&quot; title=&quot;主题状态&quot;&gt;&lt;/a&gt;主题状态&lt;/h3&gt;&lt;h5 id=&quot;1-主题状态表&quot;&gt;&lt;a href=&quot;#1-主题状态表&quot; class=&quot;headerlink&quot; title=&quot;1. 主题状态表&quot;&gt;&lt;/a&gt;1. &lt;strong&gt;主题状态表&lt;/strong&gt;&lt;/h5&gt;&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;列名&lt;/th&gt;
-&lt;th&gt;类型&lt;/th&gt;
-&lt;th&gt;长度&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;state_id&lt;/td&gt;
-&lt;td&gt;bigint(long)&lt;/td&gt;
-&lt;td&gt;20&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;domain_id&lt;/td&gt;
-&lt;td&gt;bigint(long)&lt;/td&gt;
-&lt;td&gt;20&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;states&lt;/td&gt;
-&lt;td&gt;varchar(string)&lt;/td&gt;
-&lt;td&gt;255&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;user_id&lt;/td&gt;
-&lt;td&gt;bigint(long)&lt;/td&gt;
-&lt;td&gt;20&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;created_time&lt;/td&gt;
-&lt;td&gt;datetime&lt;/td&gt;
-&lt;td&gt;1&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;modified_time&lt;/td&gt;
-&lt;td&gt;datetime&lt;/td&gt;
-&lt;td&gt;1&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-    
-    </summary>
-    
-      <category term="工程" scheme="http://yoursite.com/categories/%E5%B7%A5%E7%A8%8B/"/>
-    
-    
-      <category term="数据库" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
-    
-      <category term="智慧教育系统" scheme="http://yoursite.com/tags/%E6%99%BA%E6%85%A7%E6%95%99%E8%82%B2%E7%B3%BB%E7%BB%9F/"/>
     
   </entry>
   
