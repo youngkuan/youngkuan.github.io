@@ -100,7 +100,7 @@
 <meta property="og:site_name" content="yangkuan">
 <meta property="og:description" content="线程现代操作系统在运行一个程序的时候就会创建一个进程。线程是现在操作系统系统调度的最小单元，也称为轻量级进程（Light Weight Process），在一个进程里可以创建多个线程，每个线程都有自己的程序计数器、堆栈和局部变量等属性，并且能够访问内存中共享的变量。 使用多线程的原因 更多的处理器核心：随着处理器上的核心数量越来越多，以及超线程技术的广泛应用，现在的计算机比以往更加擅长并行计算；">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-02-27T14:23:13.626Z">
+<meta property="og:updated_time" content="2019-03-01T14:26:51.548Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java并发编程基础">
 <meta name="twitter:description" content="线程现代操作系统在运行一个程序的时候就会创建一个进程。线程是现在操作系统系统调度的最小单元，也称为轻量级进程（Light Weight Process），在一个进程里可以创建多个线程，每个线程都有自己的程序计数器、堆栈和局部变量等属性，并且能够访问内存中共享的变量。 使用多线程的原因 更多的处理器核心：随着处理器上的核心数量越来越多，以及超线程技术的广泛应用，现在的计算机比以往更加擅长并行计算；">
@@ -408,7 +408,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  320
+                  743
                 </span>
               
 
@@ -424,7 +424,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  2
                 </span>
               
             </div>
@@ -452,6 +452,44 @@
 <li>更好的编程模型：Java为多线程提供了良好、考究并且一致的编程模型，使开发人员能够更加专注于问题的解决，即为所遇到的问题建立合适的模型，而不是绞尽脑汁地考虑如何将任务多线程化。</li>
 </ol>
 <a id="more"></a>
+<h3 id="线程优先级"><a href="#线程优先级" class="headerlink" title="线程优先级"></a>线程优先级</h3><p>在Java线程中，通过一个整型成员变量priority来控制优先级，优先级的范围从1~10，在线程构建的时候可以通过setPriority(int)方法修改线程的优先级，默认优先级为5，优先级高的线程分配时间片的数量要多于优先级低的线程。设置线程优先级时，针对频繁阻塞的线程则设置较低的优先级，保证处理器不会被独占。</p>
+<h3 id="线程状态"><a href="#线程状态" class="headerlink" title="线程状态"></a>线程状态</h3><p>Java线程在运行的生命周期可能处于6种不同的状态，在任意给定时刻线程只能处于其中的一种状态：</p>
+<table>
+<thead>
+<tr>
+<th>状态名称</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NEW</td>
+<td style="text-align:center">初始状态，线程被构建，但是还没有调用start()方法</td>
+</tr>
+<tr>
+<td>RUNNABLE</td>
+<td style="text-align:center">运行状态，Java线程将操作系统中的就绪和运行两种状态笼统地称为“运行中”</td>
+</tr>
+<tr>
+<td>BLOCKED</td>
+<td style="text-align:center">阻塞状态，表示线程阻塞于锁</td>
+</tr>
+<tr>
+<td>WAITING</td>
+<td style="text-align:center">等待状态，表示线程进入等待状态，进入该状态表示当前线程需要等待其他线程做出一些特定动作（通知或中断）</td>
+</tr>
+<tr>
+<td>TIME_WAITING</td>
+<td style="text-align:center">超时等待状态，该状态不同于WAITING，它是可以在指定时间自行返回的</td>
+</tr>
+<tr>
+<td>TERMINATED</td>
+<td style="text-align:center">终止状态，表示当前线程已经执行完毕</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Daemon线程"><a href="#Daemon线程" class="headerlink" title="Daemon线程"></a>Daemon线程</h3><p>Daemon线程是一种支持型线程，因为它主要被用作程序中后台调度以及支持性工作。这意味着，当一个Java虚拟机中不存在非Daemon线程时，Java虚拟机将会退出。可以在线程启动之前通过调用Thread.setDaemon(true)将线程设置为Daemon线程。</p>
+
       
     </div>
     
@@ -706,7 +744,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#线程"><span class="nav-number">1.</span> <span class="nav-text">线程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用多线程的原因"><span class="nav-number">1.1.</span> <span class="nav-text">使用多线程的原因</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#线程"><span class="nav-number">1.</span> <span class="nav-text">线程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用多线程的原因"><span class="nav-number">1.1.</span> <span class="nav-text">使用多线程的原因</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程优先级"><span class="nav-number">1.2.</span> <span class="nav-text">线程优先级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程状态"><span class="nav-number">1.3.</span> <span class="nav-text">线程状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Daemon线程"><span class="nav-number">1.4.</span> <span class="nav-text">Daemon线程</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -740,7 +778,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">21.6k</span>
+    <span title="Site words total count">22k</span>
   
 </div>
 
@@ -754,7 +792,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共21.6k字</span>
+  <span class="post-count">博客全站共22k字</span>
 </div>
         
 <div class="busuanzi-count">
