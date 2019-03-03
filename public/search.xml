@@ -1,6 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[垃圾收集器]]></title>
+    <url>%2F2019%2F02%2F28%2F%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8%2F</url>
+    <content type="text"><![CDATA[垃圾收集算法是内存回收的方法论，垃圾收集器是垃圾回收的具体实现。在JDK1.7 Update 14之后的HotSpot虚拟机所包含的收集器如下图所示： Serial收集器Serial收集器是最基本、发展历史最悠久的收集器。这是一个单线程的收集器，但它的“单线程”的意义并不仅仅说明它只会使用一个CPU或者一条收集线程去完成垃圾收集工作，更重要的是在它进行垃圾收集时，必须暂停其他所有的工作线程，直到它收集结束。Serial收集器运行示意图如下： 也就是说，虚拟机在使用Serial垃圾收集器时会在用户不可见的情况下把所有用户正常工作的线程暂停，这种“Stop The World”操作在很多程序中是难以接受的，带给用户不良体验。举个例子“你妈妈在打扫房间的时候，肯定也会让你老老实实待在椅子上或者房间外待着，如果她一边打扫，你一边丢垃圾，这房间还能打扫完？你妈妈不会崩溃？”，因此看起来“Stop The World”操作情有可原。但是，从JDK1.3开始，HotSpot虚拟机开发团队一直在努力消除或减少工作线程因内存回收而导致的停顿，从Serial收集器到Parallel收集器，再到Concurrent Mark Sweep（CMS）乃至GC收集器最前沿的成果Garbage First（G1）收集器，用户线程的停顿时间在不断缩短，但是仍然没有办法完全消除垃圾回收带来的停顿。Serial收集器虽然很老，可以说很陈旧，但是目前为止它依旧是虚拟机运行在Client模式下的默认新生代收集器。那是因为Serial收集器简单而高效，对于限定单个GPU的情况而言，Serial收集器由于没有线程交互的开销，专心进行垃圾收集自然可以获得最高的单线程收集效率。 ParNew收集器ParNew收集器就是Serial收集器的多线程版本，除了使用多线程进行垃圾收集外，其余行为包括Serial收集器的所有可用控制参数、收集算法、Stop The World、对象分配规则、回收策略等都与Serial收集器完全一样。ParNew收集器进行垃圾收集的示意图如下： ParNew收集器除了多线程收集外，其他与Serial收集器相比没有太多创新之处，但它却是虚拟机运行在Server模式下的首选新生代收集器，其中一个与性能无关的重要原因是除了Serial收集器外，目前只有它能与CMS收集器配合工作。 Parallel Scavenge收集器Parallel Scavenge收集器也是新生代收集器，并且使用复制算法收集内存，同时还是并行的多线程收集器。这些特点都和ParNew收集器一样，但是Parallel Scavenge收集器的目标在于达到一个可控制的吞吐量（Throughput），所谓吞吐量就是CPU用于运行用户代码的时间与CPU总消耗时间的比值，即吞吐量=运行用户代码/(运行用户代码+垃圾收集时间)。这与CMS等收集器的目标不同，它们目标是尽可能地缩短垃圾收集时间用户线程的停顿时间。停顿时间越短就越适合需要与用户交互的程序，良好的响应速度能提升用户体验，而高吞吐量则可以高效率地利用CPU时间，尽快完成程序的运算任务，主要适合在后台运算而不需要太多的交互任务。Parallel Scavenge收集器提供两个参数用于精准控制吞吐量，分别是控制最大垃圾收集时间的-XX:MaxGCPauseMillis参数以及直接设置吞吐量大小的-XX:GCTimeRatio参数。MaxGCPauseMillis参数允许的值是一个大于0的毫秒数，收集器将尽可能在规定时间内完成垃圾收集操作。但是不要认为这个参数越小，系统的垃圾收集速度就会越快，GC停顿时间的缩短是以牺牲吞吐量和新生代空间来换取的：系统把新生代调小一点，收集300M新生代肯定比收集500M新生代快，这也将导致垃圾收集更频繁，原来每20s收集一次、一次100ms，现在每10s收集一次、一次70ms。停顿时间的确下降了，但吞吐量也降下来了。GCTimeRatio参数的值应当是一个大于0小于100的整数，如果把这个参数设置为19，那么允许最大GC时间就占总时间的5%（即1/(1+19)）。Parallel Scavenge收集器还有一个参数-XX:+UseAdaptiveSizePolicy，这个参数打开之后就不需要手动指定新生代的大小（-Xmm）、Eden与Survivor区的比例（-XX:SurvivorRatio）、晋升老年代对象大小（-XX:PretenureSizeThreshold）等参数了，虚拟机会根据当前系统的运行情况收集性能监控信息，动态调整这些参数以提供最适合的停顿时间或者最大吞吐量，这种调节方式称为GC自适应的调节策略（GC Ergonomics）。 Serial Old收集器Serial Old是Serial收集器的老年代版本，它同样是一个单线程收集器，使用“标记-整理”算法，这个收集器的主要意义也是在于给Client模式下的虚拟机使用。在Server模式下，它有两大用途： 在JDK1.5以及之前的版本中与Parallel Scavenge收集器搭配使用； 作为CMS收集器的后备方案，在并发收集发生Concurrent Mode Failure时使用。 Parallel Old收集器Parallel Old收集器是Parallel Scavenge收集器的老年代版本，使用多线程和“标记-整理”算法。在JDK1.6之前Parallel Scavenge只能与Serial Old收集器配合使用，由于老年代使用单线程收集内存无法充分利用服务器多CPU的处理能力，这个组合就导致无法达到高吞吐量。在JDK1.6开始提供了Parallel Old收集器和Parallel Scavenge收集器配合使用，从而可以应用在注重吞吐量以及CPU资源敏感的场合。 CMS收集器CMS（Concurrent Mark Sweep）收集器是一种以获取最短回收停顿时间为目标的收集器。从名字（包含“Mark Sweep”）就可以看出来，CMS收集器是基于“标记——清除”算法实现的，它的运作过程相对于前面几种收集器来说更复杂一些，整个过程分为4个步骤，包括： 初始标记（CMS initial mark） 并发标记（CMS concurrent mark） 重新标记（CMS remark） 并发清除（CMS concurrent sweep） 其中，初始标记、重新标记这；两个步骤仍需要“Stop The World”。初始标记是标记一下GC Roots能直接关联到的对象，速度很快，并发标记阶段就是进行GC Roots Tracing的过程，而重新标记阶段是为了修正并发标记阶段因用户程序继续运作而导致标记产生变动的那一部分对象的标记记录，这一阶段的停顿时间一般会比初始标记阶段稍长一些，但远比并发标记阶段的时间短。整个过程中耗时最长的并发标记和并发清除阶段都是与用户线程一起工作，如下图所示： CMS是一款优秀的收集器，它的主要优点是并发收集、低停顿，但是它还有以下三个明显缺点： CMS收集器对CPU资源非常敏感； CMS收集器无法处理浮动垃圾（Floating Garbage），可能出现“Concurrent Mode Failure”失败而导致另一次的Full GC。 CMS收集器是基于“标记-清除”算法实现的，在收集结束会产生大量的空间碎片。为了解决这个问题，CMS收集器提供了一个-XX:+USeCMSCompactAtFullCollection开关参数用于在CMS收集器顶不住要进行Full GC时开启内存碎片的合并整理过程。 G1收集器G1收集器是当前收集技术最前沿的成果之一，它被视为JDK1.7中HotSpot虚拟机的一个重要进化特征。G1是一款面向服务端应用的垃圾收集器，与其他收集器相比，G1具备如下特点： 并行与并发 分代收集 空间整合 可预测的停顿 在G1之前的其他收集器进行收集的范围是整个新生代或者老年代，而G1不再是这样。使用G1收集器时，Java堆的内存布局就与其他收集器有很大区别，它将整个Java堆划分成多个大小相等的独立区域（Region），虽然还保留有新生代和老年代的概念，但是新生代和老年代不再是物理隔离的了，它们都是一部分Region（不需要连续）的集合。]]></content>
+      <categories>
+        <category>深入理解Java虚拟机</category>
+      </categories>
+      <tags>
+        <tag>垃圾收集器</tag>
+        <tag>垃圾收集算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Java并发编程基础]]></title>
+    <url>%2F2019%2F02%2F27%2FJava%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80%2F</url>
+    <content type="text"><![CDATA[线程现代操作系统在运行一个程序的时候就会创建一个进程。线程是现在操作系统系统调度的最小单元，也称为轻量级进程（Light Weight Process），在一个进程里可以创建多个线程，每个线程都有自己的程序计数器、堆栈和局部变量等属性，并且能够访问内存中共享的变量。 使用多线程的原因 更多的处理器核心：随着处理器上的核心数量越来越多，以及超线程技术的广泛应用，现在的计算机比以往更加擅长并行计算； 更快的响应时间：当业务逻辑过于复杂，使用多线程技术，将对数据一致性要求不高的操作派发给多个线程处理，这样做能更快地处理完一个复杂任务，缩短响应时间，提升用户体验； 更好的编程模型：Java为多线程提供了良好、考究并且一致的编程模型，使开发人员能够更加专注于问题的解决，即为所遇到的问题建立合适的模型，而不是绞尽脑汁地考虑如何将任务多线程化。 线程优先级在Java线程中，通过一个整型成员变量priority来控制优先级，优先级的范围从1~10，在线程构建的时候可以通过setPriority(int)方法修改线程的优先级，默认优先级为5，优先级高的线程分配时间片的数量要多于优先级低的线程。设置线程优先级时，针对频繁阻塞的线程则设置较低的优先级，保证处理器不会被独占。 线程状态Java线程在运行的生命周期可能处于6种不同的状态，在任意给定时刻线程只能处于其中的一种状态： 状态名称 说明 NEW 初始状态，线程被构建，但是还没有调用start()方法 RUNNABLE 运行状态，Java线程将操作系统中的就绪和运行两种状态笼统地称为“运行中” BLOCKED 阻塞状态，表示线程阻塞于锁 WAITING 等待状态，表示线程进入等待状态，进入该状态表示当前线程需要等待其他线程做出一些特定动作（通知或中断） TIME_WAITING 超时等待状态，该状态不同于WAITING，它是可以在指定时间自行返回的 TERMINATED 终止状态，表示当前线程已经执行完毕 Daemon线程Daemon线程是一种支持型线程，因为它主要被用作程序中后台调度以及支持性工作。这意味着，当一个Java虚拟机中不存在非Daemon线程时，Java虚拟机将会退出。可以在线程启动之前通过调用Thread.setDaemon(true)将线程设置为Daemon线程。]]></content>
+      <categories>
+        <category>Java并发编程</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>多线程</tag>
+        <tag>线程</tag>
+        <tag>synchronized</tag>
+        <tag>volatile</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Ubuntu配置shadowsocks科学上网]]></title>
+    <url>%2F2019%2F02%2F26%2FUbuntu%E9%85%8D%E7%BD%AEshadowsocks%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91%2F</url>
+    <content type="text"><![CDATA[系统环境 showsocks配置 安装shadowsocks客户端,命令如下 1sudo apt install shadowsocks 查看shadowsocks命令： 1sslocal --help 启动shadowsocks两种方式： 通过设置各个参数，如下 1sslocal -s 11.22.33.44 -p 50003 -k &quot;123456&quot; -l 1080 -t 600 -m aes-256-cfb 或者，直接加载json配置文件 1sslocal -c file_path/shadowsocks.json 启动shadowsocks如下所示： 配置好shadowsocks客户端后，我们介绍一下三种方式设置代理模式。 方式一：不要关闭上面的终端，重新打开一个终端，配置全局变量：使用vim ~/.bashrc添加语句1alias hp=&quot;http_proxy=http://localhost:8123&quot; 使用source ~/.bashrc使更改生效。 测试效果 使用命令hp curl ip.gs查看代理服务器网址，结果如下所示： 可以看出，alias hp=&quot;http_proxy=http://localhost:8123&quot;这句语句的作用就是用命令hp替换http_proxy=http://localhost:8123这一串长命令。 那我们不想每条指令前面都加上命令hp怎么办，这就需要设置全局代理：方式二：为当前窗口设置全局代理命令如下：12export http_proxy=http://localhost:8123 # 当前终端使用代理unset http_proxy # 当前终端取消代理 测试如下所示，可以看出上设置全局代理后，就不需要hp命令了，取消代理（unset）后可以看到ip变成了陕西西安。 方式三：设置当前用户的全局代理在~/.bashrc中添加export http_proxy=http://localhost:8123命令设置当前用户的全局代理。别忘了使用source ~/.bashrc使更改生效。 如下所示， 经过测试，推荐方式二为当前窗口设置全局代理，命令如下：12export http_proxy=http://localhost:8123 # 当前终端使用代理unset http_proxy # 当前终端取消代理 这种方式可以开启一个窗口运行export作为科学上网窗口，而其他窗口依旧正常上网，这样可以节约流量。除此之外，这是我测试的上述三种上网方式中最稳定的一种，建议使用。 总结配置好之后，科学上网的过程，先打开一个终端窗口，运行： 1sslocal -c file_path/shadowsocks.json 再打开新窗口，运行1export http_proxy=http://localhost:8123 我使用R-3D中下载YouTube视频的代码作为测试，运行python download_video.py就可以看到下载视频并保存在当前目录的videos目录下。 示意结果如下，sslocal -c shadowsocks.json启动窗口下方会出现与www.youtube.com连接的日志信息：]]></content>
+      <categories>
+        <category>工程</category>
+      </categories>
+      <tags>
+        <tag>Ubuntu</tag>
+        <tag>shadowsocks</tag>
+        <tag>科学上网</tag>
+        <tag>代理</tag>
+        <tag>proxy</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[面向切面编程]]></title>
+    <url>%2F2019%2F02%2F21%2F%E9%9D%A2%E5%90%91%E5%88%87%E9%9D%A2%E7%BC%96%E7%A8%8B%2F</url>
+    <content type="text"><![CDATA[面向切面编程（Aspect Oriented Programming，AOP）是什么？ AOP是一种编程范式，不是编程语言； AOP解决特定问题，但不能解决所有问题； OOP的补充，而不是其替代。 AOP为什么出现？ 提高代码重用性； 概念分离：分离功能性需求和非功能性需求。将功能性需求从非功能性需求中分离出来。 应用场景 权限控制 缓存控制 事务控制 审计日志 性能监控 分布式追踪 异常处理 Spring AOP的通过代理实现通过DefaultAopProxyFactory.java源码可以看到AOP由jdk和cglib两种方式实现。12345678910111213141516public AopProxy createAopProxy(AdvisedSupport config) throws AopConfigException &#123; if (config.isOptimize() || config.isProxyTargetClass() || hasNoUserSuppliedProxyInterfaces(config)) &#123; Class&lt;?&gt; targetClass = config.getTargetClass(); if (targetClass == null) &#123; throw new AopConfigException(&quot;TargetSource cannot determine target class: &quot; + &quot;Either an interface or a target is required for proxy creation.&quot;); &#125; if (targetClass.isInterface() || Proxy.isProxyClass(targetClass)) &#123; return new JdkDynamicAopProxy(config); &#125; return new ObjenesisCglibAopProxy(config); &#125; else &#123; return new JdkDynamicAopProxy(config); &#125;&#125; Spring AOP的使用在Spring中主要使用注解@Aspect、@Pointcut、@Before、@After、@AfterReturning、@AfterThrowing以及@Around进行面向切面编程。 1234567891011@Retention(RetentionPolicy.RUNTIME)@Target(ElementType.TYPE)public @interface Aspect &#123; /** * Per clause expression, defaults to singleton aspect * &lt;p/&gt; * Valid values are &quot;&quot; (singleton), &quot;perthis(...)&quot;, etc */ public String value() default &quot;&quot;;&#125; 如上代码是@Aspect注解的定义，ElementType.TYPE可以看出该注解作用目标是接口、类、枚举、注解，@Aspect注解，Spring通过@Aspect注解切面并把它应用到目标对象上。 12345678910111213141516171819@Retention(RetentionPolicy.RUNTIME)@Target(ElementType.METHOD)public @interface Pointcut &#123; /** * The pointcut expression * We allow &quot;&quot; as default for abstract pointcut */ String value() default &quot;&quot;; /** * When compiling without debug info, or when interpreting pointcuts at runtime, * the names of any arguments used in the pointcut are not available. * Under these circumstances only, it is necessary to provide the arg names in * the annotation - these MUST duplicate the names used in the annotated method. * Format is a simple comma-separated list. */ String argNames() default &quot;&quot;;&#125; 如上代码是@Pointcut注解的定义，value()用来定义切面所在的位置，定义方式有以下几种方式：123456789// execution定义切面，匹配符合表达式的所有方法@Pointcut(&quot;execution(* com.xjtu.springbootstudy.aop.bymyself.service.ProgrammerService.work())&quot;)// within用于匹配类，对应类下的所有方法都执行切面方法；@Pointcut(&quot;within(com.xjtu.springbootstudy.aop.bymyself.service.*)&quot;)// @annotation用于匹配自定义注解，如下面的@SignLog注解，再将@SignLog放在想定义切面的方法@Pointcut(&quot;@annotation(com.xjtu.springbootstudy.aop.bymyself.annotation.SignLog)&quot;)// @within用于匹配自定义注解，如下面的@SignLog注解，再将@SignLog放在想定义切面的类上@Pointcut(&quot;@within(com.xjtu.springbootstudy.aop.bymyself.annotation.SignLog))&quot;)public void log()&#123; &#125; 如上对log()添加注解，@Pointcut注解中value定义切面位置，使用execution、within、@annotation、@within等方式设置切面。 @before在目标方法开始执行时执行； @after在目标方法执行结束前执行； @AfterReturning在目标方法执行正确返回前执行； @AfterThrowing在目标方法执行异常时执行， @Around环绕执行，一般是前4个无法实现期望功能时，才使用这个注解。 我写了一个简单示意切面程序，如下所示，对应执行结果也展示下下方。有个疑问就是@after和@AfterReturning注解的方法谁先执行？根据执行结果也可以看出@after注解的方法先执行，@AfterReturning注解的方法后执行。 1234567891011121314151617181920212223242526272829303132333435@Before(value = &quot;log()&quot;)public void signIn(JoinPoint joinPoint)&#123; logger.info(&quot;***********the people signs in******&quot;);&#125;@After(value = &quot;log()&quot;)public void leaveWorkPlace(JoinPoint joinPoint)&#123; logger.info(&quot;***********the people leaves workplace******&quot;);&#125;@AfterReturning(value = &quot;log()&quot;)public void signOut(JoinPoint joinPoint)&#123; logger.info(&quot;***********the people signs out successfully******&quot;);&#125;@AfterThrowing(value = &quot;log()&quot;,throwing = &quot;throwable&quot;)public void happenAccidentWhenWorking(JoinPoint joinPoint,Throwable throwable)&#123; logger.info(&quot;***********the people happens accident when working******&quot;); logger.info(&quot;***********&quot;+throwable.getMessage()+&quot;***********&quot;);&#125;@Around(value = &quot;log()&quot;)public void happenAround(ProceedingJoinPoint joinPoint)&#123; try &#123; joinPoint.proceed(joinPoint.getArgs()); &#125; catch (Throwable throwable) &#123; throwable.printStackTrace(); &#125;&#125;执行结果：***********the people signs in****** // @beforeI&apos;m working in workplace! // 这是目标方法的执行结果***********the people leaves workplace****** // @after***********the people signs out successfully****** // @afterReturning]]></content>
+      <categories>
+        <category>面试</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>spring</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Java面向对象编程知识点]]></title>
+    <url>%2F2019%2F02%2F20%2FJava%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E7%9F%A5%E8%AF%86%E7%82%B9%2F</url>
+    <content type="text"><![CDATA[面向对象的三个基本特征和五种设计原则三个基本特征封装封装就是把客观事物封装成抽象的类，并且类可以把自己的数据和方法只让可信的类或者对象操作，对不可信的进行信息隐藏； 继承继承是指这样一种能力：它可以使用现有类的所有功能，并在无需重写原有类的情况下对这些功能进行扩展。通过继承创建的新类称为“子类”或“派生类”，被继承的类称为“父类”或“基类”。继承的过程就是从一般到特殊的过程。要实现继承可以通过“继承”和“组合”两种方式实现。在某些OOP语言中，一个子类可以继承多个基类，但一般情况下（Java语言），一个子类只有一个基类，实现多重继承可以通过多级继承来实现。继承概念的实现方式有三类： 实现继承：指使用基类的属性和方法而无需额外编码的能力； 接口继承：指仅使用基类的属性和方法名称，但子类必须提供实现的能力； 可视继承：指子类使用基类的外观和实现代码的能力。多态 多态是允许你将父对象设置成为和一个或多个它的子对象相等的技术，赋值之后，父对象就可以根据当前赋值给它的子对象的特性以不同方式运作。简单地说就是：允许将子类类型的指针赋值给父类类型的指针。实现多态有两种方式：覆盖和重载： 覆盖是指子类重新定义父类的虚函数的做法； 重载是指允许多个同名函数，这些函数的参数不同（参数个数不同，或参数类型不同，或两者都不同）。 五种设计原则单一职责原则(Single Responsibility Principle，SRP)单一职责原则是指一个类的功能要单一，不能包罗万象。一个类应该只有一个引起它变化的原因。 开放封闭原则(Open－Close Principle，OCP) 开放封闭原则指的是对扩展性的开放和对修改的封闭： 对扩展性的开放：模块的行为应该是可扩展的，从而该模块可表现出行的行为以满足需求的变化； 对修改的封闭：模块自身的代码时不应该被修改的，扩展模块的一般途径是修改内部实现。 里氏替换原则(the Liskov Substitution Principle，LSP)子类型必须能够替换掉它们的父类型，并出现在父类能够出现的任何地方。 依赖倒置原则(the Dependency Inversion Principle，PIP)具体依赖抽象，上层依赖下层。 接口隔离原则(the Interface Segregation Principle，ISP)模块间要通过抽象接口隔离开，而不是通过具体的类强耦合起来。 Class.java类文件下getMethods()和getDeclaredMethods()的区别1234567891011@CallerSensitivepublic Method[] getMethods() throws SecurityException &#123; checkMemberAccess(Member.PUBLIC, Reflection.getCallerClass(), true); return copyMethods(privateGetPublicMethods());&#125;@CallerSensitivepublic Method[] getDeclaredMethods() throws SecurityException &#123; checkMemberAccess(Member.DECLARED, Reflection.getCallerClass(), true); return copyMethods(privateGetDeclaredMethods(false));&#125; getMethods()是获取对应类及其所有父类中的共有（public）方法；getDeclaredMethods()获取的是当前类中的所有方法。]]></content>
+      <categories>
+        <category>面试</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>面向对象</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[StackGAN: Text to Photo-realistic Image Synthesis with Stacked Generative Adversarial Networks]]></title>
+    <url>%2F2019%2F02%2F19%2FStackGAN-Text-to-Photo-realistic-Image-Synthesis-with-Stacked-Generative-Adversarial-Networks%2F</url>
+    <content type="text"><![CDATA[Abstract源码地址：https://github.com/hanzhanggit/StackGAN 这篇文章提出Stacked Generative Adversarial Networks (StackGAN)合成高分辨率（$256 \times 256$）的逼真图像。这个模型将困难的图像合成问题分成两个子问题：Stage-I GAN根据输入的文本描述合成对象的基本形状和颜色；Stage-II GAN根据Stage-I GAN以合成的图像结果和文本描述作为输入，丰富合成图像的细节，生成逼真的高分辨率图像。 我们都知道生成对抗网络的训练过程存在不稳定性，作者提出了一种新的条件增强技术促进潜在条件流形（latent conditioning manifold）的平滑性，从而改善了合成图像的多样性和训练生成对抗网络过程的稳定性。 Stacked Generative Adversarial Networks Stacked Generative Adversarial Networks的结构如下图所示分为Stage-I GAN和Stage-II GAN两个子网络： Stage-I GAN：以文本描述和噪声向量为输入，文本描述控制对象的基本形状和颜色，噪声控制背景布局，从而生成一张低分辨率图像； Stage-II GAN：纠正Stage-I生成的低分辨率图像的缺陷，再次通过读取文本描述来补全图像的细节，从而生成高分辨率的逼真图像。 Stage-I GANKL散度（Kullback–Leibler divergence,KL divergence）本文章中的条件增强技术中计算标准高斯分布和条件高斯分布之间的KL散度，所以先简单介绍KL散度。KL散度又被称为相对熵（relative entropy）或者信息散度，是连个概率分布间差异的非对称性度量。 $$KL(p(x)||q(x))=\sum_x{p(x)\log{\frac{p(x)}{q(x)}}}\\=\sum_x{p(x)\log{p(x)}-p(x)\log{q(x)}}$$ KL散度是衡量两个分布之间的差异大小的，KL散度大于等于0，并且越接近0说明p与q这两个分布越像，当且仅当p与q相等时KL散度取0。 模型框架对于生成器$G_0$，为了获得文本条件变量$\hat{c}_0$，文本嵌入$\varphi_t$首先通过全连接层生成$\mu_0$和$\delta_0$（$\delta_0$是$\sum_0$的对角线元素值）。$\hat{c}_0$由高斯分布$N(\mu(\varphi(t)),\sum_0(\varphi(t)))$抽样得到。$N_g$维的条件向量$\hat{c}_0$由公式$\hat{c}_0=\mu_0+\delta_0 \bigodot\epsilon$计算得到，其中$\bigodot$表示元素乘积（element-wise multiplication），$\epsilon\sim\N(0,I)$。之后，$\hat{c}_0$与$N_z$维的噪声向量拼接并通过一系列的上采样块生成尺寸为$W_0\times H_0$的图像。对于判别器$D_0$,文本嵌入$\varphi(t)$通过全连接压缩为$N_d$维然后通过复制将其转换成$M_d \times M_d \times N_d$大小的张量。同时图像经过一系列下采样块，输出$M_d \times M_d$大小的张量。最后把图像和文本得到的张量拼接在一起，经过$1\times 1$的卷积层以及一个只有一个节点的全连接层，从而得到决策值。Stage-I训练过程损失函数如下，目的在于最大化$L_{D_0}$以训练判别器，最小化$L_{G_0}$以训练生成器。 $$L_{D_0}=E_{(I_0,t)\sim{p_{data}}}[\log D_0(I_0,\varphi_t)]+E_{z\sim{p_z},t\sim p_{data}}[\log {(1-D_0(G_0(z,\hat{c}_0),\varphi_t)}]\\L_{G_0}=E_{z\sim{p_z},t\sim p_{data}}[\log {(1-D_0(G_0(z,\hat{c}_0),\varphi_t)}]+\lambda{D_{KL}}(N(\mu_0(\varphi_t),\sum_0(\varphi_t)||N(0,I)),$$ Stage-II GANStage-II GAN的模型框架和Stage-I GAN相似，只不过没有了噪声输入，换成了Stage-I合成的低分率图像。Stage-II其损失函数如下，目的在于最大化$L_D$以训练判别器，最小化$L_G$以训练生成器。 $$L_D=E_{(I,t)\sim{p_{data}}}[\log D(I,\varphi_t)]+E_{s_0\sim{p_{G_0}},t\sim p_{data}}[\log {(1-D(G(s_0,\hat{c}),\varphi_t)}]\\L_G=E_{s_0\sim{p_{G_0}},t\sim p_{data}}[\log {(1-D(G(s_0,\hat{c}),\varphi_t)}]+\lambda{D_{KL}}(N(\mu(\varphi_t),\sum(\varphi_t)||N(0,I)),$$]]></content>
+      <categories>
+        <category>科研</category>
+      </categories>
+      <tags>
+        <tag>论文阅读</tag>
+        <tag>text2image</tag>
+        <tag>图像合成</tag>
+        <tag>生成对抗网络</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Java内存模型（二）]]></title>
     <url>%2F2019%2F02%2F19%2FJava%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%EF%BC%88%E4%BA%8C%EF%BC%89%2F</url>
     <content type="text"><![CDATA[Java内存模型重排序重排序是指编译器和处理器为了优化程序性能而对指令序列进行重新排序的手段。 数据依赖性如果两个操作访问同一个变量，且这两个操作中有一为写操作，此时这两个操作时间就存在数据依赖性。数据依赖分为三种类型：写后读、写后写、读后写。上述三种情况，只要重排序这两个操作的执行顺序，程序的执行结果就会改变。因此编译器和处理器在重排序时，会遵守数据依赖性，编译器和处理器不会改变存在数据依赖关系的两个操作顺序。这类所说的数据依赖性仅针对单个处理器中执行的指令序列和单个线程中执行的操作，不同处理器之间和不同线程之间的数据依赖性不被编译器和处理器考虑。 as-if-serial语义as-if-serial语义的意思是：不管怎么重排序（编译器和处理器为了提高并行度），（单线程）程序的执行结果不会被改变。as-if-serial语义把单线程程序保护起来，遵循as-if-serial语义的编译器、runtime和处理器保证单线程程序执行的结果与其按照顺序执行的结果一致。 程序顺序规则123double pi = 3.14; //Adouble r = 1.0; //Bdouble area = pi * r * r; //C 根据happens-before的程序顺序规则，上面计算圆面积的示例代码存在3个happens-before关系： A happens-before B B happens-before C A happens-before C 这里A happens-before B，但在实际执行时B却可以在A之前执行。如果A happens-before B，JMM并不一定要求A在B之前执行。JMM仅仅要求前一个操作对后一个操作可见，且前一个操作按顺序排在后一操作之前。这里操作A的执行结果并不需要对操作B可见；而且重排序操作A和操作B后的执行结果，与操作A和操作B按照A happens-before B顺序执行的结果一致。在这种情况下，JMM会认为这种重排序不非法（not illegal）,JMM允许这种重排序。在计算机中，软件技术和硬件技术有一个共同目的：在不改变程序执行结果的前提下，尽可能提高并行度。 重排序对多线程的影响多线程程序中，对存在控制依赖的操作重排序，可能会改变程序的执行结果。 顺序一致性数据竞争与顺序一致性当程序未正确同步时，就可能会存在数据竞争。Java内存模型规范对数据竞争的定义如下： 在一个线程中写入一个变量； 在另一个线程中读同一个变量； 而且写和读没有通过同步来排序。 当代码中包含数据竞争时，程序的执行往往产生违反直觉的结果。如果一个多线程程序能够同步，这个程序将是一个没有数据竞争的程序。JMM对正确同步的多线程程序的内存一致性做了如下保证：如果程序时正确同步的，程序的执行将具有顺序一致性——即程序的执行结果与改程序在顺序一致性内存模型中的执行结果相同。 顺序一致性内存模型顺序一致性内存模型是一个被计算机科学家理想化的理论参考模型。它为程序员提供了极强的内存可见性保证。顺序一致性内存模型有两大特性： 一个线程中的所有操作都必须按照程序的顺序来执行； （不管线程是否同步）所有线程都只能看到一个单一的操作执行顺序。在顺序一致性内存模型中，每个操作都必须原子执行且立刻对所有线程可见。]]></content>
@@ -35,8 +115,8 @@
         <category>Java并发编程</category>
       </categories>
       <tags>
-        <tag>volatile</tag>
         <tag>synchronized</tag>
+        <tag>volatile</tag>
         <tag>原子操作</tag>
       </tags>
   </entry>
@@ -55,7 +135,7 @@
   <entry>
     <title><![CDATA[Kafka:分布式流平台]]></title>
     <url>%2F2019%2F01%2F16%2FKafka-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B5%81%E5%B9%B3%E5%8F%B0%2F</url>
-    <content type="text"><![CDATA[Kafka:分布式流平台参考链接：Kafka官网 Apache Kafka是一个分布式流平台，具有以下三个关键能力： 发布和订阅记录流（streams of records），类似于一个消息队列或者是企业消息系统； 以具有容错性和持久性的方式存储记录流； 即时处理记录流 Kafka通常被用在两大类应用中： 构建可在系统或应用程序之间可靠获取数据的实时流数据管道 构建转换或响应数据流的实时流应用 一些概念： Kafka作为一个集群可以运行在一个或多个服务器上，这些服务器可跨多个数据中心； Kafka集群存储在类别中的记录流称为主题（topics）； 每个记录包含一个键（key）、一个值（value）以及一个时间戳（timestamp）； Kafka有四个核心API： 生产者（Producer）API允许一个应用将记录流发布到一个或多个Kafka主题（topics）上； 消费者（Consumer）API允许一个应用去订阅一个或者多个主题（topics），并处理这些给它们生产的记录流； 流（Streams）API允许一个应用扮演流处理器的角色，从一个或多个主题消费一个输入流，然后向一个或多个主题输出流，高效地进行输入流到输出流的转换； 连接（Connector）API允许创建或者运行可重用的生产者或消费者，并与将Kafka主题与现有的应用或数据系统连接。例如关系数据库的连接器可以捕获对表的每个更改。 主题（Topics）和记录（Logs）一个主题是发布记录的一个类别或订阅源名称。 Kafka中主题总是多订阅用户; 也就是说，一个主题可以有零个，一个或多个消费者订阅写入它的数据。对于每个主题，Kafka群集都维护一个如下所示的分区日志（partitioned log）： 每个分区（partition）都是有序的，不可变的记录序列，这些记录不断添加到结构化的提交日志中。分区中的每个记录都被分配一个称为偏移的序列id，这些id唯一标识了分区中的每个记录。Kafka集群使用可配置的保留期，持久保存所有已发布的记录，无论这些记录是否已被使用。 例如，如果保留策略被设置为两天，那么在发布记录后的两天内，记录都可以被消费，之后将被丢弃以释放空间。 Kafka的性能不受数据大小的影响，因此长时间存储数据不是问题。实际上，基于每个消费者保留的唯一元数据是该消费者在日志中的偏移或位置。 这种偏移由消费者控制：通常消费者会线性地提高其偏移量从而读取记录，但事实上，由于该位置由消费者控制，因此它可以按照自己喜欢的任何顺序去消费记录。 例如，消费者可以重置为较旧的偏移量去重新处理过去的数据，或者跳到最近的记录并从“现在”开始消费。 这些特性的组合意味着Kafka消费者非常方便，消费者的加入移除对集群或其他消费者没有太大影响。 例如，您可以使用我们的命令行工具“拖尾（tail，此处不太理解）”任何主题的内容，而无需更改任何现有使用者所消耗的内容。 日志中的分区有多种用途。 首先，它们允许日志扩展到超出适合单个服务器的规模。 每个独立分区必须适合托管它的服务器，但一个主题可能有多个分区，因此它可以处理任意数量的数据。 其次，分区充当了并行性的单元。]]></content>
+    <content type="text"><![CDATA[Kafka:分布式流平台参考链接：Kafka官网 Apache Kafka是一个分布式流平台，具有以下三个关键能力： 发布和订阅记录流（streams of records），类似于一个消息队列或者是企业消息系统； 以具有容错性和持久性的方式存储记录流； 即时处理记录流 Kafka通常被用在两大类应用中： 构建可在系统或应用程序之间可靠获取数据的实时流数据管道 构建转换或响应数据流的实时流应用 一些概念： Kafka作为一个集群可以运行在一个或多个服务器上，这些服务器可跨多个数据中心； Kafka集群存储在类别中的记录流称为主题（topics）； 每个记录包含一个键（key）、一个值（value）以及一个时间戳（timestamp）； Kafka有四个核心API： 生产者（Producer）API允许一个应用将记录流发布到一个或多个Kafka主题（topics）上； 消费者（Consumer）API允许一个应用去订阅一个或者多个主题（topics），并处理这些给它们生产的记录流； 流（Streams）API允许一个应用扮演流处理器的角色，从一个或多个主题消费一个输入流，然后向一个或多个主题输出流，高效地进行输入流到输出流的转换； 连接（Connector）API允许创建或者运行可重用的生产者或消费者，并与将Kafka主题与现有的应用或数据系统连接。例如关系数据库的连接器可以捕获对表的每个更改。 主题（Topics）和记录（Logs）一个主题是发布记录的一个类别或订阅源名称。 Kafka中主题总是多订阅用户; 也就是说，一个主题可以有零个，一个或多个消费者订阅写入它的数据。对于每个主题，Kafka群集都维护一个如下所示的分区日志（partitioned log）： 每个分区（partition）都是有序的，不可变的记录序列，这些记录不断添加到结构化的提交日志中。分区中的每个记录都被分配一个称为偏移的序列id，这些id唯一标识了分区中的每个记录。Kafka集群使用可配置的保留期，持久保存所有已发布的记录，无论这些记录是否已被使用。 例如，如果保留策略被设置为两天，那么在发布记录后的两天内，记录都可以被消费，之后将被丢弃以释放空间。 Kafka的性能不受数据大小的影响，因此长时间存储数据不是问题。实际上，基于每个消费者保留的唯一元数据是该消费者在日志中的偏移或位置。 这种偏移由消费者控制：通常消费者会线性地提高其偏移量从而读取记录，但事实上，由于该位置由消费者控制，因此它可以按照自己喜欢的任何顺序去消费记录。 例如，消费者可以重置为较旧的偏移量去重新处理过去的数据，或者跳到最近的记录并从“现在”开始消费。 这些特性的组合意味着Kafka消费者非常方便，消费者的加入移除对集群或其他消费者没有太大影响。 例如，您可以使用我们的命令行工具“拖尾（tail，此处不太理解）”任何主题的内容，而无需更改任何现有使用者所消耗的内容。 日志中的分区有多种用途。 首先，它们允许日志扩展到超出适合单个服务器的规模。 每个独立分区必须适合托管它的服务器，但一个主题可能有多个分区，因此它可以处理任意数量的数据。 其次，分区充当了并行性的单元。 一些基本概念 Consumer Group：逻辑概念，对于同一个topic，会广播给不同的group。同一个group中只有一个consumer可以消费该topic。 Broker：物理概念，Kafka集群中的每个Kafka节点。 Partition：物理概念，Kafka下数据存储的基本单元。一个Topic数据，会被分散存储到多个Partition，每个Partition是有序的。 Replication：同一个Partition可能会有多个副本（replication），多个副本之间数据是一致的。 Replication Leader：一个Partition的多个副本需要选举一个leader负责partition上与Producer和Consumer消息传递。 ReplicaManager：负责管理当前Broker所有分区和副本的信息，处理KafkaController发起的请求，如副本状态的切换（重新选举Replication Leader）、添加消息、消费消息等。]]></content>
       <categories>
         <category>kafka</category>
       </categories>
@@ -82,8 +162,8 @@
         <category>深入理解Java虚拟机</category>
       </categories>
       <tags>
-        <tag>垃圾收集算法</tag>
         <tag>垃圾收集器</tag>
+        <tag>垃圾收集算法</tag>
         <tag>安全点</tag>
         <tag>安全区域</tag>
       </tags>
@@ -135,6 +215,7 @@
       </categories>
       <tags>
         <tag>对象检测</tag>
+        <tag>论文阅读</tag>
       </tags>
   </entry>
   <entry>

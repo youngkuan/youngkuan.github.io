@@ -51,3 +51,12 @@ Kafka集群使用可配置的保留期，持久保存所有已发布的记录，
 这些特性的组合意味着Kafka消费者非常方便，消费者的加入移除对集群或其他消费者没有太大影响。 例如，您可以使用我们的命令行工具“拖尾（tail，此处不太理解）”任何主题的内容，而无需更改任何现有使用者所消耗的内容。
 
 日志中的分区有多种用途。 首先，它们允许日志扩展到超出适合单个服务器的规模。 每个独立分区必须适合托管它的服务器，但一个主题可能有多个分区，因此它可以处理任意数量的数据。 其次，分区充当了并行性的单元。
+
+## 一些基本概念
+
+1. Consumer Group：逻辑概念，对于同一个topic，会广播给不同的group。同一个group中只有一个consumer可以消费该topic。
+2. Broker：物理概念，Kafka集群中的每个Kafka节点。
+3. Partition：物理概念，Kafka下数据存储的基本单元。一个Topic数据，会被分散存储到多个Partition，每个Partition是有序的。
+4. Replication：同一个Partition可能会有多个副本（replication），多个副本之间数据是一致的。
+5. Replication Leader：一个Partition的多个副本需要选举一个leader负责partition上与Producer和Consumer消息传递。
+6. ReplicaManager：负责管理当前Broker所有分区和副本的信息，处理KafkaController发起的请求，如副本状态的切换（重新选举Replication Leader）、添加消息、消费消息等。

@@ -3,6 +3,7 @@ title: Hierarchical Object Detection with Deep Reinforcement Learning
 date: 2019-01-08 21:31:17
 tags: 
     - 对象检测
+    - 论文阅读
 categories: 科研
 ---
 # Hierarchical Object Detection with Deep Reinforcement Learning
@@ -57,12 +58,12 @@ Q(s,a) = r+\lambda{max}_{a'}Q(s',a')
 
 ## [Implementation](https://github.com/imatge-upc/detection-2016-nipsws)
 
-###### **1. keras实现**
+### **1. keras实现**
 * 提取区域特征
 
 ![image](Hierarchical-Object-Detection-with-Deep-Reinforcement-Learning/vgg16.png)
 * state不断更新，并作为model的输入
-```math
+```
 (7*7*512)
 ```
 * 
