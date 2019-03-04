@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-02-28T10:54:47.229Z</updated>
+  <updated>2019-03-04T14:17:06.440Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>数据库范式</title>
+    <link href="http://yoursite.com/2019/03/04/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%8C%83%E5%BC%8F/"/>
+    <id>http://yoursite.com/2019/03/04/数据库范式/</id>
+    <published>2019-03-04T13:36:33.000Z</published>
+    <updated>2019-03-04T14:17:06.440Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="第一范式（1NF）"><a href="#第一范式（1NF）" class="headerlink" title="第一范式（1NF）"></a>第一范式（1NF）</h2><p>关系模型中实体的每个属性都是原子属性，即元组在每个属性上的取值是不可分的。也就是说这些属性的取值是单一的，不是集合、数组等非原子数据。当实体中的某个属性都多个值时，必须将该属性拆分为多个原子属性。</p><a id="more"></a> <h2 id="第二范式（2NF）"><a href="#第二范式（2NF）" class="headerlink" title="第二范式（2NF）"></a>第二范式（2NF）</h2><p><strong>关系模型中的所有非主属性都完全依赖于所有的候选键</strong>。2NF其实就是在1NF的基础上消除那些非主属性对所有候选键的部分函数依赖。<br>例如，关系（学号，课程号，教师，成绩，学院）中，教师部分依赖于课程号，因此这个关系不满足第二范式，所以需要把上述关系拆分成（学号，课程号，成绩）和（课程号，教师，学院）。</p><h2 id="第三范式（3NF）"><a href="#第三范式（3NF）" class="headerlink" title="第三范式（3NF）"></a>第三范式（3NF）</h2><p><strong>关系模型中的非主属性既不部分函数依赖也不传递函数依赖于关系中的所有候选键</strong>。也就是说3NF是在2NF的基础上消除了非主属性对候选键的传递依赖关系。</p><p>还是上面的例子，关系（课程号，教师，学院）中存在传递依赖关系课程号-&gt;教师，以及教师-&gt;学院，因此不满足3NF。所以将其分解为（课程号，教师）和（教师，学院）。</p><h2 id="巴斯-科德范式（BCNF）"><a href="#巴斯-科德范式（BCNF）" class="headerlink" title="巴斯-科德范式（BCNF）"></a>巴斯-科德范式（BCNF）</h2><p><strong>对于关系R上的任何非平凡函数依赖X-&gt;Y都有X必包含R的某个候选键</strong>，那么就称关系R满足BCNF。BCNF是在第三范式的基础上继续消除主属性对于键的部分依赖和传递依赖。  </p><p>举个例子来说，关系（课程名，班级，教师）中假定多名教师承担多个班级的教学任务，每个教师仅承担一个课程的教学任务，同时可以给多个班级上课，那么可以知道有函数依赖</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(课程名，班级)-&gt;(教师)</span><br><span class="line">(教师)-&gt;(课程名)</span><br></pre></td></tr></table></figure><p>然而，上述关系中的主键是(课程名，班级)或者(教师，班级)。所以<code>(教师)-&gt;(课程名)</code>就是主属性对候选键的部分依赖，不满足BCNF。</p><h2 id="第四范式（4NF）"><a href="#第四范式（4NF）" class="headerlink" title="第四范式（4NF）"></a>第四范式（4NF）</h2><p>对于关系R中的非平凡多值依赖X-&gt;-&gt;Y，X必包含R的某个候选键，则称满足4NF。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;第一范式（1NF）&quot;&gt;&lt;a href=&quot;#第一范式（1NF）&quot; class=&quot;headerlink&quot; title=&quot;第一范式（1NF）&quot;&gt;&lt;/a&gt;第一范式（1NF）&lt;/h2&gt;&lt;p&gt;关系模型中实体的每个属性都是原子属性，即元组在每个属性上的取值是不可分的。也就是说这些属性的取值是单一的，不是集合、数组等非原子数据。当实体中的某个属性都多个值时，必须将该属性拆分为多个原子属性。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="工程" scheme="http://yoursite.com/categories/%E5%B7%A5%E7%A8%8B/"/>
+    
+    
+      <category term="数据库" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+      <category term="MySQL" scheme="http://yoursite.com/tags/MySQL/"/>
+    
+      <category term="范式" scheme="http://yoursite.com/tags/%E8%8C%83%E5%BC%8F/"/>
+    
+  </entry>
   
   <entry>
     <title>垃圾收集器</title>
@@ -558,29 +584,6 @@
       <category term="排序损失" scheme="http://yoursite.com/tags/%E6%8E%92%E5%BA%8F%E6%8D%9F%E5%A4%B1/"/>
     
       <category term="数据集" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E9%9B%86/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>研究生数学建模：恐怖袭击事件分级</title>
-    <link href="http://yoursite.com/2018/09/15/%E7%A0%94%E7%A9%B6%E7%94%9F%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%EF%BC%9A%E6%81%90%E6%80%96%E8%A2%AD%E5%87%BB%E4%BA%8B%E4%BB%B6%E5%88%86%E7%BA%A7/"/>
-    <id>http://yoursite.com/2018/09/15/研究生数学建模：恐怖袭击事件分级/</id>
-    <published>2018-09-15T13:21:13.000Z</published>
-    <updated>2019-01-18T04:40:55.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="研究生数学建模：恐怖袭击事件分级"><a href="#研究生数学建模：恐怖袭击事件分级" class="headerlink" title="研究生数学建模：恐怖袭击事件分级"></a>研究生数学建模：恐怖袭击事件分级</h1><p><strong>特征：人员伤亡、经济损失、时间、地点（人口容量、GDP）等</strong></p><h3 id="财产损失"><a href="#财产损失" class="headerlink" title="财产损失"></a>财产损失</h3><h4 id="特征："><a href="#特征：" class="headerlink" title="特征："></a><strong>特征：</strong></h4><p>攻击类型、武器类型、受害子类型、国家、地区、入选标准（1、2、3、doubtterr）<br><a id="more"></a> </p><h6 id="攻击类型"><a href="#攻击类型" class="headerlink" title="攻击类型"></a><strong>攻击类型</strong></h6><ol><li>暗杀（1/0）</li><li>武装袭击（1/0）</li><li>轰炸爆炸（1/0）</li><li>劫持（1/0）</li><li>设施攻击（1/0）</li><li>徒手攻击（1/0）</li><li>未知（1/0）</li></ol><ol start="8"><li>攻击成功（1/0）</li><li>自杀式袭击（suicide）<h6 id="武器类型"><a href="#武器类型" class="headerlink" title="武器类型"></a><strong>武器类型</strong></h6></li></ol><ol start="9"><li>生化武器、放射性武器（1/0）</li><li>核武器</li><li>轻武器</li><li>炸弹</li><li>燃烧武器</li><li>治乱武器</li><li>交通工具</li><li>破坏设备</li><li>未知</li></ol><h6 id="受害者类型"><a href="#受害者类型" class="headerlink" title="受害者类型"></a><strong>受害者类型</strong></h6><ol start="18"><li>商业</li><li>政府</li><li>警察</li><li>军事</li><li>流产有关</li><li>运输（机场（飞机）或巴士、火车、高铁运输）</li><li>教育机构</li><li>食物或水供应</li><li>媒体设施</li><li>海事</li><li>非政府组织</li><li>其他</li></ol><h6 id="地区"><a href="#地区" class="headerlink" title="地区"></a><strong>地区</strong></h6><ol start="30"><li>北美</li><li>南美</li><li>东亚</li><li>东南亚</li><li>南亚</li><li>中亚</li><li>西欧</li><li>东欧</li><li>中东和北非</li><li>撒哈拉以南非洲</li><li>澳大利亚</li></ol><h6 id="入选标准"><a href="#入选标准" class="headerlink" title="入选标准"></a><strong>入选标准</strong></h6><ol start="41"><li>标准1</li><li>标准2</li><li>标准3</li></ol><p>–</p><ol start="44"><li>疑似恐怖主义</li></ol><h4 id="输出："><a href="#输出：" class="headerlink" title="输出："></a><strong>输出：</strong></h4><ol><li>灾难性的</li><li>重大的</li><li>较小的</li><li>无损失</li><li>未知</li></ol><ol><li>设置propextent中为空的部分为0，这样就可以去除property</li></ol><h4 id="K-means聚类结果分析"><a href="#K-means聚类结果分析" class="headerlink" title="K-means聚类结果分析"></a><strong>K-means聚类结果分析</strong></h4><blockquote><p>样本数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">10953\times 17</span><br></pre></td></tr></table></figure></p></blockquote><blockquote><p>聚类结果（5类）</p></blockquote><table><thead><tr><th>统计</th><th>类1</th><th>类2</th><th>类3</th><th>类4</th><th>类5</th></tr></thead><tbody><tr><td>数量</td><td>2497</td><td>4645</td><td>134</td><td>1854</td><td>1823</td></tr></tbody></table><h4 id="Spectral-Clustering聚类结果分析"><a href="#Spectral-Clustering聚类结果分析" class="headerlink" title="Spectral Clustering聚类结果分析"></a><strong>Spectral Clustering聚类结果分析</strong></h4><blockquote><p>样本数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">10953\times 17</span><br></pre></td></tr></table></figure></p></blockquote><blockquote><p>聚类结果（5类）</p></blockquote><table><thead><tr><th>统计</th><th>类1</th><th>类2</th><th>类3</th><th>类4</th><th>类5</th></tr></thead><tbody><tr><td>数量</td><td>10883</td><td>1</td><td>15</td><td>1</td><td>53</td></tr></tbody></table><h4 id="分段后K-means聚类结果分析"><a href="#分段后K-means聚类结果分析" class="headerlink" title="分段后K-means聚类结果分析"></a><strong>分段后K-means聚类结果分析</strong></h4><blockquote><p>样本数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">10953\times 36</span><br></pre></td></tr></table></figure></p></blockquote><blockquote><p>聚类结果（5类）</p></blockquote><table><thead><tr><th>统计</th><th>类1</th><th>类2</th><th>类3</th><th>类4</th><th>类5</th></tr></thead><tbody><tr><td>数量</td><td>6339</td><td>1541</td><td>1474</td><td>725</td><td>874</td></tr></tbody></table><h4 id="分段后Spectral-Clustering聚类结果分析"><a href="#分段后Spectral-Clustering聚类结果分析" class="headerlink" title="分段后Spectral Clustering聚类结果分析"></a><strong>分段后Spectral Clustering聚类结果分析</strong></h4><blockquote><p>样本数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">10953\times 36</span><br></pre></td></tr></table></figure></p></blockquote><blockquote><p>聚类结果（5类）</p></blockquote><table><thead><tr><th>统计</th><th>类1</th><th>类2</th><th>类3</th><th>类4</th><th>类5</th></tr></thead><tbody><tr><td>数量</td><td>9472</td><td>26</td><td>1343</td><td>93</td><td>19</td></tr></tbody></table><h4 id="增大死亡数以及财产损失权重，分段后K-means聚类结果分析"><a href="#增大死亡数以及财产损失权重，分段后K-means聚类结果分析" class="headerlink" title="增大死亡数以及财产损失权重，分段后K-means聚类结果分析"></a><strong>增大死亡数以及财产损失权重，分段后K-means聚类结果分析</strong></h4><blockquote><p>样本数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">10953\times 36</span><br></pre></td></tr></table></figure></p></blockquote><blockquote><p>聚类结果（5类）</p></blockquote><table><thead><tr><th>统计</th><th>类1</th><th>类2</th><th>类3</th><th>类4</th><th>类5</th></tr></thead><tbody><tr><td>数量</td><td>1541</td><td>735</td><td>7203</td><td>1474</td><td>0</td></tr></tbody></table><h4 id="增大死亡数以及财产损失权重，分段后Spectral-Clustering聚类结果分析"><a href="#增大死亡数以及财产损失权重，分段后Spectral-Clustering聚类结果分析" class="headerlink" title="增大死亡数以及财产损失权重，分段后Spectral Clustering聚类结果分析"></a><strong>增大死亡数以及财产损失权重，分段后Spectral Clustering聚类结果分析</strong></h4><blockquote><p>样本数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">10953\times 36</span><br></pre></td></tr></table></figure></p></blockquote><blockquote><p>聚类结果（5类）</p></blockquote><table><thead><tr><th>统计</th><th>类1</th><th>类2</th><th>类3</th><th>类4</th><th>类5</th></tr></thead><tbody><tr><td>数量</td><td>9471</td><td>1</td><td>1349</td><td>39</td><td>93</td></tr></tbody></table>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;研究生数学建模：恐怖袭击事件分级&quot;&gt;&lt;a href=&quot;#研究生数学建模：恐怖袭击事件分级&quot; class=&quot;headerlink&quot; title=&quot;研究生数学建模：恐怖袭击事件分级&quot;&gt;&lt;/a&gt;研究生数学建模：恐怖袭击事件分级&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;特征：人员伤亡、经济损失、时间、地点（人口容量、GDP）等&lt;/strong&gt;&lt;/p&gt;
-&lt;h3 id=&quot;财产损失&quot;&gt;&lt;a href=&quot;#财产损失&quot; class=&quot;headerlink&quot; title=&quot;财产损失&quot;&gt;&lt;/a&gt;财产损失&lt;/h3&gt;&lt;h4 id=&quot;特征：&quot;&gt;&lt;a href=&quot;#特征：&quot; class=&quot;headerlink&quot; title=&quot;特征：&quot;&gt;&lt;/a&gt;&lt;strong&gt;特征：&lt;/strong&gt;&lt;/h4&gt;&lt;p&gt;攻击类型、武器类型、受害子类型、国家、地区、入选标准（1、2、3、doubtterr）&lt;br&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="竞赛" scheme="http://yoursite.com/categories/%E7%AB%9E%E8%B5%9B/"/>
-    
-    
-      <category term="编程" scheme="http://yoursite.com/tags/%E7%BC%96%E7%A8%8B/"/>
     
   </entry>
   
