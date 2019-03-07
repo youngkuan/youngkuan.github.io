@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-03-06T08:26:16.895Z</updated>
+  <updated>2019-03-07T03:12:31.558Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Deep Residual Learning for Image Recognition</title>
+    <link href="http://yoursite.com/2019/03/06/Deep-Residual-Learning-for-Image-Recognition/"/>
+    <id>http://yoursite.com/2019/03/06/Deep-Residual-Learning-for-Image-Recognition/</id>
+    <published>2019-03-06T12:49:41.000Z</published>
+    <updated>2019-03-07T03:12:31.558Z</updated>
+    
+    <content type="html"><![CDATA[<p>神经网络越深就越难训练，作者提出一种残差学习框架来降低网络训练的难度。<br><a id="more"></a> </p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;神经网络越深就越难训练，作者提出一种残差学习框架来降低网络训练的难度。&lt;br&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="科研" scheme="http://yoursite.com/categories/%E7%A7%91%E7%A0%94/"/>
+    
+    
+      <category term="论文阅读" scheme="http://yoursite.com/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
+    
+      <category term="神经网络" scheme="http://yoursite.com/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"/>
+    
+      <category term="图像识别" scheme="http://yoursite.com/tags/%E5%9B%BE%E5%83%8F%E8%AF%86%E5%88%AB/"/>
+    
+      <category term="残差网络" scheme="http://yoursite.com/tags/%E6%AE%8B%E5%B7%AE%E7%BD%91%E7%BB%9C/"/>
+    
+  </entry>
   
   <entry>
     <title>ZooKeeper-分布式应用程序协调服务</title>
@@ -114,9 +142,9 @@
       <category term="深入理解Java虚拟机" scheme="http://yoursite.com/categories/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/"/>
     
     
-      <category term="垃圾收集器" scheme="http://yoursite.com/tags/%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/"/>
-    
       <category term="垃圾收集算法" scheme="http://yoursite.com/tags/%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="垃圾收集器" scheme="http://yoursite.com/tags/%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/"/>
     
   </entry>
   
@@ -460,9 +488,9 @@
       <category term="深入理解Java虚拟机" scheme="http://yoursite.com/categories/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/"/>
     
     
-      <category term="垃圾收集器" scheme="http://yoursite.com/tags/%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/"/>
-    
       <category term="垃圾收集算法" scheme="http://yoursite.com/tags/%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="垃圾收集器" scheme="http://yoursite.com/tags/%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/"/>
     
       <category term="安全点" scheme="http://yoursite.com/tags/%E5%AE%89%E5%85%A8%E7%82%B9/"/>
     
@@ -550,36 +578,6 @@
       <category term="环境配置" scheme="http://yoursite.com/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"/>
     
       <category term="软件安装" scheme="http://yoursite.com/tags/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Hierarchical Object Detection with Deep Reinforcement Learning</title>
-    <link href="http://yoursite.com/2019/01/08/Hierarchical-Object-Detection-with-Deep-Reinforcement-Learning/"/>
-    <id>http://yoursite.com/2019/01/08/Hierarchical-Object-Detection-with-Deep-Reinforcement-Learning/</id>
-    <published>2019-01-08T13:31:17.000Z</published>
-    <updated>2019-02-19T12:21:03.928Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Hierarchical-Object-Detection-with-Deep-Reinforcement-Learning"><a href="#Hierarchical-Object-Detection-with-Deep-Reinforcement-Learning" class="headerlink" title="Hierarchical Object Detection with Deep Reinforcement Learning"></a>Hierarchical Object Detection with Deep Reinforcement Learning</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><blockquote><p>关键的思想在于关注图像中包含更丰富信息的那些部分并放大它们。</p></blockquote><h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ol><li>考虑区域之间的联系，</li><li>利用top-down的扫描方式，首先获取整个图像，关注局部区域的相关信息，</li><li>基于增强学习训练的代理（agent）有能力检测图像中的对象<a id="more"></a> </li></ol><h2 id="Hierarchical-Object-Detection-Model"><a href="#Hierarchical-Object-Detection-Model" class="headerlink" title="Hierarchical Object Detection Model"></a>Hierarchical Object Detection Model</h2><h6 id="1-Markov-Decision-Process（马尔科夫决策过程）"><a href="#1-Markov-Decision-Process（马尔科夫决策过程）" class="headerlink" title="1. Markov Decision Process（马尔科夫决策过程）"></a><strong>1. Markov Decision Process（马尔科夫决策过程）</strong></h6><blockquote><p>State:当前区域描述符（the descriptor of current region）和记忆向量（memory vector）</p></blockquote><blockquote><p>Actions:move actions和terminal actions</p></blockquote><blockquote><p>Reward:<br>保证move action都是朝着更靠近ground truth的方向移动；<br>当IOU超过threshold，则终止移动。</p></blockquote><h6 id="2-Q-learning"><a href="#2-Q-learning" class="headerlink" title="2. Q-learning"></a><strong>2. Q-learning</strong></h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Q(s,a) = r+\lambda&#123;max&#125;_&#123;a&apos;&#125;Q(s&apos;,a&apos;)</span><br></pre></td></tr></table></figure><h6 id="3-Model"><a href="#3-Model" class="headerlink" title="3. Model"></a><strong>3. Model</strong></h6><ul><li><p>the Image-Zooms model</p><blockquote><p>使用VGG-16提取图像区域特征向量<code>$(7*7*512)$</code>,<br>拼接区域特征向量与记忆向量（memory vector）<code>$(7*7*512+24=25088+24)$</code>,<br>经过两个1024维的全连接层，输出6个可能的动作（actions），<br>反复迭代，直到终止动作</p></blockquote></li><li><p>the Pool45-Crops model<br><img src="/2019/01/08/Hierarchical-Object-Detection-with-Deep-Reinforcement-Learning/Hierarchical-Object-Detection-Models.png" alt="image"></p></li></ul><h6 id="4-Training"><a href="#4-Training" class="headerlink" title="4. Training"></a><strong>4. Training</strong></h6><h2 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h2><h6 id="1-Qualitative-Results"><a href="#1-Qualitative-Results" class="headerlink" title="1. Qualitative Results"></a><strong>1. Qualitative Results</strong></h6><p><img src="/2019/01/08/Hierarchical-Object-Detection-with-Deep-Reinforcement-Learning/aeroplane20180626.png" alt="image"></p><h2 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a><a href="https://github.com/imatge-upc/detection-2016-nipsws" target="_blank" rel="noopener">Implementation</a></h2><h3 id="1-keras实现"><a href="#1-keras实现" class="headerlink" title="1. keras实现"></a><strong>1. keras实现</strong></h3><ul><li>提取区域特征</li></ul><p><img src="/2019/01/08/Hierarchical-Object-Detection-with-Deep-Reinforcement-Learning/vgg16.png" alt="image"></p><ul><li><p>state不断更新，并作为model的输入</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(7*7*512)</span><br></pre></td></tr></table></figure></li><li></li></ul><h2 id="代码问题总结"><a href="#代码问题总结" class="headerlink" title="代码问题总结"></a>代码问题总结</h2><ol><li>数据类型错误<strong>TypeError: slice indices must be integers or None or have an <strong>index</strong> method</strong></li></ol><p>这是由于数组，矩阵等类型数据的下标是整数，而在</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">region_mask[offset[0]:offset[0] + size_mask[0]</span><br><span class="line">                         , offset[1]:offset[1] + size_mask[1]] = 1</span><br></pre></td></tr></table></figure><p>offset是float类型，所以报错，解决方法就是数据类型转换：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">region_mask[int(offset[0]):int(offset[0] + size_mask[0])</span><br><span class="line">                          , int(offset[1]):int(offset[1] + size_mask[1])] = 1</span><br></pre></td></tr></table></figure><ol start="2"><li>VGG16提取图像特征尺寸不对</li></ol><p><img src="/2019/01/08/Hierarchical-Object-Detection-with-Deep-Reinforcement-Learning/error1.png" alt="image"></p><p>解决方法：在图片提取特征之前，对图像进行resize；</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">im = images[z].resize((224, 224))</span><br></pre></td></tr></table></figure><ol start="3"><li>除0错误</li></ol><p><img src="/2019/01/08/Hierarchical-Object-Detection-with-Deep-Reinforcement-Learning/error2.png" alt="image"></p><p>对图像进行resize的位置错误</p><h2 id="问题总结"><a href="#问题总结" class="headerlink" title="问题总结"></a>问题总结</h2><ol><li>问题：记忆向量的哪儿来的？</li><li>问题：哪6个动作？<blockquote><p>move actions:左上、右上、左下、右下和中；<br>terminal actions</p></blockquote></li><li>问题：每个类训练一个模型？<blockquote><p>是的，这篇文章中只训练了飞机类（aeroplane）的检测模型</p></blockquote></li></ol>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Hierarchical-Object-Detection-with-Deep-Reinforcement-Learning&quot;&gt;&lt;a href=&quot;#Hierarchical-Object-Detection-with-Deep-Reinforcement-Learning&quot; class=&quot;headerlink&quot; title=&quot;Hierarchical Object Detection with Deep Reinforcement Learning&quot;&gt;&lt;/a&gt;Hierarchical Object Detection with Deep Reinforcement Learning&lt;/h1&gt;&lt;h2 id=&quot;Abstract&quot;&gt;&lt;a href=&quot;#Abstract&quot; class=&quot;headerlink&quot; title=&quot;Abstract&quot;&gt;&lt;/a&gt;Abstract&lt;/h2&gt;&lt;blockquote&gt;
-&lt;p&gt;关键的思想在于关注图像中包含更丰富信息的那些部分并放大它们。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&quot;Introduction&quot;&gt;&lt;a href=&quot;#Introduction&quot; class=&quot;headerlink&quot; title=&quot;Introduction&quot;&gt;&lt;/a&gt;Introduction&lt;/h2&gt;&lt;ol&gt;
-&lt;li&gt;考虑区域之间的联系，&lt;/li&gt;
-&lt;li&gt;利用top-down的扫描方式，首先获取整个图像，关注局部区域的相关信息，&lt;/li&gt;
-&lt;li&gt;基于增强学习训练的代理（agent）有能力检测图像中的对象&lt;/li&gt;&lt;/ol&gt;
-    
-    </summary>
-    
-      <category term="科研" scheme="http://yoursite.com/categories/%E7%A7%91%E7%A0%94/"/>
-    
-    
-      <category term="对象检测" scheme="http://yoursite.com/tags/%E5%AF%B9%E8%B1%A1%E6%A3%80%E6%B5%8B/"/>
-    
-      <category term="论文阅读" scheme="http://yoursite.com/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
     
   </entry>
   
