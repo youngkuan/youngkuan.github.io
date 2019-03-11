@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-02-28T10:54:47.229Z</updated>
+  <updated>2019-03-07T03:12:31.558Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,113 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Deep Residual Learning for Image Recognition</title>
+    <link href="http://yoursite.com/2019/03/06/Deep-Residual-Learning-for-Image-Recognition/"/>
+    <id>http://yoursite.com/2019/03/06/Deep-Residual-Learning-for-Image-Recognition/</id>
+    <published>2019-03-06T12:49:41.000Z</published>
+    <updated>2019-03-07T03:12:31.558Z</updated>
+    
+    <content type="html"><![CDATA[<p>神经网络越深就越难训练，作者提出一种残差学习框架来降低网络训练的难度。<br><a id="more"></a> </p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;神经网络越深就越难训练，作者提出一种残差学习框架来降低网络训练的难度。&lt;br&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="科研" scheme="http://yoursite.com/categories/%E7%A7%91%E7%A0%94/"/>
+    
+    
+      <category term="论文阅读" scheme="http://yoursite.com/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
+    
+      <category term="神经网络" scheme="http://yoursite.com/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"/>
+    
+      <category term="图像识别" scheme="http://yoursite.com/tags/%E5%9B%BE%E5%83%8F%E8%AF%86%E5%88%AB/"/>
+    
+      <category term="残差网络" scheme="http://yoursite.com/tags/%E6%AE%8B%E5%B7%AE%E7%BD%91%E7%BB%9C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ZooKeeper-分布式应用程序协调服务</title>
+    <link href="http://yoursite.com/2019/03/06/ZooKeeper-%E5%88%86%E5%B8%83%E5%BC%8F%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E5%8D%8F%E8%B0%83%E6%9C%8D%E5%8A%A1/"/>
+    <id>http://yoursite.com/2019/03/06/ZooKeeper-分布式应用程序协调服务/</id>
+    <published>2019-03-06T06:51:32.000Z</published>
+    <updated>2019-03-06T08:26:16.895Z</updated>
+    
+    <content type="html"><![CDATA[<p><a href="http://developer.51cto.com/art/201809/583184.htm" target="_blank" rel="noopener">参考链接</a></p><h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>Apache ZooKeeper is an effort to develop and maintain an open-source server which enables highly reliable distributed coordination.</p><p>Apache ZooKeeper致力于开发和维护一个支持高度可靠的分布式协调的开源服务器。<br><a id="more"></a><br>Zookeeper是一个典型的分布式数据一致性解决方案，分布式应用程序可以基于Zookeeper实现诸如数据发布/订阅、负载均衡、命名服务、分布式协调/通知、集群管理、Master选举、分布式锁和分布式队列等功能。  </p><h2 id="Znode"><a href="#Znode" class="headerlink" title="Znode"></a>Znode</h2><p>在ZooKeeper中，“节点”分为两种类型：</p><ul><li>第一类是指构成集群的机器，称之为机器节点；</li><li>第二类则是指数据模型中的数据单元，我们称之为数据节点-Znode。</li></ul><p>ZooKeeper将所有的数据存储在内存中，数据模型是一棵树（Znode Tree）</p><h2 id="ZooKeeper集群介绍介绍"><a href="#ZooKeeper集群介绍介绍" class="headerlink" title="ZooKeeper集群介绍介绍"></a>ZooKeeper集群介绍介绍</h2><p>ZooKeeper集群中的所有机器通过Leader选举过程来选定一台称为“Leader”的机器，Leader既可以为客户端提供写服务又能提供读服务。出Leader外，Follower和Observer只能提供读服务。</p><p>Follower与Observer的唯一区别在于Observer机器不参与Leader的选举过程，也不参与写操作的“过半写成功”策略，因此Observer机器可以在不影响写性能的情况下提升集群的读性能。</p><h2 id="ZAB协议"><a href="#ZAB协议" class="headerlink" title="ZAB协议"></a>ZAB协议</h2><p>ZAB（ZooKeeper Atomic Broadcast，ZooKeeper原子广播）协议是为分布式协调服务ZooKeeper专门设计的一种支持崩溃恢复的原子广播协议。</p><p>在ZooKeeper中，主要依赖ZAB协议来实现分布式数据一致性，基于该协议ZooKeeper实现了一种主备模式的系统架构来保持集群中各个副本之间的数据一致性。</p><p>ZAB协议包括两种基本模式，分别是崩溃恢复和消息广播。<br>当整个服务框架在启动过程中，或是当Leader服务器出现网络中断、崩溃退出与重启等异常情况是，ZAB协议就会进入恢复模式并选举出新的Leader服务器。<br>当选举产生的新的Leader服务器，同时集群中已经有过半的机器与新Leader服务器完成状态同步之后，ZAB协议就会退出恢复模式。其中，所谓的状态同步是指数据同步，也就是保证集群中过半的机器与该Leader服务器的数据状态一致。<br>当集群中已经有过半的Follower服务器完成与Leader服务器的状态同步，那么整个服务框架就可以进入消息广播模式了。<br>当一台同样遵守ZAB协议的服务器启动后加入到集群中时，如果此时集群中已经存在一个Leader服务器在负责消息广播，那么新加入的服务器就会自觉地进去数据恢复模式：找到Leader所在的服务器，并与其进行数据同步，然后一起参与到消息广播流程中去。</p><p>正如上文所述，ZooKeeper被设计成只允许唯一的Leader服务器进行事务请求的处理，Leader服务器在接收到客户端的事务请求后，会生成对应的事务提案并发起一轮广播协议。如果集群中的其他机器接收到客户端事务请求，那么这些非Leader服务器会首先将这个事务转发给Leader服务器。</p><h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><p>在我们的智慧教育示范应用中，主要是使用Kafka收集用户日志，而ZooKeeper就担任了服务生产者和消费者的注册中心。<br>服务生产者将自己提供的服务注册到ZooKeeper中心，服务消费者在进行服务调用的时候先到ZooKeeper中查找服务，获取到服务生产者的详细信息之后，再去调用服务生产者的内容和数据。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;a href=&quot;http://developer.51cto.com/art/201809/583184.htm&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;参考链接&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;基本概念&quot;&gt;&lt;a href=&quot;#基本概念&quot; class=&quot;headerlink&quot; title=&quot;基本概念&quot;&gt;&lt;/a&gt;基本概念&lt;/h2&gt;&lt;p&gt;Apache ZooKeeper is an effort to develop and maintain an open-source server which enables highly reliable distributed coordination.&lt;/p&gt;
+&lt;p&gt;Apache ZooKeeper致力于开发和维护一个支持高度可靠的分布式协调的开源服务器。&lt;br&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="ZooKeeper" scheme="http://yoursite.com/categories/ZooKeeper/"/>
+    
+    
+      <category term="开源软件" scheme="http://yoursite.com/tags/%E5%BC%80%E6%BA%90%E8%BD%AF%E4%BB%B6/"/>
+    
+      <category term="ZooKeeper" scheme="http://yoursite.com/tags/ZooKeeper/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>条件生成对抗网络的一系列问题</title>
+    <link href="http://yoursite.com/2019/03/05/%E6%9D%A1%E4%BB%B6%E7%94%9F%E6%88%90%E5%AF%B9%E6%8A%97%E7%BD%91%E7%BB%9C%E7%9A%84%E4%B8%80%E7%B3%BB%E5%88%97%E9%97%AE%E9%A2%98/"/>
+    <id>http://yoursite.com/2019/03/05/条件生成对抗网络的一系列问题/</id>
+    <published>2019-03-05T13:30:04.000Z</published>
+    <updated>2019-03-06T05:18:26.081Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="条件生成对抗网络中生成器的输入随机噪声z，文本特征-phi-t-作为条件，噪声输入有什么用？"><a href="#条件生成对抗网络中生成器的输入随机噪声z，文本特征-phi-t-作为条件，噪声输入有什么用？" class="headerlink" title="条件生成对抗网络中生成器的输入随机噪声z，文本特征$\phi(t)$作为条件，噪声输入有什么用？"></a>条件生成对抗网络中生成器的输入随机噪声<code>z</code>，文本特征$\phi(t)$作为条件，噪声输入有什么用？</h2><p><a href="https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix/issues/152" target="_blank" rel="noopener">参考链接：https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix/issues/152</a></p><p>其实没有噪声输入也可以，但是有时候需要同一个文本输入需要生成的样本更加多样，这时候随机噪声就有用了。<br><a id="more"></a> </p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;条件生成对抗网络中生成器的输入随机噪声z，文本特征-phi-t-作为条件，噪声输入有什么用？&quot;&gt;&lt;a href=&quot;#条件生成对抗网络中生成器的输入随机噪声z，文本特征-phi-t-作为条件，噪声输入有什么用？&quot; class=&quot;headerlink&quot; title=&quot;条件生成对抗网络中生成器的输入随机噪声z，文本特征$\phi(t)$作为条件，噪声输入有什么用？&quot;&gt;&lt;/a&gt;条件生成对抗网络中生成器的输入随机噪声&lt;code&gt;z&lt;/code&gt;，文本特征$\phi(t)$作为条件，噪声输入有什么用？&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix/issues/152&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;参考链接：https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix/issues/152&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;其实没有噪声输入也可以，但是有时候需要同一个文本输入需要生成的样本更加多样，这时候随机噪声就有用了。&lt;br&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="科研" scheme="http://yoursite.com/categories/%E7%A7%91%E7%A0%94/"/>
+    
+    
+      <category term="论文阅读" scheme="http://yoursite.com/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
+    
+      <category term="生成对抗网络" scheme="http://yoursite.com/tags/%E7%94%9F%E6%88%90%E5%AF%B9%E6%8A%97%E7%BD%91%E7%BB%9C/"/>
+    
+      <category term="问题" scheme="http://yoursite.com/tags/%E9%97%AE%E9%A2%98/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>数据库范式</title>
+    <link href="http://yoursite.com/2019/03/04/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%8C%83%E5%BC%8F/"/>
+    <id>http://yoursite.com/2019/03/04/数据库范式/</id>
+    <published>2019-03-04T13:36:33.000Z</published>
+    <updated>2019-03-04T14:17:06.440Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="第一范式（1NF）"><a href="#第一范式（1NF）" class="headerlink" title="第一范式（1NF）"></a>第一范式（1NF）</h2><p>关系模型中实体的每个属性都是原子属性，即元组在每个属性上的取值是不可分的。也就是说这些属性的取值是单一的，不是集合、数组等非原子数据。当实体中的某个属性都多个值时，必须将该属性拆分为多个原子属性。</p><a id="more"></a> <h2 id="第二范式（2NF）"><a href="#第二范式（2NF）" class="headerlink" title="第二范式（2NF）"></a>第二范式（2NF）</h2><p><strong>关系模型中的所有非主属性都完全依赖于所有的候选键</strong>。2NF其实就是在1NF的基础上消除那些非主属性对所有候选键的部分函数依赖。<br>例如，关系（学号，课程号，教师，成绩，学院）中，教师部分依赖于课程号，因此这个关系不满足第二范式，所以需要把上述关系拆分成（学号，课程号，成绩）和（课程号，教师，学院）。</p><h2 id="第三范式（3NF）"><a href="#第三范式（3NF）" class="headerlink" title="第三范式（3NF）"></a>第三范式（3NF）</h2><p><strong>关系模型中的非主属性既不部分函数依赖也不传递函数依赖于关系中的所有候选键</strong>。也就是说3NF是在2NF的基础上消除了非主属性对候选键的传递依赖关系。</p><p>还是上面的例子，关系（课程号，教师，学院）中存在传递依赖关系课程号-&gt;教师，以及教师-&gt;学院，因此不满足3NF。所以将其分解为（课程号，教师）和（教师，学院）。</p><h2 id="巴斯-科德范式（BCNF）"><a href="#巴斯-科德范式（BCNF）" class="headerlink" title="巴斯-科德范式（BCNF）"></a>巴斯-科德范式（BCNF）</h2><p><strong>对于关系R上的任何非平凡函数依赖X-&gt;Y都有X必包含R的某个候选键</strong>，那么就称关系R满足BCNF。BCNF是在第三范式的基础上继续消除主属性对于键的部分依赖和传递依赖。  </p><p>举个例子来说，关系（课程名，班级，教师）中假定多名教师承担多个班级的教学任务，每个教师仅承担一个课程的教学任务，同时可以给多个班级上课，那么可以知道有函数依赖</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(课程名，班级)-&gt;(教师)</span><br><span class="line">(教师)-&gt;(课程名)</span><br></pre></td></tr></table></figure><p>然而，上述关系中的主键是(课程名，班级)或者(教师，班级)。所以<code>(教师)-&gt;(课程名)</code>就是主属性对候选键的部分依赖，不满足BCNF。</p><h2 id="第四范式（4NF）"><a href="#第四范式（4NF）" class="headerlink" title="第四范式（4NF）"></a>第四范式（4NF）</h2><p>对于关系R中的非平凡多值依赖X-&gt;-&gt;Y，X必包含R的某个候选键，则称满足4NF。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;第一范式（1NF）&quot;&gt;&lt;a href=&quot;#第一范式（1NF）&quot; class=&quot;headerlink&quot; title=&quot;第一范式（1NF）&quot;&gt;&lt;/a&gt;第一范式（1NF）&lt;/h2&gt;&lt;p&gt;关系模型中实体的每个属性都是原子属性，即元组在每个属性上的取值是不可分的。也就是说这些属性的取值是单一的，不是集合、数组等非原子数据。当实体中的某个属性都多个值时，必须将该属性拆分为多个原子属性。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="工程" scheme="http://yoursite.com/categories/%E5%B7%A5%E7%A8%8B/"/>
+    
+    
+      <category term="数据库" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+      <category term="MySQL" scheme="http://yoursite.com/tags/MySQL/"/>
+    
+      <category term="范式" scheme="http://yoursite.com/tags/%E8%8C%83%E5%BC%8F/"/>
+    
+  </entry>
   
   <entry>
     <title>垃圾收集器</title>
@@ -35,9 +142,9 @@
       <category term="深入理解Java虚拟机" scheme="http://yoursite.com/categories/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/"/>
     
     
-      <category term="垃圾收集器" scheme="http://yoursite.com/tags/%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/"/>
-    
       <category term="垃圾收集算法" scheme="http://yoursite.com/tags/%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="垃圾收集器" scheme="http://yoursite.com/tags/%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/"/>
     
   </entry>
   
@@ -302,11 +409,11 @@
   </entry>
   
   <entry>
-    <title>Kafka:分布式流平台</title>
+    <title>Kafka-分布式流平台</title>
     <link href="http://yoursite.com/2019/01/16/Kafka-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B5%81%E5%B9%B3%E5%8F%B0/"/>
     <id>http://yoursite.com/2019/01/16/Kafka-分布式流平台/</id>
     <published>2019-01-16T09:20:56.000Z</published>
-    <updated>2019-02-25T07:57:30.847Z</updated>
+    <updated>2019-03-06T06:57:16.384Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Kafka-分布式流平台"><a href="#Kafka-分布式流平台" class="headerlink" title="Kafka:分布式流平台"></a>Kafka:分布式流平台</h1><p><a href="https://kafka.apache.org/intro" target="_blank" rel="noopener">参考链接：Kafka官网</a></p><p>Apache Kafka是一个分布式流平台，具有以下三个关键能力：</p><ul><li>发布和订阅记录流（<code>streams of records</code>），类似于一个消息队列或者是企业消息系统；</li><li>以具有容错性和持久性的方式存储记录流；</li><li><p>即时处理记录流</p><a id="more"></a> <p>Kafka通常被用在两大类应用中：</p></li><li><p>构建可在系统或应用程序之间可靠获取数据的实时流数据管道</p></li><li>构建转换或响应数据流的实时流应用</li></ul><p>一些概念：</p><ul><li>Kafka作为一个集群可以运行在一个或多个服务器上，这些服务器可跨多个数据中心；</li><li>Kafka集群存储在类别中的记录流称为主题（topics）；</li><li>每个记录包含一个键（key）、一个值（value）以及一个时间戳（timestamp）；</li></ul><p>Kafka有四个核心API：</p><ul><li>生产者（Producer）API允许一个应用将记录流发布到一个或多个Kafka主题（topics）上；</li><li>消费者（Consumer）API允许一个应用去订阅一个或者多个主题（topics），并处理这些给它们生产的记录流；</li><li>流（Streams）API允许一个应用扮演流处理器的角色，从一个或多个主题消费一个输入流，然后向一个或多个主题输出流，高效地进行输入流到输出流的转换；</li><li>连接（Connector）API允许创建或者运行可重用的生产者或消费者，并与将Kafka主题与现有的应用或数据系统连接。例如关系数据库的连接器可以捕获对表的每个更改。</li></ul><p><img src="/2019/01/16/Kafka-分布式流平台/kafka1.png" alt="四个核心API"></p><h2 id="主题（Topics）和记录（Logs）"><a href="#主题（Topics）和记录（Logs）" class="headerlink" title="主题（Topics）和记录（Logs）"></a>主题（Topics）和记录（Logs）</h2><p>一个主题是发布记录的一个类别或订阅源名称。 Kafka中主题总是多订阅用户; 也就是说，一个主题可以有零个，一个或多个消费者订阅写入它的数据。<br>对于每个主题，Kafka群集都维护一个如下所示的分区日志（partitioned log）：</p><p><img src="/2019/01/16/Kafka-分布式流平台/kafka2.png" alt="主题解剖">  </p><p>每个分区（partition）都是有序的，不可变的记录序列，这些记录不断添加到结构化的提交日志中。分区中的每个记录都被分配一个称为偏移的序列id，这些id唯一标识了分区中的每个记录。<br>Kafka集群使用可配置的保留期，持久保存所有已发布的记录，无论这些记录是否已被使用。 例如，如果保留策略被设置为两天，那么在发布记录后的两天内，记录都可以被消费，之后将被丢弃以释放空间。 Kafka的性能不受数据大小的影响，因此长时间存储数据不是问题。<br>实际上，基于每个消费者保留的唯一元数据是该消费者在日志中的偏移或位置。 这种偏移由消费者控制：通常消费者会线性地提高其偏移量从而读取记录，但事实上，由于该位置由消费者控制，因此它可以按照自己喜欢的任何顺序去消费记录。 例如，消费者可以重置为较旧的偏移量去重新处理过去的数据，或者跳到最近的记录并从“现在”开始消费。</p><p><img src="/2019/01/16/Kafka-分布式流平台/kafka3.png" alt="主题解剖">  </p><p>这些特性的组合意味着Kafka消费者非常方便，消费者的加入移除对集群或其他消费者没有太大影响。 例如，您可以使用我们的命令行工具“拖尾（tail，此处不太理解）”任何主题的内容，而无需更改任何现有使用者所消耗的内容。</p><p>日志中的分区有多种用途。 首先，它们允许日志扩展到超出适合单个服务器的规模。 每个独立分区必须适合托管它的服务器，但一个主题可能有多个分区，因此它可以处理任意数量的数据。 其次，分区充当了并行性的单元。</p><h2 id="一些基本概念"><a href="#一些基本概念" class="headerlink" title="一些基本概念"></a>一些基本概念</h2><ol><li>Consumer Group：逻辑概念，对于同一个topic，会广播给不同的group。同一个group中只有一个consumer可以消费该topic。</li><li>Broker：物理概念，Kafka集群中的每个Kafka节点。</li><li>Partition：物理概念，Kafka下数据存储的基本单元。一个Topic数据，会被分散存储到多个Partition，每个Partition是有序的。</li><li>Replication：同一个Partition可能会有多个副本（replication），多个副本之间数据是一致的。</li><li>Replication Leader：一个Partition的多个副本需要选举一个leader负责partition上与Producer和Consumer消息传递。</li><li>ReplicaManager：负责管理当前Broker所有分区和副本的信息，处理KafkaController发起的请求，如副本状态的切换（重新选举Replication Leader）、添加消息、消费消息等。</li></ol>]]></content>
     
@@ -325,6 +432,8 @@
     
     
       <category term="kafka" scheme="http://yoursite.com/tags/kafka/"/>
+    
+      <category term="开源软件" scheme="http://yoursite.com/tags/%E5%BC%80%E6%BA%90%E8%BD%AF%E4%BB%B6/"/>
     
   </entry>
   
@@ -379,9 +488,9 @@
       <category term="深入理解Java虚拟机" scheme="http://yoursite.com/categories/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/"/>
     
     
-      <category term="垃圾收集器" scheme="http://yoursite.com/tags/%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/"/>
-    
       <category term="垃圾收集算法" scheme="http://yoursite.com/tags/%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="垃圾收集器" scheme="http://yoursite.com/tags/%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/"/>
     
       <category term="安全点" scheme="http://yoursite.com/tags/%E5%AE%89%E5%85%A8%E7%82%B9/"/>
     
@@ -469,118 +578,6 @@
       <category term="环境配置" scheme="http://yoursite.com/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"/>
     
       <category term="软件安装" scheme="http://yoursite.com/tags/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Hierarchical Object Detection with Deep Reinforcement Learning</title>
-    <link href="http://yoursite.com/2019/01/08/Hierarchical-Object-Detection-with-Deep-Reinforcement-Learning/"/>
-    <id>http://yoursite.com/2019/01/08/Hierarchical-Object-Detection-with-Deep-Reinforcement-Learning/</id>
-    <published>2019-01-08T13:31:17.000Z</published>
-    <updated>2019-02-19T12:21:03.928Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Hierarchical-Object-Detection-with-Deep-Reinforcement-Learning"><a href="#Hierarchical-Object-Detection-with-Deep-Reinforcement-Learning" class="headerlink" title="Hierarchical Object Detection with Deep Reinforcement Learning"></a>Hierarchical Object Detection with Deep Reinforcement Learning</h1><h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><blockquote><p>关键的思想在于关注图像中包含更丰富信息的那些部分并放大它们。</p></blockquote><h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ol><li>考虑区域之间的联系，</li><li>利用top-down的扫描方式，首先获取整个图像，关注局部区域的相关信息，</li><li>基于增强学习训练的代理（agent）有能力检测图像中的对象<a id="more"></a> </li></ol><h2 id="Hierarchical-Object-Detection-Model"><a href="#Hierarchical-Object-Detection-Model" class="headerlink" title="Hierarchical Object Detection Model"></a>Hierarchical Object Detection Model</h2><h6 id="1-Markov-Decision-Process（马尔科夫决策过程）"><a href="#1-Markov-Decision-Process（马尔科夫决策过程）" class="headerlink" title="1. Markov Decision Process（马尔科夫决策过程）"></a><strong>1. Markov Decision Process（马尔科夫决策过程）</strong></h6><blockquote><p>State:当前区域描述符（the descriptor of current region）和记忆向量（memory vector）</p></blockquote><blockquote><p>Actions:move actions和terminal actions</p></blockquote><blockquote><p>Reward:<br>保证move action都是朝着更靠近ground truth的方向移动；<br>当IOU超过threshold，则终止移动。</p></blockquote><h6 id="2-Q-learning"><a href="#2-Q-learning" class="headerlink" title="2. Q-learning"></a><strong>2. Q-learning</strong></h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Q(s,a) = r+\lambda&#123;max&#125;_&#123;a&apos;&#125;Q(s&apos;,a&apos;)</span><br></pre></td></tr></table></figure><h6 id="3-Model"><a href="#3-Model" class="headerlink" title="3. Model"></a><strong>3. Model</strong></h6><ul><li><p>the Image-Zooms model</p><blockquote><p>使用VGG-16提取图像区域特征向量<code>$(7*7*512)$</code>,<br>拼接区域特征向量与记忆向量（memory vector）<code>$(7*7*512+24=25088+24)$</code>,<br>经过两个1024维的全连接层，输出6个可能的动作（actions），<br>反复迭代，直到终止动作</p></blockquote></li><li><p>the Pool45-Crops model<br><img src="/2019/01/08/Hierarchical-Object-Detection-with-Deep-Reinforcement-Learning/Hierarchical-Object-Detection-Models.png" alt="image"></p></li></ul><h6 id="4-Training"><a href="#4-Training" class="headerlink" title="4. Training"></a><strong>4. Training</strong></h6><h2 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h2><h6 id="1-Qualitative-Results"><a href="#1-Qualitative-Results" class="headerlink" title="1. Qualitative Results"></a><strong>1. Qualitative Results</strong></h6><p><img src="/2019/01/08/Hierarchical-Object-Detection-with-Deep-Reinforcement-Learning/aeroplane20180626.png" alt="image"></p><h2 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a><a href="https://github.com/imatge-upc/detection-2016-nipsws" target="_blank" rel="noopener">Implementation</a></h2><h3 id="1-keras实现"><a href="#1-keras实现" class="headerlink" title="1. keras实现"></a><strong>1. keras实现</strong></h3><ul><li>提取区域特征</li></ul><p><img src="/2019/01/08/Hierarchical-Object-Detection-with-Deep-Reinforcement-Learning/vgg16.png" alt="image"></p><ul><li><p>state不断更新，并作为model的输入</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(7*7*512)</span><br></pre></td></tr></table></figure></li><li></li></ul><h2 id="代码问题总结"><a href="#代码问题总结" class="headerlink" title="代码问题总结"></a>代码问题总结</h2><ol><li>数据类型错误<strong>TypeError: slice indices must be integers or None or have an <strong>index</strong> method</strong></li></ol><p>这是由于数组，矩阵等类型数据的下标是整数，而在</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">region_mask[offset[0]:offset[0] + size_mask[0]</span><br><span class="line">                         , offset[1]:offset[1] + size_mask[1]] = 1</span><br></pre></td></tr></table></figure><p>offset是float类型，所以报错，解决方法就是数据类型转换：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">region_mask[int(offset[0]):int(offset[0] + size_mask[0])</span><br><span class="line">                          , int(offset[1]):int(offset[1] + size_mask[1])] = 1</span><br></pre></td></tr></table></figure><ol start="2"><li>VGG16提取图像特征尺寸不对</li></ol><p><img src="/2019/01/08/Hierarchical-Object-Detection-with-Deep-Reinforcement-Learning/error1.png" alt="image"></p><p>解决方法：在图片提取特征之前，对图像进行resize；</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">im = images[z].resize((224, 224))</span><br></pre></td></tr></table></figure><ol start="3"><li>除0错误</li></ol><p><img src="/2019/01/08/Hierarchical-Object-Detection-with-Deep-Reinforcement-Learning/error2.png" alt="image"></p><p>对图像进行resize的位置错误</p><h2 id="问题总结"><a href="#问题总结" class="headerlink" title="问题总结"></a>问题总结</h2><ol><li>问题：记忆向量的哪儿来的？</li><li>问题：哪6个动作？<blockquote><p>move actions:左上、右上、左下、右下和中；<br>terminal actions</p></blockquote></li><li>问题：每个类训练一个模型？<blockquote><p>是的，这篇文章中只训练了飞机类（aeroplane）的检测模型</p></blockquote></li></ol>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Hierarchical-Object-Detection-with-Deep-Reinforcement-Learning&quot;&gt;&lt;a href=&quot;#Hierarchical-Object-Detection-with-Deep-Reinforcement-Learning&quot; class=&quot;headerlink&quot; title=&quot;Hierarchical Object Detection with Deep Reinforcement Learning&quot;&gt;&lt;/a&gt;Hierarchical Object Detection with Deep Reinforcement Learning&lt;/h1&gt;&lt;h2 id=&quot;Abstract&quot;&gt;&lt;a href=&quot;#Abstract&quot; class=&quot;headerlink&quot; title=&quot;Abstract&quot;&gt;&lt;/a&gt;Abstract&lt;/h2&gt;&lt;blockquote&gt;
-&lt;p&gt;关键的思想在于关注图像中包含更丰富信息的那些部分并放大它们。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&quot;Introduction&quot;&gt;&lt;a href=&quot;#Introduction&quot; class=&quot;headerlink&quot; title=&quot;Introduction&quot;&gt;&lt;/a&gt;Introduction&lt;/h2&gt;&lt;ol&gt;
-&lt;li&gt;考虑区域之间的联系，&lt;/li&gt;
-&lt;li&gt;利用top-down的扫描方式，首先获取整个图像，关注局部区域的相关信息，&lt;/li&gt;
-&lt;li&gt;基于增强学习训练的代理（agent）有能力检测图像中的对象&lt;/li&gt;&lt;/ol&gt;
-    
-    </summary>
-    
-      <category term="科研" scheme="http://yoursite.com/categories/%E7%A7%91%E7%A0%94/"/>
-    
-    
-      <category term="对象检测" scheme="http://yoursite.com/tags/%E5%AF%B9%E8%B1%A1%E6%A3%80%E6%B5%8B/"/>
-    
-      <category term="论文阅读" scheme="http://yoursite.com/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Yotta系统错误记录及性能优化</title>
-    <link href="http://yoursite.com/2019/01/07/Yotta%E7%B3%BB%E7%BB%9F%E9%94%99%E8%AF%AF%E8%AE%B0%E5%BD%95%E5%8F%8A%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
-    <id>http://yoursite.com/2019/01/07/Yotta系统错误记录及性能优化/</id>
-    <published>2019-01-07T03:28:21.000Z</published>
-    <updated>2019-01-18T04:40:21.240Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="错误记录"><a href="#错误记录" class="headerlink" title="错误记录"></a>错误记录</h2><ol><li>在日志系统运行期间，每隔几天kafka平台就会自动崩溃，控制台窗口关闭，并且重新启动kafka平台也会出现日志文件冲突问题，从而导致日志系统无法正常记录用户行为日志。<a id="more"></a> 解决方法：</li></ol><ul><li>首先，我们查阅了官网的各种文档，在全面了解kafka的实现原理与应用之后仍然没有找到解决问题的方法。然后我们在StackOverflow和Quora上进行了相关问题的查看，尝试后发现类似问题解决方法，将kafka平台对应的日志文件删除就可以正常启动kafka平台。虽然通过删除日志文件的方式使得日志记录正常进行，但是依旧没有解决每隔几天kafka平台就会自动崩溃的问题，频繁人工启动不稳定的服务耗费人力开销。</li><li>为了彻底解决这个问题，我们维护人员仔细阅读kafka生成的日志文件，了解到崩溃的发生是因为日志文件大小达到阈值时kafka程序会对日志文件重命名，而此时日志文件又被自身所占用，就产生了程序异常，在Apache官网issues下发现这是此版本kafka在windows下的一个错误，所以我们将日志系统整体迁移到linux系统下，将问题完美解决。</li></ul><h2 id="性能优化"><a href="#性能优化" class="headerlink" title="性能优化"></a>性能优化</h2><ol><li>Optimizing MySQL LIKE ‘%string%’ queries</li></ol><ul><li>方法1：建立fulltext索引，全文索引只能用于数据库引擎为MYISAM的数据表，但是全文索引不支持中文；</li><li>方法2：</li></ul>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;错误记录&quot;&gt;&lt;a href=&quot;#错误记录&quot; class=&quot;headerlink&quot; title=&quot;错误记录&quot;&gt;&lt;/a&gt;错误记录&lt;/h2&gt;&lt;ol&gt;
-&lt;li&gt;在日志系统运行期间，每隔几天kafka平台就会自动崩溃，控制台窗口关闭，并且重新启动kafka平台也会出现日志文件冲突问题，从而导致日志系统无法正常记录用户行为日志。&lt;/li&gt;&lt;/ol&gt;
-    
-    </summary>
-    
-      <category term="工程" scheme="http://yoursite.com/categories/%E5%B7%A5%E7%A8%8B/"/>
-    
-    
-      <category term="yotta系统" scheme="http://yoursite.com/tags/yotta%E7%B3%BB%E7%BB%9F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>图像文本匹配相关工作</title>
-    <link href="http://yoursite.com/2018/11/07/%E5%9B%BE%E5%83%8F%E6%96%87%E6%9C%AC%E5%8C%B9%E9%85%8D%E7%9B%B8%E5%85%B3%E5%B7%A5%E4%BD%9C/"/>
-    <id>http://yoursite.com/2018/11/07/图像文本匹配相关工作/</id>
-    <published>2018-11-07T11:36:07.000Z</published>
-    <updated>2019-01-18T04:40:24.712Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="图像文本匹配相关工作"><a href="#图像文本匹配相关工作" class="headerlink" title="图像文本匹配相关工作"></a>图像文本匹配相关工作</h1><h2 id="introduction"><a href="#introduction" class="headerlink" title="introduction"></a>introduction</h2><ol><li>什么是图像文本匹配？<br>计算机视觉任务逐渐不在满足于简单的图像分类、或者为图像分配一个或几个标签的任务，越来越多的研究者希望能够通过匹配图像和文本，为图像生成丰富的文本描述，从而更好地理解图像的语义。</li><li>已经有大量的研究工作，这些工作的方法怎么做的？</li><li>我的工作在别人的工作上有什么改进？有什么优点、贡献？</li></ol><ul><li>通过生成网络生成更多的正例(positive fact), 从而扩充训练数据集;</li><li>设计了一个高效的训练算法，交替优化生成网络和判别网络的参数，得到强判别器；</li><li>在多个数据集上实现了与其他方法可比较甚至更优异的结果。<a id="more"></a> </li></ul><h2 id="related-work"><a href="#related-work" class="headerlink" title="related work"></a>related work</h2><h4 id="1-CCA"><a href="#1-CCA" class="headerlink" title="1. CCA"></a>1. CCA</h4><ul><li>Canonical Correlation Analysis (CCA)</li><li>Kernel Canonical Correlation Analysis (KCCA)</li><li>deep CCA</li><li>Sparse Kernel CCA</li><li>Randomized CCA</li><li>Nonparametric CCA <h4 id="2-ranking-based-method"><a href="#2-ranking-based-method" class="headerlink" title="2. ranking based method"></a>2. ranking based method</h4></li><li>Y. Verma and C. Jawahar, “Im2text and text2im: Associating images and texts for cross-modal retrieval,” in British Machine Vision Conference (BMVC), vol. 1, 2014, p. 2.</li><li>R. Socher, A. Karpathy, Q. V. Le, C. D. Manning, and A. Y. Ng, “Grounded compositional semantics for finding and describing images with sentences,” Transactions of the Association for Computational Linguistics, vol. 2, pp. 207–218, 2014.  <strong><em>OK</em></strong></li><li>A. Karpathy, A. Joulin, and F. F. F. Li, “Deep fragment embeddings for bidirectional image sentence mapping,” in Neural Information Processing Systems (NIPS), 2014, pp. 1889–1897. <strong><em>OK</em></strong></li><li>R. Kiros, R. Salakhutdinov, and R. S. Zemel, “Unifying visual-semantic embeddings with multimodal neural language models,” arXiv preprint arXiv:1411.2539, 2014. <strong><em>OK</em></strong></li><li>L. Wang, Y. Li, and S. Lazebnik, “Learning deep structure-preserving image-text embeddings,” in Computer Vision and Pattern Recognition (CVPR), 2016, pp. 5005–5013.</li><li>“Learning two-branch neural networks for image-text matching tasks,” arXiv preprint arXiv:1704.03470, 2017.</li><li>Huang Y, Wang W, Wang L. Instance-aware image and sentence matching with selective multimodal lstm[C]//The IEEE Conference on Computer Vision and Pattern Recognition (CVPR). 2017, 2(6): 7.</li><li>Huang Y, Wu Q, Wang L. Learning semantic concepts and order for image and sentence matching[C]//Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition. 2018: 6163-6171.</li></ul><h4 id="3-Generative-Adversarial-Networks-GANs"><a href="#3-Generative-Adversarial-Networks-GANs" class="headerlink" title="3.Generative Adversarial Networks(GANs)"></a>3.Generative Adversarial Networks(GANs)</h4><ul><li>@inproceedings{goodfellow2014generative,<br>title={Generative adversarial nets},<br>author={Goodfellow, Ian and Pouget-Abadie, Jean and Mirza, Mehdi and Xu, Bing and Warde-Farley, David and Ozair, Sherjil and Courville, Aaron and Bengio, Yoshua},<br>booktitle={Advances in neural information processing systems},<br>pages={2672–2680},<br>year={2014}<br>}</li><li>@article{mirza2014conditional,<br>title={Conditional generative adversarial nets},<br>author={Mirza, Mehdi and Osindero, Simon},<br>journal={arXiv preprint arXiv:1411.1784},<br>year={2014}<br>}</li><li>@article{radford2015unsupervised,<br>title={Unsupervised representation learning with deep convolutional generative adversarial networks},<br>author={Radford, Alec and Metz, Luke and Chintala, Soumith},<br>journal={arXiv preprint arXiv:1511.06434},<br>year={2015}<br>}</li><li>@article{reed2016generative,<br>title={Generative adversarial text to image synthesis},<br>author={Reed, Scott and Akata, Zeynep and Yan, Xinchen and Logeswaran, Lajanugen and Schiele, Bernt and Lee, Honglak},<br>journal={arXiv preprint arXiv:1605.05396},<br>year={2016}<br>}</li><li>@inproceedings{wang2017irgan,<br>title={Irgan: A minimax game for unifying generative and discriminative information retrieval models},<br>author={Wang, Jun and Yu, Lantao and Zhang, Weinan and Gong, Yu and Xu, Yinghui and Wang, Benyou and Zhang, Peng and Zhang, Dell},<br>booktitle={Proceedings of the 40th International ACM SIGIR conference on Research and Development in Information Retrieval},<br>pages={515–524},<br>year={2017},<br>organization={ACM}<br>}</li><li>@article{cai2017kbgan,<br>title={Kbgan: Adversarial learning for knowledge graph embeddings},<br>author={Cai, Liwei and Wang, William Yang},<br>journal={arXiv preprint arXiv:1711.04071},<br>year={2017}<br>}</li></ul><h2 id="experiment"><a href="#experiment" class="headerlink" title="experiment"></a>experiment</h2><ol><li>数据集的扩充：<br>对每一张图片进行裁剪，4个角以及中间，并将这5个裁剪的图翻转，一张图片扩充得到10张尺寸为<code>$128 \times 128$</code>的图片。</li></ol>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;图像文本匹配相关工作&quot;&gt;&lt;a href=&quot;#图像文本匹配相关工作&quot; class=&quot;headerlink&quot; title=&quot;图像文本匹配相关工作&quot;&gt;&lt;/a&gt;图像文本匹配相关工作&lt;/h1&gt;&lt;h2 id=&quot;introduction&quot;&gt;&lt;a href=&quot;#introduction&quot; class=&quot;headerlink&quot; title=&quot;introduction&quot;&gt;&lt;/a&gt;introduction&lt;/h2&gt;&lt;ol&gt;
-&lt;li&gt;什么是图像文本匹配？&lt;br&gt;计算机视觉任务逐渐不在满足于简单的图像分类、或者为图像分配一个或几个标签的任务，越来越多的研究者希望能够通过匹配图像和文本，为图像生成丰富的文本描述，从而更好地理解图像的语义。&lt;/li&gt;
-&lt;li&gt;已经有大量的研究工作，这些工作的方法怎么做的？&lt;/li&gt;
-&lt;li&gt;我的工作在别人的工作上有什么改进？有什么优点、贡献？&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ul&gt;
-&lt;li&gt;通过生成网络生成更多的正例(positive fact), 从而扩充训练数据集;&lt;/li&gt;
-&lt;li&gt;设计了一个高效的训练算法，交替优化生成网络和判别网络的参数，得到强判别器；&lt;/li&gt;
-&lt;li&gt;在多个数据集上实现了与其他方法可比较甚至更优异的结果。&lt;/li&gt;&lt;/ul&gt;
-    
-    </summary>
-    
-      <category term="科研" scheme="http://yoursite.com/categories/%E7%A7%91%E7%A0%94/"/>
-    
-    
-      <category term="图文匹配" scheme="http://yoursite.com/tags/%E5%9B%BE%E6%96%87%E5%8C%B9%E9%85%8D/"/>
-    
-      <category term="典型相关分析" scheme="http://yoursite.com/tags/%E5%85%B8%E5%9E%8B%E7%9B%B8%E5%85%B3%E5%88%86%E6%9E%90/"/>
-    
-      <category term="排序损失" scheme="http://yoursite.com/tags/%E6%8E%92%E5%BA%8F%E6%8D%9F%E5%A4%B1/"/>
-    
-      <category term="数据集" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E9%9B%86/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>研究生数学建模：恐怖袭击事件分级</title>
-    <link href="http://yoursite.com/2018/09/15/%E7%A0%94%E7%A9%B6%E7%94%9F%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%EF%BC%9A%E6%81%90%E6%80%96%E8%A2%AD%E5%87%BB%E4%BA%8B%E4%BB%B6%E5%88%86%E7%BA%A7/"/>
-    <id>http://yoursite.com/2018/09/15/研究生数学建模：恐怖袭击事件分级/</id>
-    <published>2018-09-15T13:21:13.000Z</published>
-    <updated>2019-01-18T04:40:55.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="研究生数学建模：恐怖袭击事件分级"><a href="#研究生数学建模：恐怖袭击事件分级" class="headerlink" title="研究生数学建模：恐怖袭击事件分级"></a>研究生数学建模：恐怖袭击事件分级</h1><p><strong>特征：人员伤亡、经济损失、时间、地点（人口容量、GDP）等</strong></p><h3 id="财产损失"><a href="#财产损失" class="headerlink" title="财产损失"></a>财产损失</h3><h4 id="特征："><a href="#特征：" class="headerlink" title="特征："></a><strong>特征：</strong></h4><p>攻击类型、武器类型、受害子类型、国家、地区、入选标准（1、2、3、doubtterr）<br><a id="more"></a> </p><h6 id="攻击类型"><a href="#攻击类型" class="headerlink" title="攻击类型"></a><strong>攻击类型</strong></h6><ol><li>暗杀（1/0）</li><li>武装袭击（1/0）</li><li>轰炸爆炸（1/0）</li><li>劫持（1/0）</li><li>设施攻击（1/0）</li><li>徒手攻击（1/0）</li><li>未知（1/0）</li></ol><ol start="8"><li>攻击成功（1/0）</li><li>自杀式袭击（suicide）<h6 id="武器类型"><a href="#武器类型" class="headerlink" title="武器类型"></a><strong>武器类型</strong></h6></li></ol><ol start="9"><li>生化武器、放射性武器（1/0）</li><li>核武器</li><li>轻武器</li><li>炸弹</li><li>燃烧武器</li><li>治乱武器</li><li>交通工具</li><li>破坏设备</li><li>未知</li></ol><h6 id="受害者类型"><a href="#受害者类型" class="headerlink" title="受害者类型"></a><strong>受害者类型</strong></h6><ol start="18"><li>商业</li><li>政府</li><li>警察</li><li>军事</li><li>流产有关</li><li>运输（机场（飞机）或巴士、火车、高铁运输）</li><li>教育机构</li><li>食物或水供应</li><li>媒体设施</li><li>海事</li><li>非政府组织</li><li>其他</li></ol><h6 id="地区"><a href="#地区" class="headerlink" title="地区"></a><strong>地区</strong></h6><ol start="30"><li>北美</li><li>南美</li><li>东亚</li><li>东南亚</li><li>南亚</li><li>中亚</li><li>西欧</li><li>东欧</li><li>中东和北非</li><li>撒哈拉以南非洲</li><li>澳大利亚</li></ol><h6 id="入选标准"><a href="#入选标准" class="headerlink" title="入选标准"></a><strong>入选标准</strong></h6><ol start="41"><li>标准1</li><li>标准2</li><li>标准3</li></ol><p>–</p><ol start="44"><li>疑似恐怖主义</li></ol><h4 id="输出："><a href="#输出：" class="headerlink" title="输出："></a><strong>输出：</strong></h4><ol><li>灾难性的</li><li>重大的</li><li>较小的</li><li>无损失</li><li>未知</li></ol><ol><li>设置propextent中为空的部分为0，这样就可以去除property</li></ol><h4 id="K-means聚类结果分析"><a href="#K-means聚类结果分析" class="headerlink" title="K-means聚类结果分析"></a><strong>K-means聚类结果分析</strong></h4><blockquote><p>样本数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">10953\times 17</span><br></pre></td></tr></table></figure></p></blockquote><blockquote><p>聚类结果（5类）</p></blockquote><table><thead><tr><th>统计</th><th>类1</th><th>类2</th><th>类3</th><th>类4</th><th>类5</th></tr></thead><tbody><tr><td>数量</td><td>2497</td><td>4645</td><td>134</td><td>1854</td><td>1823</td></tr></tbody></table><h4 id="Spectral-Clustering聚类结果分析"><a href="#Spectral-Clustering聚类结果分析" class="headerlink" title="Spectral Clustering聚类结果分析"></a><strong>Spectral Clustering聚类结果分析</strong></h4><blockquote><p>样本数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">10953\times 17</span><br></pre></td></tr></table></figure></p></blockquote><blockquote><p>聚类结果（5类）</p></blockquote><table><thead><tr><th>统计</th><th>类1</th><th>类2</th><th>类3</th><th>类4</th><th>类5</th></tr></thead><tbody><tr><td>数量</td><td>10883</td><td>1</td><td>15</td><td>1</td><td>53</td></tr></tbody></table><h4 id="分段后K-means聚类结果分析"><a href="#分段后K-means聚类结果分析" class="headerlink" title="分段后K-means聚类结果分析"></a><strong>分段后K-means聚类结果分析</strong></h4><blockquote><p>样本数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">10953\times 36</span><br></pre></td></tr></table></figure></p></blockquote><blockquote><p>聚类结果（5类）</p></blockquote><table><thead><tr><th>统计</th><th>类1</th><th>类2</th><th>类3</th><th>类4</th><th>类5</th></tr></thead><tbody><tr><td>数量</td><td>6339</td><td>1541</td><td>1474</td><td>725</td><td>874</td></tr></tbody></table><h4 id="分段后Spectral-Clustering聚类结果分析"><a href="#分段后Spectral-Clustering聚类结果分析" class="headerlink" title="分段后Spectral Clustering聚类结果分析"></a><strong>分段后Spectral Clustering聚类结果分析</strong></h4><blockquote><p>样本数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">10953\times 36</span><br></pre></td></tr></table></figure></p></blockquote><blockquote><p>聚类结果（5类）</p></blockquote><table><thead><tr><th>统计</th><th>类1</th><th>类2</th><th>类3</th><th>类4</th><th>类5</th></tr></thead><tbody><tr><td>数量</td><td>9472</td><td>26</td><td>1343</td><td>93</td><td>19</td></tr></tbody></table><h4 id="增大死亡数以及财产损失权重，分段后K-means聚类结果分析"><a href="#增大死亡数以及财产损失权重，分段后K-means聚类结果分析" class="headerlink" title="增大死亡数以及财产损失权重，分段后K-means聚类结果分析"></a><strong>增大死亡数以及财产损失权重，分段后K-means聚类结果分析</strong></h4><blockquote><p>样本数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">10953\times 36</span><br></pre></td></tr></table></figure></p></blockquote><blockquote><p>聚类结果（5类）</p></blockquote><table><thead><tr><th>统计</th><th>类1</th><th>类2</th><th>类3</th><th>类4</th><th>类5</th></tr></thead><tbody><tr><td>数量</td><td>1541</td><td>735</td><td>7203</td><td>1474</td><td>0</td></tr></tbody></table><h4 id="增大死亡数以及财产损失权重，分段后Spectral-Clustering聚类结果分析"><a href="#增大死亡数以及财产损失权重，分段后Spectral-Clustering聚类结果分析" class="headerlink" title="增大死亡数以及财产损失权重，分段后Spectral Clustering聚类结果分析"></a><strong>增大死亡数以及财产损失权重，分段后Spectral Clustering聚类结果分析</strong></h4><blockquote><p>样本数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">10953\times 36</span><br></pre></td></tr></table></figure></p></blockquote><blockquote><p>聚类结果（5类）</p></blockquote><table><thead><tr><th>统计</th><th>类1</th><th>类2</th><th>类3</th><th>类4</th><th>类5</th></tr></thead><tbody><tr><td>数量</td><td>9471</td><td>1</td><td>1349</td><td>39</td><td>93</td></tr></tbody></table>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;研究生数学建模：恐怖袭击事件分级&quot;&gt;&lt;a href=&quot;#研究生数学建模：恐怖袭击事件分级&quot; class=&quot;headerlink&quot; title=&quot;研究生数学建模：恐怖袭击事件分级&quot;&gt;&lt;/a&gt;研究生数学建模：恐怖袭击事件分级&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;特征：人员伤亡、经济损失、时间、地点（人口容量、GDP）等&lt;/strong&gt;&lt;/p&gt;
-&lt;h3 id=&quot;财产损失&quot;&gt;&lt;a href=&quot;#财产损失&quot; class=&quot;headerlink&quot; title=&quot;财产损失&quot;&gt;&lt;/a&gt;财产损失&lt;/h3&gt;&lt;h4 id=&quot;特征：&quot;&gt;&lt;a href=&quot;#特征：&quot; class=&quot;headerlink&quot; title=&quot;特征：&quot;&gt;&lt;/a&gt;&lt;strong&gt;特征：&lt;/strong&gt;&lt;/h4&gt;&lt;p&gt;攻击类型、武器类型、受害子类型、国家、地区、入选标准（1、2、3、doubtterr）&lt;br&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="竞赛" scheme="http://yoursite.com/categories/%E7%AB%9E%E8%B5%9B/"/>
-    
-    
-      <category term="编程" scheme="http://yoursite.com/tags/%E7%BC%96%E7%A8%8B/"/>
     
   </entry>
   

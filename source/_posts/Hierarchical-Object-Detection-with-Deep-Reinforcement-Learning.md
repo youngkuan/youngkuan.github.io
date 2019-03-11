@@ -4,6 +4,8 @@ date: 2019-01-08 21:31:17
 tags: 
     - 对象检测
     - 论文阅读
+    - 神经网络
+    - 图像识别
 categories: 科研
 ---
 # Hierarchical Object Detection with Deep Reinforcement Learning

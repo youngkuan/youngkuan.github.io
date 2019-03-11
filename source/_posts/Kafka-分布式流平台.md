@@ -1,8 +1,9 @@
 ---
-title: 'Kafka:分布式流平台'
+title: Kafka-分布式流平台
 date: 2019-01-16 17:20:56
 tags: 
     - kafka
+    - 开源软件
 categories: kafka 
 ---
 

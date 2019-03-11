@@ -1,6 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Deep Residual Learning for Image Recognition]]></title>
+    <url>%2F2019%2F03%2F06%2FDeep-Residual-Learning-for-Image-Recognition%2F</url>
+    <content type="text"><![CDATA[神经网络越深就越难训练，作者提出一种残差学习框架来降低网络训练的难度。]]></content>
+      <categories>
+        <category>科研</category>
+      </categories>
+      <tags>
+        <tag>论文阅读</tag>
+        <tag>神经网络</tag>
+        <tag>图像识别</tag>
+        <tag>残差网络</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[ZooKeeper-分布式应用程序协调服务]]></title>
+    <url>%2F2019%2F03%2F06%2FZooKeeper-%E5%88%86%E5%B8%83%E5%BC%8F%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E5%8D%8F%E8%B0%83%E6%9C%8D%E5%8A%A1%2F</url>
+    <content type="text"><![CDATA[参考链接 基本概念Apache ZooKeeper is an effort to develop and maintain an open-source server which enables highly reliable distributed coordination. Apache ZooKeeper致力于开发和维护一个支持高度可靠的分布式协调的开源服务器。Zookeeper是一个典型的分布式数据一致性解决方案，分布式应用程序可以基于Zookeeper实现诸如数据发布/订阅、负载均衡、命名服务、分布式协调/通知、集群管理、Master选举、分布式锁和分布式队列等功能。 Znode在ZooKeeper中，“节点”分为两种类型： 第一类是指构成集群的机器，称之为机器节点； 第二类则是指数据模型中的数据单元，我们称之为数据节点-Znode。 ZooKeeper将所有的数据存储在内存中，数据模型是一棵树（Znode Tree） ZooKeeper集群介绍介绍ZooKeeper集群中的所有机器通过Leader选举过程来选定一台称为“Leader”的机器，Leader既可以为客户端提供写服务又能提供读服务。出Leader外，Follower和Observer只能提供读服务。 Follower与Observer的唯一区别在于Observer机器不参与Leader的选举过程，也不参与写操作的“过半写成功”策略，因此Observer机器可以在不影响写性能的情况下提升集群的读性能。 ZAB协议ZAB（ZooKeeper Atomic Broadcast，ZooKeeper原子广播）协议是为分布式协调服务ZooKeeper专门设计的一种支持崩溃恢复的原子广播协议。 在ZooKeeper中，主要依赖ZAB协议来实现分布式数据一致性，基于该协议ZooKeeper实现了一种主备模式的系统架构来保持集群中各个副本之间的数据一致性。 ZAB协议包括两种基本模式，分别是崩溃恢复和消息广播。当整个服务框架在启动过程中，或是当Leader服务器出现网络中断、崩溃退出与重启等异常情况是，ZAB协议就会进入恢复模式并选举出新的Leader服务器。当选举产生的新的Leader服务器，同时集群中已经有过半的机器与新Leader服务器完成状态同步之后，ZAB协议就会退出恢复模式。其中，所谓的状态同步是指数据同步，也就是保证集群中过半的机器与该Leader服务器的数据状态一致。当集群中已经有过半的Follower服务器完成与Leader服务器的状态同步，那么整个服务框架就可以进入消息广播模式了。当一台同样遵守ZAB协议的服务器启动后加入到集群中时，如果此时集群中已经存在一个Leader服务器在负责消息广播，那么新加入的服务器就会自觉地进去数据恢复模式：找到Leader所在的服务器，并与其进行数据同步，然后一起参与到消息广播流程中去。 正如上文所述，ZooKeeper被设计成只允许唯一的Leader服务器进行事务请求的处理，Leader服务器在接收到客户端的事务请求后，会生成对应的事务提案并发起一轮广播协议。如果集群中的其他机器接收到客户端事务请求，那么这些非Leader服务器会首先将这个事务转发给Leader服务器。 应用在我们的智慧教育示范应用中，主要是使用Kafka收集用户日志，而ZooKeeper就担任了服务生产者和消费者的注册中心。服务生产者将自己提供的服务注册到ZooKeeper中心，服务消费者在进行服务调用的时候先到ZooKeeper中查找服务，获取到服务生产者的详细信息之后，再去调用服务生产者的内容和数据。]]></content>
+      <categories>
+        <category>ZooKeeper</category>
+      </categories>
+      <tags>
+        <tag>开源软件</tag>
+        <tag>ZooKeeper</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[条件生成对抗网络的一系列问题]]></title>
+    <url>%2F2019%2F03%2F05%2F%E6%9D%A1%E4%BB%B6%E7%94%9F%E6%88%90%E5%AF%B9%E6%8A%97%E7%BD%91%E7%BB%9C%E7%9A%84%E4%B8%80%E7%B3%BB%E5%88%97%E9%97%AE%E9%A2%98%2F</url>
+    <content type="text"><![CDATA[条件生成对抗网络中生成器的输入随机噪声z，文本特征$\phi(t)$作为条件，噪声输入有什么用？参考链接：https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix/issues/152 其实没有噪声输入也可以，但是有时候需要同一个文本输入需要生成的样本更加多样，这时候随机噪声就有用了。]]></content>
+      <categories>
+        <category>科研</category>
+      </categories>
+      <tags>
+        <tag>论文阅读</tag>
+        <tag>生成对抗网络</tag>
+        <tag>问题</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[数据库范式]]></title>
+    <url>%2F2019%2F03%2F04%2F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%8C%83%E5%BC%8F%2F</url>
+    <content type="text"><![CDATA[第一范式（1NF）关系模型中实体的每个属性都是原子属性，即元组在每个属性上的取值是不可分的。也就是说这些属性的取值是单一的，不是集合、数组等非原子数据。当实体中的某个属性都多个值时，必须将该属性拆分为多个原子属性。 第二范式（2NF）关系模型中的所有非主属性都完全依赖于所有的候选键。2NF其实就是在1NF的基础上消除那些非主属性对所有候选键的部分函数依赖。例如，关系（学号，课程号，教师，成绩，学院）中，教师部分依赖于课程号，因此这个关系不满足第二范式，所以需要把上述关系拆分成（学号，课程号，成绩）和（课程号，教师，学院）。 第三范式（3NF）关系模型中的非主属性既不部分函数依赖也不传递函数依赖于关系中的所有候选键。也就是说3NF是在2NF的基础上消除了非主属性对候选键的传递依赖关系。 还是上面的例子，关系（课程号，教师，学院）中存在传递依赖关系课程号-&gt;教师，以及教师-&gt;学院，因此不满足3NF。所以将其分解为（课程号，教师）和（教师，学院）。 巴斯-科德范式（BCNF）对于关系R上的任何非平凡函数依赖X-&gt;Y都有X必包含R的某个候选键，那么就称关系R满足BCNF。BCNF是在第三范式的基础上继续消除主属性对于键的部分依赖和传递依赖。 举个例子来说，关系（课程名，班级，教师）中假定多名教师承担多个班级的教学任务，每个教师仅承担一个课程的教学任务，同时可以给多个班级上课，那么可以知道有函数依赖 12(课程名，班级)-&gt;(教师)(教师)-&gt;(课程名) 然而，上述关系中的主键是(课程名，班级)或者(教师，班级)。所以(教师)-&gt;(课程名)就是主属性对候选键的部分依赖，不满足BCNF。 第四范式（4NF）对于关系R中的非平凡多值依赖X-&gt;-&gt;Y，X必包含R的某个候选键，则称满足4NF。]]></content>
+      <categories>
+        <category>工程</category>
+      </categories>
+      <tags>
+        <tag>数据库</tag>
+        <tag>MySQL</tag>
+        <tag>范式</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[垃圾收集器]]></title>
     <url>%2F2019%2F02%2F28%2F%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8%2F</url>
     <content type="text"><![CDATA[垃圾收集算法是内存回收的方法论，垃圾收集器是垃圾回收的具体实现。在JDK1.7 Update 14之后的HotSpot虚拟机所包含的收集器如下图所示： Serial收集器Serial收集器是最基本、发展历史最悠久的收集器。这是一个单线程的收集器，但它的“单线程”的意义并不仅仅说明它只会使用一个CPU或者一条收集线程去完成垃圾收集工作，更重要的是在它进行垃圾收集时，必须暂停其他所有的工作线程，直到它收集结束。Serial收集器运行示意图如下： 也就是说，虚拟机在使用Serial垃圾收集器时会在用户不可见的情况下把所有用户正常工作的线程暂停，这种“Stop The World”操作在很多程序中是难以接受的，带给用户不良体验。举个例子“你妈妈在打扫房间的时候，肯定也会让你老老实实待在椅子上或者房间外待着，如果她一边打扫，你一边丢垃圾，这房间还能打扫完？你妈妈不会崩溃？”，因此看起来“Stop The World”操作情有可原。但是，从JDK1.3开始，HotSpot虚拟机开发团队一直在努力消除或减少工作线程因内存回收而导致的停顿，从Serial收集器到Parallel收集器，再到Concurrent Mark Sweep（CMS）乃至GC收集器最前沿的成果Garbage First（G1）收集器，用户线程的停顿时间在不断缩短，但是仍然没有办法完全消除垃圾回收带来的停顿。Serial收集器虽然很老，可以说很陈旧，但是目前为止它依旧是虚拟机运行在Client模式下的默认新生代收集器。那是因为Serial收集器简单而高效，对于限定单个GPU的情况而言，Serial收集器由于没有线程交互的开销，专心进行垃圾收集自然可以获得最高的单线程收集效率。 ParNew收集器ParNew收集器就是Serial收集器的多线程版本，除了使用多线程进行垃圾收集外，其余行为包括Serial收集器的所有可用控制参数、收集算法、Stop The World、对象分配规则、回收策略等都与Serial收集器完全一样。ParNew收集器进行垃圾收集的示意图如下： ParNew收集器除了多线程收集外，其他与Serial收集器相比没有太多创新之处，但它却是虚拟机运行在Server模式下的首选新生代收集器，其中一个与性能无关的重要原因是除了Serial收集器外，目前只有它能与CMS收集器配合工作。 Parallel Scavenge收集器Parallel Scavenge收集器也是新生代收集器，并且使用复制算法收集内存，同时还是并行的多线程收集器。这些特点都和ParNew收集器一样，但是Parallel Scavenge收集器的目标在于达到一个可控制的吞吐量（Throughput），所谓吞吐量就是CPU用于运行用户代码的时间与CPU总消耗时间的比值，即吞吐量=运行用户代码/(运行用户代码+垃圾收集时间)。这与CMS等收集器的目标不同，它们目标是尽可能地缩短垃圾收集时间用户线程的停顿时间。停顿时间越短就越适合需要与用户交互的程序，良好的响应速度能提升用户体验，而高吞吐量则可以高效率地利用CPU时间，尽快完成程序的运算任务，主要适合在后台运算而不需要太多的交互任务。Parallel Scavenge收集器提供两个参数用于精准控制吞吐量，分别是控制最大垃圾收集时间的-XX:MaxGCPauseMillis参数以及直接设置吞吐量大小的-XX:GCTimeRatio参数。MaxGCPauseMillis参数允许的值是一个大于0的毫秒数，收集器将尽可能在规定时间内完成垃圾收集操作。但是不要认为这个参数越小，系统的垃圾收集速度就会越快，GC停顿时间的缩短是以牺牲吞吐量和新生代空间来换取的：系统把新生代调小一点，收集300M新生代肯定比收集500M新生代快，这也将导致垃圾收集更频繁，原来每20s收集一次、一次100ms，现在每10s收集一次、一次70ms。停顿时间的确下降了，但吞吐量也降下来了。GCTimeRatio参数的值应当是一个大于0小于100的整数，如果把这个参数设置为19，那么允许最大GC时间就占总时间的5%（即1/(1+19)）。Parallel Scavenge收集器还有一个参数-XX:+UseAdaptiveSizePolicy，这个参数打开之后就不需要手动指定新生代的大小（-Xmm）、Eden与Survivor区的比例（-XX:SurvivorRatio）、晋升老年代对象大小（-XX:PretenureSizeThreshold）等参数了，虚拟机会根据当前系统的运行情况收集性能监控信息，动态调整这些参数以提供最适合的停顿时间或者最大吞吐量，这种调节方式称为GC自适应的调节策略（GC Ergonomics）。 Serial Old收集器Serial Old是Serial收集器的老年代版本，它同样是一个单线程收集器，使用“标记-整理”算法，这个收集器的主要意义也是在于给Client模式下的虚拟机使用。在Server模式下，它有两大用途： 在JDK1.5以及之前的版本中与Parallel Scavenge收集器搭配使用； 作为CMS收集器的后备方案，在并发收集发生Concurrent Mode Failure时使用。 Parallel Old收集器Parallel Old收集器是Parallel Scavenge收集器的老年代版本，使用多线程和“标记-整理”算法。在JDK1.6之前Parallel Scavenge只能与Serial Old收集器配合使用，由于老年代使用单线程收集内存无法充分利用服务器多CPU的处理能力，这个组合就导致无法达到高吞吐量。在JDK1.6开始提供了Parallel Old收集器和Parallel Scavenge收集器配合使用，从而可以应用在注重吞吐量以及CPU资源敏感的场合。 CMS收集器CMS（Concurrent Mark Sweep）收集器是一种以获取最短回收停顿时间为目标的收集器。从名字（包含“Mark Sweep”）就可以看出来，CMS收集器是基于“标记——清除”算法实现的，它的运作过程相对于前面几种收集器来说更复杂一些，整个过程分为4个步骤，包括： 初始标记（CMS initial mark） 并发标记（CMS concurrent mark） 重新标记（CMS remark） 并发清除（CMS concurrent sweep） 其中，初始标记、重新标记这；两个步骤仍需要“Stop The World”。初始标记是标记一下GC Roots能直接关联到的对象，速度很快，并发标记阶段就是进行GC Roots Tracing的过程，而重新标记阶段是为了修正并发标记阶段因用户程序继续运作而导致标记产生变动的那一部分对象的标记记录，这一阶段的停顿时间一般会比初始标记阶段稍长一些，但远比并发标记阶段的时间短。整个过程中耗时最长的并发标记和并发清除阶段都是与用户线程一起工作，如下图所示： CMS是一款优秀的收集器，它的主要优点是并发收集、低停顿，但是它还有以下三个明显缺点： CMS收集器对CPU资源非常敏感； CMS收集器无法处理浮动垃圾（Floating Garbage），可能出现“Concurrent Mode Failure”失败而导致另一次的Full GC。 CMS收集器是基于“标记-清除”算法实现的，在收集结束会产生大量的空间碎片。为了解决这个问题，CMS收集器提供了一个-XX:+USeCMSCompactAtFullCollection开关参数用于在CMS收集器顶不住要进行Full GC时开启内存碎片的合并整理过程。 G1收集器G1收集器是当前收集技术最前沿的成果之一，它被视为JDK1.7中HotSpot虚拟机的一个重要进化特征。G1是一款面向服务端应用的垃圾收集器，与其他收集器相比，G1具备如下特点： 并行与并发 分代收集 空间整合 可预测的停顿 在G1之前的其他收集器进行收集的范围是整个新生代或者老年代，而G1不再是这样。使用G1收集器时，Java堆的内存布局就与其他收集器有很大区别，它将整个Java堆划分成多个大小相等的独立区域（Region），虽然还保留有新生代和老年代的概念，但是新生代和老年代不再是物理隔离的了，它们都是一部分Region（不需要连续）的集合。]]></content>
@@ -8,8 +60,8 @@
         <category>深入理解Java虚拟机</category>
       </categories>
       <tags>
-        <tag>垃圾收集器</tag>
         <tag>垃圾收集算法</tag>
+        <tag>垃圾收集器</tag>
       </tags>
   </entry>
   <entry>
@@ -133,7 +185,7 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Kafka:分布式流平台]]></title>
+    <title><![CDATA[Kafka-分布式流平台]]></title>
     <url>%2F2019%2F01%2F16%2FKafka-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B5%81%E5%B9%B3%E5%8F%B0%2F</url>
     <content type="text"><![CDATA[Kafka:分布式流平台参考链接：Kafka官网 Apache Kafka是一个分布式流平台，具有以下三个关键能力： 发布和订阅记录流（streams of records），类似于一个消息队列或者是企业消息系统； 以具有容错性和持久性的方式存储记录流； 即时处理记录流 Kafka通常被用在两大类应用中： 构建可在系统或应用程序之间可靠获取数据的实时流数据管道 构建转换或响应数据流的实时流应用 一些概念： Kafka作为一个集群可以运行在一个或多个服务器上，这些服务器可跨多个数据中心； Kafka集群存储在类别中的记录流称为主题（topics）； 每个记录包含一个键（key）、一个值（value）以及一个时间戳（timestamp）； Kafka有四个核心API： 生产者（Producer）API允许一个应用将记录流发布到一个或多个Kafka主题（topics）上； 消费者（Consumer）API允许一个应用去订阅一个或者多个主题（topics），并处理这些给它们生产的记录流； 流（Streams）API允许一个应用扮演流处理器的角色，从一个或多个主题消费一个输入流，然后向一个或多个主题输出流，高效地进行输入流到输出流的转换； 连接（Connector）API允许创建或者运行可重用的生产者或消费者，并与将Kafka主题与现有的应用或数据系统连接。例如关系数据库的连接器可以捕获对表的每个更改。 主题（Topics）和记录（Logs）一个主题是发布记录的一个类别或订阅源名称。 Kafka中主题总是多订阅用户; 也就是说，一个主题可以有零个，一个或多个消费者订阅写入它的数据。对于每个主题，Kafka群集都维护一个如下所示的分区日志（partitioned log）： 每个分区（partition）都是有序的，不可变的记录序列，这些记录不断添加到结构化的提交日志中。分区中的每个记录都被分配一个称为偏移的序列id，这些id唯一标识了分区中的每个记录。Kafka集群使用可配置的保留期，持久保存所有已发布的记录，无论这些记录是否已被使用。 例如，如果保留策略被设置为两天，那么在发布记录后的两天内，记录都可以被消费，之后将被丢弃以释放空间。 Kafka的性能不受数据大小的影响，因此长时间存储数据不是问题。实际上，基于每个消费者保留的唯一元数据是该消费者在日志中的偏移或位置。 这种偏移由消费者控制：通常消费者会线性地提高其偏移量从而读取记录，但事实上，由于该位置由消费者控制，因此它可以按照自己喜欢的任何顺序去消费记录。 例如，消费者可以重置为较旧的偏移量去重新处理过去的数据，或者跳到最近的记录并从“现在”开始消费。 这些特性的组合意味着Kafka消费者非常方便，消费者的加入移除对集群或其他消费者没有太大影响。 例如，您可以使用我们的命令行工具“拖尾（tail，此处不太理解）”任何主题的内容，而无需更改任何现有使用者所消耗的内容。 日志中的分区有多种用途。 首先，它们允许日志扩展到超出适合单个服务器的规模。 每个独立分区必须适合托管它的服务器，但一个主题可能有多个分区，因此它可以处理任意数量的数据。 其次，分区充当了并行性的单元。 一些基本概念 Consumer Group：逻辑概念，对于同一个topic，会广播给不同的group。同一个group中只有一个consumer可以消费该topic。 Broker：物理概念，Kafka集群中的每个Kafka节点。 Partition：物理概念，Kafka下数据存储的基本单元。一个Topic数据，会被分散存储到多个Partition，每个Partition是有序的。 Replication：同一个Partition可能会有多个副本（replication），多个副本之间数据是一致的。 Replication Leader：一个Partition的多个副本需要选举一个leader负责partition上与Producer和Consumer消息传递。 ReplicaManager：负责管理当前Broker所有分区和副本的信息，处理KafkaController发起的请求，如副本状态的切换（重新选举Replication Leader）、添加消息、消费消息等。]]></content>
       <categories>
@@ -141,6 +193,7 @@
       </categories>
       <tags>
         <tag>kafka</tag>
+        <tag>开源软件</tag>
       </tags>
   </entry>
   <entry>
@@ -162,8 +215,8 @@
         <category>深入理解Java虚拟机</category>
       </categories>
       <tags>
-        <tag>垃圾收集器</tag>
         <tag>垃圾收集算法</tag>
+        <tag>垃圾收集器</tag>
         <tag>安全点</tag>
         <tag>安全区域</tag>
       </tags>
@@ -216,6 +269,8 @@
       <tags>
         <tag>对象检测</tag>
         <tag>论文阅读</tag>
+        <tag>神经网络</tag>
+        <tag>图像识别</tag>
       </tags>
   </entry>
   <entry>
