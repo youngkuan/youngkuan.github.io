@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-03-07T03:12:31.558Z</updated>
+  <updated>2019-03-30T13:25:21.779Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,39 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>字节跳动实习生面试</title>
+    <link href="http://yoursite.com/2019/03/30/%E5%AD%97%E8%8A%82%E8%B7%B3%E5%8A%A8%E5%AE%9E%E4%B9%A0%E7%94%9F%E9%9D%A2%E8%AF%95/"/>
+    <id>http://yoursite.com/2019/03/30/字节跳动实习生面试/</id>
+    <published>2019-03-30T13:20:08.000Z</published>
+    <updated>2019-03-30T13:25:21.779Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="一面"><a href="#一面" class="headerlink" title="一面"></a>一面</h2><ol><li>垃圾回收讲一下；</li><li>java内存模型；<blockquote><ul><li>垃圾回收算法（如何确定回收对象（引用计数法、可达性算法）、回收算法（标记回收、标记整理、复制））；</li><li>垃圾收集器；</li><li>MySQL数据库讲一下；数据引擎、索引类型、索引方法（B+树、Hash）</li></ul></blockquote></li><li>手写代码：根据前序遍历和中序遍历还原二叉树，根据获得的前序遍历和中序遍历结果输出一颗二叉树（输出后续遍历）（我问可以IDE吗？尽量别用）<h2 id="二面"><a href="#二面" class="headerlink" title="二面"></a>二面</h2></li><li><p>手写代码： </p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">单链表操作：   </span><br><span class="line"> 输入：奇数位升序，偶数位降序  </span><br><span class="line"> 1 -&gt; 80 -&gt; 4 -&gt; 60 -&gt; 6 -&gt; 40 -&gt; 7 -&gt; 2    </span><br><span class="line">输出：升序单链表  </span><br><span class="line"> 1 -&gt; 2 -&gt; 4 -&gt; 6-&gt; 7 -&gt; 40 -&gt; 60 -&gt; 80  </span><br><span class="line">不允许使用其他数据结构。</span><br></pre></td></tr></table></figure></li><li><p>进程和线程的区别</p></li><li>HashMap</li><li>TCP/UDP<h2 id="三面-两道编程题："><a href="#三面-两道编程题：" class="headerlink" title="三面-两道编程题："></a>三面-两道编程题：</h2><ol><li>假定一张表的数据格式为 id,name,parentId，表的数据不大，1000条以内，得到这些数据的树型结构    输入：List<user> ， 输出：Node（手写代码）</user></li></ol></li><li>有2个文件，分别是A(3t大小)，B(2t)大小，A文件的组织形式为 uid, username,B文件的组织形式为 uid, age,找出A、B文件交集的数据放入一个文件，文件的数据格式为uid,username,age（讲讲思路）</li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;一面&quot;&gt;&lt;a href=&quot;#一面&quot; class=&quot;headerlink&quot; title=&quot;一面&quot;&gt;&lt;/a&gt;一面&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;垃圾回收讲一下；&lt;/li&gt;
+&lt;li&gt;java内存模型；&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;垃圾回收算法（如何确定回收对象
+      
+    
+    </summary>
+    
+      <category term="工作" scheme="http://yoursite.com/categories/%E5%B7%A5%E4%BD%9C/"/>
+    
+    
+      <category term="实习" scheme="http://yoursite.com/tags/%E5%AE%9E%E4%B9%A0/"/>
+    
+      <category term="字节跳动" scheme="http://yoursite.com/tags/%E5%AD%97%E8%8A%82%E8%B7%B3%E5%8A%A8/"/>
+    
+      <category term="面试" scheme="http://yoursite.com/tags/%E9%9D%A2%E8%AF%95/"/>
+    
+  </entry>
   
   <entry>
     <title>Deep Residual Learning for Image Recognition</title>
@@ -34,13 +67,13 @@
       <category term="科研" scheme="http://yoursite.com/categories/%E7%A7%91%E7%A0%94/"/>
     
     
-      <category term="论文阅读" scheme="http://yoursite.com/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
-    
-      <category term="神经网络" scheme="http://yoursite.com/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"/>
-    
       <category term="图像识别" scheme="http://yoursite.com/tags/%E5%9B%BE%E5%83%8F%E8%AF%86%E5%88%AB/"/>
     
       <category term="残差网络" scheme="http://yoursite.com/tags/%E6%AE%8B%E5%B7%AE%E7%BD%91%E7%BB%9C/"/>
+    
+      <category term="神经网络" scheme="http://yoursite.com/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"/>
+    
+      <category term="论文阅读" scheme="http://yoursite.com/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
     
   </entry>
   
@@ -142,9 +175,9 @@
       <category term="深入理解Java虚拟机" scheme="http://yoursite.com/categories/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/"/>
     
     
-      <category term="垃圾收集算法" scheme="http://yoursite.com/tags/%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E7%AE%97%E6%B3%95/"/>
-    
       <category term="垃圾收集器" scheme="http://yoursite.com/tags/%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/"/>
+    
+      <category term="垃圾收集算法" scheme="http://yoursite.com/tags/%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E7%AE%97%E6%B3%95/"/>
     
   </entry>
   
@@ -222,7 +255,7 @@
     <link href="http://yoursite.com/2019/02/21/%E9%9D%A2%E5%90%91%E5%88%87%E9%9D%A2%E7%BC%96%E7%A8%8B/"/>
     <id>http://yoursite.com/2019/02/21/面向切面编程/</id>
     <published>2019-02-21T09:08:56.000Z</published>
-    <updated>2019-02-22T13:21:30.848Z</updated>
+    <updated>2019-03-09T14:10:14.755Z</updated>
     
     <content type="html"><![CDATA[<h2 id="面向切面编程（Aspect-Oriented-Programming，AOP）是什么？"><a href="#面向切面编程（Aspect-Oriented-Programming，AOP）是什么？" class="headerlink" title="面向切面编程（Aspect Oriented Programming，AOP）是什么？"></a>面向切面编程（Aspect Oriented Programming，AOP）是什么？</h2><ol><li>AOP是一种编程范式，不是编程语言；</li><li>AOP解决特定问题，但不能解决所有问题；</li><li>OOP的补充，而不是其替代。<a id="more"></a> </li></ol><h2 id="AOP为什么出现？"><a href="#AOP为什么出现？" class="headerlink" title="AOP为什么出现？"></a>AOP为什么出现？</h2><ol><li>提高代码重用性；</li><li>概念分离：分离功能性需求和非功能性需求。将功能性需求从非功能性需求中分离出来。</li></ol><h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><ol><li>权限控制</li><li>缓存控制</li><li>事务控制</li><li>审计日志</li><li>性能监控</li><li>分布式追踪</li><li>异常处理</li></ol><h2 id="Spring-AOP的通过代理实现"><a href="#Spring-AOP的通过代理实现" class="headerlink" title="Spring AOP的通过代理实现"></a>Spring AOP的通过代理实现</h2><p>通过DefaultAopProxyFactory.java源码可以看到AOP由jdk和cglib两种方式实现。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">public AopProxy createAopProxy(AdvisedSupport config) throws AopConfigException &#123;</span><br><span class="line">    if (config.isOptimize() || config.isProxyTargetClass() || hasNoUserSuppliedProxyInterfaces(config)) &#123;</span><br><span class="line">        Class&lt;?&gt; targetClass = config.getTargetClass();</span><br><span class="line">        if (targetClass == null) &#123;</span><br><span class="line">            throw new AopConfigException(&quot;TargetSource cannot determine target class: &quot; +</span><br><span class="line">                    &quot;Either an interface or a target is required for proxy creation.&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        if (targetClass.isInterface() || Proxy.isProxyClass(targetClass)) &#123;</span><br><span class="line">            return new JdkDynamicAopProxy(config);</span><br><span class="line">        &#125;</span><br><span class="line">        return new ObjenesisCglibAopProxy(config);</span><br><span class="line">    &#125;</span><br><span class="line">    else &#123;</span><br><span class="line">        return new JdkDynamicAopProxy(config);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><h2 id="Spring-AOP的使用"><a href="#Spring-AOP的使用" class="headerlink" title="Spring AOP的使用"></a>Spring AOP的使用</h2><p>在Spring中主要使用注解@Aspect、@Pointcut、@Before、@After、@AfterReturning、@AfterThrowing以及@Around进行面向切面编程。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">@Target(ElementType.TYPE)</span><br><span class="line">public @interface Aspect &#123;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * Per clause expression, defaults to singleton aspect</span><br><span class="line">     * &lt;p/&gt;</span><br><span class="line">     * Valid values are &quot;&quot; (singleton), &quot;perthis(...)&quot;, etc</span><br><span class="line">     */</span><br><span class="line">    public String value() default &quot;&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>如上代码是@Aspect注解的定义，ElementType.TYPE可以看出该注解作用目标是接口、类、枚举、注解，@Aspect注解，Spring通过@Aspect注解切面并把它应用到目标对象上。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">@Target(ElementType.METHOD)</span><br><span class="line">public @interface Pointcut &#123;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * The pointcut expression</span><br><span class="line">     * We allow &quot;&quot; as default for abstract pointcut</span><br><span class="line">     */</span><br><span class="line">    String value() default &quot;&quot;;</span><br><span class="line">    </span><br><span class="line">    /**</span><br><span class="line">     * When compiling without debug info, or when interpreting pointcuts at runtime,</span><br><span class="line">     * the names of any arguments used in the pointcut are not available.</span><br><span class="line">     * Under these circumstances only, it is necessary to provide the arg names in </span><br><span class="line">     * the annotation - these MUST duplicate the names used in the annotated method.</span><br><span class="line">     * Format is a simple comma-separated list.</span><br><span class="line">     */</span><br><span class="line">    String argNames() default &quot;&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>如上代码是@Pointcut注解的定义，value()用来定义切面所在的位置，定义方式有以下几种方式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// execution定义切面，匹配符合表达式的所有方法</span><br><span class="line">@Pointcut(&quot;execution(* com.xjtu.springbootstudy.aop.bymyself.service.ProgrammerService.work())&quot;)</span><br><span class="line">// within用于匹配类，对应类下的所有方法都执行切面方法；</span><br><span class="line">@Pointcut(&quot;within(com.xjtu.springbootstudy.aop.bymyself.service.*)&quot;)</span><br><span class="line">// @annotation用于匹配自定义注解，如下面的@SignLog注解，再将@SignLog放在想定义切面的方法</span><br><span class="line">@Pointcut(&quot;@annotation(com.xjtu.springbootstudy.aop.bymyself.annotation.SignLog)&quot;)</span><br><span class="line">// @within用于匹配自定义注解，如下面的@SignLog注解，再将@SignLog放在想定义切面的类上</span><br><span class="line">@Pointcut(&quot;@within(com.xjtu.springbootstudy.aop.bymyself.annotation.SignLog))&quot;)</span><br><span class="line">public void log()&#123; &#125;</span><br></pre></td></tr></table></figure></p><p>如上对log()添加注解，@Pointcut注解中value定义切面位置，使用execution、within、@annotation、@within等方式设置切面。</p><ul><li>@before在目标方法开始执行时执行；</li><li>@after在目标方法执行结束前执行；</li><li>@AfterReturning在目标方法执行正确返回前执行；</li><li>@AfterThrowing在目标方法执行异常时执行，</li><li>@Around环绕执行，一般是前4个无法实现期望功能时，才使用这个注解。</li></ul><p>我写了一个简单示意切面程序，如下所示，对应执行结果也展示下下方。有个疑问就是@after和@AfterReturning注解的方法谁<strong>先执行</strong>？根据执行结果也可以看出<br><strong>@after</strong>注解的方法<strong>先执行</strong>，@AfterReturning注解的方法后执行。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">@Before(value = &quot;log()&quot;)</span><br><span class="line">public void signIn(JoinPoint joinPoint)&#123;</span><br><span class="line">    logger.info(&quot;***********the people signs in******&quot;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@After(value = &quot;log()&quot;)</span><br><span class="line">public void leaveWorkPlace(JoinPoint joinPoint)&#123;</span><br><span class="line">    logger.info(&quot;***********the people leaves workplace******&quot;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@AfterReturning(value = &quot;log()&quot;)</span><br><span class="line">public void signOut(JoinPoint joinPoint)&#123;</span><br><span class="line">    logger.info(&quot;***********the people signs out successfully******&quot;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@AfterThrowing(value = &quot;log()&quot;,throwing = &quot;throwable&quot;)</span><br><span class="line">public void happenAccidentWhenWorking(JoinPoint joinPoint,Throwable throwable)&#123;</span><br><span class="line">    logger.info(&quot;***********the people happens accident when working******&quot;);</span><br><span class="line">    logger.info(&quot;***********&quot;+throwable.getMessage()+&quot;***********&quot;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@Around(value = &quot;log()&quot;)</span><br><span class="line">public void happenAround(ProceedingJoinPoint joinPoint)&#123;</span><br><span class="line">    try &#123;</span><br><span class="line">        joinPoint.proceed(joinPoint.getArgs());</span><br><span class="line">    &#125; catch (Throwable throwable) &#123;</span><br><span class="line">        throwable.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">执行结果：</span><br><span class="line">***********the people signs in******                // @before</span><br><span class="line">I&apos;m working in workplace!                           // 这是目标方法的执行结果</span><br><span class="line">***********the people leaves workplace******        // @after</span><br><span class="line">***********the people signs out successfully******  // @afterReturning</span><br></pre></td></tr></table></figure>]]></content>
     
@@ -235,12 +268,18 @@
     
     </summary>
     
-      <category term="面试" scheme="http://yoursite.com/categories/%E9%9D%A2%E8%AF%95/"/>
+      <category term="Spring Boot" scheme="http://yoursite.com/categories/Spring-Boot/"/>
     
     
       <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
     
-      <category term="spring" scheme="http://yoursite.com/tags/spring/"/>
+      <category term="Spring" scheme="http://yoursite.com/tags/Spring/"/>
+    
+      <category term="Spring Boot" scheme="http://yoursite.com/tags/Spring-Boot/"/>
+    
+      <category term="AOP" scheme="http://yoursite.com/tags/AOP/"/>
+    
+      <category term="面向切面编程" scheme="http://yoursite.com/tags/%E9%9D%A2%E5%90%91%E5%88%87%E9%9D%A2%E7%BC%96%E7%A8%8B/"/>
     
   </entry>
   
@@ -249,7 +288,7 @@
     <link href="http://yoursite.com/2019/02/20/Java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E7%9F%A5%E8%AF%86%E7%82%B9/"/>
     <id>http://yoursite.com/2019/02/20/Java面向对象编程知识点/</id>
     <published>2019-02-20T02:40:58.000Z</published>
-    <updated>2019-02-22T13:25:33.185Z</updated>
+    <updated>2019-03-30T13:21:21.847Z</updated>
     
     <content type="html"><![CDATA[<h2 id="面向对象的三个基本特征和五种设计原则"><a href="#面向对象的三个基本特征和五种设计原则" class="headerlink" title="面向对象的三个基本特征和五种设计原则"></a>面向对象的三个基本特征和五种设计原则</h2><h3 id="三个基本特征"><a href="#三个基本特征" class="headerlink" title="三个基本特征"></a>三个基本特征</h3><h4 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h4><p>封装就是把客观事物封装成抽象的类，并且类可以把自己的数据和方法只让可信的类或者对象操作，对不可信的进行信息隐藏；</p><h4 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h4><p>继承是指这样一种能力：它可以使用现有类的所有功能，并在无需重写原有类的情况下对这些功能进行扩展。通过继承创建的新类称为“子类”或“派生类”，被继承的类称为“父类”或“基类”。继承的过程就是从一般到特殊的过程。<br>要实现继承可以通过“继承”和“组合”两种方式实现。在某些OOP语言中，一个子类可以继承多个基类，但一般情况下（Java语言），一个子类只有一个基类，实现多重继承可以通过多级继承来实现。<br><a id="more"></a><br>继承概念的实现方式有三类：  </p><ul><li>实现继承：指使用基类的属性和方法而无需额外编码的能力；</li><li>接口继承：指仅使用基类的属性和方法名称，但子类必须提供实现的能力；</li><li>可视继承：指子类使用基类的外观和实现代码的能力。<h4 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h4></li></ul><p>多态是允许你将父对象设置成为和一个或多个它的子对象相等的技术，赋值之后，父对象就可以根据当前赋值给它的子对象的特性以不同方式运作。简单地说就是：允许将子类类型的指针赋值给父类类型的指针。<br>实现多态有两种方式：覆盖和重载：  </p><ul><li>覆盖是指子类重新定义父类的虚函数的做法；</li><li>重载是指允许多个同名函数，这些函数的参数不同（参数个数不同，或参数类型不同，或两者都不同）。</li></ul><h3 id="五种设计原则"><a href="#五种设计原则" class="headerlink" title="五种设计原则"></a>五种设计原则</h3><h4 id="单一职责原则-Single-Responsibility-Principle，SRP"><a href="#单一职责原则-Single-Responsibility-Principle，SRP" class="headerlink" title="单一职责原则(Single Responsibility Principle，SRP)"></a>单一职责原则(Single Responsibility Principle，SRP)</h4><p>单一职责原则是指一个类的功能要单一，不能包罗万象。一个类应该只有一个引起它变化的原因。</p><h4 id="开放封闭原则-Open－Close-Principle，OCP"><a href="#开放封闭原则-Open－Close-Principle，OCP" class="headerlink" title="开放封闭原则(Open－Close Principle，OCP)"></a>开放封闭原则(Open－Close Principle，OCP)</h4><p> 开放封闭原则指的是对扩展性的开放和对修改的封闭：</p><ul><li>对扩展性的开放：模块的行为应该是可扩展的，从而该模块可表现出行的行为以满足需求的变化；</li><li><p>对修改的封闭：模块自身的代码时不应该被修改的，扩展模块的一般途径是修改内部实现。</p><h4 id="里氏替换原则-the-Liskov-Substitution-Principle，LSP"><a href="#里氏替换原则-the-Liskov-Substitution-Principle，LSP" class="headerlink" title="里氏替换原则(the Liskov Substitution Principle，LSP)"></a>里氏替换原则(the Liskov Substitution Principle，LSP)</h4><p>子类型必须能够替换掉它们的父类型，并出现在父类能够出现的任何地方。</p></li></ul><h4 id="依赖倒置原则-the-Dependency-Inversion-Principle，PIP"><a href="#依赖倒置原则-the-Dependency-Inversion-Principle，PIP" class="headerlink" title="依赖倒置原则(the Dependency Inversion Principle，PIP)"></a>依赖倒置原则(the Dependency Inversion Principle，PIP)</h4><p>具体依赖抽象，上层依赖下层。</p><h4 id="接口隔离原则-the-Interface-Segregation-Principle，ISP"><a href="#接口隔离原则-the-Interface-Segregation-Principle，ISP" class="headerlink" title="接口隔离原则(the Interface Segregation Principle，ISP)"></a>接口隔离原则(the Interface Segregation Principle，ISP)</h4><p>模块间要通过抽象接口隔离开，而不是通过具体的类强耦合起来。</p><h2 id="Class-java类文件下getMethods-和getDeclaredMethods-的区别"><a href="#Class-java类文件下getMethods-和getDeclaredMethods-的区别" class="headerlink" title="Class.java类文件下getMethods()和getDeclaredMethods()的区别"></a><code>Class.java</code>类文件下<code>getMethods()</code>和<code>getDeclaredMethods()</code>的区别</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@CallerSensitive</span><br><span class="line">public Method[] getMethods() throws SecurityException &#123;</span><br><span class="line">    checkMemberAccess(Member.PUBLIC, Reflection.getCallerClass(), true);</span><br><span class="line">    return copyMethods(privateGetPublicMethods());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@CallerSensitive</span><br><span class="line">public Method[] getDeclaredMethods() throws SecurityException &#123;</span><br><span class="line">    checkMemberAccess(Member.DECLARED, Reflection.getCallerClass(), true);</span><br><span class="line">    return copyMethods(privateGetDeclaredMethods(false));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><code>getMethods()</code>是获取对应类及其所有父类中的共有（public）方法；<code>getDeclaredMethods()</code>获取的是当前类中的所有方法。</p>]]></content>
     
@@ -260,7 +299,7 @@
     
     </summary>
     
-      <category term="面试" scheme="http://yoursite.com/categories/%E9%9D%A2%E8%AF%95/"/>
+      <category term="工作" scheme="http://yoursite.com/categories/%E5%B7%A5%E4%BD%9C/"/>
     
     
       <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
@@ -488,9 +527,9 @@
       <category term="深入理解Java虚拟机" scheme="http://yoursite.com/categories/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/"/>
     
     
-      <category term="垃圾收集算法" scheme="http://yoursite.com/tags/%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E7%AE%97%E6%B3%95/"/>
-    
       <category term="垃圾收集器" scheme="http://yoursite.com/tags/%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/"/>
+    
+      <category term="垃圾收集算法" scheme="http://yoursite.com/tags/%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E7%AE%97%E6%B3%95/"/>
     
       <category term="安全点" scheme="http://yoursite.com/tags/%E5%AE%89%E5%85%A8%E7%82%B9/"/>
     
@@ -551,33 +590,6 @@
       <category term="方法区" scheme="http://yoursite.com/tags/%E6%96%B9%E6%B3%95%E5%8C%BA/"/>
     
       <category term="Java虚拟机栈" scheme="http://yoursite.com/tags/Java%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>cuda安装</title>
-    <link href="http://yoursite.com/2019/01/08/cuda%E5%AE%89%E8%A3%85/"/>
-    <id>http://yoursite.com/2019/01/08/cuda安装/</id>
-    <published>2019-01-08T13:38:04.000Z</published>
-    <updated>2019-01-18T04:39:56.815Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="cuda安装"><a href="#cuda安装" class="headerlink" title="cuda安装"></a>cuda安装</h1><h2 id="cuda和cudnn版本查看"><a href="#cuda和cudnn版本查看" class="headerlink" title="cuda和cudnn版本查看"></a>cuda和cudnn版本查看</h2><ol><li>cuda版本</li></ol><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /usr/local/cuda/version.txt</span><br></pre></td></tr></table></figure><a id="more"></a> <ol start="2"><li>cudnn版本</li></ol><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /usr/local/cuda/include/cudnn.h | grep CUDNN_MAJOR -A 2</span><br></pre></td></tr></table></figure><h2 id="cuda8-0卸载"><a href="#cuda8-0卸载" class="headerlink" title="cuda8.0卸载"></a>cuda8.0卸载</h2><ol><li>卸载</li></ol><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt autoremove cuda</span><br></pre></td></tr></table></figure><ol start="2"><li>清除残留文件</li></ol><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/</span><br><span class="line">rm -rf cuda-8.0/</span><br></pre></td></tr></table></figure><h2 id="cuda9-0及对应cudnn安装"><a href="#cuda9-0及对应cudnn安装" class="headerlink" title="cuda9.0及对应cudnn安装"></a>cuda9.0及对应cudnn安装</h2><h3 id="cuda9-0安装"><a href="#cuda9-0安装" class="headerlink" title="cuda9.0安装"></a>cuda9.0安装</h3><p><a href="https://developer.nvidia.com/cuda-90-download-archive" target="_blank" rel="noopener">cuda9.0官方网站</a></p><ol><li>运行压缩.run</li></ol><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo sh cuda_9.0.176_384.81_linux.run</span><br></pre></td></tr></table></figure><ul><li>一般在不需要图形驱动（Grphics Driver）和 样例（cuda samples）</li></ul><p><img src="/2019/01/08/cuda安装/cuda0.png" alt="image"></p><p><a href="https://developer.nvidia.com/cudnn" target="_blank" rel="noopener">cudnn官方网站</a></p><p>2.~/.bashrc配置</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export CUDA_HOME=/usr/local/cuda</span><br><span class="line">export LD_LIBRARY_PATH=$&#123;CUDA_HOME&#125;/lib64</span><br><span class="line">export PATH=$&#123;CUDA_HOME&#125;/bin:$&#123;PATH&#125;</span><br></pre></td></tr></table></figure><ol start="3"><li>刷新使得配置生效</li></ol><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source ~/.bashrc</span><br></pre></td></tr></table></figure><h3 id="cudnn安装"><a href="#cudnn安装" class="headerlink" title="cudnn安装"></a>cudnn安装</h3><p>本次版本是<strong>cuDNN v7.4.2 (Dec 14, 2018), for CUDA 9.0</strong>，选择<strong>cuDNN Library for Linux</strong>。</p><ol><li>解压cudnn-9.0-linux-x64-v7.4.2.24.tgz压缩包</li></ol><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf cudnn-9.0-linux-x64-v7.4.2.24.tgz</span><br></pre></td></tr></table></figure><p><img src="/2019/01/08/cuda安装/cuda1.png" alt="image"></p><ol start="2"><li>复制文件到cuda库下</li></ol><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cp cuda/lib64/* /usr/local/cuda-9.0/lib64/</span><br><span class="line">cp cuda/include/* /usr/local/cuda-9.0/include/</span><br></pre></td></tr></table></figure><ol start="3"><li>查看cudnn版本信息</li></ol><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /usr/local/cuda/include/cudnn.h | grep CUDNN_MAJOR -A 2</span><br></pre></td></tr></table></figure><h3 id="cuda切换"><a href="#cuda切换" class="headerlink" title="cuda切换"></a>cuda切换</h3><p>当一台服务器上既安装了cuda8.0和cuda9.0，使用ls命令查看/usr/local下的文件包含三个文件夹cuda、cuda8.0和cuda9.0。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -l /usr/local/</span><br></pre></td></tr></table></figure><p><img src="/2019/01/08/cuda安装/cuda3.png" alt="image"></p><ol><li>可以看到，当前cuda文件夹链接到cuda-9.0,当需要切换到cuda8.0时，使用以下命令：</li></ol><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rm -rf /usr/local/cuda #删除之前创建的软链接</span><br><span class="line">sudo ln -s /usr/local/cuda-8.0/ /usr/local/cuda</span><br><span class="line">nvcc --version #查看当前 cuda 版本</span><br></pre></td></tr></table></figure><p><a href="http://geyao1995.com/CUDA8_CUDA9/" target="_blank" rel="noopener">参考博客：http://geyao1995.com/CUDA8_CUDA9/</a></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;cuda安装&quot;&gt;&lt;a href=&quot;#cuda安装&quot; class=&quot;headerlink&quot; title=&quot;cuda安装&quot;&gt;&lt;/a&gt;cuda安装&lt;/h1&gt;&lt;h2 id=&quot;cuda和cudnn版本查看&quot;&gt;&lt;a href=&quot;#cuda和cudnn版本查看&quot; class=&quot;headerlink&quot; title=&quot;cuda和cudnn版本查看&quot;&gt;&lt;/a&gt;cuda和cudnn版本查看&lt;/h2&gt;&lt;ol&gt;
-&lt;li&gt;cuda版本&lt;/li&gt;
-&lt;/ol&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;cat /usr/local/cuda/version.txt&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-    
-    </summary>
-    
-      <category term="科研" scheme="http://yoursite.com/categories/%E7%A7%91%E7%A0%94/"/>
-    
-    
-      <category term="环境配置" scheme="http://yoursite.com/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"/>
-    
-      <category term="软件安装" scheme="http://yoursite.com/tags/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/"/>
     
   </entry>
   

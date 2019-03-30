@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[字节跳动实习生面试]]></title>
+    <url>%2F2019%2F03%2F30%2F%E5%AD%97%E8%8A%82%E8%B7%B3%E5%8A%A8%E5%AE%9E%E4%B9%A0%E7%94%9F%E9%9D%A2%E8%AF%95%2F</url>
+    <content type="text"><![CDATA[一面 垃圾回收讲一下； java内存模型； 垃圾回收算法（如何确定回收对象（引用计数法、可达性算法）、回收算法（标记回收、标记整理、复制））； 垃圾收集器； MySQL数据库讲一下；数据引擎、索引类型、索引方法（B+树、Hash） 手写代码：根据前序遍历和中序遍历还原二叉树，根据获得的前序遍历和中序遍历结果输出一颗二叉树（输出后续遍历）（我问可以IDE吗？尽量别用）二面 手写代码： 123456单链表操作： 输入：奇数位升序，偶数位降序 1 -&gt; 80 -&gt; 4 -&gt; 60 -&gt; 6 -&gt; 40 -&gt; 7 -&gt; 2 输出：升序单链表 1 -&gt; 2 -&gt; 4 -&gt; 6-&gt; 7 -&gt; 40 -&gt; 60 -&gt; 80 不允许使用其他数据结构。 进程和线程的区别 HashMap TCP/UDP三面-两道编程题： 假定一张表的数据格式为 id,name,parentId，表的数据不大，1000条以内，得到这些数据的树型结构 输入：List ， 输出：Node（手写代码） 有2个文件，分别是A(3t大小)，B(2t)大小，A文件的组织形式为 uid, username,B文件的组织形式为 uid, age,找出A、B文件交集的数据放入一个文件，文件的数据格式为uid,username,age（讲讲思路）]]></content>
+      <categories>
+        <category>工作</category>
+      </categories>
+      <tags>
+        <tag>实习</tag>
+        <tag>字节跳动</tag>
+        <tag>面试</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Deep Residual Learning for Image Recognition]]></title>
     <url>%2F2019%2F03%2F06%2FDeep-Residual-Learning-for-Image-Recognition%2F</url>
     <content type="text"><![CDATA[神经网络越深就越难训练，作者提出一种残差学习框架来降低网络训练的难度。]]></content>
@@ -8,10 +21,10 @@
         <category>科研</category>
       </categories>
       <tags>
-        <tag>论文阅读</tag>
-        <tag>神经网络</tag>
         <tag>图像识别</tag>
         <tag>残差网络</tag>
+        <tag>神经网络</tag>
+        <tag>论文阅读</tag>
       </tags>
   </entry>
   <entry>
@@ -60,8 +73,8 @@
         <category>深入理解Java虚拟机</category>
       </categories>
       <tags>
-        <tag>垃圾收集算法</tag>
         <tag>垃圾收集器</tag>
+        <tag>垃圾收集算法</tag>
       </tags>
   </entry>
   <entry>
@@ -99,11 +112,14 @@
     <url>%2F2019%2F02%2F21%2F%E9%9D%A2%E5%90%91%E5%88%87%E9%9D%A2%E7%BC%96%E7%A8%8B%2F</url>
     <content type="text"><![CDATA[面向切面编程（Aspect Oriented Programming，AOP）是什么？ AOP是一种编程范式，不是编程语言； AOP解决特定问题，但不能解决所有问题； OOP的补充，而不是其替代。 AOP为什么出现？ 提高代码重用性； 概念分离：分离功能性需求和非功能性需求。将功能性需求从非功能性需求中分离出来。 应用场景 权限控制 缓存控制 事务控制 审计日志 性能监控 分布式追踪 异常处理 Spring AOP的通过代理实现通过DefaultAopProxyFactory.java源码可以看到AOP由jdk和cglib两种方式实现。12345678910111213141516public AopProxy createAopProxy(AdvisedSupport config) throws AopConfigException &#123; if (config.isOptimize() || config.isProxyTargetClass() || hasNoUserSuppliedProxyInterfaces(config)) &#123; Class&lt;?&gt; targetClass = config.getTargetClass(); if (targetClass == null) &#123; throw new AopConfigException(&quot;TargetSource cannot determine target class: &quot; + &quot;Either an interface or a target is required for proxy creation.&quot;); &#125; if (targetClass.isInterface() || Proxy.isProxyClass(targetClass)) &#123; return new JdkDynamicAopProxy(config); &#125; return new ObjenesisCglibAopProxy(config); &#125; else &#123; return new JdkDynamicAopProxy(config); &#125;&#125; Spring AOP的使用在Spring中主要使用注解@Aspect、@Pointcut、@Before、@After、@AfterReturning、@AfterThrowing以及@Around进行面向切面编程。 1234567891011@Retention(RetentionPolicy.RUNTIME)@Target(ElementType.TYPE)public @interface Aspect &#123; /** * Per clause expression, defaults to singleton aspect * &lt;p/&gt; * Valid values are &quot;&quot; (singleton), &quot;perthis(...)&quot;, etc */ public String value() default &quot;&quot;;&#125; 如上代码是@Aspect注解的定义，ElementType.TYPE可以看出该注解作用目标是接口、类、枚举、注解，@Aspect注解，Spring通过@Aspect注解切面并把它应用到目标对象上。 12345678910111213141516171819@Retention(RetentionPolicy.RUNTIME)@Target(ElementType.METHOD)public @interface Pointcut &#123; /** * The pointcut expression * We allow &quot;&quot; as default for abstract pointcut */ String value() default &quot;&quot;; /** * When compiling without debug info, or when interpreting pointcuts at runtime, * the names of any arguments used in the pointcut are not available. * Under these circumstances only, it is necessary to provide the arg names in * the annotation - these MUST duplicate the names used in the annotated method. * Format is a simple comma-separated list. */ String argNames() default &quot;&quot;;&#125; 如上代码是@Pointcut注解的定义，value()用来定义切面所在的位置，定义方式有以下几种方式：123456789// execution定义切面，匹配符合表达式的所有方法@Pointcut(&quot;execution(* com.xjtu.springbootstudy.aop.bymyself.service.ProgrammerService.work())&quot;)// within用于匹配类，对应类下的所有方法都执行切面方法；@Pointcut(&quot;within(com.xjtu.springbootstudy.aop.bymyself.service.*)&quot;)// @annotation用于匹配自定义注解，如下面的@SignLog注解，再将@SignLog放在想定义切面的方法@Pointcut(&quot;@annotation(com.xjtu.springbootstudy.aop.bymyself.annotation.SignLog)&quot;)// @within用于匹配自定义注解，如下面的@SignLog注解，再将@SignLog放在想定义切面的类上@Pointcut(&quot;@within(com.xjtu.springbootstudy.aop.bymyself.annotation.SignLog))&quot;)public void log()&#123; &#125; 如上对log()添加注解，@Pointcut注解中value定义切面位置，使用execution、within、@annotation、@within等方式设置切面。 @before在目标方法开始执行时执行； @after在目标方法执行结束前执行； @AfterReturning在目标方法执行正确返回前执行； @AfterThrowing在目标方法执行异常时执行， @Around环绕执行，一般是前4个无法实现期望功能时，才使用这个注解。 我写了一个简单示意切面程序，如下所示，对应执行结果也展示下下方。有个疑问就是@after和@AfterReturning注解的方法谁先执行？根据执行结果也可以看出@after注解的方法先执行，@AfterReturning注解的方法后执行。 1234567891011121314151617181920212223242526272829303132333435@Before(value = &quot;log()&quot;)public void signIn(JoinPoint joinPoint)&#123; logger.info(&quot;***********the people signs in******&quot;);&#125;@After(value = &quot;log()&quot;)public void leaveWorkPlace(JoinPoint joinPoint)&#123; logger.info(&quot;***********the people leaves workplace******&quot;);&#125;@AfterReturning(value = &quot;log()&quot;)public void signOut(JoinPoint joinPoint)&#123; logger.info(&quot;***********the people signs out successfully******&quot;);&#125;@AfterThrowing(value = &quot;log()&quot;,throwing = &quot;throwable&quot;)public void happenAccidentWhenWorking(JoinPoint joinPoint,Throwable throwable)&#123; logger.info(&quot;***********the people happens accident when working******&quot;); logger.info(&quot;***********&quot;+throwable.getMessage()+&quot;***********&quot;);&#125;@Around(value = &quot;log()&quot;)public void happenAround(ProceedingJoinPoint joinPoint)&#123; try &#123; joinPoint.proceed(joinPoint.getArgs()); &#125; catch (Throwable throwable) &#123; throwable.printStackTrace(); &#125;&#125;执行结果：***********the people signs in****** // @beforeI&apos;m working in workplace! // 这是目标方法的执行结果***********the people leaves workplace****** // @after***********the people signs out successfully****** // @afterReturning]]></content>
       <categories>
-        <category>面试</category>
+        <category>Spring Boot</category>
       </categories>
       <tags>
         <tag>Java</tag>
-        <tag>spring</tag>
+        <tag>Spring</tag>
+        <tag>Spring Boot</tag>
+        <tag>AOP</tag>
+        <tag>面向切面编程</tag>
       </tags>
   </entry>
   <entry>
@@ -111,7 +127,7 @@
     <url>%2F2019%2F02%2F20%2FJava%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E7%9F%A5%E8%AF%86%E7%82%B9%2F</url>
     <content type="text"><![CDATA[面向对象的三个基本特征和五种设计原则三个基本特征封装封装就是把客观事物封装成抽象的类，并且类可以把自己的数据和方法只让可信的类或者对象操作，对不可信的进行信息隐藏； 继承继承是指这样一种能力：它可以使用现有类的所有功能，并在无需重写原有类的情况下对这些功能进行扩展。通过继承创建的新类称为“子类”或“派生类”，被继承的类称为“父类”或“基类”。继承的过程就是从一般到特殊的过程。要实现继承可以通过“继承”和“组合”两种方式实现。在某些OOP语言中，一个子类可以继承多个基类，但一般情况下（Java语言），一个子类只有一个基类，实现多重继承可以通过多级继承来实现。继承概念的实现方式有三类： 实现继承：指使用基类的属性和方法而无需额外编码的能力； 接口继承：指仅使用基类的属性和方法名称，但子类必须提供实现的能力； 可视继承：指子类使用基类的外观和实现代码的能力。多态 多态是允许你将父对象设置成为和一个或多个它的子对象相等的技术，赋值之后，父对象就可以根据当前赋值给它的子对象的特性以不同方式运作。简单地说就是：允许将子类类型的指针赋值给父类类型的指针。实现多态有两种方式：覆盖和重载： 覆盖是指子类重新定义父类的虚函数的做法； 重载是指允许多个同名函数，这些函数的参数不同（参数个数不同，或参数类型不同，或两者都不同）。 五种设计原则单一职责原则(Single Responsibility Principle，SRP)单一职责原则是指一个类的功能要单一，不能包罗万象。一个类应该只有一个引起它变化的原因。 开放封闭原则(Open－Close Principle，OCP) 开放封闭原则指的是对扩展性的开放和对修改的封闭： 对扩展性的开放：模块的行为应该是可扩展的，从而该模块可表现出行的行为以满足需求的变化； 对修改的封闭：模块自身的代码时不应该被修改的，扩展模块的一般途径是修改内部实现。 里氏替换原则(the Liskov Substitution Principle，LSP)子类型必须能够替换掉它们的父类型，并出现在父类能够出现的任何地方。 依赖倒置原则(the Dependency Inversion Principle，PIP)具体依赖抽象，上层依赖下层。 接口隔离原则(the Interface Segregation Principle，ISP)模块间要通过抽象接口隔离开，而不是通过具体的类强耦合起来。 Class.java类文件下getMethods()和getDeclaredMethods()的区别1234567891011@CallerSensitivepublic Method[] getMethods() throws SecurityException &#123; checkMemberAccess(Member.PUBLIC, Reflection.getCallerClass(), true); return copyMethods(privateGetPublicMethods());&#125;@CallerSensitivepublic Method[] getDeclaredMethods() throws SecurityException &#123; checkMemberAccess(Member.DECLARED, Reflection.getCallerClass(), true); return copyMethods(privateGetDeclaredMethods(false));&#125; getMethods()是获取对应类及其所有父类中的共有（public）方法；getDeclaredMethods()获取的是当前类中的所有方法。]]></content>
       <categories>
-        <category>面试</category>
+        <category>工作</category>
       </categories>
       <tags>
         <tag>Java</tag>
@@ -215,8 +231,8 @@
         <category>深入理解Java虚拟机</category>
       </categories>
       <tags>
-        <tag>垃圾收集算法</tag>
         <tag>垃圾收集器</tag>
+        <tag>垃圾收集算法</tag>
         <tag>安全点</tag>
         <tag>安全区域</tag>
       </tags>
@@ -267,10 +283,10 @@
         <category>科研</category>
       </categories>
       <tags>
-        <tag>对象检测</tag>
-        <tag>论文阅读</tag>
-        <tag>神经网络</tag>
         <tag>图像识别</tag>
+        <tag>神经网络</tag>
+        <tag>论文阅读</tag>
+        <tag>对象检测</tag>
       </tags>
   </entry>
   <entry>
