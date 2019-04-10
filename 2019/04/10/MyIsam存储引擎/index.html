@@ -79,7 +79,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="MyIsam,数据库,问题,">
 
 
 
@@ -92,16 +92,18 @@
 
 
 
-<meta name="description" content="杨宽的博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="yangkuan">
-<meta property="og:url" content="http://yoursite.com/tags/shadowsocks/index.html">
+<meta name="description" content="Spring Boot的@Transactional注解对MyISAM存储引擎生效的问题？  未解决问题，一脸懵逼。。。。">
+<meta name="keywords" content="MyIsam,数据库,问题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MyIsam存储引擎">
+<meta property="og:url" content="http://yoursite.com/2019/04/10/MyIsam存储引擎/index.html">
 <meta property="og:site_name" content="yangkuan">
-<meta property="og:description" content="杨宽的博客">
+<meta property="og:description" content="Spring Boot的@Transactional注解对MyISAM存储引擎生效的问题？  未解决问题，一脸懵逼。。。。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-04-10T02:46:46.092Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="yangkuan">
-<meta name="twitter:description" content="杨宽的博客">
+<meta name="twitter:title" content="MyIsam存储引擎">
+<meta name="twitter:description" content="Spring Boot的@Transactional注解对MyISAM存储引擎生效的问题？  未解决问题，一脸懵逼。。。。">
 
 
 
@@ -131,13 +133,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/shadowsocks/">
+  <link rel="canonical" href="http://yoursite.com/2019/04/10/MyIsam存储引擎/">
 
 
 
 
 
-  <title>标签: shadowsocks | yangkuan</title>
+  <title>MyIsam存储引擎 | yangkuan</title>
   
 
 
@@ -156,7 +158,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
     <a href="https://github.com/youngkuan" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
 
@@ -293,52 +295,254 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>shadowsocks<small>标签</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/10/MyIsam存储引擎/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yang Kuan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yangkuan">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2019/02/26/Ubuntu配置shadowsocks科学上网/" itemprop="url">
-              
-                <span itemprop="name">Ubuntu配置shadowsocks科学上网</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">MyIsam存储引擎</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-02-26T12:36:59+08:00" content="2019-02-26">
-          02-26
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-10T10:18:51+08:00">
+                2019-04-10
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据库/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2019/04/10/MyIsam存储引擎/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2019/04/10/MyIsam存储引擎/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>  阅读数
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  557
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  3
+                </span>
+              
+            </div>
+          
+
+          
+
+        </span></div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        <ol>
+<li>Spring Boot的@Transactional注解对MyISAM存储引擎生效的问题？</li>
+</ol>
+<p>未解决问题，一脸懵逼。。。。</p>
+<a id="more"></a> 
+<p>其中，数据表对应的实体对象如下，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">import javax.persistence.Entity;</span><br><span class="line">import javax.persistence.GeneratedValue;</span><br><span class="line">import javax.persistence.GenerationType;</span><br><span class="line">import javax.persistence.Id;</span><br><span class="line"></span><br><span class="line">@Entity</span><br><span class="line">public class User &#123;</span><br><span class="line"></span><br><span class="line">    @GeneratedValue(strategy = GenerationType.AUTO)</span><br><span class="line">    @Id</span><br><span class="line">    private Long id;</span><br><span class="line"></span><br><span class="line">    private String name;</span><br><span class="line">    private String password;</span><br><span class="line"></span><br><span class="line">    public User() &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public User(String name, String password) &#123;</span><br><span class="line">        this.name = name;</span><br><span class="line">        this.password = password;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public String toString() &#123;</span><br><span class="line">        return &quot;User&#123;&quot; +</span><br><span class="line">                &quot;id=&quot; + id +</span><br><span class="line">                &quot;, name=&apos;&quot; + name + &apos;\&apos;&apos; +</span><br><span class="line">                &quot;, password=&apos;&quot; + password + &apos;\&apos;&apos; +</span><br><span class="line">                &apos;&#125;&apos;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Long getId() &#123;</span><br><span class="line">        return id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setId(Long id) &#123;</span><br><span class="line">        this.id = id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getName() &#123;</span><br><span class="line">        return name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setName(String name) &#123;</span><br><span class="line">        this.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getPassword() &#123;</span><br><span class="line">        return password;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setPassword(String password) &#123;</span><br><span class="line">        this.password = password;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>使用Spring Data Jpa进行数据操作，代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">import org.springframework.data.jpa.repository.JpaRepository;</span><br><span class="line">import org.springframework.data.jpa.repository.Modifying;</span><br><span class="line">import org.springframework.data.jpa.repository.Query;</span><br><span class="line">import org.springframework.stereotype.Repository;</span><br><span class="line"></span><br><span class="line">@Repository(&quot;user_repository&quot;)</span><br><span class="line">public interface UserRepository extends JpaRepository&lt;User, Long&gt; &#123;</span><br><span class="line"></span><br><span class="line">    Integer deleteUserById(Long id);</span><br><span class="line"></span><br><span class="line">    @Modifying(clearAutomatically = true)</span><br><span class="line">    @Query(value = &quot;update User set name=?2,password=?3 where id=?1&quot;)</span><br><span class="line">    Integer updateUserById(Long id,String name,String password);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>业务逻辑层代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">import org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line">import org.springframework.stereotype.Service;</span><br><span class="line">import org.springframework.transaction.annotation.Transactional;</span><br><span class="line"></span><br><span class="line">@Service(&quot;uService&quot;)</span><br><span class="line">public class UserService &#123;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    UserRepository userRepository;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    @Transactional(rollbackFor = Exception.class)</span><br><span class="line">    public Integer deleteUserById(Long id)&#123;</span><br><span class="line">        Integer i = userRepository.deleteUserById(id);</span><br><span class="line">        if(id.equals(718L))&#123;</span><br><span class="line">            throw new IllegalArgumentException(&quot;删除714错误，回滚&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        return i;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Transactional(rollbackFor = &#123;IllegalArgumentException.class&#125;)</span><br><span class="line">    public User saveUser(User user)&#123;</span><br><span class="line">        User u = userRepository.save(user);</span><br><span class="line"></span><br><span class="line">        if(u.getName()==&quot;yang1&quot;)&#123;</span><br><span class="line">            throw new IllegalArgumentException(&quot;存入yang，导致回滚&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        return u;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Transactional(rollbackFor = &#123;IllegalArgumentException.class&#125;)</span><br><span class="line">    public Integer updateUserById(User user)&#123;</span><br><span class="line">        Integer i = userRepository.updateUserById(user.getId(),user.getName(),user.getPassword());</span><br><span class="line">        return i;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>最后是测试代码，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">@RunWith(SpringRunner.class)</span><br><span class="line">@SpringBootTest</span><br><span class="line">public class UserServiceTest &#123;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    UserService userService;</span><br><span class="line"></span><br><span class="line">    private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());</span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    public void deleteUserById() &#123;</span><br><span class="line">        Integer i = userService.deleteUserById(718L);</span><br><span class="line">        LOGGER.error(&quot;delete by user id successful: &quot;+ i);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    public void saveUser()&#123;</span><br><span class="line">        User user = new User(&quot;yang&quot;,&quot;adasdsa&quot;);</span><br><span class="line">        User u = userService.saveUser(user);</span><br><span class="line">        LOGGER.error(u.toString());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    public void updateUser()&#123;</span><br><span class="line">        User user = new User(&quot;yang&quot;,&quot;adasdsa&quot;);</span><br><span class="line">        user.setId(714L);</span><br><span class="line">        int i = userService.updateUserById(user);</span><br><span class="line">        LOGGER.error(&quot;update by user id successful: &quot;+ i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在测试删除用户（deleteUserById）以及保存用户（saveUser）时，发现抛出异常会导致回滚，但是我的数据库引擎是MyIsam，讲道理不应该支持事务。</p>
 
       
     </div>
+    
+    
+    
 
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/MyIsam/" rel="tag"><i class="fa fa-tag"></i> MyIsam</a>
+          
+            <a href="/tags/数据库/" rel="tag"><i class="fa fa-tag"></i> 数据库</a>
+          
+            <a href="/tags/问题/" rel="tag"><i class="fa fa-tag"></i> 问题</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/08/代理模式/" rel="next" title="代理模式">
+                <i class="fa fa-chevron-left"></i> 代理模式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -346,6 +550,15 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+      <div id="SOHUCS"></div>
+    </div>
+
+  
+
+
 
         </div>
         
@@ -637,6 +850,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 

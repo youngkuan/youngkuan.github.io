@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[MyIsam存储引擎]]></title>
+    <url>%2F2019%2F04%2F10%2FMyIsam%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E%2F</url>
+    <content type="text"><![CDATA[Spring Boot的@Transactional注解对MyISAM存储引擎生效的问题？ 未解决问题，一脸懵逼。。。。 其中，数据表对应的实体对象如下，1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556import javax.persistence.Entity;import javax.persistence.GeneratedValue;import javax.persistence.GenerationType;import javax.persistence.Id;@Entitypublic class User &#123; @GeneratedValue(strategy = GenerationType.AUTO) @Id private Long id; private String name; private String password; public User() &#123; &#125; public User(String name, String password) &#123; this.name = name; this.password = password; &#125; @Override public String toString() &#123; return &quot;User&#123;&quot; + &quot;id=&quot; + id + &quot;, name=&apos;&quot; + name + &apos;\&apos;&apos; + &quot;, password=&apos;&quot; + password + &apos;\&apos;&apos; + &apos;&#125;&apos;; &#125; public Long getId() &#123; return id; &#125; public void setId(Long id) &#123; this.id = id; &#125; public String getName() &#123; return name; &#125; public void setName(String name) &#123; this.name = name; &#125; public String getPassword() &#123; return password; &#125; public void setPassword(String password) &#123; this.password = password; &#125;&#125; 使用Spring Data Jpa进行数据操作，代码如下：123456789101112131415import org.springframework.data.jpa.repository.JpaRepository;import org.springframework.data.jpa.repository.Modifying;import org.springframework.data.jpa.repository.Query;import org.springframework.stereotype.Repository;@Repository(&quot;user_repository&quot;)public interface UserRepository extends JpaRepository&lt;User, Long&gt; &#123; Integer deleteUserById(Long id); @Modifying(clearAutomatically = true) @Query(value = &quot;update User set name=?2,password=?3 where id=?1&quot;) Integer updateUserById(Long id,String name,String password);&#125; 业务逻辑层代码如下：123456789101112131415161718192021222324252627282930313233343536import org.springframework.beans.factory.annotation.Autowired;import org.springframework.stereotype.Service;import org.springframework.transaction.annotation.Transactional;@Service(&quot;uService&quot;)public class UserService &#123; @Autowired UserRepository userRepository; @Transactional(rollbackFor = Exception.class) public Integer deleteUserById(Long id)&#123; Integer i = userRepository.deleteUserById(id); if(id.equals(718L))&#123; throw new IllegalArgumentException(&quot;删除714错误，回滚&quot;); &#125; return i; &#125; @Transactional(rollbackFor = &#123;IllegalArgumentException.class&#125;) public User saveUser(User user)&#123; User u = userRepository.save(user); if(u.getName()==&quot;yang1&quot;)&#123; throw new IllegalArgumentException(&quot;存入yang，导致回滚&quot;); &#125; return u; &#125; @Transactional(rollbackFor = &#123;IllegalArgumentException.class&#125;) public Integer updateUserById(User user)&#123; Integer i = userRepository.updateUserById(user.getId(),user.getName(),user.getPassword()); return i; &#125;&#125; 最后是测试代码，123456789101112131415161718192021222324252627282930@RunWith(SpringRunner.class)@SpringBootTestpublic class UserServiceTest &#123; @Autowired UserService userService; private final Logger LOGGER = LoggerFactory.getLogger(this.getClass()); @Test public void deleteUserById() &#123; Integer i = userService.deleteUserById(718L); LOGGER.error(&quot;delete by user id successful: &quot;+ i); &#125; @Test public void saveUser()&#123; User user = new User(&quot;yang&quot;,&quot;adasdsa&quot;); User u = userService.saveUser(user); LOGGER.error(u.toString()); &#125; @Test public void updateUser()&#123; User user = new User(&quot;yang&quot;,&quot;adasdsa&quot;); user.setId(714L); int i = userService.updateUserById(user); LOGGER.error(&quot;update by user id successful: &quot;+ i); &#125;&#125; 在测试删除用户（deleteUserById）以及保存用户（saveUser）时，发现抛出异常会导致回滚，但是我的数据库引擎是MyIsam，讲道理不应该支持事务。]]></content>
+      <categories>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>MyIsam</tag>
+        <tag>数据库</tag>
+        <tag>问题</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[代理模式]]></title>
     <url>%2F2019%2F04%2F08%2F%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%2F</url>
     <content type="text"><![CDATA[代理是一种设计模式，提供了对目标对象的间接访问方式，即通过代理访问目标对象。代理模式的作用：控制和管理访问。 静态代理在程序运行前就已经存在对应的代理类，那么这种代理方式就称之为静态代理。由于这种代理方式下的代理类往往是程序员自己在Java代码中定义的，当我们需求发生变化的时候，代理类以及目标类都需要进行修改维护，不够灵活。但是静态代理也有优点，就是在不对目标对象进行修改的前提下就可以对目标对象进行功能扩展和拦截。下面举个简单的例子，在CS（客户端\服务器）主从结构的网络架构中，一般服务器会对客户端发送而来的请求进行过滤和记录，这个时候就可以使用代理类来实现上述功能。 首先，我们定义服务端顶层接口： 123456 /** * 顶层接口，目标类和代理类都需要实现顶层接口 */interface ServerInterface&#123; public void processRequest(String request);&#125; 其次，定义服务类： 123456789 /** * 目标类 */class Server implements ServerInterface&#123; @Override public void processRequest(String request) &#123; System.out.println(&quot;process request&quot;); &#125;&#125; 最后定义服务代理类，服务类和代理类都实现服务顶层接口：12345678910111213141516171819202122232425262728293031323334353637383940414243/** * 代理类 */class ServerProxy implements ServerInterface&#123; ServerInterface serverInterface; public ServerProxy(ServerInterface serverInterface) &#123; this.serverInterface = serverInterface; &#125; /** * 过滤来自客户端的不合理请求 * @param request * @return */ public boolean filter(String request)&#123; System.out.println(&quot;filter request&quot;); return true; &#125; /** * 记录来自客户端的请求 */ public void logBefore()&#123; System.out.println(&quot;log before&quot;); &#125; /** * 记录返回给客户端的结果 */ public void logReturn()&#123; System.out.println(&quot;log return&quot;); &#125; @Override public void processRequest(String request) &#123; logBefore(); if(!filter(request))&#123; serverInterface.processRequest(request); &#125; logReturn(); &#125;&#125; 从上面可以看出，当我们的需求改变的时候，比如说我们不仅需要过滤请求、日志记录，还需要进行客户端登录时，那么就需要在代理类中添加登录服务器的方法logIn()，并且给processRequest方法中添加登录方法，而实际情况中服务器中处理请求的方法processRequest成千上万，这个时候程序员就需要给一个个processRequest方法添加logIn操作，可以看到修改和维护代码代价过大，代码也不够简洁。 动态代理JDK原生动态代理动态代理中，代理类是在运行时通过Java中的反射机制动态生成的。有兴趣的可以去看看Java中ProxyClassFactory类以及ProxyGenerator类动态生成代理类的源码。 对于应用程序员而言，主要使用InvocationHandler类以及Proxy.newProxyInstance()实现动态代理。我们还是以上述客户端/服务器网络架构为例。 顶层的服务接口ServerInterface不变，目标类Server也不用改变，只用实现InvocationHandler接口如下：123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354/** * 日志记录类 */class Logger &#123; /** * 记录来自客户端的请求 */ public void logBefore() &#123; System.out.println(&quot;log before&quot;); &#125; /** * 记录返回给客户端的结果 */ public void logReturn() &#123; System.out.println(&quot;log return&quot;); &#125;&#125;/** * 动态代理 */class ServerDynamicProxy implements InvocationHandler &#123; Object target; Object prozy; public ServerDynamicProxy(Object target, Object prozy) &#123; this.target = target; this.prozy = prozy; &#125; /** * 动态绑定，返回代理对象 * * @return */ public Object bind() &#123; return Proxy.newProxyInstance(target.getClass().getClassLoader() , target.getClass().getInterfaces(), this); &#125; @Override public Object invoke(Object proxy, Method method, Object[] args) throws Throwable &#123; Class prozyClass = proxy.getClass(); Method beforeMethod = prozyClass.getMethod(&quot;logBefore&quot;); Method returnMethod = prozyClass.getMethod(&quot;logReturn&quot;); beforeMethod.invoke(prozy); method.invoke(this.target, args); returnMethod.invoke(prozy); return null; &#125;&#125; 以上就是动态代理的使用，当测试的时候只需要在主函数中调用bind()方法返回代理类就可以了，当然需要进行强制类型转换，从Object转换成目标类。如果想看见动态代理生成的代理类，可以使用System.getProperties().put(&quot;sun.misc.ProxyGenerator.saveGeneratedFiles&quot;,&quot;true&quot;); CGLIB动态代理CGLIB(Code Generation Library)是一个基于ASM的字节码生成库，它允许在运行时对字节码进行修改和动态生成。CGLIB通过继承方式实现代理，所以当目标类没有实现接口时，就无法使用JDK代理，只能使用CGLIB实现动态代理。示例代码如下：1234567891011121314151617181920212223242526272829303132333435363738394041/** * 目标类 */public class Server &#123; public void processRequest(String request) &#123; System.out.println(&quot;process request&quot;); &#125;&#125;/** * 代理类 */public class ServerMethodInterceptor implements MethodInterceptor &#123; private Object target;//业务类对象，供代理方法中进行真正的业务方法调用 public ServerMethodInterceptor(Object target) &#123; this.target = target; &#125; //相当于JDK动态代理中的绑定 public Object getInstance() &#123; Enhancer enhancer = new Enhancer(); //创建加强器，用来创建动态代理类 enhancer.setSuperclass(this.target.getClass()); //为加强器指定要代理的业务类（即：为下面生成的代理类指定父类） //设置回调：对于代理类上所有方法的调用，都会调用CallBack，而Callback则需要实现intercept()方法进行拦 enhancer.setCallback(this); // 创建动态代理类对象并返回 return enhancer.create(); &#125; @Override public Object intercept(Object o, Method method, Object[] objects, MethodProxy methodProxy) throws Throwable &#123; // log before System.out.println(&quot;log before&quot;); Object result = methodProxy.invokeSuper(o,objects); // log return System.out.println(&quot;log return&quot;); return result; &#125;&#125;]]></content>
@@ -61,8 +74,8 @@
       </categories>
       <tags>
         <tag>论文阅读</tag>
-        <tag>生成对抗网络</tag>
         <tag>问题</tag>
+        <tag>生成对抗网络</tag>
       </tags>
   </entry>
   <entry>
@@ -70,7 +83,7 @@
     <url>%2F2019%2F03%2F04%2F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%8C%83%E5%BC%8F%2F</url>
     <content type="text"><![CDATA[第一范式（1NF）关系模型中实体的每个属性都是原子属性，即元组在每个属性上的取值是不可分的。也就是说这些属性的取值是单一的，不是集合、数组等非原子数据。当实体中的某个属性都多个值时，必须将该属性拆分为多个原子属性。 第二范式（2NF）关系模型中的所有非主属性都完全依赖于所有的候选键。2NF其实就是在1NF的基础上消除那些非主属性对所有候选键的部分函数依赖。例如，关系（学号，课程号，教师，成绩，学院）中，教师部分依赖于课程号，因此这个关系不满足第二范式，所以需要把上述关系拆分成（学号，课程号，成绩）和（课程号，教师，学院）。 第三范式（3NF）关系模型中的非主属性既不部分函数依赖也不传递函数依赖于关系中的所有候选键。也就是说3NF是在2NF的基础上消除了非主属性对候选键的传递依赖关系。 还是上面的例子，关系（课程号，教师，学院）中存在传递依赖关系课程号-&gt;教师，以及教师-&gt;学院，因此不满足3NF。所以将其分解为（课程号，教师）和（教师，学院）。 巴斯-科德范式（BCNF）对于关系R上的任何非平凡函数依赖X-&gt;Y都有X必包含R的某个候选键，那么就称关系R满足BCNF。BCNF是在第三范式的基础上继续消除主属性对于键的部分依赖和传递依赖。 举个例子来说，关系（课程名，班级，教师）中假定多名教师承担多个班级的教学任务，每个教师仅承担一个课程的教学任务，同时可以给多个班级上课，那么可以知道有函数依赖 12(课程名，班级)-&gt;(教师)(教师)-&gt;(课程名) 然而，上述关系中的主键是(课程名，班级)或者(教师，班级)。所以(教师)-&gt;(课程名)就是主属性对候选键的部分依赖，不满足BCNF。 第四范式（4NF）对于关系R中的非平凡多值依赖X-&gt;-&gt;Y，X必包含R的某个候选键，则称满足4NF。]]></content>
       <categories>
-        <category>工程</category>
+        <category>数据库</category>
       </categories>
       <tags>
         <tag>数据库</tag>
@@ -86,8 +99,8 @@
         <category>深入理解Java虚拟机</category>
       </categories>
       <tags>
-        <tag>垃圾收集器</tag>
         <tag>垃圾收集算法</tag>
+        <tag>垃圾收集器</tag>
       </tags>
   </entry>
   <entry>
@@ -244,8 +257,8 @@
         <category>深入理解Java虚拟机</category>
       </categories>
       <tags>
-        <tag>垃圾收集器</tag>
         <tag>垃圾收集算法</tag>
+        <tag>垃圾收集器</tag>
         <tag>安全点</tag>
         <tag>安全区域</tag>
       </tags>
@@ -343,7 +356,7 @@
     <url>%2F2018%2F07%2F10%2F%E6%99%BA%E6%85%A7%E6%95%99%E8%82%B2%E5%B8%88%E8%8C%83%E5%BA%94%E7%94%A8%E8%A1%A8%E6%A0%BC%E6%8E%A5%E5%8F%A3%E8%A7%84%E8%8C%83%2F</url>
     <content type="text"><![CDATA[智慧教育-网络学院示范应用后端数据访问接口主题状态1. 主题状态表 列名 类型 长度 state_id bigint(long) 20 domain_id bigint(long) 20 states varchar(string) 255 user_id bigint(long) 20 created_time datetime 1 modified_time datetime 1 说明： （1） 学习状态：0表示未学习，1表示正在学习，2表示已学习； （2） states（主题状态列表）形式：学习状态1，学习状态2，学习状态3，…… 举例： 1， 0， 1， 2，…… 2. 主题状态接口 （1） /topicState/getByDomainIdAndUserId 查询主题状态，参数 long domainId long userId 课程id 用户id （2） /topicState/saveStateByDomainIdAndUserId 保存主题状态，参数 long domainId String states long userId 课程id 主题状态列表 用户id （3） /topicState/saveStateByDomainNameAndUserId 保存主题状态，参数 long domainName String states long userId 课程名 主题状态列表 用户id 分面状态1. 分面状态表 列名 类型 长度 state_id bigint(long) 20 domain_id bigint(long) 20 topic_id bigint(long) 20 states varchar(string) 255 user_id bigint(long) 20 created_time datetime 1 modified_time datetime 1 说明： （1） 学习状态：0表示未学习，1表示已在学习； （2） states（分面状态列表）形式：学习状态1，学习状态2，学习状态3，…… 举例： 1， 0， 1， 0，…… 2. 分面状态接口 （1）/facetState/getByDomainIdAndTopicIdAndUserId 查询分面状态，参数 long domainId long userId long topicId 课程id 用户id 主题id （2）/facetState/saveStateByDomainIdAndTopicIdAndUserId 保存分面状态，参数 long domainId long topicId String states long userId 课程id 主题id 分面状态列表 用户id （3）/facetState/saveStateByDomainNameAndTopicNameAndUserId 保存分面状态，参数 string domainName string topicName String states long userId 课程名 主题名 分面状态列表 用户id （4）/facetState/saveStateByDomainIdAndUserId 保存分面状态，参数 long domainId String states long userId 课程id 分面状态列表 用户id （5）/facetState/saveStateByDomainNameAndUserId 保存主题状态，参数 long domainName String states long userId 课程名 分面状态列表 用户id 注：states：分面状态的矩阵（行（主题）之间以分号隔开，行内以逗号隔开） 例如：0,0,1,0;0,0,1;1,1,0;1,0,1,1,1;……推荐主题1. 推荐主题表 列名 类型 长度 recommendation_id bigint(long) 20 domain_id bigint(long) 20 recommendation_topics varchar(string) 255 user_id bigint(long) 20 created_time datetime 1 modified_time datetime 1 说明： （1）recommendation_topics（推荐主题列表）形式：：推荐主题1 id，推荐主题2 id，推荐主题3 id；推荐主题3 id，推荐主题1 id，推荐主题4 id；……即，不同推荐方式之间以分号隔开，同一推荐方式内的主题id以逗号分隔开 2. 2. 推荐主题接口 （1） recommendation/getByDomainIdAndUserId 查询推荐主题，参数 long domainId long userId 课程id 用户id （2） recommendation/saveRecommendationByDomainIdAndUserId 保存推荐主题，参数 long domainId String recommendationTopics long userId 课程id 推荐主题列表 用户id （3） recommendation/saveRecommendationByDomainNameAndUserId 保存推荐主题，参数 long domainName String recommendationTopics long userId 课程名 推荐主题列表 用户id]]></content>
       <categories>
-        <category>工程</category>
+        <category>数据库</category>
       </categories>
       <tags>
         <tag>数据库</tag>

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-04-08T10:55:16.262Z</updated>
+  <updated>2019-04-10T02:46:46.092Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>MyIsam存储引擎</title>
+    <link href="http://yoursite.com/2019/04/10/MyIsam%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E/"/>
+    <id>http://yoursite.com/2019/04/10/MyIsam存储引擎/</id>
+    <published>2019-04-10T02:18:51.000Z</published>
+    <updated>2019-04-10T02:46:46.092Z</updated>
+    
+    <content type="html"><![CDATA[<ol><li>Spring Boot的@Transactional注解对MyISAM存储引擎生效的问题？</li></ol><p>未解决问题，一脸懵逼。。。。</p><a id="more"></a> <p>其中，数据表对应的实体对象如下，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">import javax.persistence.Entity;</span><br><span class="line">import javax.persistence.GeneratedValue;</span><br><span class="line">import javax.persistence.GenerationType;</span><br><span class="line">import javax.persistence.Id;</span><br><span class="line"></span><br><span class="line">@Entity</span><br><span class="line">public class User &#123;</span><br><span class="line"></span><br><span class="line">    @GeneratedValue(strategy = GenerationType.AUTO)</span><br><span class="line">    @Id</span><br><span class="line">    private Long id;</span><br><span class="line"></span><br><span class="line">    private String name;</span><br><span class="line">    private String password;</span><br><span class="line"></span><br><span class="line">    public User() &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public User(String name, String password) &#123;</span><br><span class="line">        this.name = name;</span><br><span class="line">        this.password = password;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public String toString() &#123;</span><br><span class="line">        return &quot;User&#123;&quot; +</span><br><span class="line">                &quot;id=&quot; + id +</span><br><span class="line">                &quot;, name=&apos;&quot; + name + &apos;\&apos;&apos; +</span><br><span class="line">                &quot;, password=&apos;&quot; + password + &apos;\&apos;&apos; +</span><br><span class="line">                &apos;&#125;&apos;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Long getId() &#123;</span><br><span class="line">        return id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setId(Long id) &#123;</span><br><span class="line">        this.id = id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getName() &#123;</span><br><span class="line">        return name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setName(String name) &#123;</span><br><span class="line">        this.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getPassword() &#123;</span><br><span class="line">        return password;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setPassword(String password) &#123;</span><br><span class="line">        this.password = password;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>使用Spring Data Jpa进行数据操作，代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">import org.springframework.data.jpa.repository.JpaRepository;</span><br><span class="line">import org.springframework.data.jpa.repository.Modifying;</span><br><span class="line">import org.springframework.data.jpa.repository.Query;</span><br><span class="line">import org.springframework.stereotype.Repository;</span><br><span class="line"></span><br><span class="line">@Repository(&quot;user_repository&quot;)</span><br><span class="line">public interface UserRepository extends JpaRepository&lt;User, Long&gt; &#123;</span><br><span class="line"></span><br><span class="line">    Integer deleteUserById(Long id);</span><br><span class="line"></span><br><span class="line">    @Modifying(clearAutomatically = true)</span><br><span class="line">    @Query(value = &quot;update User set name=?2,password=?3 where id=?1&quot;)</span><br><span class="line">    Integer updateUserById(Long id,String name,String password);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>业务逻辑层代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">import org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line">import org.springframework.stereotype.Service;</span><br><span class="line">import org.springframework.transaction.annotation.Transactional;</span><br><span class="line"></span><br><span class="line">@Service(&quot;uService&quot;)</span><br><span class="line">public class UserService &#123;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    UserRepository userRepository;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    @Transactional(rollbackFor = Exception.class)</span><br><span class="line">    public Integer deleteUserById(Long id)&#123;</span><br><span class="line">        Integer i = userRepository.deleteUserById(id);</span><br><span class="line">        if(id.equals(718L))&#123;</span><br><span class="line">            throw new IllegalArgumentException(&quot;删除714错误，回滚&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        return i;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Transactional(rollbackFor = &#123;IllegalArgumentException.class&#125;)</span><br><span class="line">    public User saveUser(User user)&#123;</span><br><span class="line">        User u = userRepository.save(user);</span><br><span class="line"></span><br><span class="line">        if(u.getName()==&quot;yang1&quot;)&#123;</span><br><span class="line">            throw new IllegalArgumentException(&quot;存入yang，导致回滚&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        return u;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Transactional(rollbackFor = &#123;IllegalArgumentException.class&#125;)</span><br><span class="line">    public Integer updateUserById(User user)&#123;</span><br><span class="line">        Integer i = userRepository.updateUserById(user.getId(),user.getName(),user.getPassword());</span><br><span class="line">        return i;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>最后是测试代码，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">@RunWith(SpringRunner.class)</span><br><span class="line">@SpringBootTest</span><br><span class="line">public class UserServiceTest &#123;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    UserService userService;</span><br><span class="line"></span><br><span class="line">    private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());</span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    public void deleteUserById() &#123;</span><br><span class="line">        Integer i = userService.deleteUserById(718L);</span><br><span class="line">        LOGGER.error(&quot;delete by user id successful: &quot;+ i);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    public void saveUser()&#123;</span><br><span class="line">        User user = new User(&quot;yang&quot;,&quot;adasdsa&quot;);</span><br><span class="line">        User u = userService.saveUser(user);</span><br><span class="line">        LOGGER.error(u.toString());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    public void updateUser()&#123;</span><br><span class="line">        User user = new User(&quot;yang&quot;,&quot;adasdsa&quot;);</span><br><span class="line">        user.setId(714L);</span><br><span class="line">        int i = userService.updateUserById(user);</span><br><span class="line">        LOGGER.error(&quot;update by user id successful: &quot;+ i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>在测试删除用户（deleteUserById）以及保存用户（saveUser）时，发现抛出异常会导致回滚，但是我的数据库引擎是MyIsam，讲道理不应该支持事务。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;ol&gt;
+&lt;li&gt;Spring Boot的@Transactional注解对MyISAM存储引擎生效的问题？&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;未解决问题，一脸懵逼。。。。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="数据库" scheme="http://yoursite.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+    
+      <category term="MyIsam" scheme="http://yoursite.com/tags/MyIsam/"/>
+    
+      <category term="数据库" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+      <category term="问题" scheme="http://yoursite.com/tags/%E9%97%AE%E9%A2%98/"/>
+    
+  </entry>
   
   <entry>
     <title>代理模式</title>
@@ -149,9 +178,9 @@
     
       <category term="论文阅读" scheme="http://yoursite.com/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
     
-      <category term="生成对抗网络" scheme="http://yoursite.com/tags/%E7%94%9F%E6%88%90%E5%AF%B9%E6%8A%97%E7%BD%91%E7%BB%9C/"/>
-    
       <category term="问题" scheme="http://yoursite.com/tags/%E9%97%AE%E9%A2%98/"/>
+    
+      <category term="生成对抗网络" scheme="http://yoursite.com/tags/%E7%94%9F%E6%88%90%E5%AF%B9%E6%8A%97%E7%BD%91%E7%BB%9C/"/>
     
   </entry>
   
@@ -160,7 +189,7 @@
     <link href="http://yoursite.com/2019/03/04/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%8C%83%E5%BC%8F/"/>
     <id>http://yoursite.com/2019/03/04/数据库范式/</id>
     <published>2019-03-04T13:36:33.000Z</published>
-    <updated>2019-03-04T14:17:06.440Z</updated>
+    <updated>2019-04-10T02:19:30.952Z</updated>
     
     <content type="html"><![CDATA[<h2 id="第一范式（1NF）"><a href="#第一范式（1NF）" class="headerlink" title="第一范式（1NF）"></a>第一范式（1NF）</h2><p>关系模型中实体的每个属性都是原子属性，即元组在每个属性上的取值是不可分的。也就是说这些属性的取值是单一的，不是集合、数组等非原子数据。当实体中的某个属性都多个值时，必须将该属性拆分为多个原子属性。</p><a id="more"></a> <h2 id="第二范式（2NF）"><a href="#第二范式（2NF）" class="headerlink" title="第二范式（2NF）"></a>第二范式（2NF）</h2><p><strong>关系模型中的所有非主属性都完全依赖于所有的候选键</strong>。2NF其实就是在1NF的基础上消除那些非主属性对所有候选键的部分函数依赖。<br>例如，关系（学号，课程号，教师，成绩，学院）中，教师部分依赖于课程号，因此这个关系不满足第二范式，所以需要把上述关系拆分成（学号，课程号，成绩）和（课程号，教师，学院）。</p><h2 id="第三范式（3NF）"><a href="#第三范式（3NF）" class="headerlink" title="第三范式（3NF）"></a>第三范式（3NF）</h2><p><strong>关系模型中的非主属性既不部分函数依赖也不传递函数依赖于关系中的所有候选键</strong>。也就是说3NF是在2NF的基础上消除了非主属性对候选键的传递依赖关系。</p><p>还是上面的例子，关系（课程号，教师，学院）中存在传递依赖关系课程号-&gt;教师，以及教师-&gt;学院，因此不满足3NF。所以将其分解为（课程号，教师）和（教师，学院）。</p><h2 id="巴斯-科德范式（BCNF）"><a href="#巴斯-科德范式（BCNF）" class="headerlink" title="巴斯-科德范式（BCNF）"></a>巴斯-科德范式（BCNF）</h2><p><strong>对于关系R上的任何非平凡函数依赖X-&gt;Y都有X必包含R的某个候选键</strong>，那么就称关系R满足BCNF。BCNF是在第三范式的基础上继续消除主属性对于键的部分依赖和传递依赖。  </p><p>举个例子来说，关系（课程名，班级，教师）中假定多名教师承担多个班级的教学任务，每个教师仅承担一个课程的教学任务，同时可以给多个班级上课，那么可以知道有函数依赖</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(课程名，班级)-&gt;(教师)</span><br><span class="line">(教师)-&gt;(课程名)</span><br></pre></td></tr></table></figure><p>然而，上述关系中的主键是(课程名，班级)或者(教师，班级)。所以<code>(教师)-&gt;(课程名)</code>就是主属性对候选键的部分依赖，不满足BCNF。</p><h2 id="第四范式（4NF）"><a href="#第四范式（4NF）" class="headerlink" title="第四范式（4NF）"></a>第四范式（4NF）</h2><p>对于关系R中的非平凡多值依赖X-&gt;-&gt;Y，X必包含R的某个候选键，则称满足4NF。</p>]]></content>
     
@@ -170,7 +199,7 @@
     
     </summary>
     
-      <category term="工程" scheme="http://yoursite.com/categories/%E5%B7%A5%E7%A8%8B/"/>
+      <category term="数据库" scheme="http://yoursite.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     
     
       <category term="数据库" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
@@ -200,9 +229,9 @@
       <category term="深入理解Java虚拟机" scheme="http://yoursite.com/categories/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/"/>
     
     
-      <category term="垃圾收集器" scheme="http://yoursite.com/tags/%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/"/>
-    
       <category term="垃圾收集算法" scheme="http://yoursite.com/tags/%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="垃圾收集器" scheme="http://yoursite.com/tags/%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/"/>
     
   </entry>
   
@@ -552,43 +581,13 @@
       <category term="深入理解Java虚拟机" scheme="http://yoursite.com/categories/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/"/>
     
     
-      <category term="垃圾收集器" scheme="http://yoursite.com/tags/%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/"/>
-    
       <category term="垃圾收集算法" scheme="http://yoursite.com/tags/%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="垃圾收集器" scheme="http://yoursite.com/tags/%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/"/>
     
       <category term="安全点" scheme="http://yoursite.com/tags/%E5%AE%89%E5%85%A8%E7%82%B9/"/>
     
       <category term="安全区域" scheme="http://yoursite.com/tags/%E5%AE%89%E5%85%A8%E5%8C%BA%E5%9F%9F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>垃圾收集(一)</title>
-    <link href="http://yoursite.com/2019/01/12/%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86/"/>
-    <id>http://yoursite.com/2019/01/12/垃圾收集/</id>
-    <published>2019-01-12T03:50:08.000Z</published>
-    <updated>2019-01-18T04:40:35.523Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="垃圾收集"><a href="#垃圾收集" class="headerlink" title="垃圾收集"></a>垃圾收集</h1><p>垃圾回收需要关注的事情：  </p><ol><li>哪些内存需要回收？ Java堆和方法区</li><li>什么时候回收？</li><li>如何回收？  <a id="more"></a> java内存运行时各个区域，其中程序计数器、java虚拟机栈、本地方法栈3个区域随线程而生，随线程而灭；栈中的栈帧随着方法的进入和退出而有条不紊地进行出栈和入栈操作。而Java堆和方法区则不一样，一个接口中的多个实现类需要的内存可能不一样，一个方法中的多个分支需要的内存也可能不一样，我们只有在程序处于运行期间时才能知道会创建哪些对象，这部分内存的分配和回收都是动态的，垃圾回收器所关注的就是这部分内存。</li></ol><h2 id="对象存活判断"><a href="#对象存活判断" class="headerlink" title="对象存活判断"></a>对象存活判断</h2><h3 id="引用计数法（Reference-Counting）"><a href="#引用计数法（Reference-Counting）" class="headerlink" title="引用计数法（Reference Counting）"></a>引用计数法（Reference Counting）</h3><p>算法描述：给对象中添加一个引用计数器，每当有一个引用指向这个对象，计数器值就加1；当引用失效时，计数器值就减1；任何时刻计数器值为0的对象就不可能再被使用。<br>引用计数法存在一个问题：它很难解决对象之间的相互循环引用问题，举个例子，示例代码如下。对象<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line">/**</span><br><span class="line"> * 对象objA和objB存在相互引用</span><br><span class="line"> * @author yangkuan</span><br><span class="line"> */</span><br><span class="line">public class ReferenceCounteringGC &#123;</span><br><span class="line">    public Object instance = null;</span><br><span class="line"></span><br><span class="line">    private static final int _1MB = 1024 * 1024;</span><br><span class="line">    /**</span><br><span class="line">     * 这个成员变量的意义是通过其占用的内存，通过GC日志查看对象是否被回收</span><br><span class="line">     */</span><br><span class="line">    private byte[] bigSize = new byte[2 * _1MB];</span><br><span class="line"></span><br><span class="line">    public static void testGC()&#123;</span><br><span class="line">        ReferenceCounteringGC objA = new ReferenceCounteringGC();</span><br><span class="line">        ReferenceCounteringGC objB = new ReferenceCounteringGC();</span><br><span class="line">        objA.instance = objB;</span><br><span class="line">        objB.instance = objA;</span><br><span class="line"></span><br><span class="line">        objA = null;</span><br><span class="line">        objB = null;</span><br><span class="line"></span><br><span class="line">        // 假设此处发生垃圾回收，如果回收算法是引用计数法，那么objA和objB将不会被回收</span><br><span class="line">        System.gc();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><h3 id="可达性分析算法（Reachability-Analysis）"><a href="#可达性分析算法（Reachability-Analysis）" class="headerlink" title="可达性分析算法（Reachability Analysis）"></a>可达性分析算法（Reachability Analysis）</h3><h4 id="算法描述"><a href="#算法描述" class="headerlink" title="算法描述"></a>算法描述</h4><p>这个算法的基本思想就是通过一系列的称为“GC Roots”的对象作为起始点，从这些节点开始向下搜索，搜索所走过的路径称为引用链（Reference Chain），当一个对象到GC Roots没有任何引用链相连（即该对象到GC Roots不可达）时，则证明这个对象不可用。那这些不可达的对象就可以判定为可回收对象。<br>可作为GC Roots的对象包括以下几种：  </p><ul><li>虚拟机栈（栈帧中的本地变量表）中引用的对象；</li><li>方法区中类静态属性引用的对象；</li><li>方法区中常量引用的对象；</li><li>本地方法栈中JNI（即Native方法）引用的对象。</li></ul><h4 id="引用类型"><a href="#引用类型" class="headerlink" title="引用类型"></a>引用类型</h4><ol><li><strong>强引用（Strong Reference）</strong><br>强引用就是指在程序代码之中普遍存在的，类似<code>Object obj = new Object()</code>这类的引用，只要强引用还存在，垃圾收集器永远不会回收掉被引用的对象。</li><li><strong>软引用（Soft Reference）</strong><br>软引用是用来描述一些还有用但并非必须的对象。对于软引用关联着的对象，在系统将要发生内存溢出异常之前，将会把这些对象列进回收范围之中进行第二次回收。如果这次回收之后还没有足够的内存，那么程序就会抛出内存溢出异常。</li><li><strong>弱引用（Weak Reference）</strong><br>弱引用也是用来描述非必须对象的，但是它的强度比软引用还要更弱一些，被弱引用关联的对象只能生存到下一次垃圾回收之前。当垃圾收集器工作时，无论当内存是否足够，都会回收掉只被弱引用关联的对象。</li><li><strong>虚引用（Phantom Reference）</strong><br>虚引用也被称为幽灵引用或者幻影引用，它是最弱的一种引用关系。一个对象是否有虚引用的存在，完全不会对其生存时间构成威胁，也无法通过虚引用来取得一个对象实例。为一个对象设置虚引用关联的唯一目的就是能在这个对象被收集器回收时收到一个系统通知。</li></ol><h4 id="对象的两次标记过程"><a href="#对象的两次标记过程" class="headerlink" title="对象的两次标记过程"></a>对象的两次标记过程</h4><ol><li>如果对象再进行可达性分析的时候发现其与<code>GC Roots</code>之间不可达，那么它将会被第一次标记并进行下一次筛选，筛选的条件是此对象是否有必要执行<code>finalize()</code>方法。当对象没有覆盖<code>finalize()</code>方法或者<code>finalize()</code>方法已经被虚拟机执行过，都会被认为没有必要执行。</li><li>如果这个对象被虚拟机认为有必要执行<code>finalize()</code>方法，那么这个对象将会放置在一个叫<code>F-Queue</code>的队列中，并在稍后由一个由虚拟机自动建立的、低优先级的<code>Finalizer</code>线程去执行它。如果对象想要拯救自己，那么覆盖<code>finalize()</code>方法在方法中重新将自身与引用链上的任意一个对象关联起来就可以避免自己被回收。</li></ol><h3 id="回收方法区"><a href="#回收方法区" class="headerlink" title="回收方法区"></a>回收方法区</h3><p>方法区（永久代）的垃圾回收主要包括两个部分：废弃常量和无用的类。</p><ul><li>废弃常量指的是没有任何地方引用这个常量，这个常量会被系统清理出常量池；</li><li>无用的类需要同时满足以下三个条件：<blockquote><ol><li>该类的所有实例都已经被回收，也就是<code>Java</code>堆中不存在该类的任何实例；</li><li>加载该类的<code>ClassLoader</code>已经被回收；</li><li>该类对应的<code>java.lang.Class</code>对象没有在任何地方被引用，无法再任何地方通过反射访问该类的方法。</li></ol></blockquote></li></ul>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;垃圾收集&quot;&gt;&lt;a href=&quot;#垃圾收集&quot; class=&quot;headerlink&quot; title=&quot;垃圾收集&quot;&gt;&lt;/a&gt;垃圾收集&lt;/h1&gt;&lt;p&gt;垃圾回收需要关注的事情：  &lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;哪些内存需要回收？ Java堆和方法区&lt;/li&gt;
-&lt;li&gt;什么时候回收？&lt;/li&gt;
-&lt;li&gt;如何回收？&lt;/li&gt;&lt;/ol&gt;
-    
-    </summary>
-    
-      <category term="深入理解Java虚拟机" scheme="http://yoursite.com/categories/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/"/>
-    
-    
-      <category term="内存分配策略" scheme="http://yoursite.com/tags/%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E7%AD%96%E7%95%A5/"/>
-    
-      <category term="引用计数法" scheme="http://yoursite.com/tags/%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0%E6%B3%95/"/>
-    
-      <category term="可达性算法" scheme="http://yoursite.com/tags/%E5%8F%AF%E8%BE%BE%E6%80%A7%E7%AE%97%E6%B3%95/"/>
     
   </entry>
   
