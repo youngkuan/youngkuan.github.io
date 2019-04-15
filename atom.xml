@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-04-10T02:46:46.092Z</updated>
+  <updated>2019-04-15T09:37:19.549Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Stacked Cross Attention for Image-Text Matching</title>
+    <link href="http://yoursite.com/2019/04/15/Stacked-Cross-Attention-for-Image-Text-Matching/"/>
+    <id>http://yoursite.com/2019/04/15/Stacked-Cross-Attention-for-Image-Text-Matching/</id>
+    <published>2019-04-15T02:30:23.000Z</published>
+    <updated>2019-04-15T09:37:19.549Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="这篇文章做了什么？"><a href="#这篇文章做了什么？" class="headerlink" title="这篇文章做了什么？"></a>这篇文章做了什么？</h2><p>通过对图像中的对象或者突出内容与句子中的单词进行潜在语义对齐，使得图文匹配过程能够捕获到视觉与语言之间细粒度的相互关系，使得图文匹配更具有可解释性。目的是将单词和图像区域映射到同一嵌入空间（<code>common embedding space</code>）从而推断整个图像与句子之间的相似度。<br><a id="more"></a> </p><h2 id="相比于已有的方法有什么优点？"><a href="#相比于已有的方法有什么优点？" class="headerlink" title="相比于已有的方法有什么优点？"></a>相比于已有的方法有什么优点？</h2><p>已有方法：</p><ol><li>简单聚合所有可能的区域以及单词对之间的相似度，却没有关注区分单词和区域之间的重要性；</li><li>使用多步骤的注意力过程来捕获数量有限且缺乏一定解释性的语义对齐。</li></ol><p>这篇文章使用提出的<code>Stacked Cross Attention</code>去发现在图像区域和单词之间的所有潜在对齐，从而计算图文相似度。已有方法通过执行固定步骤的注意力推理，从而在一个时刻只能发现有限的语义对齐，而<code>Stacked Cross Attention</code>可以同时发现所有可能的语义对齐。由于语义对齐的数量随着不同的图像和句子而变化，因此<code>Stacked Cross Attention</code>方法推断出的对应关系更加全面，从而使图像文本匹配更具可解释性。</p><h2 id="这篇文章是怎么做的？"><a href="#这篇文章是怎么做的？" class="headerlink" title="这篇文章是怎么做的？"></a>这篇文章是怎么做的？</h2><ol><li>利用自底向上的注意力机制检测图像区域，并提取图像区域的特征；</li><li>将句子中的单词及其句子上下文映射为特征向量；</li><li>应用<code>Stacked Cross Attention</code>通过对齐图像区域和单词特征来推断图文相似度。</li><li>这篇文章的损失函数关注每一个<code>Batch</code>中最负面的图文对（也就是最不匹配的图文对）。所以对于给定的正样例对$(I,T)$，那么最负样例对定义为$\hat{I}<em>h=argmax</em>{m\neq{I}}S(m,T)$以及$\hat{T}<em>h=argmax</em>{d\neq{T}}S(I,d)$。所以这篇文章定义损失函数如下：  </li></ol><p>$$<br>l_{hard}(I,T)=[\alpha-S(I,T)+S(I,\hat{T}<em>h)]</em>++[\alpha-S(I,T)+S(\hat{I}<em>h,T)]</em>+<br>$$</p><h2 id="怎么文章题目中的Stacked-Cross-Attention？"><a href="#怎么文章题目中的Stacked-Cross-Attention？" class="headerlink" title="怎么文章题目中的Stacked Cross Attention？"></a>怎么文章题目中的<code>Stacked Cross Attention</code>？</h2><p><code>Stacked Cross Attention</code>通过两个阶段来关注图像和文本的上下文信息。第一个阶段，给定一个图像和一个句子，关注每个图像区域对应的句子中的单词，并将每个图像区域与来自句子的受关注信息进行比较，以确定图像区域的重要性（比如图像区域在句子中是否被提到）。第二阶段，与第一阶段相似的，根据每个单词对应的图像区域来决定每个单词的重要性（也就是对每个单词的关注度）。</p><h2 id="文章的实验结果展示"><a href="#文章的实验结果展示" class="headerlink" title="文章的实验结果展示"></a>文章的实验结果展示</h2><p>这篇文章在Flickr30K以及MS-COCO数据集上进行实验，结果如下：</p><p><img src="/2019/04/15/Stacked-Cross-Attention-for-Image-Text-Matching/Stacked-Cross-Attention1.png" alt="image"></p><p><img src="/2019/04/15/Stacked-Cross-Attention-for-Image-Text-Matching/Stacked-Cross-Attention2.png" alt="image"></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;这篇文章做了什么？&quot;&gt;&lt;a href=&quot;#这篇文章做了什么？&quot; class=&quot;headerlink&quot; title=&quot;这篇文章做了什么？&quot;&gt;&lt;/a&gt;这篇文章做了什么？&lt;/h2&gt;&lt;p&gt;通过对图像中的对象或者突出内容与句子中的单词进行潜在语义对齐，使得图文匹配过程能够捕获到视觉与语言之间细粒度的相互关系，使得图文匹配更具有可解释性。目的是将单词和图像区域映射到同一嵌入空间（&lt;code&gt;common embedding space&lt;/code&gt;）从而推断整个图像与句子之间的相似度。&lt;br&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="科研" scheme="http://yoursite.com/categories/%E7%A7%91%E7%A0%94/"/>
+    
+    
+      <category term="图像识别" scheme="http://yoursite.com/tags/%E5%9B%BE%E5%83%8F%E8%AF%86%E5%88%AB/"/>
+    
+      <category term="神经网络" scheme="http://yoursite.com/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"/>
+    
+      <category term="论文阅读" scheme="http://yoursite.com/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
+    
+      <category term="图文匹配" scheme="http://yoursite.com/tags/%E5%9B%BE%E6%96%87%E5%8C%B9%E9%85%8D/"/>
+    
+  </entry>
   
   <entry>
     <title>MyIsam存储引擎</title>
@@ -555,39 +583,6 @@
     
     
       <category term="nginx" scheme="http://yoursite.com/tags/nginx/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>垃圾收集（二）</title>
-    <link href="http://yoursite.com/2019/01/14/%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%EF%BC%88%E4%BA%8C%EF%BC%89/"/>
-    <id>http://yoursite.com/2019/01/14/垃圾收集（二）/</id>
-    <published>2019-01-14T02:25:44.000Z</published>
-    <updated>2019-01-18T04:40:40.615Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="垃圾收集"><a href="#垃圾收集" class="headerlink" title="垃圾收集"></a>垃圾收集</h1><h2 id="垃圾收集算法"><a href="#垃圾收集算法" class="headerlink" title="垃圾收集算法"></a>垃圾收集算法</h2><h3 id="标记-清除算法"><a href="#标记-清除算法" class="headerlink" title="标记-清除算法"></a>标记-清除算法</h3><p>算法分为标记阶段和清除阶段 ，首先标记出所有需要回收的对象，在标记完成后统一回收所有被标记的对象，它的标记过程就是引用计数法或者可达性算法判断对象是否存活的过程。<br>不足：  </p><ol><li>效率问题，标记和清除两个阶段的效率都不高；</li><li>空间问题，标记清除之后会产生大量不连续的内存碎片，空间碎片太多可能会导致以后程序运行过程中需要分配较大对象时，无法找到足够的内存碎片而不得不提前出发一次垃圾收集动作。<br>标记清除算法的执行过程如下图所示：  </li></ol><p><img src="/2019/01/14/垃圾收集（二）/gc1.png" alt="image"><br><a id="more"></a> </p><h3 id="复制算法"><a href="#复制算法" class="headerlink" title="复制算法"></a>复制算法</h3><p>为了解决效率问题，一种“复制”的垃圾收集算法出现了，它将可用的内存分成大小相等的两个区域，每次只使用其中的一块区域。当这块区域用完之后，就将还存活着的对象复制到另一块内存区域上，然后再把已使用过的内存空间一次清理掉。这样使得每次都是对整个半区进行垃圾回收，内存分配时也就不用再考虑内存碎片等复杂情况，只要移动堆顶指针，按顺序分配内存即可，实现简单，运行高效。只是这种算法每次只能使用一半的内存，相当于将内存缩小为原来的一半，代价太高。复制算法的执行过程如下图所示：</p><p><img src="/2019/01/14/垃圾收集（二）/gc2.png" alt="image"></p><p>目前的商业虚拟机都是采用复制算法回收新生代，但是并不按照<code>1:1</code>划分内存空间，而是将内存分为一块较大的Eden空间和两块较小的<code>Survivor</code>空间，每次使用<code>Eden</code>和其中一块<code>Survivor</code>。当回收时，将Eden和Survivor中还存活的对象一次性复制到另一块<code>Survivor</code>空间上，最后清理掉Eden和刚才用过的Survivor空间。<code>HotSpot</code>虚拟机默认<code>Eden：Survivor=8:1</code>，也就是每次新生代中可用内存空间为整个新生代容量的<code>90%</code>，只有<code>10%</code>的内存被“浪费”。当然在大多数（<code>98%</code>）情况下，只有不超过<code>10%</code>的对象存活，而当超过<code>10%</code>时，也就意味着<code>Survivor</code>空间不够用，这个时候就需要依赖老年代进行分配担保（无法再<code>Survivor</code>区存放的对象直接进入老年代）。</p><h3 id="标记-整理算法"><a href="#标记-整理算法" class="headerlink" title="标记-整理算法"></a>标记-整理算法</h3><p>复制算法在对象存活率较高的情况下就会进行较多的复制操作，效率将会变低，而且还需要额外的内存空间进行分配担保，以应对内存（<code>Survivor</code>空间）不够容纳存活对象的极端情况。<br>因此，老年代一般不采用复制算法，而采用“标记-整理”（<code>Mark-Compact</code>）算法，标记过程仍然与“标记-清除”算法一样，但后续步骤不是直接对可回收对象进行清理，而是让存活对象都向一端移动，然后直接清理掉端边界以外的内存，标记-整理算法的示意图如下：</p><p><img src="/2019/01/14/垃圾收集（二）/gc3.png" alt="image"></p><h3 id="分代收集算法"><a href="#分代收集算法" class="headerlink" title="分代收集算法"></a>分代收集算法</h3><p>当前商业虚拟机的垃圾收集都采用“分代收集”（<code>Generational Collection</code>）算法，这种算法根据对象存活周期的不同将内存划分为几块。一般是把Java堆划分成新生代和老生代，从而根据各个年代的特点采用最适当的收集算法。在新生代中，每次垃圾收集都会发现大量的对象死去，只有少量对象存活，因此采用复制算法，只需要付出少量存活对象的复制成本就可以完成收集；在老年代中因为对象存活率高、没有额外的空间对它进行分配担保，就必须采用“标记-清理”或者“标记-整理”算法进行回收。</p><h2 id="HotSpot的算法实现"><a href="#HotSpot的算法实现" class="headerlink" title="HotSpot的算法实现"></a>HotSpot的算法实现</h2><h3 id="枚举根节点"><a href="#枚举根节点" class="headerlink" title="枚举根节点"></a>枚举根节点</h3><p>从可达性分析中从<code>GC Roots</code>节点找到引用链这个操作为例，可作为<code>GC Roots</code>的加点主要在全局性的引用（例如常量或类静态变量）与执行上下文（例如栈帧中的本地变量表）中，现在的很多应用仅仅方法区就有数百兆，如果要逐个检查这里面的引用，那么必然会消耗很多时间。<br>另外，可达性分析对执行时间的敏感还体现在<code>GC</code>停顿上，因为这项分析工作必须在一个能确保一致性的快照中进行——这里的“一致性”的意思是在真个分析过程中整个执行系统看起来就像被冻结在某个时间点上，不可以出现分析过程中对象引用关系还在不断变化的情况，该点不满足的话分析结果准确性就无法得到保证。这点是导致在<code>GC</code>进行时必须停止多有<code>Java</code>执行线程的其中一个重要原因。即时在号称（几乎）不会发生停顿的<code>CMS</code>收集器中，枚举根节点时也是必须要停顿的。<br>由于目前主流的<code>Java</code>虚拟机使用的都是准确式<code>GC</code>，所以当执行系统停顿下来后，并不需要一个不漏地检查完所有执行上下文和全局的引用位置，虚拟机应当是有办法直接得知哪些地方存放着对象引用。在<code>HotSpot</code>的实现中，是使用一组称为<code>OopMap</code>的数据结构来达到这个目的，在类加载完成时，<code>HotSpot</code>就把对象内什么偏移量上是什么类型的数据计算出来，在<code>JIT</code>编译过程中，也会在特定位置记录下栈和寄存器哪些位置是引用。</p><h3 id="安全点"><a href="#安全点" class="headerlink" title="安全点"></a>安全点</h3><p>在<code>OopMap</code>的协助下，<code>HotSpot</code>可以快速且准确地完成<code>GC Roots</code>枚举，但一个很现实的问题随之而来：可能导致引用关系发生变化，或者说<code>OopMap</code>内容变化的指令非常多，如果每一条指令都生成对应的<code>OopMap</code>，那将会需要大量的额外空间，这样<code>GC</code>的空间成本就会变得很高。<br>实际上，<code>HotSpot</code>也的确没有为每条指令都生成<code>OopMap</code>，前面已经提到只是在“特定的位置”记录这些信息，这些位置称为安全点（<code>Safepoint</code>），即程序执行时并非在所有的地方都能停顿下来开始GC，只有到达安全点时才能暂停。<code>Safepoint</code>的选定既不能太少以致于GC等待时间过长，也不能过于频繁以致于过分增大运行时的负荷。所以，安全点的选定基本上是以程序“是否具有让程序长时间执行的特征”为标准进行选定的————因为每一条指令执行的时间都非常短暂，程序不太可能因为指令流长度太长这个原因而过长时间运行，“长时间执行”最明显的特征就是指令序列复用，例如方法调用、循环跳转、异常跳转等，所以具有这些功能的指令才回产生<code>Safepoint</code>。<br>对于<code>Safepoint</code>，另一个需要考虑的问题就是如何在GC发生时让所有的线程都“跑”到最近的安全点上停顿下来。这里有两种方案可以选择:抢先式中断（<code>Preemptive Suspension</code>）和主动式中断（<code>Voluntary Suspension</code>），其中抢先式中断不需要线程的执行代码主动去配合，在GC发生时，首先把所有的线程全部中断，如果发现线程中断的地方不在安全点上，就恢复线程，让它“跑”到安全点上。现在几乎没有虚拟机实现采用抢先式中断来暂停线程从而相应GC时间。<br>而主动式中断的思想是当GC需要中断线程的时候，不直接对线程操作，仅仅简单地设一个标志，各个线程执行时主动去轮询这个标志，发现中断标志为真时就自己中断挂起。</p><h3 id="安全区域"><a href="#安全区域" class="headerlink" title="安全区域"></a>安全区域</h3><p>使用<code>Safepoint</code>似乎已经完美解决了如何进入<code>GC</code>的问题，但实际情况却并不一定。<code>Safepoint</code>机制保证了程序执行时，在不太长的时间内就会遇到可进入<code>GC</code>的<code>Safepoint</code>。但是程序不执行的时候，<code>CPU</code>没有分配时间给程序，典型例子就是线程处于<code>Sleep</code>或者<code>Blocked</code>状态，这时线程无法响应<code>JVM</code>的中断请求，“走”到安全的地方去挂起中断，<code>JVM</code>也不太可能等待这些线程重新分配<code>CPU</code>时间。<br>对于这种情况就需要安全区域（<code>Safe Region</code>）来解决。安全区域是指在一段代码片段中，引用关系不会发生变化。在这个区域中的任何地方开始GC都是安全的。<br>在线程执行到<code>Saferegion</code>中的代码时，首先标志自己进入了<code>Saferegion</code>，那样当在这段时间里<code>JVM</code>要发起<code>GC</code>时，就不用管标志自己为<code>Saferegion</code>状态的线程了。在线程要离开<code>Saferegion</code>时，它要检查系统是否已经完成了根节点枚举（或者整个<code>GC</code>过程），如果完成了那么线程继续执行，否则它就要等待直到收到可以安全离开<code>Saferegion</code>的信号为止。</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;垃圾收集&quot;&gt;&lt;a href=&quot;#垃圾收集&quot; class=&quot;headerlink&quot; title=&quot;垃圾收集&quot;&gt;&lt;/a&gt;垃圾收集&lt;/h1&gt;&lt;h2 id=&quot;垃圾收集算法&quot;&gt;&lt;a href=&quot;#垃圾收集算法&quot; class=&quot;headerlink&quot; title=&quot;垃圾收集算法&quot;&gt;&lt;/a&gt;垃圾收集算法&lt;/h2&gt;&lt;h3 id=&quot;标记-清除算法&quot;&gt;&lt;a href=&quot;#标记-清除算法&quot; class=&quot;headerlink&quot; title=&quot;标记-清除算法&quot;&gt;&lt;/a&gt;标记-清除算法&lt;/h3&gt;&lt;p&gt;算法分为标记阶段和清除阶段 ，首先标记出所有需要回收的对象，在标记完成后统一回收所有被标记的对象，它的标记过程就是引用计数法或者可达性算法判断对象是否存活的过程。&lt;br&gt;不足：  &lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;效率问题，标记和清除两个阶段的效率都不高；&lt;/li&gt;
-&lt;li&gt;空间问题，标记清除之后会产生大量不连续的内存碎片，空间碎片太多可能会导致以后程序运行过程中需要分配较大对象时，无法找到足够的内存碎片而不得不提前出发一次垃圾收集动作。&lt;br&gt;标记清除算法的执行过程如下图所示：  &lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;&lt;img src=&quot;/2019/01/14/垃圾收集（二）/gc1.png&quot; alt=&quot;image&quot;&gt;&lt;br&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="深入理解Java虚拟机" scheme="http://yoursite.com/categories/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/"/>
-    
-    
-      <category term="垃圾收集算法" scheme="http://yoursite.com/tags/%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E7%AE%97%E6%B3%95/"/>
-    
-      <category term="垃圾收集器" scheme="http://yoursite.com/tags/%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/"/>
-    
-      <category term="安全点" scheme="http://yoursite.com/tags/%E5%AE%89%E5%85%A8%E7%82%B9/"/>
-    
-      <category term="安全区域" scheme="http://yoursite.com/tags/%E5%AE%89%E5%85%A8%E5%8C%BA%E5%9F%9F/"/>
     
   </entry>
   
