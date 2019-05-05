@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[句子分块]]></title>
+    <url>%2F2019%2F04%2F19%2F%E5%8F%A5%E5%AD%90%E5%88%86%E5%9D%97%2F</url>
+    <content type="text"><![CDATA[句子分块分块也称为浅层分析，它基本上是识别句子部分和短语(如名词短语)。 词性标注告诉你单词是名词，动词，形容词等，但它并没有给你任何关于句子中句子或短语结构的线索。有时除了单词的词性，自然语言处理任务需要获取更多信息，这是就需要对句子进行解析，从中获得完整的解析树。PyRATA Python nltk.RegexpParser() Examples 1234567891011121314151617181920212223242526272829303132def prepareForNLP(text): sentences = nltk.sent_tokenize(text) sentences = [nltk.word_tokenize(sent) for sent in sentences] sentences = [nltk.pos_tag(sent) for sent in sentences] return sentencesdef chunk(sentence): chunkToExtract = &quot;&quot;&quot; NP: &#123;&lt;NNP&gt;*&#125; &#123;&lt;DT&gt;?&lt;JJ&gt;?&lt;NNS&gt;&#125; &#123;&lt;NN&gt;&lt;NN&gt;&#125;&quot;&quot;&quot; grammar = r&quot;&quot;&quot; NP: &#123;&lt;DT|JJ|NN.*&gt;+&#125; # Chunk sequences of DT, JJ, NN PP: &#123;&lt;IN&gt;&lt;NP&gt;&#125; # Chunk prepositions followed by NP VP: &#123;&lt;VB.*&gt;&lt;NP|PP|CLAUSE&gt;+&#125; # Chunk verbs and their arguments CLAUSE: &#123;&lt;NP&gt;&lt;VP&gt;&#125; # Chunk NP, VP &#125;&lt;[\.VI].*&gt;+&#123; # chink any verbs, prepositions or periods &quot;&quot;&quot; parser = nltk.RegexpParser(grammar) result = parser.parse(sentence) print &quot;result.label():&quot;, result.label() for subtree in result.subtrees(): t = subtree t = &apos; &apos;.join(word for word, pos in t.leaves()) print(t)if __name__ == &apos;__main__&apos;: example_sent = &quot;A man with a red helmet stands on a small moped on a dirt road .&quot;.lower() sentences = prepareForNLP(example_sent) for sentence in sentences: chunk(sentence) 输出：123456789a man with a red helmet stands on a small moped on a dirt road .a manwith a red helmeta red helmetstands on a small moped on a dirt roadon a small mopeda small mopedon a dirt roada dirt road 相关链接名词短语的分块：NP Chunking (State of the art))]]></content>
+      <categories>
+        <category>科研</category>
+      </categories>
+      <tags>
+        <tag>自然语言处理</tag>
+        <tag>chunk</tag>
+        <tag>NLTK</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[阿里巴巴实习生面试]]></title>
     <url>%2F2019%2F04%2F17%2F%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4%E5%AE%9E%E4%B9%A0%E7%94%9F%E9%9D%A2%E8%AF%95%2F</url>
     <content type="text"><![CDATA[阿里巴巴暑期实习，官网内推投的成都蚂蚁金服，经过漫长等待和催促终于等来了面试。 一面（48min）自我介绍Java并发 一个之前没注意的问题：synchronized关键字可以修饰类吗？ Spring bean的生命周期和作用域IOC有什么用解耦 MySQL数据库 索引 索引的优缺点 锁 蚂蚁金服干啥了解吗安全 蚂蚁金服的对手有哪些微信支付、京东金融 蚂蚁金服和对手的优势和劣势幂等律一个请求与多个请求等效 一个用户的同一请求（比如充值操作）由于网络问题等多次发送给服务端，怎么实现幂等？]]></content>
@@ -9,8 +22,8 @@
       </categories>
       <tags>
         <tag>实习</tag>
-        <tag>面试</tag>
         <tag>阿里巴巴</tag>
+        <tag>面试</tag>
         <tag>蚂蚁金服</tag>
       </tags>
   </entry>
@@ -63,8 +76,8 @@
       </categories>
       <tags>
         <tag>实习</tag>
-        <tag>字节跳动</tag>
         <tag>面试</tag>
+        <tag>字节跳动</tag>
       </tags>
   </entry>
   <entry>
@@ -127,8 +140,8 @@
         <category>深入理解Java虚拟机</category>
       </categories>
       <tags>
-        <tag>垃圾收集器</tag>
         <tag>垃圾收集算法</tag>
+        <tag>垃圾收集器</tag>
       </tags>
   </entry>
   <entry>
@@ -285,8 +298,8 @@
         <category>深入理解Java虚拟机</category>
       </categories>
       <tags>
-        <tag>垃圾收集器</tag>
         <tag>垃圾收集算法</tag>
+        <tag>垃圾收集器</tag>
         <tag>安全点</tag>
         <tag>安全区域</tag>
       </tags>

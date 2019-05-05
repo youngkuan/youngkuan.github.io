@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-04-17T15:10:07.275Z</updated>
+  <updated>2019-05-05T07:35:48.425Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>句子分块</title>
+    <link href="http://yoursite.com/2019/04/19/%E5%8F%A5%E5%AD%90%E5%88%86%E5%9D%97/"/>
+    <id>http://yoursite.com/2019/04/19/句子分块/</id>
+    <published>2019-04-19T02:52:03.000Z</published>
+    <updated>2019-05-05T07:35:48.425Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="句子分块"><a href="#句子分块" class="headerlink" title="句子分块"></a>句子分块</h2><p>分块也称为浅层分析，它基本上是识别句子部分和短语(如名词短语)。 词性标注告诉你单词是名词，动词，形容词等，但它并没有给你任何关于句子中句子或短语结构的线索。有时除了单词的词性，自然语言处理任务需要获取更多信息，这是就需要对句子进行解析，从中获得完整的解析树。<br><a id="more"></a><br><a href="https://github.com/nicolashernandez/PyRATA" target="_blank" rel="noopener">PyRATA</a></p><p><a href="https://www.programcreek.com/python/example/91255/nltk.RegexpParser" target="_blank" rel="noopener">Python nltk.RegexpParser() Examples</a></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">def prepareForNLP(text):</span><br><span class="line">    sentences = nltk.sent_tokenize(text)</span><br><span class="line">    sentences = [nltk.word_tokenize(sent) for sent in sentences]</span><br><span class="line">    sentences = [nltk.pos_tag(sent) for sent in sentences]</span><br><span class="line">    return sentences</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def chunk(sentence):</span><br><span class="line">    chunkToExtract = &quot;&quot;&quot;</span><br><span class="line">NP: &#123;&lt;NNP&gt;*&#125;</span><br><span class="line">&#123;&lt;DT&gt;?&lt;JJ&gt;?&lt;NNS&gt;&#125;</span><br><span class="line">&#123;&lt;NN&gt;&lt;NN&gt;&#125;&quot;&quot;&quot;</span><br><span class="line">    grammar = r&quot;&quot;&quot;</span><br><span class="line">     NP: &#123;&lt;DT|JJ|NN.*&gt;+&#125;          # Chunk sequences of DT, JJ, NN</span><br><span class="line">     PP: &#123;&lt;IN&gt;&lt;NP&gt;&#125;               # Chunk prepositions followed by NP</span><br><span class="line">     VP: &#123;&lt;VB.*&gt;&lt;NP|PP|CLAUSE&gt;+&#125; # Chunk verbs and their arguments</span><br><span class="line">     CLAUSE: &#123;&lt;NP&gt;&lt;VP&gt;&#125;           # Chunk NP, VP</span><br><span class="line">     &#125;&lt;[\.VI].*&gt;+&#123;       # chink any verbs, prepositions or periods</span><br><span class="line">     &quot;&quot;&quot;</span><br><span class="line">    parser = nltk.RegexpParser(grammar)</span><br><span class="line">    result = parser.parse(sentence)</span><br><span class="line">    print &quot;result.label():&quot;, result.label()</span><br><span class="line">    for subtree in result.subtrees():</span><br><span class="line">        t = subtree</span><br><span class="line">        t = &apos; &apos;.join(word for word, pos in t.leaves())</span><br><span class="line">        print(t)</span><br><span class="line"></span><br><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">    example_sent = &quot;A man with a red helmet stands on a small moped on a dirt road .&quot;.lower()</span><br><span class="line">    sentences = prepareForNLP(example_sent)</span><br><span class="line">    for sentence in sentences:</span><br><span class="line">        chunk(sentence)</span><br></pre></td></tr></table></figure><p>输出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">a man with a red helmet stands on a small moped on a dirt road .</span><br><span class="line">a man</span><br><span class="line">with a red helmet</span><br><span class="line">a red helmet</span><br><span class="line">stands on a small moped on a dirt road</span><br><span class="line">on a small moped</span><br><span class="line">a small moped</span><br><span class="line">on a dirt road</span><br><span class="line">a dirt road</span><br></pre></td></tr></table></figure></p><h2 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h2><h3 id="名词短语的分块："><a href="#名词短语的分块：" class="headerlink" title="名词短语的分块："></a>名词短语的分块：</h3><p><a href="https://aclweb.org/aclwiki/NP_Chunking_(State_of_the_art" target="_blank" rel="noopener">NP Chunking (State of the art)</a>)</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;句子分块&quot;&gt;&lt;a href=&quot;#句子分块&quot; class=&quot;headerlink&quot; title=&quot;句子分块&quot;&gt;&lt;/a&gt;句子分块&lt;/h2&gt;&lt;p&gt;分块也称为浅层分析，它基本上是识别句子部分和短语(如名词短语)。 词性标注告诉你单词是名词，动词，形容词等，但它并没有给你任何关于句子中句子或短语结构的线索。有时除了单词的词性，自然语言处理任务需要获取更多信息，这是就需要对句子进行解析，从中获得完整的解析树。&lt;br&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="科研" scheme="http://yoursite.com/categories/%E7%A7%91%E7%A0%94/"/>
+    
+    
+      <category term="自然语言处理" scheme="http://yoursite.com/tags/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86/"/>
+    
+      <category term="chunk" scheme="http://yoursite.com/tags/chunk/"/>
+    
+      <category term="NLTK" scheme="http://yoursite.com/tags/NLTK/"/>
+    
+  </entry>
   
   <entry>
     <title>阿里巴巴实习生面试</title>
@@ -36,9 +62,9 @@
     
       <category term="实习" scheme="http://yoursite.com/tags/%E5%AE%9E%E4%B9%A0/"/>
     
-      <category term="面试" scheme="http://yoursite.com/tags/%E9%9D%A2%E8%AF%95/"/>
-    
       <category term="阿里巴巴" scheme="http://yoursite.com/tags/%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4/"/>
+    
+      <category term="面试" scheme="http://yoursite.com/tags/%E9%9D%A2%E8%AF%95/"/>
     
       <category term="蚂蚁金服" scheme="http://yoursite.com/tags/%E8%9A%82%E8%9A%81%E9%87%91%E6%9C%8D/"/>
     
@@ -153,9 +179,9 @@
     
       <category term="实习" scheme="http://yoursite.com/tags/%E5%AE%9E%E4%B9%A0/"/>
     
-      <category term="字节跳动" scheme="http://yoursite.com/tags/%E5%AD%97%E8%8A%82%E8%B7%B3%E5%8A%A8/"/>
-    
       <category term="面试" scheme="http://yoursite.com/tags/%E9%9D%A2%E8%AF%95/"/>
+    
+      <category term="字节跳动" scheme="http://yoursite.com/tags/%E5%AD%97%E8%8A%82%E8%B7%B3%E5%8A%A8/"/>
     
   </entry>
   
@@ -285,9 +311,9 @@
       <category term="深入理解Java虚拟机" scheme="http://yoursite.com/categories/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/"/>
     
     
-      <category term="垃圾收集器" scheme="http://yoursite.com/tags/%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/"/>
-    
       <category term="垃圾收集算法" scheme="http://yoursite.com/tags/%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="垃圾收集器" scheme="http://yoursite.com/tags/%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/"/>
     
   </entry>
   
@@ -554,35 +580,6 @@
       <category term="上下文切换" scheme="http://yoursite.com/tags/%E4%B8%8A%E4%B8%8B%E6%96%87%E5%88%87%E6%8D%A2/"/>
     
       <category term="死锁" scheme="http://yoursite.com/tags/%E6%AD%BB%E9%94%81/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Kafka-分布式流平台</title>
-    <link href="http://yoursite.com/2019/01/16/Kafka-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B5%81%E5%B9%B3%E5%8F%B0/"/>
-    <id>http://yoursite.com/2019/01/16/Kafka-分布式流平台/</id>
-    <published>2019-01-16T09:20:56.000Z</published>
-    <updated>2019-03-06T06:57:16.384Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Kafka-分布式流平台"><a href="#Kafka-分布式流平台" class="headerlink" title="Kafka:分布式流平台"></a>Kafka:分布式流平台</h1><p><a href="https://kafka.apache.org/intro" target="_blank" rel="noopener">参考链接：Kafka官网</a></p><p>Apache Kafka是一个分布式流平台，具有以下三个关键能力：</p><ul><li>发布和订阅记录流（<code>streams of records</code>），类似于一个消息队列或者是企业消息系统；</li><li>以具有容错性和持久性的方式存储记录流；</li><li><p>即时处理记录流</p><a id="more"></a> <p>Kafka通常被用在两大类应用中：</p></li><li><p>构建可在系统或应用程序之间可靠获取数据的实时流数据管道</p></li><li>构建转换或响应数据流的实时流应用</li></ul><p>一些概念：</p><ul><li>Kafka作为一个集群可以运行在一个或多个服务器上，这些服务器可跨多个数据中心；</li><li>Kafka集群存储在类别中的记录流称为主题（topics）；</li><li>每个记录包含一个键（key）、一个值（value）以及一个时间戳（timestamp）；</li></ul><p>Kafka有四个核心API：</p><ul><li>生产者（Producer）API允许一个应用将记录流发布到一个或多个Kafka主题（topics）上；</li><li>消费者（Consumer）API允许一个应用去订阅一个或者多个主题（topics），并处理这些给它们生产的记录流；</li><li>流（Streams）API允许一个应用扮演流处理器的角色，从一个或多个主题消费一个输入流，然后向一个或多个主题输出流，高效地进行输入流到输出流的转换；</li><li>连接（Connector）API允许创建或者运行可重用的生产者或消费者，并与将Kafka主题与现有的应用或数据系统连接。例如关系数据库的连接器可以捕获对表的每个更改。</li></ul><p><img src="/2019/01/16/Kafka-分布式流平台/kafka1.png" alt="四个核心API"></p><h2 id="主题（Topics）和记录（Logs）"><a href="#主题（Topics）和记录（Logs）" class="headerlink" title="主题（Topics）和记录（Logs）"></a>主题（Topics）和记录（Logs）</h2><p>一个主题是发布记录的一个类别或订阅源名称。 Kafka中主题总是多订阅用户; 也就是说，一个主题可以有零个，一个或多个消费者订阅写入它的数据。<br>对于每个主题，Kafka群集都维护一个如下所示的分区日志（partitioned log）：</p><p><img src="/2019/01/16/Kafka-分布式流平台/kafka2.png" alt="主题解剖">  </p><p>每个分区（partition）都是有序的，不可变的记录序列，这些记录不断添加到结构化的提交日志中。分区中的每个记录都被分配一个称为偏移的序列id，这些id唯一标识了分区中的每个记录。<br>Kafka集群使用可配置的保留期，持久保存所有已发布的记录，无论这些记录是否已被使用。 例如，如果保留策略被设置为两天，那么在发布记录后的两天内，记录都可以被消费，之后将被丢弃以释放空间。 Kafka的性能不受数据大小的影响，因此长时间存储数据不是问题。<br>实际上，基于每个消费者保留的唯一元数据是该消费者在日志中的偏移或位置。 这种偏移由消费者控制：通常消费者会线性地提高其偏移量从而读取记录，但事实上，由于该位置由消费者控制，因此它可以按照自己喜欢的任何顺序去消费记录。 例如，消费者可以重置为较旧的偏移量去重新处理过去的数据，或者跳到最近的记录并从“现在”开始消费。</p><p><img src="/2019/01/16/Kafka-分布式流平台/kafka3.png" alt="主题解剖">  </p><p>这些特性的组合意味着Kafka消费者非常方便，消费者的加入移除对集群或其他消费者没有太大影响。 例如，您可以使用我们的命令行工具“拖尾（tail，此处不太理解）”任何主题的内容，而无需更改任何现有使用者所消耗的内容。</p><p>日志中的分区有多种用途。 首先，它们允许日志扩展到超出适合单个服务器的规模。 每个独立分区必须适合托管它的服务器，但一个主题可能有多个分区，因此它可以处理任意数量的数据。 其次，分区充当了并行性的单元。</p><h2 id="一些基本概念"><a href="#一些基本概念" class="headerlink" title="一些基本概念"></a>一些基本概念</h2><ol><li>Consumer Group：逻辑概念，对于同一个topic，会广播给不同的group。同一个group中只有一个consumer可以消费该topic。</li><li>Broker：物理概念，Kafka集群中的每个Kafka节点。</li><li>Partition：物理概念，Kafka下数据存储的基本单元。一个Topic数据，会被分散存储到多个Partition，每个Partition是有序的。</li><li>Replication：同一个Partition可能会有多个副本（replication），多个副本之间数据是一致的。</li><li>Replication Leader：一个Partition的多个副本需要选举一个leader负责partition上与Producer和Consumer消息传递。</li><li>ReplicaManager：负责管理当前Broker所有分区和副本的信息，处理KafkaController发起的请求，如副本状态的切换（重新选举Replication Leader）、添加消息、消费消息等。</li></ol>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Kafka-分布式流平台&quot;&gt;&lt;a href=&quot;#Kafka-分布式流平台&quot; class=&quot;headerlink&quot; title=&quot;Kafka:分布式流平台&quot;&gt;&lt;/a&gt;Kafka:分布式流平台&lt;/h1&gt;&lt;p&gt;&lt;a href=&quot;https://kafka.apache.org/intro&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;参考链接：Kafka官网&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Apache Kafka是一个分布式流平台，具有以下三个关键能力：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;发布和订阅记录流（&lt;code&gt;streams of records&lt;/code&gt;），类似于一个消息队列或者是企业消息系统；&lt;/li&gt;
-&lt;li&gt;以具有容错性和持久性的方式存储记录流；&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;即时处理记录流&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;
-    
-    </summary>
-    
-      <category term="kafka" scheme="http://yoursite.com/categories/kafka/"/>
-    
-    
-      <category term="kafka" scheme="http://yoursite.com/tags/kafka/"/>
-    
-      <category term="开源软件" scheme="http://yoursite.com/tags/%E5%BC%80%E6%BA%90%E8%BD%AF%E4%BB%B6/"/>
     
   </entry>
   
