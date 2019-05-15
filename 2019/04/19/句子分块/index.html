@@ -100,7 +100,7 @@
 <meta property="og:site_name" content="yangkuan">
 <meta property="og:description" content="句子分块分块也称为浅层分析，它基本上是识别句子部分和短语(如名词短语)。 词性标注告诉你单词是名词，动词，形容词等，但它并没有给你任何关于句子中句子或短语结构的线索。有时除了单词的词性，自然语言处理任务需要获取更多信息，这是就需要对句子进行解析，从中获得完整的解析树。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-05-05T07:35:48.425Z">
+<meta property="og:updated_time" content="2019-05-05T09:11:44.218Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="句子分块">
 <meta name="twitter:description" content="句子分块分块也称为浅层分析，它基本上是识别句子部分和短语(如名词短语)。 词性标注告诉你单词是名词，动词，形容词等，但它并没有给你任何关于句子中句子或短语结构的线索。有时除了单词的词性，自然语言处理任务需要获取更多信息，这是就需要对句子进行解析，从中获得完整的解析树。">
@@ -408,7 +408,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  387
+                  397
                 </span>
               
 
@@ -450,6 +450,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">def prepareForNLP(text):</span><br><span class="line">    sentences = nltk.sent_tokenize(text)</span><br><span class="line">    sentences = [nltk.word_tokenize(sent) for sent in sentences]</span><br><span class="line">    sentences = [nltk.pos_tag(sent) for sent in sentences]</span><br><span class="line">    return sentences</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def chunk(sentence):</span><br><span class="line">    chunkToExtract = &quot;&quot;&quot;</span><br><span class="line">	NP: &#123;&lt;NNP&gt;*&#125;</span><br><span class="line">		&#123;&lt;DT&gt;?&lt;JJ&gt;?&lt;NNS&gt;&#125;</span><br><span class="line">		&#123;&lt;NN&gt;&lt;NN&gt;&#125;&quot;&quot;&quot;</span><br><span class="line">    grammar = r&quot;&quot;&quot;</span><br><span class="line">     NP: &#123;&lt;DT|JJ|NN.*&gt;+&#125;          # Chunk sequences of DT, JJ, NN</span><br><span class="line">     PP: &#123;&lt;IN&gt;&lt;NP&gt;&#125;               # Chunk prepositions followed by NP</span><br><span class="line">     VP: &#123;&lt;VB.*&gt;&lt;NP|PP|CLAUSE&gt;+&#125; # Chunk verbs and their arguments</span><br><span class="line">     CLAUSE: &#123;&lt;NP&gt;&lt;VP&gt;&#125;           # Chunk NP, VP</span><br><span class="line">     &#125;&lt;[\.VI].*&gt;+&#123;       # chink any verbs, prepositions or periods</span><br><span class="line">     &quot;&quot;&quot;</span><br><span class="line">    parser = nltk.RegexpParser(grammar)</span><br><span class="line">    result = parser.parse(sentence)</span><br><span class="line">    print &quot;result.label():&quot;, result.label()</span><br><span class="line">    for subtree in result.subtrees():</span><br><span class="line">        t = subtree</span><br><span class="line">        t = &apos; &apos;.join(word for word, pos in t.leaves())</span><br><span class="line">        print(t)</span><br><span class="line"></span><br><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">    example_sent = &quot;A man with a red helmet stands on a small moped on a dirt road .&quot;.lower()</span><br><span class="line">    sentences = prepareForNLP(example_sent)</span><br><span class="line">    for sentence in sentences:</span><br><span class="line">        chunk(sentence)</span><br></pre></td></tr></table></figure>
 <p>输出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">a man with a red helmet stands on a small moped on a dirt road .</span><br><span class="line">a man</span><br><span class="line">with a red helmet</span><br><span class="line">a red helmet</span><br><span class="line">stands on a small moped on a dirt road</span><br><span class="line">on a small moped</span><br><span class="line">a small moped</span><br><span class="line">on a dirt road</span><br><span class="line">a dirt road</span><br></pre></td></tr></table></figure></p>
 <h2 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h2><h3 id="名词短语的分块："><a href="#名词短语的分块：" class="headerlink" title="名词短语的分块："></a>名词短语的分块：</h3><p><a href="https://aclweb.org/aclwiki/NP_Chunking_(State_of_the_art" target="_blank" rel="noopener">NP Chunking (State of the art)</a>)</p>
+<h3 id="词性标记集"><a href="#词性标记集" class="headerlink" title="词性标记集"></a>词性标记集</h3><p><a href="https://www.ibm.com/support/knowledgecenter/zh/SS5RWK_3.5.0/com.ibm.discovery.es.ta.doc/iiysspostagset.htm" target="_blank" rel="noopener">英语标记集</a></p>
 
       
     </div>
@@ -697,7 +698,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#句子分块"><span class="nav-number">1.</span> <span class="nav-text">句子分块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#相关链接"><span class="nav-number">2.</span> <span class="nav-text">相关链接</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#名词短语的分块："><span class="nav-number">2.1.</span> <span class="nav-text">名词短语的分块：</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#句子分块"><span class="nav-number">1.</span> <span class="nav-text">句子分块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#相关链接"><span class="nav-number">2.</span> <span class="nav-text">相关链接</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#名词短语的分块："><span class="nav-number">2.1.</span> <span class="nav-text">名词短语的分块：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#词性标记集"><span class="nav-number">2.2.</span> <span class="nav-text">词性标记集</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -731,7 +732,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">27.2k</span>
+    <span title="Site words total count">27.3k</span>
   
 </div>
 
@@ -745,7 +746,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共27.2k字</span>
+  <span class="post-count">博客全站共27.3k字</span>
 </div>
         
 <div class="busuanzi-count">
