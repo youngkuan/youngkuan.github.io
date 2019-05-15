@@ -35,9 +35,9 @@
         <category>科研</category>
       </categories>
       <tags>
-        <tag>论文阅读</tag>
-        <tag>神经网络</tag>
         <tag>图像识别</tag>
+        <tag>神经网络</tag>
+        <tag>论文阅读</tag>
         <tag>图文匹配</tag>
       </tags>
   </entry>
@@ -88,10 +88,10 @@
         <category>科研</category>
       </categories>
       <tags>
-        <tag>论文阅读</tag>
-        <tag>神经网络</tag>
         <tag>图像识别</tag>
         <tag>残差网络</tag>
+        <tag>神经网络</tag>
+        <tag>论文阅读</tag>
       </tags>
   </entry>
   <entry>
@@ -115,8 +115,8 @@
       </categories>
       <tags>
         <tag>论文阅读</tag>
-        <tag>生成对抗网络</tag>
         <tag>问题</tag>
+        <tag>生成对抗网络</tag>
       </tags>
   </entry>
   <entry>
@@ -350,10 +350,10 @@
         <category>科研</category>
       </categories>
       <tags>
-        <tag>对象检测</tag>
-        <tag>论文阅读</tag>
-        <tag>神经网络</tag>
         <tag>图像识别</tag>
+        <tag>神经网络</tag>
+        <tag>论文阅读</tag>
+        <tag>对象检测</tag>
       </tags>
   </entry>
   <entry>
