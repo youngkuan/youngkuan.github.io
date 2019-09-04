@@ -1,6 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[句子分块]]></title>
+    <url>%2F2019%2F04%2F19%2F%E5%8F%A5%E5%AD%90%E5%88%86%E5%9D%97%2F</url>
+    <content type="text"><![CDATA[句子分块分块也称为浅层分析，它基本上是识别句子部分和短语(如名词短语)。 词性标注告诉你单词是名词，动词，形容词等，但它并没有给你任何关于句子中句子或短语结构的线索。有时除了单词的词性，自然语言处理任务需要获取更多信息，这是就需要对句子进行解析，从中获得完整的解析树。PyRATA Python nltk.RegexpParser() Examples 1234567891011121314151617181920212223242526272829303132def prepareForNLP(text): sentences = nltk.sent_tokenize(text) sentences = [nltk.word_tokenize(sent) for sent in sentences] sentences = [nltk.pos_tag(sent) for sent in sentences] return sentencesdef chunk(sentence): chunkToExtract = &quot;&quot;&quot; NP: &#123;&lt;NNP&gt;*&#125; &#123;&lt;DT&gt;?&lt;JJ&gt;?&lt;NNS&gt;&#125; &#123;&lt;NN&gt;&lt;NN&gt;&#125;&quot;&quot;&quot; grammar = r&quot;&quot;&quot; NP: &#123;&lt;DT|JJ|NN.*&gt;+&#125; # Chunk sequences of DT, JJ, NN PP: &#123;&lt;IN&gt;&lt;NP&gt;&#125; # Chunk prepositions followed by NP VP: &#123;&lt;VB.*&gt;&lt;NP|PP|CLAUSE&gt;+&#125; # Chunk verbs and their arguments CLAUSE: &#123;&lt;NP&gt;&lt;VP&gt;&#125; # Chunk NP, VP &#125;&lt;[\.VI].*&gt;+&#123; # chink any verbs, prepositions or periods &quot;&quot;&quot; parser = nltk.RegexpParser(grammar) result = parser.parse(sentence) print &quot;result.label():&quot;, result.label() for subtree in result.subtrees(): t = subtree t = &apos; &apos;.join(word for word, pos in t.leaves()) print(t)if __name__ == &apos;__main__&apos;: example_sent = &quot;A man with a red helmet stands on a small moped on a dirt road .&quot;.lower() sentences = prepareForNLP(example_sent) for sentence in sentences: chunk(sentence) 输出：123456789a man with a red helmet stands on a small moped on a dirt road .a manwith a red helmeta red helmetstands on a small moped on a dirt roadon a small mopeda small mopedon a dirt roada dirt road 相关链接名词短语的分块：NP Chunking (State of the art)) 词性标记集英语标记集]]></content>
+      <categories>
+        <category>科研</category>
+      </categories>
+      <tags>
+        <tag>自然语言处理</tag>
+        <tag>chunk</tag>
+        <tag>NLTK</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[阿里巴巴实习生面试]]></title>
+    <url>%2F2019%2F04%2F17%2F%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4%E5%AE%9E%E4%B9%A0%E7%94%9F%E9%9D%A2%E8%AF%95%2F</url>
+    <content type="text"><![CDATA[阿里巴巴暑期实习，官网内推投的成都蚂蚁金服，经过漫长等待和催促终于等来了面试。 一面（48min）自我介绍Java并发 一个之前没注意的问题：synchronized关键字可以修饰类吗？ Spring bean的生命周期和作用域IOC有什么用解耦 MySQL数据库 索引 索引的优缺点 锁 蚂蚁金服干啥了解吗安全 蚂蚁金服的对手有哪些微信支付、京东金融 蚂蚁金服和对手的优势和劣势幂等律一个请求与多个请求等效 一个用户的同一请求（比如充值操作）由于网络问题等多次发送给服务端，怎么实现幂等？]]></content>
+      <categories>
+        <category>工作</category>
+      </categories>
+      <tags>
+        <tag>实习</tag>
+        <tag>面试</tag>
+        <tag>阿里巴巴</tag>
+        <tag>蚂蚁金服</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Stacked Cross Attention for Image-Text Matching]]></title>
+    <url>%2F2019%2F04%2F15%2FStacked-Cross-Attention-for-Image-Text-Matching%2F</url>
+    <content type="text"><![CDATA[这篇文章做了什么？通过对图像中的对象或者突出内容与句子中的单词进行潜在语义对齐，使得图文匹配过程能够捕获到视觉与语言之间细粒度的相互关系，使得图文匹配更具有可解释性。目的是将单词和图像区域映射到同一嵌入空间（common embedding space）从而推断整个图像与句子之间的相似度。 相比于已有的方法有什么优点？已有方法： 简单聚合所有可能的区域以及单词对之间的相似度，却没有关注区分单词和区域之间的重要性； 使用多步骤的注意力过程来捕获数量有限且缺乏一定解释性的语义对齐。 这篇文章使用提出的Stacked Cross Attention去发现在图像区域和单词之间的所有潜在对齐，从而计算图文相似度。已有方法通过执行固定步骤的注意力推理，从而在一个时刻只能发现有限的语义对齐，而Stacked Cross Attention可以同时发现所有可能的语义对齐。由于语义对齐的数量随着不同的图像和句子而变化，因此Stacked Cross Attention方法推断出的对应关系更加全面，从而使图像文本匹配更具可解释性。 这篇文章是怎么做的？ 利用自底向上的注意力机制检测图像区域，并提取图像区域的特征； 将句子中的单词及其句子上下文映射为特征向量； 应用Stacked Cross Attention通过对齐图像区域和单词特征来推断图文相似度。 这篇文章的损失函数关注每一个Batch中最负面的图文对（也就是最不匹配的图文对）。所以对于给定的正样例对$(I,T)$，那么最负样例对定义为$\hat{I}h=argmax{m\neq{I}}S(m,T)$以及$\hat{T}h=argmax{d\neq{T}}S(I,d)$。所以这篇文章定义损失函数如下： $$l_{hard}(I,T)=[\alpha-S(I,T)+S(I,\hat{T}h)]++[\alpha-S(I,T)+S(\hat{I}h,T)]+$$ 怎么文章题目中的Stacked Cross Attention？Stacked Cross Attention通过两个阶段来关注图像和文本的上下文信息。第一个阶段，给定一个图像和一个句子，关注每个图像区域对应的句子中的单词，并将每个图像区域与来自句子的受关注信息进行比较，以确定图像区域的重要性（比如图像区域在句子中是否被提到）。第二阶段，与第一阶段相似的，根据每个单词对应的图像区域来决定每个单词的重要性（也就是对每个单词的关注度）。 文章的实验结果展示这篇文章在Flickr30K以及MS-COCO数据集上进行实验，结果如下：]]></content>
+      <categories>
+        <category>科研</category>
+      </categories>
+      <tags>
+        <tag>论文阅读</tag>
+        <tag>神经网络</tag>
+        <tag>图像识别</tag>
+        <tag>图文匹配</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[MyIsam存储引擎]]></title>
+    <url>%2F2019%2F04%2F10%2FMyIsam%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E%2F</url>
+    <content type="text"><![CDATA[Spring Boot的@Transactional注解对MyISAM存储引擎生效的问题？ 未解决问题，一脸懵逼。。。。 其中，数据表对应的实体对象如下，1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556import javax.persistence.Entity;import javax.persistence.GeneratedValue;import javax.persistence.GenerationType;import javax.persistence.Id;@Entitypublic class User &#123; @GeneratedValue(strategy = GenerationType.AUTO) @Id private Long id; private String name; private String password; public User() &#123; &#125; public User(String name, String password) &#123; this.name = name; this.password = password; &#125; @Override public String toString() &#123; return &quot;User&#123;&quot; + &quot;id=&quot; + id + &quot;, name=&apos;&quot; + name + &apos;\&apos;&apos; + &quot;, password=&apos;&quot; + password + &apos;\&apos;&apos; + &apos;&#125;&apos;; &#125; public Long getId() &#123; return id; &#125; public void setId(Long id) &#123; this.id = id; &#125; public String getName() &#123; return name; &#125; public void setName(String name) &#123; this.name = name; &#125; public String getPassword() &#123; return password; &#125; public void setPassword(String password) &#123; this.password = password; &#125;&#125; 使用Spring Data Jpa进行数据操作，代码如下：123456789101112131415import org.springframework.data.jpa.repository.JpaRepository;import org.springframework.data.jpa.repository.Modifying;import org.springframework.data.jpa.repository.Query;import org.springframework.stereotype.Repository;@Repository(&quot;user_repository&quot;)public interface UserRepository extends JpaRepository&lt;User, Long&gt; &#123; Integer deleteUserById(Long id); @Modifying(clearAutomatically = true) @Query(value = &quot;update User set name=?2,password=?3 where id=?1&quot;) Integer updateUserById(Long id,String name,String password);&#125; 业务逻辑层代码如下：123456789101112131415161718192021222324252627282930313233343536import org.springframework.beans.factory.annotation.Autowired;import org.springframework.stereotype.Service;import org.springframework.transaction.annotation.Transactional;@Service(&quot;uService&quot;)public class UserService &#123; @Autowired UserRepository userRepository; @Transactional(rollbackFor = Exception.class) public Integer deleteUserById(Long id)&#123; Integer i = userRepository.deleteUserById(id); if(id.equals(718L))&#123; throw new IllegalArgumentException(&quot;删除714错误，回滚&quot;); &#125; return i; &#125; @Transactional(rollbackFor = &#123;IllegalArgumentException.class&#125;) public User saveUser(User user)&#123; User u = userRepository.save(user); if(u.getName()==&quot;yang1&quot;)&#123; throw new IllegalArgumentException(&quot;存入yang，导致回滚&quot;); &#125; return u; &#125; @Transactional(rollbackFor = &#123;IllegalArgumentException.class&#125;) public Integer updateUserById(User user)&#123; Integer i = userRepository.updateUserById(user.getId(),user.getName(),user.getPassword()); return i; &#125;&#125; 最后是测试代码，123456789101112131415161718192021222324252627282930@RunWith(SpringRunner.class)@SpringBootTestpublic class UserServiceTest &#123; @Autowired UserService userService; private final Logger LOGGER = LoggerFactory.getLogger(this.getClass()); @Test public void deleteUserById() &#123; Integer i = userService.deleteUserById(718L); LOGGER.error(&quot;delete by user id successful: &quot;+ i); &#125; @Test public void saveUser()&#123; User user = new User(&quot;yang&quot;,&quot;adasdsa&quot;); User u = userService.saveUser(user); LOGGER.error(u.toString()); &#125; @Test public void updateUser()&#123; User user = new User(&quot;yang&quot;,&quot;adasdsa&quot;); user.setId(714L); int i = userService.updateUserById(user); LOGGER.error(&quot;update by user id successful: &quot;+ i); &#125;&#125; 在测试删除用户（deleteUserById）以及保存用户（saveUser）时，发现抛出异常会导致回滚，但是我的数据库引擎是MyIsam，讲道理不应该支持事务。]]></content>
+      <categories>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>MyIsam</tag>
+        <tag>数据库</tag>
+        <tag>问题</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[代理模式]]></title>
+    <url>%2F2019%2F04%2F08%2F%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%2F</url>
+    <content type="text"><![CDATA[代理是一种设计模式，提供了对目标对象的间接访问方式，即通过代理访问目标对象。代理模式的作用：控制和管理访问。 静态代理在程序运行前就已经存在对应的代理类，那么这种代理方式就称之为静态代理。由于这种代理方式下的代理类往往是程序员自己在Java代码中定义的，当我们需求发生变化的时候，代理类以及目标类都需要进行修改维护，不够灵活。但是静态代理也有优点，就是在不对目标对象进行修改的前提下就可以对目标对象进行功能扩展和拦截。下面举个简单的例子，在CS（客户端\服务器）主从结构的网络架构中，一般服务器会对客户端发送而来的请求进行过滤和记录，这个时候就可以使用代理类来实现上述功能。 首先，我们定义服务端顶层接口： 123456 /** * 顶层接口，目标类和代理类都需要实现顶层接口 */interface ServerInterface&#123; public void processRequest(String request);&#125; 其次，定义服务类： 123456789 /** * 目标类 */class Server implements ServerInterface&#123; @Override public void processRequest(String request) &#123; System.out.println(&quot;process request&quot;); &#125;&#125; 最后定义服务代理类，服务类和代理类都实现服务顶层接口：12345678910111213141516171819202122232425262728293031323334353637383940414243/** * 代理类 */class ServerProxy implements ServerInterface&#123; ServerInterface serverInterface; public ServerProxy(ServerInterface serverInterface) &#123; this.serverInterface = serverInterface; &#125; /** * 过滤来自客户端的不合理请求 * @param request * @return */ public boolean filter(String request)&#123; System.out.println(&quot;filter request&quot;); return true; &#125; /** * 记录来自客户端的请求 */ public void logBefore()&#123; System.out.println(&quot;log before&quot;); &#125; /** * 记录返回给客户端的结果 */ public void logReturn()&#123; System.out.println(&quot;log return&quot;); &#125; @Override public void processRequest(String request) &#123; logBefore(); if(!filter(request))&#123; serverInterface.processRequest(request); &#125; logReturn(); &#125;&#125; 从上面可以看出，当我们的需求改变的时候，比如说我们不仅需要过滤请求、日志记录，还需要进行客户端登录时，那么就需要在代理类中添加登录服务器的方法logIn()，并且给processRequest方法中添加登录方法，而实际情况中服务器中处理请求的方法processRequest成千上万，这个时候程序员就需要给一个个processRequest方法添加logIn操作，可以看到修改和维护代码代价过大，代码也不够简洁。 动态代理JDK原生动态代理动态代理中，代理类是在运行时通过Java中的反射机制动态生成的。有兴趣的可以去看看Java中ProxyClassFactory类以及ProxyGenerator类动态生成代理类的源码。 对于应用程序员而言，主要使用InvocationHandler类以及Proxy.newProxyInstance()实现动态代理。我们还是以上述客户端/服务器网络架构为例。 顶层的服务接口ServerInterface不变，目标类Server也不用改变，只用实现InvocationHandler接口如下：123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354/** * 日志记录类 */class Logger &#123; /** * 记录来自客户端的请求 */ public void logBefore() &#123; System.out.println(&quot;log before&quot;); &#125; /** * 记录返回给客户端的结果 */ public void logReturn() &#123; System.out.println(&quot;log return&quot;); &#125;&#125;/** * 动态代理 */class ServerDynamicProxy implements InvocationHandler &#123; Object target; Object prozy; public ServerDynamicProxy(Object target, Object prozy) &#123; this.target = target; this.prozy = prozy; &#125; /** * 动态绑定，返回代理对象 * * @return */ public Object bind() &#123; return Proxy.newProxyInstance(target.getClass().getClassLoader() , target.getClass().getInterfaces(), this); &#125; @Override public Object invoke(Object proxy, Method method, Object[] args) throws Throwable &#123; Class prozyClass = proxy.getClass(); Method beforeMethod = prozyClass.getMethod(&quot;logBefore&quot;); Method returnMethod = prozyClass.getMethod(&quot;logReturn&quot;); beforeMethod.invoke(prozy); method.invoke(this.target, args); returnMethod.invoke(prozy); return null; &#125;&#125; 以上就是动态代理的使用，当测试的时候只需要在主函数中调用bind()方法返回代理类就可以了，当然需要进行强制类型转换，从Object转换成目标类。如果想看见动态代理生成的代理类，可以使用System.getProperties().put(&quot;sun.misc.ProxyGenerator.saveGeneratedFiles&quot;,&quot;true&quot;); CGLIB动态代理CGLIB(Code Generation Library)是一个基于ASM的字节码生成库，它允许在运行时对字节码进行修改和动态生成。CGLIB通过继承方式实现代理，所以当目标类没有实现接口时，就无法使用JDK代理，只能使用CGLIB实现动态代理。示例代码如下：1234567891011121314151617181920212223242526272829303132333435363738394041/** * 目标类 */public class Server &#123; public void processRequest(String request) &#123; System.out.println(&quot;process request&quot;); &#125;&#125;/** * 代理类 */public class ServerMethodInterceptor implements MethodInterceptor &#123; private Object target;//业务类对象，供代理方法中进行真正的业务方法调用 public ServerMethodInterceptor(Object target) &#123; this.target = target; &#125; //相当于JDK动态代理中的绑定 public Object getInstance() &#123; Enhancer enhancer = new Enhancer(); //创建加强器，用来创建动态代理类 enhancer.setSuperclass(this.target.getClass()); //为加强器指定要代理的业务类（即：为下面生成的代理类指定父类） //设置回调：对于代理类上所有方法的调用，都会调用CallBack，而Callback则需要实现intercept()方法进行拦 enhancer.setCallback(this); // 创建动态代理类对象并返回 return enhancer.create(); &#125; @Override public Object intercept(Object o, Method method, Object[] objects, MethodProxy methodProxy) throws Throwable &#123; // log before System.out.println(&quot;log before&quot;); Object result = methodProxy.invokeSuper(o,objects); // log return System.out.println(&quot;log return&quot;); return result; &#125;&#125;]]></content>
+      <categories>
+        <category>设计模式</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>动态代理</tag>
+        <tag>静态代理</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[字节跳动实习生面试]]></title>
+    <url>%2F2019%2F03%2F30%2F%E5%AD%97%E8%8A%82%E8%B7%B3%E5%8A%A8%E5%AE%9E%E4%B9%A0%E7%94%9F%E9%9D%A2%E8%AF%95%2F</url>
+    <content type="text"><![CDATA[一面 垃圾回收讲一下； java内存模型； 垃圾回收算法（如何确定回收对象（引用计数法、可达性算法）、回收算法（标记回收、标记整理、复制））； 垃圾收集器； MySQL数据库讲一下；数据引擎、索引类型、索引方法（B+树、Hash） 手写代码：根据前序遍历和中序遍历还原二叉树，根据获得的前序遍历和中序遍历结果输出一颗二叉树（输出后续遍历）（我问可以IDE吗？尽量别用）二面 手写代码： 123456单链表操作： 输入：奇数位升序，偶数位降序 1 -&gt; 80 -&gt; 4 -&gt; 60 -&gt; 6 -&gt; 40 -&gt; 7 -&gt; 2 输出：升序单链表 1 -&gt; 2 -&gt; 4 -&gt; 6-&gt; 7 -&gt; 40 -&gt; 60 -&gt; 80 不允许使用其他数据结构。 进程和线程的区别 HashMap TCP/UDP三面-两道编程题： 假定一张表的数据格式为 id,name,parentId，表的数据不大，1000条以内，得到这些数据的树型结构 输入：List ， 输出：Node（手写代码） 有2个文件，分别是A(3t大小)，B(2t)大小，A文件的组织形式为 uid, username,B文件的组织形式为 uid, age,找出A、B文件交集的数据放入一个文件，文件的数据格式为uid,username,age（讲讲思路）]]></content>
+      <categories>
+        <category>工作</category>
+      </categories>
+      <tags>
+        <tag>实习</tag>
+        <tag>字节跳动</tag>
+        <tag>面试</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Deep Residual Learning for Image Recognition]]></title>
     <url>%2F2019%2F03%2F06%2FDeep-Residual-Learning-for-Image-Recognition%2F</url>
     <content type="text"><![CDATA[神经网络越深就越难训练，作者提出一种残差学习框架来降低网络训练的难度。]]></content>
@@ -35,8 +115,8 @@
       </categories>
       <tags>
         <tag>论文阅读</tag>
-        <tag>生成对抗网络</tag>
         <tag>问题</tag>
+        <tag>生成对抗网络</tag>
       </tags>
   </entry>
   <entry>
@@ -44,7 +124,7 @@
     <url>%2F2019%2F03%2F04%2F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%8C%83%E5%BC%8F%2F</url>
     <content type="text"><![CDATA[第一范式（1NF）关系模型中实体的每个属性都是原子属性，即元组在每个属性上的取值是不可分的。也就是说这些属性的取值是单一的，不是集合、数组等非原子数据。当实体中的某个属性都多个值时，必须将该属性拆分为多个原子属性。 第二范式（2NF）关系模型中的所有非主属性都完全依赖于所有的候选键。2NF其实就是在1NF的基础上消除那些非主属性对所有候选键的部分函数依赖。例如，关系（学号，课程号，教师，成绩，学院）中，教师部分依赖于课程号，因此这个关系不满足第二范式，所以需要把上述关系拆分成（学号，课程号，成绩）和（课程号，教师，学院）。 第三范式（3NF）关系模型中的非主属性既不部分函数依赖也不传递函数依赖于关系中的所有候选键。也就是说3NF是在2NF的基础上消除了非主属性对候选键的传递依赖关系。 还是上面的例子，关系（课程号，教师，学院）中存在传递依赖关系课程号-&gt;教师，以及教师-&gt;学院，因此不满足3NF。所以将其分解为（课程号，教师）和（教师，学院）。 巴斯-科德范式（BCNF）对于关系R上的任何非平凡函数依赖X-&gt;Y都有X必包含R的某个候选键，那么就称关系R满足BCNF。BCNF是在第三范式的基础上继续消除主属性对于键的部分依赖和传递依赖。 举个例子来说，关系（课程名，班级，教师）中假定多名教师承担多个班级的教学任务，每个教师仅承担一个课程的教学任务，同时可以给多个班级上课，那么可以知道有函数依赖 12(课程名，班级)-&gt;(教师)(教师)-&gt;(课程名) 然而，上述关系中的主键是(课程名，班级)或者(教师，班级)。所以(教师)-&gt;(课程名)就是主属性对候选键的部分依赖，不满足BCNF。 第四范式（4NF）对于关系R中的非平凡多值依赖X-&gt;-&gt;Y，X必包含R的某个候选键，则称满足4NF。]]></content>
       <categories>
-        <category>工程</category>
+        <category>数据库</category>
       </categories>
       <tags>
         <tag>数据库</tag>
@@ -99,11 +179,14 @@
     <url>%2F2019%2F02%2F21%2F%E9%9D%A2%E5%90%91%E5%88%87%E9%9D%A2%E7%BC%96%E7%A8%8B%2F</url>
     <content type="text"><![CDATA[面向切面编程（Aspect Oriented Programming，AOP）是什么？ AOP是一种编程范式，不是编程语言； AOP解决特定问题，但不能解决所有问题； OOP的补充，而不是其替代。 AOP为什么出现？ 提高代码重用性； 概念分离：分离功能性需求和非功能性需求。将功能性需求从非功能性需求中分离出来。 应用场景 权限控制 缓存控制 事务控制 审计日志 性能监控 分布式追踪 异常处理 Spring AOP的通过代理实现通过DefaultAopProxyFactory.java源码可以看到AOP由jdk和cglib两种方式实现。12345678910111213141516public AopProxy createAopProxy(AdvisedSupport config) throws AopConfigException &#123; if (config.isOptimize() || config.isProxyTargetClass() || hasNoUserSuppliedProxyInterfaces(config)) &#123; Class&lt;?&gt; targetClass = config.getTargetClass(); if (targetClass == null) &#123; throw new AopConfigException(&quot;TargetSource cannot determine target class: &quot; + &quot;Either an interface or a target is required for proxy creation.&quot;); &#125; if (targetClass.isInterface() || Proxy.isProxyClass(targetClass)) &#123; return new JdkDynamicAopProxy(config); &#125; return new ObjenesisCglibAopProxy(config); &#125; else &#123; return new JdkDynamicAopProxy(config); &#125;&#125; Spring AOP的使用在Spring中主要使用注解@Aspect、@Pointcut、@Before、@After、@AfterReturning、@AfterThrowing以及@Around进行面向切面编程。 1234567891011@Retention(RetentionPolicy.RUNTIME)@Target(ElementType.TYPE)public @interface Aspect &#123; /** * Per clause expression, defaults to singleton aspect * &lt;p/&gt; * Valid values are &quot;&quot; (singleton), &quot;perthis(...)&quot;, etc */ public String value() default &quot;&quot;;&#125; 如上代码是@Aspect注解的定义，ElementType.TYPE可以看出该注解作用目标是接口、类、枚举、注解，@Aspect注解，Spring通过@Aspect注解切面并把它应用到目标对象上。 12345678910111213141516171819@Retention(RetentionPolicy.RUNTIME)@Target(ElementType.METHOD)public @interface Pointcut &#123; /** * The pointcut expression * We allow &quot;&quot; as default for abstract pointcut */ String value() default &quot;&quot;; /** * When compiling without debug info, or when interpreting pointcuts at runtime, * the names of any arguments used in the pointcut are not available. * Under these circumstances only, it is necessary to provide the arg names in * the annotation - these MUST duplicate the names used in the annotated method. * Format is a simple comma-separated list. */ String argNames() default &quot;&quot;;&#125; 如上代码是@Pointcut注解的定义，value()用来定义切面所在的位置，定义方式有以下几种方式：123456789// execution定义切面，匹配符合表达式的所有方法@Pointcut(&quot;execution(* com.xjtu.springbootstudy.aop.bymyself.service.ProgrammerService.work())&quot;)// within用于匹配类，对应类下的所有方法都执行切面方法；@Pointcut(&quot;within(com.xjtu.springbootstudy.aop.bymyself.service.*)&quot;)// @annotation用于匹配自定义注解，如下面的@SignLog注解，再将@SignLog放在想定义切面的方法@Pointcut(&quot;@annotation(com.xjtu.springbootstudy.aop.bymyself.annotation.SignLog)&quot;)// @within用于匹配自定义注解，如下面的@SignLog注解，再将@SignLog放在想定义切面的类上@Pointcut(&quot;@within(com.xjtu.springbootstudy.aop.bymyself.annotation.SignLog))&quot;)public void log()&#123; &#125; 如上对log()添加注解，@Pointcut注解中value定义切面位置，使用execution、within、@annotation、@within等方式设置切面。 @before在目标方法开始执行时执行； @after在目标方法执行结束前执行； @AfterReturning在目标方法执行正确返回前执行； @AfterThrowing在目标方法执行异常时执行， @Around环绕执行，一般是前4个无法实现期望功能时，才使用这个注解。 我写了一个简单示意切面程序，如下所示，对应执行结果也展示下下方。有个疑问就是@after和@AfterReturning注解的方法谁先执行？根据执行结果也可以看出@after注解的方法先执行，@AfterReturning注解的方法后执行。 1234567891011121314151617181920212223242526272829303132333435@Before(value = &quot;log()&quot;)public void signIn(JoinPoint joinPoint)&#123; logger.info(&quot;***********the people signs in******&quot;);&#125;@After(value = &quot;log()&quot;)public void leaveWorkPlace(JoinPoint joinPoint)&#123; logger.info(&quot;***********the people leaves workplace******&quot;);&#125;@AfterReturning(value = &quot;log()&quot;)public void signOut(JoinPoint joinPoint)&#123; logger.info(&quot;***********the people signs out successfully******&quot;);&#125;@AfterThrowing(value = &quot;log()&quot;,throwing = &quot;throwable&quot;)public void happenAccidentWhenWorking(JoinPoint joinPoint,Throwable throwable)&#123; logger.info(&quot;***********the people happens accident when working******&quot;); logger.info(&quot;***********&quot;+throwable.getMessage()+&quot;***********&quot;);&#125;@Around(value = &quot;log()&quot;)public void happenAround(ProceedingJoinPoint joinPoint)&#123; try &#123; joinPoint.proceed(joinPoint.getArgs()); &#125; catch (Throwable throwable) &#123; throwable.printStackTrace(); &#125;&#125;执行结果：***********the people signs in****** // @beforeI&apos;m working in workplace! // 这是目标方法的执行结果***********the people leaves workplace****** // @after***********the people signs out successfully****** // @afterReturning]]></content>
       <categories>
-        <category>面试</category>
+        <category>Spring Boot</category>
       </categories>
       <tags>
         <tag>Java</tag>
-        <tag>spring</tag>
+        <tag>Spring</tag>
+        <tag>Spring Boot</tag>
+        <tag>AOP</tag>
+        <tag>面向切面编程</tag>
       </tags>
   </entry>
   <entry>
@@ -111,7 +194,7 @@
     <url>%2F2019%2F02%2F20%2FJava%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E7%9F%A5%E8%AF%86%E7%82%B9%2F</url>
     <content type="text"><![CDATA[面向对象的三个基本特征和五种设计原则三个基本特征封装封装就是把客观事物封装成抽象的类，并且类可以把自己的数据和方法只让可信的类或者对象操作，对不可信的进行信息隐藏； 继承继承是指这样一种能力：它可以使用现有类的所有功能，并在无需重写原有类的情况下对这些功能进行扩展。通过继承创建的新类称为“子类”或“派生类”，被继承的类称为“父类”或“基类”。继承的过程就是从一般到特殊的过程。要实现继承可以通过“继承”和“组合”两种方式实现。在某些OOP语言中，一个子类可以继承多个基类，但一般情况下（Java语言），一个子类只有一个基类，实现多重继承可以通过多级继承来实现。继承概念的实现方式有三类： 实现继承：指使用基类的属性和方法而无需额外编码的能力； 接口继承：指仅使用基类的属性和方法名称，但子类必须提供实现的能力； 可视继承：指子类使用基类的外观和实现代码的能力。多态 多态是允许你将父对象设置成为和一个或多个它的子对象相等的技术，赋值之后，父对象就可以根据当前赋值给它的子对象的特性以不同方式运作。简单地说就是：允许将子类类型的指针赋值给父类类型的指针。实现多态有两种方式：覆盖和重载： 覆盖是指子类重新定义父类的虚函数的做法； 重载是指允许多个同名函数，这些函数的参数不同（参数个数不同，或参数类型不同，或两者都不同）。 五种设计原则单一职责原则(Single Responsibility Principle，SRP)单一职责原则是指一个类的功能要单一，不能包罗万象。一个类应该只有一个引起它变化的原因。 开放封闭原则(Open－Close Principle，OCP) 开放封闭原则指的是对扩展性的开放和对修改的封闭： 对扩展性的开放：模块的行为应该是可扩展的，从而该模块可表现出行的行为以满足需求的变化； 对修改的封闭：模块自身的代码时不应该被修改的，扩展模块的一般途径是修改内部实现。 里氏替换原则(the Liskov Substitution Principle，LSP)子类型必须能够替换掉它们的父类型，并出现在父类能够出现的任何地方。 依赖倒置原则(the Dependency Inversion Principle，PIP)具体依赖抽象，上层依赖下层。 接口隔离原则(the Interface Segregation Principle，ISP)模块间要通过抽象接口隔离开，而不是通过具体的类强耦合起来。 Class.java类文件下getMethods()和getDeclaredMethods()的区别1234567891011@CallerSensitivepublic Method[] getMethods() throws SecurityException &#123; checkMemberAccess(Member.PUBLIC, Reflection.getCallerClass(), true); return copyMethods(privateGetPublicMethods());&#125;@CallerSensitivepublic Method[] getDeclaredMethods() throws SecurityException &#123; checkMemberAccess(Member.DECLARED, Reflection.getCallerClass(), true); return copyMethods(privateGetDeclaredMethods(false));&#125; getMethods()是获取对应类及其所有父类中的共有（public）方法；getDeclaredMethods()获取的是当前类中的所有方法。]]></content>
       <categories>
-        <category>面试</category>
+        <category>工作</category>
       </categories>
       <tags>
         <tag>Java</tag>
@@ -262,7 +345,7 @@
   <entry>
     <title><![CDATA[Hierarchical Object Detection with Deep Reinforcement Learning]]></title>
     <url>%2F2019%2F01%2F08%2FHierarchical-Object-Detection-with-Deep-Reinforcement-Learning%2F</url>
-    <content type="text"><![CDATA[Hierarchical Object Detection with Deep Reinforcement LearningAbstract 关键的思想在于关注图像中包含更丰富信息的那些部分并放大它们。 Introduction 考虑区域之间的联系， 利用top-down的扫描方式，首先获取整个图像，关注局部区域的相关信息， 基于增强学习训练的代理（agent）有能力检测图像中的对象 Hierarchical Object Detection Model1. Markov Decision Process（马尔科夫决策过程） State:当前区域描述符（the descriptor of current region）和记忆向量（memory vector） Actions:move actions和terminal actions Reward:保证move action都是朝着更靠近ground truth的方向移动；当IOU超过threshold，则终止移动。 2. Q-learning1Q(s,a) = r+\lambda&#123;max&#125;_&#123;a&apos;&#125;Q(s&apos;,a&apos;) 3. Model the Image-Zooms model 使用VGG-16提取图像区域特征向量$(7*7*512)$,拼接区域特征向量与记忆向量（memory vector）$(7*7*512+24=25088+24)$,经过两个1024维的全连接层，输出6个可能的动作（actions），反复迭代，直到终止动作 the Pool45-Crops model 4. TrainingExperiments1. Qualitative Results Implementation1. keras实现 提取区域特征 state不断更新，并作为model的输入 1(7*7*512) 代码问题总结 数据类型错误TypeError: slice indices must be integers or None or have an index method 这是由于数组，矩阵等类型数据的下标是整数，而在 12region_mask[offset[0]:offset[0] + size_mask[0] , offset[1]:offset[1] + size_mask[1]] = 1 offset是float类型，所以报错，解决方法就是数据类型转换： 12region_mask[int(offset[0]):int(offset[0] + size_mask[0]) , int(offset[1]):int(offset[1] + size_mask[1])] = 1 VGG16提取图像特征尺寸不对 解决方法：在图片提取特征之前，对图像进行resize； 1im = images[z].resize((224, 224)) 除0错误 对图像进行resize的位置错误 问题总结 问题：记忆向量的哪儿来的？ 问题：哪6个动作？ move actions:左上、右上、左下、右下和中；terminal actions 问题：每个类训练一个模型？ 是的，这篇文章中只训练了飞机类（aeroplane）的检测模型]]></content>
+    <content type="text"><![CDATA[Hierarchical Object Detection with Deep Reinforcement LearningAbstract 关键的思想在于关注图像中包含更丰富信息的那些部分并放大它们。 Introduction 考虑区域之间的联系， 利用top-down的扫描方式，首先获取整个图像，关注局部区域的相关信息， 基于增强学习训练的代理（agent）有能力检测图像中的对象 Hierarchical Object Detection Model1. Markov Decision Process（马尔科夫决策过程） State:当前区域描述符（the descriptor of current region）和记忆向量（memory vector） Actions:move actions和terminal actions Reward:保证move action都是朝着更靠近ground truth的方向移动；当IOU超过threshold，则终止移动。 2. Q-learning$$Q(s,a) = r+\lambda{max}_{a’}Q(s’,a’)$$ 3. Model the Image-Zooms model 使用VGG-16提取图像区域特征向量$(77512)$,拼接区域特征向量与记忆向量（memory vector）$(77512+24=25088+24)$,经过两个1024维的全连接层，输出6个可能的动作（actions），反复迭代，直到终止动作 the Pool45-Crops model 4. TrainingExperiments1. Qualitative Results Implementation1. keras实现 提取区域特征 state不断更新，并作为model的输入 1(7*7*512) 代码问题总结 数据类型错误TypeError: slice indices must be integers or None or have an index method 这是由于数组，矩阵等类型数据的下标是整数，而在 12region_mask[offset[0]:offset[0] + size_mask[0] , offset[1]:offset[1] + size_mask[1]] = 1 offset是float类型，所以报错，解决方法就是数据类型转换： 12region_mask[int(offset[0]):int(offset[0] + size_mask[0]) , int(offset[1]):int(offset[1] + size_mask[1])] = 1 VGG16提取图像特征尺寸不对 解决方法：在图片提取特征之前，对图像进行resize； 1im = images[z].resize((224, 224)) 除0错误 对图像进行resize的位置错误 问题总结 问题：记忆向量的哪儿来的？ 问题：哪6个动作？ move actions:左上、右上、左下、右下和中；terminal actions 问题：每个类训练一个模型？ 是的，这篇文章中只训练了飞机类（aeroplane）的检测模型]]></content>
       <categories>
         <category>科研</category>
       </categories>
@@ -314,7 +397,7 @@
     <url>%2F2018%2F07%2F10%2F%E6%99%BA%E6%85%A7%E6%95%99%E8%82%B2%E5%B8%88%E8%8C%83%E5%BA%94%E7%94%A8%E8%A1%A8%E6%A0%BC%E6%8E%A5%E5%8F%A3%E8%A7%84%E8%8C%83%2F</url>
     <content type="text"><![CDATA[智慧教育-网络学院示范应用后端数据访问接口主题状态1. 主题状态表 列名 类型 长度 state_id bigint(long) 20 domain_id bigint(long) 20 states varchar(string) 255 user_id bigint(long) 20 created_time datetime 1 modified_time datetime 1 说明： （1） 学习状态：0表示未学习，1表示正在学习，2表示已学习； （2） states（主题状态列表）形式：学习状态1，学习状态2，学习状态3，…… 举例： 1， 0， 1， 2，…… 2. 主题状态接口 （1） /topicState/getByDomainIdAndUserId 查询主题状态，参数 long domainId long userId 课程id 用户id （2） /topicState/saveStateByDomainIdAndUserId 保存主题状态，参数 long domainId String states long userId 课程id 主题状态列表 用户id （3） /topicState/saveStateByDomainNameAndUserId 保存主题状态，参数 long domainName String states long userId 课程名 主题状态列表 用户id 分面状态1. 分面状态表 列名 类型 长度 state_id bigint(long) 20 domain_id bigint(long) 20 topic_id bigint(long) 20 states varchar(string) 255 user_id bigint(long) 20 created_time datetime 1 modified_time datetime 1 说明： （1） 学习状态：0表示未学习，1表示已在学习； （2） states（分面状态列表）形式：学习状态1，学习状态2，学习状态3，…… 举例： 1， 0， 1， 0，…… 2. 分面状态接口 （1）/facetState/getByDomainIdAndTopicIdAndUserId 查询分面状态，参数 long domainId long userId long topicId 课程id 用户id 主题id （2）/facetState/saveStateByDomainIdAndTopicIdAndUserId 保存分面状态，参数 long domainId long topicId String states long userId 课程id 主题id 分面状态列表 用户id （3）/facetState/saveStateByDomainNameAndTopicNameAndUserId 保存分面状态，参数 string domainName string topicName String states long userId 课程名 主题名 分面状态列表 用户id （4）/facetState/saveStateByDomainIdAndUserId 保存分面状态，参数 long domainId String states long userId 课程id 分面状态列表 用户id （5）/facetState/saveStateByDomainNameAndUserId 保存主题状态，参数 long domainName String states long userId 课程名 分面状态列表 用户id 注：states：分面状态的矩阵（行（主题）之间以分号隔开，行内以逗号隔开） 例如：0,0,1,0;0,0,1;1,1,0;1,0,1,1,1;……推荐主题1. 推荐主题表 列名 类型 长度 recommendation_id bigint(long) 20 domain_id bigint(long) 20 recommendation_topics varchar(string) 255 user_id bigint(long) 20 created_time datetime 1 modified_time datetime 1 说明： （1）recommendation_topics（推荐主题列表）形式：：推荐主题1 id，推荐主题2 id，推荐主题3 id；推荐主题3 id，推荐主题1 id，推荐主题4 id；……即，不同推荐方式之间以分号隔开，同一推荐方式内的主题id以逗号分隔开 2. 2. 推荐主题接口 （1） recommendation/getByDomainIdAndUserId 查询推荐主题，参数 long domainId long userId 课程id 用户id （2） recommendation/saveRecommendationByDomainIdAndUserId 保存推荐主题，参数 long domainId String recommendationTopics long userId 课程id 推荐主题列表 用户id （3） recommendation/saveRecommendationByDomainNameAndUserId 保存推荐主题，参数 long domainName String recommendationTopics long userId 课程名 推荐主题列表 用户id]]></content>
       <categories>
-        <category>工程</category>
+        <category>数据库</category>
       </categories>
       <tags>
         <tag>数据库</tag>

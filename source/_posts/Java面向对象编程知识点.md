@@ -4,7 +4,7 @@ date: 2019-02-20 10:40:58
 tags: 
     - Java
     - 面向对象
-categories: 知识点
+categories: 工作
 ---
 
 ## 面向对象的三个基本特征和五种设计原则

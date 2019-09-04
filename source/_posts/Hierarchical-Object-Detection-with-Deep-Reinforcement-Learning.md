@@ -32,14 +32,14 @@ categories: 科研
 当IOU超过threshold，则终止移动。
 
 ###### **2. Q-learning**
-```math
+$$
 Q(s,a) = r+\lambda{max}_{a'}Q(s',a')
-```
+$$
 
 ###### **3. Model**
 * the Image-Zooms model
-> 使用VGG-16提取图像区域特征向量`$(7*7*512)$`,
-> 拼接区域特征向量与记忆向量（memory vector）`$(7*7*512+24=25088+24)$`,
+> 使用VGG-16提取图像区域特征向量$(7*7*512)$,
+> 拼接区域特征向量与记忆向量（memory vector）$(7*7*512+24=25088+24)$,
 > 经过两个1024维的全连接层，输出6个可能的动作（actions），
 > 反复迭代，直到终止动作
 
@@ -53,7 +53,7 @@ Q(s,a) = r+\lambda{max}_{a'}Q(s',a')
 
 ## Experiments
 
-###### **1. Qualitative Results**
+### **1. Qualitative Results**
 ![image](Hierarchical-Object-Detection-with-Deep-Reinforcement-Learning/aeroplane20180626.png)
 
 
