@@ -109,7 +109,7 @@
       },
       "wechat": function (el) {
         var myoptions = getOptions(el);
-        var imgSrc = "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=" + encodeURIComponent(myoptions.url);
+        var imgSrc = "https://api.qinco.me/api/qr?size=400&content=" + encodeURIComponent(myoptions.url);
         var dropdownEl = el.querySelector(".need-share-button_dropdown");
         var img = dropdownEl.getElementsByClassName("need-share-wechat-code-image")[0];
         if (img) {
@@ -119,13 +119,7 @@
           img.src = imgSrc;
           img.alt = "loading wechat image...";
           img.setAttribute("class", "need-share-wechat-code-image");
-
-          if (root.options.position == 'middleRight') {
-            dropdownEl.insertBefore(img, dropdownEl.children[0]);
-          }
-          else {
-            dropdownEl.appendChild(img);
-          }
+          dropdownEl.appendChild(img);
         }
       },
       "douban": function (el) {
@@ -224,6 +218,29 @@
         url += "&url=" + encodeURIComponent(myoptions.url);
         url += "&title=" + encodeURIComponent(myoptions.title);
         url += "&source=" + encodeURIComponent(myoptions.source);
+
+        root.popup(url);
+      },
+      "slashdot": function (el) {
+        var myoptions = getOptions(el);
+        var url = myoptions.protocol + "slashdot.org/bookmark.pl?";
+        url += "url=" + encodeURIComponent(myoptions.url);
+        url += "&title=" + encodeURIComponent(myoptions.title);
+
+        root.popup(url);
+      },
+      "technorati": function (el) {
+        var myoptions = getOptions(el);
+        var url = myoptions.protocol + "technorati.com/faves?";
+        url += "add=" + encodeURIComponent(myoptions.url);
+        url += "&title=" + encodeURIComponent(myoptions.title);
+
+        root.popup(url);
+      },
+      "posterous": function (el) {
+        var myoptions = getOptions(el);
+        var url = myoptions.protocol + "posterous.com/share?";
+        url += "linkto=" + encodeURIComponent(myoptions.url);
 
         root.popup(url);
       },
@@ -402,9 +419,7 @@
       var myoptions = getOptions(el);
 
       // set dropdown row length
-      if (myoptions.iconStyle == "default" && myoptions.boxForm == "vertical") {
-        dropdownEl.className += " need-share-button_dropdown-box-vertical";
-      } else if (myoptions.iconStyle == "box" && myoptions.boxForm == "horizontal") {
+      if (myoptions.iconStyle == "box" && myoptions.boxForm == "horizontal") {
         dropdownEl.className += " need-share-button_dropdown-box-horizontal";
       } else if (myoptions.iconStyle == "box" && myoptions.boxForm == "vertical") {
         dropdownEl.className += " need-share-button_dropdown-box-vertical";
@@ -450,8 +465,8 @@
 
 
       // fill fropdown with buttons
-      var iconClass = myoptions.iconStyle == "default" ?
-                      "need-share-button_link need-share-button_" :
+      var iconClass = myoptions.iconStyle == "default" ? 
+                      "need-share-button_link need-share-button_" : 
                       "need-share-button_link-" + myoptions.iconStyle + " need-share-button_link need-share-button_";
       for (var network in myoptions.networks) {
         if (myoptions.networks.hasOwnProperty(network)) {
