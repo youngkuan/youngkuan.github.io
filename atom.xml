@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-05-05T09:11:44.218Z</updated>
+  <updated>2019-09-09T09:04:28.728Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>第一章 统计学习方法概论</title>
+    <link href="http://yoursite.com/2019/09/09/%E7%AC%AC%E4%B8%80%E7%AB%A0-%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E6%A6%82%E8%AE%BA/"/>
+    <id>http://yoursite.com/2019/09/09/第一章-统计学习方法概论/</id>
+    <published>2019-09-09T02:21:21.000Z</published>
+    <updated>2019-09-09T09:04:28.728Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="1-统计学习"><a href="#1-统计学习" class="headerlink" title="1. 统计学习"></a>1. 统计学习</h1><p>统计学习（statistical learning）是关于计算机基于数据构建概率统计模型并运用模型对数据进行预测人与分析的一门学科。</p><p>$$<br>已有数据\xrightarrow{构建}模型\xrightarrow{预测分析}数据<br>$$<br><a id="more"></a> </p><h2 id="主要特点"><a href="#主要特点" class="headerlink" title="主要特点"></a>主要特点</h2><ul><li>统计学习以计算机与网络为平台，是构建在计算机及网络之上的；</li><li>统计学习以数据为研究对象，是数据驱动的学科；</li><li>统计学习的目的是对数据进行预测与分析；</li><li>统计学习以方法为中心，统计学习方法构建模型并应用模型进行预测与分析；</li><li>统计学习是概率论、统计学、信息论、计算理论、最优化理论及计算机科学等多个领域的交叉学科，并且在发展中逐步形成独自的理论体系与方法论。</li></ul><p>统计学习的对象是数据，统计学习从数据出发，提取数据的特征，抽取出数据的模型，发现数据中的知识，又回到对数据的分析与预测中。数据形式多样，包括存在于计算机及网络上的各种数字、文字、图像、音频、视频数据以及它们的组合。</p><h2 id="统计学习的前提"><a href="#统计学习的前提" class="headerlink" title="统计学习的前提"></a>统计学习的前提</h2><p>统计学习关于数据的基本假设是同类数据具有一定的统计规律性。这里的同类数据指的是具有某种共同性质的数据。由于它们具有统计规律性，所以可以用概率统计方法来加以处理。</p><h2 id="统计学习的目的"><a href="#统计学习的目的" class="headerlink" title="统计学习的目的"></a>统计学习的目的</h2><p>统计学习用于对数据进行预测和分析，特别是对未知新数据进行预测与分析。对数据的预测可以使计算机更加智能化，或者说使计算机的某些性能得到提升；对数据的分析可以让人们获得新的知识，给人们带来新的发现。</p><p>统计学习总的目标就是考虑学习什么样的模型和如何学习模型，以使模型能对数据进行准确的预测与分析，同时也要考虑尽可能地提升学习效率。</p><p><strong>统计学习与机器学习的异同</strong></p><p>统计学习和机器学习的界限一直很模糊，有人认为统计学习偏向于理论上的完善，机器学习基于统计学习，并将其延伸到实践中。<br>机器学习旨在于使最准确的预测成为可能，统计学习模型是为推断变量之间的关系而设计的。<br>我认为，统计学习与机器学习主要就是理论与实践的区别。</p><h2 id="统计学习的方法"><a href="#统计学习的方法" class="headerlink" title="统计学习的方法"></a>统计学习的方法</h2><p>统计学习的方法时基于数据构建统计模型从而对数据进行预测与分析。统计学习由监督学习（supervised learning）、非监督学习（unsupervised learning）、半监督学习（semi-supervised learning）和强化学习（reinforcement learning）等组成。</p><p><strong>监督学习</strong>是从给定的、有限的、用于学习的训练模型（training data）集合出发，假设数据是独立同分布产生的；并且假设要学习的模型属于某个函数的集合，称为假设空间（hypothesis space）；应用某个评价准则（evaluation criterion），从假设空间中选取一个最优的模型，使它对已知训练数据集未知测试数据（test data）在给定的评价准则下有最优的预测；最优模型的选取由算法实现。</p><p>统计学习方法包括模型的假设空间、模型选择的准则以及模型学习的算法，称其为统计学习方法的三要素，简称为模型（model）、策略（stratage）和算法（algorithm）。</p><p>实现统计学习方法的步骤如下：<br>（1）得到一个有限的训练数据集合；<br>（2）确定包含多有可能的模型的假设空间，即学习模型的集合；<br>（3）确定模型选择的准则，即学习的策略；<br>（4）实现求解最优模型的算法，即学习的算法；<br>（5）通过学习方法选择最优模型；<br>（6）利用学习的最优模型对新数据进行预测或分析。</p><p>统计学习研究一般包括统计学习方法（statistical learning method）、统计学习理论（statistical learning theory）以及统计学习应用三个方面。</p><h1 id="2-监督学习"><a href="#2-监督学习" class="headerlink" title="2. 监督学习"></a>2. 监督学习</h1><p><strong>监督学习</strong>（supervised learning）的任务是学习一个模型，是模型能够对任意给定的输入，对其相应的输出做出一个好的预测。</p><h2 id="基本概率"><a href="#基本概率" class="headerlink" title="基本概率"></a>基本概率</h2><h3 id="输入空间、特征空间与输出空间"><a href="#输入空间、特征空间与输出空间" class="headerlink" title="输入空间、特征空间与输出空间"></a>输入空间、特征空间与输出空间</h3><p>在监督学习中，将输入与输出所有可能取值的集合分别称为输入空间与输出空间。输入与输出空间可以是有限元素的集合，也可以是整个欧氏空间。输入和输出空间可以是同一空间，也可以不是同一空间；通常输出空间小于输入空间。<br>每一个具体的输入都是一个实例（instance），通常由特征向量（feature vector）表示。所有的特征向量存在的空间称为特征空间（feature space）。</p><h3 id="联合概率分布"><a href="#联合概率分布" class="headerlink" title="联合概率分布"></a>联合概率分布</h3><p>监督学习假设输入与输出的随机变量$X$和$Y$遵循联合概率分布$P(X,Y)$。$P(X,Y)$表示分布函数，或分布密度函数。</p><h3 id="假设空间"><a href="#假设空间" class="headerlink" title="假设空间"></a>假设空间</h3><p>监督学习的目的在于学习一个由输入到输出的映射，这一映射由模型来表示。换句话说，学习的目的就是找到最满足映射关系的模型。模型属于由输入空间到输出空间的映射的集合，这个集合就是假设空间（hypothesis space）。监督学习的模型可以是概率模型或非概率模型，由条件概率分布$P(Y/X)$或决策函数（decision function）$Y=f(X)$表示。</p><h2 id="问题的形式化"><a href="#问题的形式化" class="headerlink" title="问题的形式化"></a>问题的形式化</h2><p>监督学习利用训练数据集学习一个模型，再用模型对测试样本集进行预测（prediction）。由于在这个过程中需要训练数据集，而训练数据集往往是通过人工标注的，所以统称为监督学习。监督学习分为学习和预测两个过程，由学习系统和预测系统完成。</p><p>首先给定一个训练数据集：</p><p>$$<br>T={(x_1,y_1),(x_2,y_2),\cdots,(x_N,y_N)}<br>$$</p><p>其中$(x_i,y_i),i=1,2,\cdots,N$，称为样本或样本点。$x_i\in\chi\subseteqq{R^n}$是输入的观测值，也称为输入或实例，$y_i\subseteqq\LARGE{y}$是输出的观测值，也称为输出。  </p><p>监督学习中，假设训练数据和测试数据都是依联合概率分布$P(X,Y)$独立同分布产生的。<br>在学习过程中，学习系统利用给定的训练数据集，通过学习（或训练）得到一个模型，表示为条件概率分布$\hat{P}(Y/X)$或决策函数$Y=\hat{f}(X)$。条件概率分布$\hat{P}(Y/X)$或决策函数$Y=\hat{f}(X)$描述输入与输出随机变量之间的映射关系。<br>在预测过程中，预测系统对于给定的测试样本集合中的输入$x_{N+1}$，由模型$y_{N+1}=argmax_{y_{N+1}}\hat{P}(y_{N+1}/x_{N+1})$或$y_{N+1}=\hat{f}(x_{N+1})$给出相应的输出$y_{N+1}$。其中$y_{N+1}=argmax_{y_{N+1}}\hat{P}(y_{N+1}/x_{N+1})$表示的是对于给定的$x_{N+1}$使得$\hat{P}(y_{N+1}/x_{N+1})$最大时对应的$y_{N+1}$的取值。<br>在学习的过程中，学习系统（也就是学习算法）试图通过训练数据集中的样本$(x_i,y_i)$带来的信息学习模型。具体来说，对于输入$x_i$，一个具体的模型$y=f(x)$可以产生一个输出$f(x_i)$，而训练数据集中对应的输出是$y_i$，如果这个模型有很好的预测能力，那么训练样本输出$y_i$就应该和模型的输出$f(x_i)$尽可能接近。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;1-统计学习&quot;&gt;&lt;a href=&quot;#1-统计学习&quot; class=&quot;headerlink&quot; title=&quot;1. 统计学习&quot;&gt;&lt;/a&gt;1. 统计学习&lt;/h1&gt;&lt;p&gt;统计学习（statistical learning）是关于计算机基于数据构建概率统计模型并运用模型对数据进行预测人与分析的一门学科。&lt;/p&gt;
+&lt;p&gt;$$&lt;br&gt;已有数据\xrightarrow{构建}模型\xrightarrow{预测分析}数据&lt;br&gt;$$&lt;br&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="机器学习" scheme="http://yoursite.com/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>句子分块</title>
@@ -88,11 +109,11 @@
       <category term="科研" scheme="http://yoursite.com/categories/%E7%A7%91%E7%A0%94/"/>
     
     
-      <category term="论文阅读" scheme="http://yoursite.com/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
+      <category term="图像识别" scheme="http://yoursite.com/tags/%E5%9B%BE%E5%83%8F%E8%AF%86%E5%88%AB/"/>
     
       <category term="神经网络" scheme="http://yoursite.com/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"/>
     
-      <category term="图像识别" scheme="http://yoursite.com/tags/%E5%9B%BE%E5%83%8F%E8%AF%86%E5%88%AB/"/>
+      <category term="论文阅读" scheme="http://yoursite.com/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
     
       <category term="图文匹配" scheme="http://yoursite.com/tags/%E5%9B%BE%E6%96%87%E5%8C%B9%E9%85%8D/"/>
     
@@ -203,13 +224,13 @@
       <category term="科研" scheme="http://yoursite.com/categories/%E7%A7%91%E7%A0%94/"/>
     
     
-      <category term="论文阅读" scheme="http://yoursite.com/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
-    
-      <category term="神经网络" scheme="http://yoursite.com/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"/>
-    
       <category term="图像识别" scheme="http://yoursite.com/tags/%E5%9B%BE%E5%83%8F%E8%AF%86%E5%88%AB/"/>
     
       <category term="残差网络" scheme="http://yoursite.com/tags/%E6%AE%8B%E5%B7%AE%E7%BD%91%E7%BB%9C/"/>
+    
+      <category term="神经网络" scheme="http://yoursite.com/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"/>
+    
+      <category term="论文阅读" scheme="http://yoursite.com/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
     
   </entry>
   
@@ -260,9 +281,9 @@
     
       <category term="论文阅读" scheme="http://yoursite.com/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
     
-      <category term="问题" scheme="http://yoursite.com/tags/%E9%97%AE%E9%A2%98/"/>
-    
       <category term="生成对抗网络" scheme="http://yoursite.com/tags/%E7%94%9F%E6%88%90%E5%AF%B9%E6%8A%97%E7%BD%91%E7%BB%9C/"/>
+    
+      <category term="问题" scheme="http://yoursite.com/tags/%E9%97%AE%E9%A2%98/"/>
     
   </entry>
   
@@ -556,30 +577,6 @@
       <category term="volatile" scheme="http://yoursite.com/tags/volatile/"/>
     
       <category term="原子操作" scheme="http://yoursite.com/tags/%E5%8E%9F%E5%AD%90%E6%93%8D%E4%BD%9C/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>并发编程的挑战</title>
-    <link href="http://yoursite.com/2019/01/20/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%9A%84%E6%8C%91%E6%88%98/"/>
-    <id>http://yoursite.com/2019/01/20/并发编程的挑战/</id>
-    <published>2019-01-20T12:06:28.000Z</published>
-    <updated>2019-01-21T02:25:24.579Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="并发编程的挑战"><a href="#并发编程的挑战" class="headerlink" title="并发编程的挑战"></a>并发编程的挑战</h1><h2 id="上下文切换"><a href="#上下文切换" class="headerlink" title="上下文切换"></a>上下文切换</h2><p>在多线程执行代码的过程中，CPU为每个线程分配CPU时间片保证线程的执行，时间片很短，一般是几十毫秒（ms）。CPU通过时间片分配算法来循环执行任务，当前任务执行一个时间片后会切换到下一个任务。但是，在切换前会保存前一个任务的状态，以便下次切换回这个任务的时候可以再加载这个任务。任务从保存到再加载的过程就是一次上下文切换。<br><a id="more"></a><br>多线程由于上下文切换的存在使得其不一定比单线程快，一般减少上下文切换的方法有无锁并发编程、CAS算法、使用最少线程和使用协程。  </p><ul><li><strong>无锁并发编程</strong>：多线程竞争锁时，会引起上下文切换，所以多线程处理数据时，可以用一些方法来避免使用锁，如将数据的ID按照Hash算法取模分段，不同线程处理不同段的数据；</li><li><strong>CAS算法</strong>：Java的Atomic包使用CAS算法来更新数据，而不需要加锁；</li><li><strong>使用最少线程</strong>：避免创建不需要的线程，比如任务少时，创建很多线程会造成大量线程都处于等待状态；</li><li><strong>使用协程</strong>：在单线程中实现多任务的调度，并在单线程里维持多个任务间的切换。<h2 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h2>死锁是指由于两个或者多个任务互相持有对方所需要的资源，导致这些线程处于等待状态，无法前往执行。</li></ul><h3 id="线程死锁产生的四个必要条件"><a href="#线程死锁产生的四个必要条件" class="headerlink" title="线程死锁产生的四个必要条件"></a>线程死锁产生的四个必要条件</h3><ol><li><strong>互斥条件</strong>：某种资源一次只允许一个线程访问，即该资源一旦分配给某个线程，其他线程就不能再访问，直到该进程访问结束并释放；</li><li><strong>请求和保持条件</strong>：指线程已经保持至少一个资源，但又提出了新的资源请求，而该资源已被其它线程占有，此时请求进程阻塞，但又对自己已获得的其它资源保持不放；</li><li><strong>不剥夺条件</strong>：指线程已获得的资源，在未使用完之前，不能被剥夺，只能在使用完时由自己释放；</li><li><strong>环路(循环)等待条件</strong>：指在发生死锁时，必然存在一个线程——资源的环形链，即线程集合<code>{t0，t1，t2，···，tn}</code>中的t0正在等待一个t1占用的资源；t1正在等待t2占用的资源，……，tn正在等待已被t0占用的资源。</li></ol><h3 id="避免死锁的几个常用方法"><a href="#避免死锁的几个常用方法" class="headerlink" title="避免死锁的几个常用方法"></a>避免死锁的几个常用方法</h3><ul><li>避免一个线程同时获得多个锁；</li><li>避免一个线程在锁内同时占用多个资源，尽量保证每个锁只占用一个资源；</li><li>尝试使用定时锁，使用<code>lock。tryLock(timeout)</code>来替代使用内部锁机制；</li><li>对于数据库锁，加锁和解锁必须在一个数据库连接里，否则会出现解锁失败的情况。</li></ul><h2 id="资源限制的挑战"><a href="#资源限制的挑战" class="headerlink" title="资源限制的挑战"></a>资源限制的挑战</h2><p>资源限制是指在进行并发编程时，程序的执行速度受限于计算机硬件资源或软件资源。例如，网络带宽的限制、硬盘读写速度的限制、CPU计算速度的限制、数据库的连接数和socket连接数限制等。</p><h3 id="资源限制引发的问题"><a href="#资源限制引发的问题" class="headerlink" title="资源限制引发的问题"></a>资源限制引发的问题</h3><p>在并发编程中，将代码执行速度加快的原则是将代码中串行执行的部分变为并发执行，但如果将某段串行代码并发执行，因为资源受限，仍然在串行执行，这时候程序不仅不会加快执行，反而会更慢，因为增加了上下文切换和资源调度的时间。</p><h3 id="资源限制的解决"><a href="#资源限制的解决" class="headerlink" title="资源限制的解决"></a>资源限制的解决</h3><p>对应硬件资源限制，可以考虑使用集群并行执行程序。既然单机的资源有限制，那么就让程序在多机上运行。比如用<code>ODPS</code>、<code>Hadoop</code>或者自己搭建服务器集群，不同的机器处理不同的数据。<br>对于软件资源限制，可以考虑使用资源池复用资源。比如使用连接池将数据库和Socket连接复用，或者在调用对方webservice接口获取数据时，只建立一个连接。</p><h3 id="资源限制下的并发编程"><a href="#资源限制下的并发编程" class="headerlink" title="资源限制下的并发编程"></a>资源限制下的并发编程</h3><p>根据不同的资源限制调整程序的并发度，比如下载文件程序依赖于两个资源——带宽和硬盘读写速度。有数据库操作时，涉及数据库连接数，如果SQL语句执行非常快，而线程的数量比数据库连接数大很多，就会导致某些线程被阻塞，等待数据库连接，因此这个时候就应该降低线程数量。</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;并发编程的挑战&quot;&gt;&lt;a href=&quot;#并发编程的挑战&quot; class=&quot;headerlink&quot; title=&quot;并发编程的挑战&quot;&gt;&lt;/a&gt;并发编程的挑战&lt;/h1&gt;&lt;h2 id=&quot;上下文切换&quot;&gt;&lt;a href=&quot;#上下文切换&quot; class=&quot;headerlink&quot; title=&quot;上下文切换&quot;&gt;&lt;/a&gt;上下文切换&lt;/h2&gt;&lt;p&gt;在多线程执行代码的过程中，CPU为每个线程分配CPU时间片保证线程的执行，时间片很短，一般是几十毫秒（ms）。CPU通过时间片分配算法来循环执行任务，当前任务执行一个时间片后会切换到下一个任务。但是，在切换前会保存前一个任务的状态，以便下次切换回这个任务的时候可以再加载这个任务。任务从保存到再加载的过程就是一次上下文切换。&lt;br&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Java并发编程" scheme="http://yoursite.com/categories/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/"/>
-    
-    
-      <category term="上下文切换" scheme="http://yoursite.com/tags/%E4%B8%8A%E4%B8%8B%E6%96%87%E5%88%87%E6%8D%A2/"/>
-    
-      <category term="死锁" scheme="http://yoursite.com/tags/%E6%AD%BB%E9%94%81/"/>
     
   </entry>
   
