@@ -1976,7 +1976,11 @@ img:hover {
   width: 4px;
   height: 4px;
   border-radius: 50%;
+<<<<<<< HEAD
   background: #ff990f;
+=======
+  background: #09fff4;
+>>>>>>> update
 }
 .links-of-blogroll {
   font-size: 13px;

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-09-07T05:00:34.215Z</updated>
+  <updated>2019-09-09T09:04:28.728Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>第一章 统计学习方法概论</title>
+    <link href="http://yoursite.com/2019/09/09/%E7%AC%AC%E4%B8%80%E7%AB%A0-%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E6%A6%82%E8%AE%BA/"/>
+    <id>http://yoursite.com/2019/09/09/第一章-统计学习方法概论/</id>
+    <published>2019-09-09T02:21:21.000Z</published>
+    <updated>2019-09-09T09:04:28.728Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="1-统计学习"><a href="#1-统计学习" class="headerlink" title="1. 统计学习"></a>1. 统计学习</h1><p>统计学习（statistical learning）是关于计算机基于数据构建概率统计模型并运用模型对数据进行预测人与分析的一门学科。</p><p>$$<br>已有数据\xrightarrow{构建}模型\xrightarrow{预测分析}数据<br>$$<br><a id="more"></a> </p><h2 id="主要特点"><a href="#主要特点" class="headerlink" title="主要特点"></a>主要特点</h2><ul><li>统计学习以计算机与网络为平台，是构建在计算机及网络之上的；</li><li>统计学习以数据为研究对象，是数据驱动的学科；</li><li>统计学习的目的是对数据进行预测与分析；</li><li>统计学习以方法为中心，统计学习方法构建模型并应用模型进行预测与分析；</li><li>统计学习是概率论、统计学、信息论、计算理论、最优化理论及计算机科学等多个领域的交叉学科，并且在发展中逐步形成独自的理论体系与方法论。</li></ul><p>统计学习的对象是数据，统计学习从数据出发，提取数据的特征，抽取出数据的模型，发现数据中的知识，又回到对数据的分析与预测中。数据形式多样，包括存在于计算机及网络上的各种数字、文字、图像、音频、视频数据以及它们的组合。</p><h2 id="统计学习的前提"><a href="#统计学习的前提" class="headerlink" title="统计学习的前提"></a>统计学习的前提</h2><p>统计学习关于数据的基本假设是同类数据具有一定的统计规律性。这里的同类数据指的是具有某种共同性质的数据。由于它们具有统计规律性，所以可以用概率统计方法来加以处理。</p><h2 id="统计学习的目的"><a href="#统计学习的目的" class="headerlink" title="统计学习的目的"></a>统计学习的目的</h2><p>统计学习用于对数据进行预测和分析，特别是对未知新数据进行预测与分析。对数据的预测可以使计算机更加智能化，或者说使计算机的某些性能得到提升；对数据的分析可以让人们获得新的知识，给人们带来新的发现。</p><p>统计学习总的目标就是考虑学习什么样的模型和如何学习模型，以使模型能对数据进行准确的预测与分析，同时也要考虑尽可能地提升学习效率。</p><p><strong>统计学习与机器学习的异同</strong></p><p>统计学习和机器学习的界限一直很模糊，有人认为统计学习偏向于理论上的完善，机器学习基于统计学习，并将其延伸到实践中。<br>机器学习旨在于使最准确的预测成为可能，统计学习模型是为推断变量之间的关系而设计的。<br>我认为，统计学习与机器学习主要就是理论与实践的区别。</p><h2 id="统计学习的方法"><a href="#统计学习的方法" class="headerlink" title="统计学习的方法"></a>统计学习的方法</h2><p>统计学习的方法时基于数据构建统计模型从而对数据进行预测与分析。统计学习由监督学习（supervised learning）、非监督学习（unsupervised learning）、半监督学习（semi-supervised learning）和强化学习（reinforcement learning）等组成。</p><p><strong>监督学习</strong>是从给定的、有限的、用于学习的训练模型（training data）集合出发，假设数据是独立同分布产生的；并且假设要学习的模型属于某个函数的集合，称为假设空间（hypothesis space）；应用某个评价准则（evaluation criterion），从假设空间中选取一个最优的模型，使它对已知训练数据集未知测试数据（test data）在给定的评价准则下有最优的预测；最优模型的选取由算法实现。</p><p>统计学习方法包括模型的假设空间、模型选择的准则以及模型学习的算法，称其为统计学习方法的三要素，简称为模型（model）、策略（stratage）和算法（algorithm）。</p><p>实现统计学习方法的步骤如下：<br>（1）得到一个有限的训练数据集合；<br>（2）确定包含多有可能的模型的假设空间，即学习模型的集合；<br>（3）确定模型选择的准则，即学习的策略；<br>（4）实现求解最优模型的算法，即学习的算法；<br>（5）通过学习方法选择最优模型；<br>（6）利用学习的最优模型对新数据进行预测或分析。</p><p>统计学习研究一般包括统计学习方法（statistical learning method）、统计学习理论（statistical learning theory）以及统计学习应用三个方面。</p><h1 id="2-监督学习"><a href="#2-监督学习" class="headerlink" title="2. 监督学习"></a>2. 监督学习</h1><p><strong>监督学习</strong>（supervised learning）的任务是学习一个模型，是模型能够对任意给定的输入，对其相应的输出做出一个好的预测。</p><h2 id="基本概率"><a href="#基本概率" class="headerlink" title="基本概率"></a>基本概率</h2><h3 id="输入空间、特征空间与输出空间"><a href="#输入空间、特征空间与输出空间" class="headerlink" title="输入空间、特征空间与输出空间"></a>输入空间、特征空间与输出空间</h3><p>在监督学习中，将输入与输出所有可能取值的集合分别称为输入空间与输出空间。输入与输出空间可以是有限元素的集合，也可以是整个欧氏空间。输入和输出空间可以是同一空间，也可以不是同一空间；通常输出空间小于输入空间。<br>每一个具体的输入都是一个实例（instance），通常由特征向量（feature vector）表示。所有的特征向量存在的空间称为特征空间（feature space）。</p><h3 id="联合概率分布"><a href="#联合概率分布" class="headerlink" title="联合概率分布"></a>联合概率分布</h3><p>监督学习假设输入与输出的随机变量$X$和$Y$遵循联合概率分布$P(X,Y)$。$P(X,Y)$表示分布函数，或分布密度函数。</p><h3 id="假设空间"><a href="#假设空间" class="headerlink" title="假设空间"></a>假设空间</h3><p>监督学习的目的在于学习一个由输入到输出的映射，这一映射由模型来表示。换句话说，学习的目的就是找到最满足映射关系的模型。模型属于由输入空间到输出空间的映射的集合，这个集合就是假设空间（hypothesis space）。监督学习的模型可以是概率模型或非概率模型，由条件概率分布$P(Y/X)$或决策函数（decision function）$Y=f(X)$表示。</p><h2 id="问题的形式化"><a href="#问题的形式化" class="headerlink" title="问题的形式化"></a>问题的形式化</h2><p>监督学习利用训练数据集学习一个模型，再用模型对测试样本集进行预测（prediction）。由于在这个过程中需要训练数据集，而训练数据集往往是通过人工标注的，所以统称为监督学习。监督学习分为学习和预测两个过程，由学习系统和预测系统完成。</p><p>首先给定一个训练数据集：</p><p>$$<br>T={(x_1,y_1),(x_2,y_2),\cdots,(x_N,y_N)}<br>$$</p><p>其中$(x_i,y_i),i=1,2,\cdots,N$，称为样本或样本点。$x_i\in\chi\subseteqq{R^n}$是输入的观测值，也称为输入或实例，$y_i\subseteqq\LARGE{y}$是输出的观测值，也称为输出。  </p><p>监督学习中，假设训练数据和测试数据都是依联合概率分布$P(X,Y)$独立同分布产生的。<br>在学习过程中，学习系统利用给定的训练数据集，通过学习（或训练）得到一个模型，表示为条件概率分布$\hat{P}(Y/X)$或决策函数$Y=\hat{f}(X)$。条件概率分布$\hat{P}(Y/X)$或决策函数$Y=\hat{f}(X)$描述输入与输出随机变量之间的映射关系。<br>在预测过程中，预测系统对于给定的测试样本集合中的输入$x_{N+1}$，由模型$y_{N+1}=argmax_{y_{N+1}}\hat{P}(y_{N+1}/x_{N+1})$或$y_{N+1}=\hat{f}(x_{N+1})$给出相应的输出$y_{N+1}$。其中$y_{N+1}=argmax_{y_{N+1}}\hat{P}(y_{N+1}/x_{N+1})$表示的是对于给定的$x_{N+1}$使得$\hat{P}(y_{N+1}/x_{N+1})$最大时对应的$y_{N+1}$的取值。<br>在学习的过程中，学习系统（也就是学习算法）试图通过训练数据集中的样本$(x_i,y_i)$带来的信息学习模型。具体来说，对于输入$x_i$，一个具体的模型$y=f(x)$可以产生一个输出$f(x_i)$，而训练数据集中对应的输出是$y_i$，如果这个模型有很好的预测能力，那么训练样本输出$y_i$就应该和模型的输出$f(x_i)$尽可能接近。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;1-统计学习&quot;&gt;&lt;a href=&quot;#1-统计学习&quot; class=&quot;headerlink&quot; title=&quot;1. 统计学习&quot;&gt;&lt;/a&gt;1. 统计学习&lt;/h1&gt;&lt;p&gt;统计学习（statistical learning）是关于计算机基于数据构建概率统计模型并运用模型对数据进行预测人与分析的一门学科。&lt;/p&gt;
+&lt;p&gt;$$&lt;br&gt;已有数据\xrightarrow{构建}模型\xrightarrow{预测分析}数据&lt;br&gt;$$&lt;br&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="机器学习" scheme="http://yoursite.com/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>句子分块</title>
@@ -260,9 +281,9 @@
     
       <category term="论文阅读" scheme="http://yoursite.com/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
     
-      <category term="问题" scheme="http://yoursite.com/tags/%E9%97%AE%E9%A2%98/"/>
-    
       <category term="生成对抗网络" scheme="http://yoursite.com/tags/%E7%94%9F%E6%88%90%E5%AF%B9%E6%8A%97%E7%BD%91%E7%BB%9C/"/>
+    
+      <category term="问题" scheme="http://yoursite.com/tags/%E9%97%AE%E9%A2%98/"/>
     
   </entry>
   
@@ -559,6 +580,7 @@
     
   </entry>
   
+<<<<<<< HEAD
   <entry>
     <title>并发编程的挑战</title>
     <link href="http://yoursite.com/2019/01/20/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%9A%84%E6%8C%91%E6%88%98/"/>
@@ -583,4 +605,6 @@
     
   </entry>
   
+=======
+>>>>>>> update
 </feed>
