@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-09-09T09:04:28.728Z</updated>
+  <updated>2019-09-10T05:23:20.318Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,11 +17,32 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>第一章 统计学习方法概论</title>
-    <link href="http://yoursite.com/2019/09/09/%E7%AC%AC%E4%B8%80%E7%AB%A0-%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E6%A6%82%E8%AE%BA/"/>
-    <id>http://yoursite.com/2019/09/09/第一章-统计学习方法概论/</id>
+    <title>统计学习三要素</title>
+    <link href="http://yoursite.com/2019/09/10/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E4%B8%89%E8%A6%81%E7%B4%A0/"/>
+    <id>http://yoursite.com/2019/09/10/统计学习三要素/</id>
+    <published>2019-09-10T02:37:22.000Z</published>
+    <updated>2019-09-10T05:23:20.318Z</updated>
+    
+    <content type="html"><![CDATA[<p>统计学习方法是由模型、策略和算法构成的，即统计学习方法由三要素构成，可以简单表示为：</p><p>$$<br>方法=模型+策略+算法<br>$$<br><a id="more"></a> </p><h2 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h2><p>统计学习首先要考虑的问题是学习什么样的模型。在监督学习过程中，模型就是所要学习的条件概率分布$P(Y/X)$或者决策函数$Y=f(X)$。模型的假设空间包含所有可能的条件概率分布或决策函数。  </p><p>对于决策函数是输入变量的线性函数的情况，模型的假设空间就是所有线性函数构成的函数集合。假设空间用$F$表示。假设空间可以定义为决策函数的集合</p><p>$$<br>F={f|Y=f(X)}<br>$$</p><p>其中，$X$和$Y$是定义在输入空间$\LARGE{x}$和输出空间$\LARGE{y}$上的变量。这时$F$通常是由一个参数向量决定的函数族：</p><p>$$<br>F={f|Y=f_\theta(X),\theta\in{R^n}}<br>$$<br>参数向量$\theta$取值于$n$维欧氏空间$R^n$，称为参数空间。</p><p>假设空间也可以定义为条件概率的集合</p><p>$$<br>F={P|P(Y/X)}<br>$$<br>其中，$X$和$Y$是定义在输入空间$\LARGE{x}$和输出空间$\LARGE{y}$上的随机变量。这时$F$通常是由一个参数向量决定的条件概率分布族：</p><p>$$<br>F={P|P_\theta(Y/X)}<br>$$</p><p>参数向量$\theta$取值于$n$维欧氏空间$R^n$，也称为参数空间。</p><h2 id="策略"><a href="#策略" class="headerlink" title="策略"></a>策略</h2><p>有了模型的假设空间，统计学习接着需要考虑使用什么样的策略从假设空间中选取出最优的模型。  </p><p>首先引入损失函数与风险函数的概念，损失函数模型一次预测的好坏，风险函数度量平均意义下模型预测的好坏。</p><h3 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h3><p>监督学习问题是在假设空间$F$中选取模型$f$作为决策函数，对于给定的输入$X$，由$f(X)$给出相应的输出$Y$，这个输出的预测值$f(X)$与真实值$Y$可能一致也可能不一致，用一个损失函数(loss function)与代价函数(cost function)来度量错误的程度。损失函数是$f(X)$与$Y$的非负实值函数，记作$L(Y,f(X))$。</p><p>统计学习常用的损失函数有以下几种：<br>（1）0-1损失函数(0-1 loss function)  </p><p>$$<br>L(Y,f(X)) = \begin{cases}<br>1, &amp; Y \neq f(X) \<br>0, &amp; Y = f(X)<br>\end{cases}<br>$$</p><p>（2）平方损失函数(quadratic loss function)</p><p>$$<br>L(Y,f(X)) = (Y-f(X))^2<br>$$</p><p>（3）绝对损失函数(absolute loss function)</p><p>$$<br>L(Y,f(X)) = |Y-f(X)|<br>$$</p><p>（4）对数损失函数(logarithmic loss function)或者对数似然损失函数(log-likelihood loss function)</p><p>$$<br>L(Y,P(Y/X)) = -log{P(Y/X)}<br>$$</p><h3 id="风险函数"><a href="#风险函数" class="headerlink" title="风险函数"></a>风险函数</h3><p>损失函数值越小，模型就越好。由于模型的输入、输出$(X,Y)$是随机变量，遵循联合分布$P(X,Y)$，所以损失函数的期望是</p><p>$$<br>R_{exp}(f)=E_p[L(Y,f(X))]=\int_{\LARGE{x}\times\Large{y}}L(y,f(x))P(x,y)dxdy<br>$$</p><p>这是理论上$f(X)$关于联合分布$P(X,Y)$的平均意义下的损失，称为风险函数（risk function）或期望损失（expected loss）。学习的目标就是选择期望风险最小的模型。</p><p>给定一个训练数据集</p><p>$$<br>T={(x_1,y_1),(x_2,y_2),\cdots,(x_N,y_N)}<br>$$</p><p>模型$f(X)$关于训练数据集的平均损失称为经验风险(empirical risk)或经验损失(empirical loss)，记作$R_{emp}$:</p><p>$$<br>R_{emp}(f)=\frac{1}{N}\sum_{i=1}^N{L(y_i,f(x_i))}<br>$$</p><p>期望风险$R_{exp}(f)$是模型关于联合分布的期望损失，经验风险$R_{emp}(f)$是模型关于训练样本集的平均损失。根据大数定律，当样本容量$N$趋于无穷时，经验风险$R_{emp}(f)$趋于期望风险$R_{exp}(f)$。但是现实中训练样本数目有限，甚至很小，所以用经验风险估计期望风险常常并不理想，需要对经验风险进行一定的矫正。</p><h3 id="经验风险最小化与结构风险最小化"><a href="#经验风险最小化与结构风险最小化" class="headerlink" title="经验风险最小化与结构风险最小化"></a>经验风险最小化与结构风险最小化</h3><p>在假设空间、损失函数以及训练数据集确定的情况下，经验风险函数式就可以确定。通过最小化经验风险就可以得到最优的模型。根据这一策略，按照经验风险最小化求最优模型就是求解最优化问题：</p><p>$$<br>min_{f\in{F}}\frac{1}{N}\sum_{i=1}^N{L(y_i,f(x_i))}<br>$$</p><p>其中，$F$是假设空间。</p><p>当样本容量足够大时，经验风险最小化能保证有很好的学习效果，在现实中被广泛采用。当样本容量很小的时候，经验风险最小化学习的效果就不一定很好，会产生过拟合现象。  </p><p>结构风险最小化(structural risk minimization,SRM)是为了防止过拟合而提出的策略。结构风险最小化等价于正则化(regularization)。结构风险在经验风险上加上表示模型复杂度的正则项(regularizer)或惩罚项(penalty term)。在假设空间、损失函数以及训练数据集确定的情况下，结构风险的定义是：</p><p>$$<br>R_{srm}(f)=\frac{1}{N}\sum_{i=1}^N{L(y_i,f(x_i))}+\lambda{J(f)}<br>$$</p><p>其中$J(f)$为模型的复杂度，是定义在假设空间$F$上的泛函。模型$f$越复杂，复杂度$J(f)$就越大。也就是说，复杂度表示了对复杂模型的惩罚。$\lambda\geq{0}$是系数，用以权衡经验风险和模型复杂度。结构风险小需要经验风险和模型复杂度同时小。</p><p>结构风险最小化的策略认为结构风险最小的模型就是最优的模型。所以求最优模型，就是求解以下问题：</p><p>$$<br>min_{f\in{F}}R_{srm}(f)=min_{f\in{F}}{\frac{1}{N}\sum_{i=1}^N{L(y_i,f(x_i))}+\lambda{J(f)}}<br>$$</p><h2 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h2><p>算法是指学习模型的具体计算方法。统计学习基于训练数据集，根据学习策略，从假设空间中选择最优模型，最后考虑用什么样的计算方法求解最优模型。</p><p>这时，统计学习问题归结为最优化问题，统计学习的算法称为求解最优化问题的算法。统计学习方法之间的不同，主要来自其模型、策略、算法的不同。确定里模型、策略、算法，统计学习的方法也就确定了。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;统计学习方法是由模型、策略和算法构成的，即统计学习方法由三要素构成，可以简单表示为：&lt;/p&gt;
+&lt;p&gt;$$&lt;br&gt;方法=模型+策略+算法&lt;br&gt;$$&lt;br&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="统计学习" scheme="http://yoursite.com/categories/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>统计学习方法概论</title>
+    <link href="http://yoursite.com/2019/09/09/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E6%A6%82%E8%AE%BA/"/>
+    <id>http://yoursite.com/2019/09/09/统计学习方法概论/</id>
     <published>2019-09-09T02:21:21.000Z</published>
-    <updated>2019-09-09T09:04:28.728Z</updated>
+    <updated>2019-09-10T02:37:38.839Z</updated>
     
     <content type="html"><![CDATA[<h1 id="1-统计学习"><a href="#1-统计学习" class="headerlink" title="1. 统计学习"></a>1. 统计学习</h1><p>统计学习（statistical learning）是关于计算机基于数据构建概率统计模型并运用模型对数据进行预测人与分析的一门学科。</p><p>$$<br>已有数据\xrightarrow{构建}模型\xrightarrow{预测分析}数据<br>$$<br><a id="more"></a> </p><h2 id="主要特点"><a href="#主要特点" class="headerlink" title="主要特点"></a>主要特点</h2><ul><li>统计学习以计算机与网络为平台，是构建在计算机及网络之上的；</li><li>统计学习以数据为研究对象，是数据驱动的学科；</li><li>统计学习的目的是对数据进行预测与分析；</li><li>统计学习以方法为中心，统计学习方法构建模型并应用模型进行预测与分析；</li><li>统计学习是概率论、统计学、信息论、计算理论、最优化理论及计算机科学等多个领域的交叉学科，并且在发展中逐步形成独自的理论体系与方法论。</li></ul><p>统计学习的对象是数据，统计学习从数据出发，提取数据的特征，抽取出数据的模型，发现数据中的知识，又回到对数据的分析与预测中。数据形式多样，包括存在于计算机及网络上的各种数字、文字、图像、音频、视频数据以及它们的组合。</p><h2 id="统计学习的前提"><a href="#统计学习的前提" class="headerlink" title="统计学习的前提"></a>统计学习的前提</h2><p>统计学习关于数据的基本假设是同类数据具有一定的统计规律性。这里的同类数据指的是具有某种共同性质的数据。由于它们具有统计规律性，所以可以用概率统计方法来加以处理。</p><h2 id="统计学习的目的"><a href="#统计学习的目的" class="headerlink" title="统计学习的目的"></a>统计学习的目的</h2><p>统计学习用于对数据进行预测和分析，特别是对未知新数据进行预测与分析。对数据的预测可以使计算机更加智能化，或者说使计算机的某些性能得到提升；对数据的分析可以让人们获得新的知识，给人们带来新的发现。</p><p>统计学习总的目标就是考虑学习什么样的模型和如何学习模型，以使模型能对数据进行准确的预测与分析，同时也要考虑尽可能地提升学习效率。</p><p><strong>统计学习与机器学习的异同</strong></p><p>统计学习和机器学习的界限一直很模糊，有人认为统计学习偏向于理论上的完善，机器学习基于统计学习，并将其延伸到实践中。<br>机器学习旨在于使最准确的预测成为可能，统计学习模型是为推断变量之间的关系而设计的。<br>我认为，统计学习与机器学习主要就是理论与实践的区别。</p><h2 id="统计学习的方法"><a href="#统计学习的方法" class="headerlink" title="统计学习的方法"></a>统计学习的方法</h2><p>统计学习的方法时基于数据构建统计模型从而对数据进行预测与分析。统计学习由监督学习（supervised learning）、非监督学习（unsupervised learning）、半监督学习（semi-supervised learning）和强化学习（reinforcement learning）等组成。</p><p><strong>监督学习</strong>是从给定的、有限的、用于学习的训练模型（training data）集合出发，假设数据是独立同分布产生的；并且假设要学习的模型属于某个函数的集合，称为假设空间（hypothesis space）；应用某个评价准则（evaluation criterion），从假设空间中选取一个最优的模型，使它对已知训练数据集未知测试数据（test data）在给定的评价准则下有最优的预测；最优模型的选取由算法实现。</p><p>统计学习方法包括模型的假设空间、模型选择的准则以及模型学习的算法，称其为统计学习方法的三要素，简称为模型（model）、策略（stratage）和算法（algorithm）。</p><p>实现统计学习方法的步骤如下：<br>（1）得到一个有限的训练数据集合；<br>（2）确定包含多有可能的模型的假设空间，即学习模型的集合；<br>（3）确定模型选择的准则，即学习的策略；<br>（4）实现求解最优模型的算法，即学习的算法；<br>（5）通过学习方法选择最优模型；<br>（6）利用学习的最优模型对新数据进行预测或分析。</p><p>统计学习研究一般包括统计学习方法（statistical learning method）、统计学习理论（statistical learning theory）以及统计学习应用三个方面。</p><h1 id="2-监督学习"><a href="#2-监督学习" class="headerlink" title="2. 监督学习"></a>2. 监督学习</h1><p><strong>监督学习</strong>（supervised learning）的任务是学习一个模型，是模型能够对任意给定的输入，对其相应的输出做出一个好的预测。</p><h2 id="基本概率"><a href="#基本概率" class="headerlink" title="基本概率"></a>基本概率</h2><h3 id="输入空间、特征空间与输出空间"><a href="#输入空间、特征空间与输出空间" class="headerlink" title="输入空间、特征空间与输出空间"></a>输入空间、特征空间与输出空间</h3><p>在监督学习中，将输入与输出所有可能取值的集合分别称为输入空间与输出空间。输入与输出空间可以是有限元素的集合，也可以是整个欧氏空间。输入和输出空间可以是同一空间，也可以不是同一空间；通常输出空间小于输入空间。<br>每一个具体的输入都是一个实例（instance），通常由特征向量（feature vector）表示。所有的特征向量存在的空间称为特征空间（feature space）。</p><h3 id="联合概率分布"><a href="#联合概率分布" class="headerlink" title="联合概率分布"></a>联合概率分布</h3><p>监督学习假设输入与输出的随机变量$X$和$Y$遵循联合概率分布$P(X,Y)$。$P(X,Y)$表示分布函数，或分布密度函数。</p><h3 id="假设空间"><a href="#假设空间" class="headerlink" title="假设空间"></a>假设空间</h3><p>监督学习的目的在于学习一个由输入到输出的映射，这一映射由模型来表示。换句话说，学习的目的就是找到最满足映射关系的模型。模型属于由输入空间到输出空间的映射的集合，这个集合就是假设空间（hypothesis space）。监督学习的模型可以是概率模型或非概率模型，由条件概率分布$P(Y/X)$或决策函数（decision function）$Y=f(X)$表示。</p><h2 id="问题的形式化"><a href="#问题的形式化" class="headerlink" title="问题的形式化"></a>问题的形式化</h2><p>监督学习利用训练数据集学习一个模型，再用模型对测试样本集进行预测（prediction）。由于在这个过程中需要训练数据集，而训练数据集往往是通过人工标注的，所以统称为监督学习。监督学习分为学习和预测两个过程，由学习系统和预测系统完成。</p><p>首先给定一个训练数据集：</p><p>$$<br>T={(x_1,y_1),(x_2,y_2),\cdots,(x_N,y_N)}<br>$$</p><p>其中$(x_i,y_i),i=1,2,\cdots,N$，称为样本或样本点。$x_i\in\chi\subseteqq{R^n}$是输入的观测值，也称为输入或实例，$y_i\subseteqq\LARGE{y}$是输出的观测值，也称为输出。  </p><p>监督学习中，假设训练数据和测试数据都是依联合概率分布$P(X,Y)$独立同分布产生的。<br>在学习过程中，学习系统利用给定的训练数据集，通过学习（或训练）得到一个模型，表示为条件概率分布$\hat{P}(Y/X)$或决策函数$Y=\hat{f}(X)$。条件概率分布$\hat{P}(Y/X)$或决策函数$Y=\hat{f}(X)$描述输入与输出随机变量之间的映射关系。<br>在预测过程中，预测系统对于给定的测试样本集合中的输入$x_{N+1}$，由模型$y_{N+1}=argmax_{y_{N+1}}\hat{P}(y_{N+1}/x_{N+1})$或$y_{N+1}=\hat{f}(x_{N+1})$给出相应的输出$y_{N+1}$。其中$y_{N+1}=argmax_{y_{N+1}}\hat{P}(y_{N+1}/x_{N+1})$表示的是对于给定的$x_{N+1}$使得$\hat{P}(y_{N+1}/x_{N+1})$最大时对应的$y_{N+1}$的取值。<br>在学习的过程中，学习系统（也就是学习算法）试图通过训练数据集中的样本$(x_i,y_i)$带来的信息学习模型。具体来说，对于输入$x_i$，一个具体的模型$y=f(x)$可以产生一个输出$f(x_i)$，而训练数据集中对应的输出是$y_i$，如果这个模型有很好的预测能力，那么训练样本输出$y_i$就应该和模型的输出$f(x_i)$尽可能接近。</p>]]></content>
     
@@ -32,7 +53,7 @@
     
     </summary>
     
-      <category term="机器学习" scheme="http://yoursite.com/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+      <category term="统计学习" scheme="http://yoursite.com/categories/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0/"/>
     
     
   </entry>
@@ -332,9 +353,9 @@
       <category term="深入理解Java虚拟机" scheme="http://yoursite.com/categories/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/"/>
     
     
-      <category term="垃圾收集算法" scheme="http://yoursite.com/tags/%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E7%AE%97%E6%B3%95/"/>
-    
       <category term="垃圾收集器" scheme="http://yoursite.com/tags/%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/"/>
+    
+      <category term="垃圾收集算法" scheme="http://yoursite.com/tags/%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E7%AE%97%E6%B3%95/"/>
     
   </entry>
   
@@ -551,32 +572,6 @@
       <category term="happens-before" scheme="http://yoursite.com/tags/happens-before/"/>
     
       <category term="指令重排序" scheme="http://yoursite.com/tags/%E6%8C%87%E4%BB%A4%E9%87%8D%E6%8E%92%E5%BA%8F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>并发机制的底层实现原理</title>
-    <link href="http://yoursite.com/2019/01/21/%E5%B9%B6%E5%8F%91%E6%9C%BA%E5%88%B6%E7%9A%84%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/"/>
-    <id>http://yoursite.com/2019/01/21/并发机制的底层实现原理/</id>
-    <published>2019-01-21T02:22:24.000Z</published>
-    <updated>2019-01-21T13:02:52.104Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="并发机制的底层实现原理"><a href="#并发机制的底层实现原理" class="headerlink" title="并发机制的底层实现原理"></a>并发机制的底层实现原理</h1><h2 id="volatile"><a href="#volatile" class="headerlink" title="volatile"></a>volatile</h2><p>在多线程并发编程中synchronized和volatile关键字都扮演着重要角色，volatile是轻量级的synchronized，它在多处理器开发中保证了共享变量的“可见性”。可见性的意思是当一个线程修改一个共享变量时，另外的线程可以读到修改后的值。volatile的恰当使用能比synchronized关键字的使用和执行成本更低，因为它不会引起线程上下文的切换和调度。<br><a id="more"></a><br><strong>定义</strong>：Java编程语言允许线程访问共享变量，为了确保共享变量能被准确和一致地更新，线程应该确保通过排他锁单独获得这个变量。<br>Java语言提供了volatile，在某些情况下比锁要更加方便。如果一个字段被声明为volatile，Java线程内存模型确保所有线程看到这个变量的值是一致的。<br>在X86处理器下通过工具获取JIT编译器生成的汇编指令，查看对volatile变量进行写操作时，对应CPU的操作，例子如下：</p><ul><li><p>Java代码如下：  </p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">instance = new Singleton();    //instance是volatile变量</span><br></pre></td></tr></table></figure></li><li><p>转化为汇编代码，如下：  </p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0x01a3de1d: movb $0x0,ox1104800(%esi);0x01a3de24: lock addl $0x0,(%esp);</span><br></pre></td></tr></table></figure></li></ul><p>有volatile变量修饰的共享变量进行写操作时会多出两行汇编代码，通过查看IA-32架构软件开发者手册可知，Lock前缀的指令在多核处理器中会发生以下两件事情。  </p><ol><li>将当前处理器的缓存行的数据写回到系统内存；</li><li>这个写回内存的操作会是其他CPU里缓存了该内存地址的数据无效。</li></ol><h2 id="synchronized"><a href="#synchronized" class="headerlink" title="synchronized"></a>synchronized</h2><p>在多线程并发编程中synchronized一直是元老级角色，很多人称呼它为重量级锁。Java SE1.6对synchronized进行了各种优化，为减少获得锁和释放锁带来的性能消耗而引入的偏向锁和轻量级锁。<br>synchronized实现同步的基础：Java中的每一个对象都可以作为锁，具体表现为一些3种形式：  </p><ul><li>对于普通同步方法，锁是当前实例对象；</li><li>对于静态同步方法，锁是当前类的Class对象；</li><li>对于同步代码块，锁是Synchronized括号里配置的对象。  </li></ul><p>当一个线程师徒访问同步代码块时，它首先必须得到锁，退出或者抛出异常时必须释放锁。<br>从JVM规范中可以看到Synchronized在JVM里实现的原理，JVM基于进入和退出Monitor对象来实现方法同步和代码块同步，但两者实现细节不同。代码块同步用monitorenter和monitorexit指令实现，而方法同步是使用另一种方式实现的，细节没有在JVM规范中提及。但方法的同步同样可以使用上述两个指令实现。<br>monitorenter指令是在编译后插入到同步代码块的开始位置，而monitorexit是插入到方法结束处和异常处，JVM要保证每个monitorenter必须有对应的monitorexit与之配对。任何对象都有一个monitor与之关联，当且一个monitor被持有之后，它将处于被锁状态。线程执行到monitor指令时，将尝试获取对象所对应的monitor的所有权，即尝试获得对象的锁。  </p><h3 id="锁的升级"><a href="#锁的升级" class="headerlink" title="锁的升级"></a>锁的升级</h3><p>Java SE 1.6为了减少获得锁和释放锁带来的性能消耗，引入了偏向锁和轻量级锁，在Java SE 1.6中，锁一共有4个状态，级别从低到高依次是：无锁状态、偏向锁状态、轻量级锁状态和重量级锁状态，这几个状态随着竞争情况逐渐升级。锁可以升级但不可以降级，意味着偏向锁升级为轻量级锁后不能降级为偏向锁。这种锁只能升级不能降级的策略是为了提高获得锁和释放锁的效率。</p><h2 id="原子操作"><a href="#原子操作" class="headerlink" title="原子操作"></a>原子操作</h2><p>原子操作（atomic operation）指的是不可被中断的一个或者一系列操作。<br>处理器保证从系统内存中读取或写入一个字节是原子的，意思是当一个处理器读取一个字节时，其他处理器不能访问这个字节的内存地址。但是负责的内存操作处理器是不能自动保证原子性的，比如跨总线宽度、跨多个缓存行和跨页表的访问。但是，处理器提供<strong>总线锁定</strong>和<strong>缓存锁定</strong>两个机制来保证复杂内存操作的原子性。</p><ul><li>总线锁是指使用处理器提供的一个LOCK#信号，当一个处理器在总线上输出此信号时，其他处理器的请求将被阻塞住，那么该处理器就可以独占共享内存。但是总线锁定把CPU和内存之间的通信锁定了，这使得锁定期间，其他处理器不能操作其他内存地址的数据，所以总线锁定开销比较大。</li><li>缓存锁定是指内存区域如果被缓存在处理器的缓存行中，并且在LOCK操作期间被锁定，那么当它执行写操作回写到内存时，处理器不在总线上声言LOCK#信号，而是修改内部的内存地址，并允许它的缓存一致性机制来保证操作的原子性，因为缓存一致性机制会阻止同时修改由两个以上处理器缓存的内存区域数据，当其他处理器回写已被锁定的缓存行的数据时，会使缓存行无效  </li></ul><p>CAS实现原子操作的三大问题：</p><ol><li>ABA问题；</li><li>循环时间长开销大；</li><li>只能保证一个共享变量的原子操作。</li></ol>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;并发机制的底层实现原理&quot;&gt;&lt;a href=&quot;#并发机制的底层实现原理&quot; class=&quot;headerlink&quot; title=&quot;并发机制的底层实现原理&quot;&gt;&lt;/a&gt;并发机制的底层实现原理&lt;/h1&gt;&lt;h2 id=&quot;volatile&quot;&gt;&lt;a href=&quot;#volatile&quot; class=&quot;headerlink&quot; title=&quot;volatile&quot;&gt;&lt;/a&gt;volatile&lt;/h2&gt;&lt;p&gt;在多线程并发编程中synchronized和volatile关键字都扮演着重要角色，volatile是轻量级的synchronized，它在多处理器开发中保证了共享变量的“可见性”。可见性的意思是当一个线程修改一个共享变量时，另外的线程可以读到修改后的值。volatile的恰当使用能比synchronized关键字的使用和执行成本更低，因为它不会引起线程上下文的切换和调度。&lt;br&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Java并发编程" scheme="http://yoursite.com/categories/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/"/>
-    
-    
-      <category term="synchronized" scheme="http://yoursite.com/tags/synchronized/"/>
-    
-      <category term="volatile" scheme="http://yoursite.com/tags/volatile/"/>
-    
-      <category term="原子操作" scheme="http://yoursite.com/tags/%E5%8E%9F%E5%AD%90%E6%93%8D%E4%BD%9C/"/>
     
   </entry>
   
