@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-09-10T05:23:20.318Z</updated>
+  <updated>2019-09-18T07:58:10.248Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,26 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>感知机</title>
+    <link href="http://yoursite.com/2019/09/17/%E6%84%9F%E7%9F%A5%E6%9C%BA/"/>
+    <id>http://yoursite.com/2019/09/17/感知机/</id>
+    <published>2019-09-17T13:21:02.000Z</published>
+    <updated>2019-09-18T07:58:10.248Z</updated>
+    
+    <content type="html"><![CDATA[<p>感知机（<code>perceptron</code>）是二类分类的线性分类模型，其输入为实例的特征向量，输出为实例的类别，取$+1$和$-1$二值。感知机对应于输入空间（特征空间）中将实例划分为正负两类的分离超平面，属于判别模型。<br><a id="more"></a> </p><h1 id="感知机模型"><a href="#感知机模型" class="headerlink" title="感知机模型"></a>感知机模型</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>假设输入空间（特征空间）是$X\in{R^n}$，输出空间是$Y={+1,-1}$。输入$x\in{X}$表示实例的特征向量，对应于输入空间（特征空间）的点；输出$y\in{Y}$表示实例的类别。由输入空间到输出空间的如下函数  </p><p>$$<br>f(x)=sign(w\cdot{x}+b)<br>$$</p><p>称为感知机。其中，$w$和$b$为感知机模型的参数，$w\in{R^n}$叫作权值（weight）或权值向量（weight vector），$b\in{R}$叫作偏置（bias），$w\cdot{x}$表示$w$和$x$的内积。$sign$是符号函数，即  </p><p>$$<br>sign(x)= \begin{cases}<br>+1, &amp; x \geq 0 \<br>-1, &amp; x &lt; 0<br>\end{cases}<br>$$</p><p>感知机是一种线性分类模型，属于判别模型。感知机模型的空间假设是定义在特征空间中的所有线性分类模型（linear classification model）或线性分类器（linear classifier），即函数集合$f|f(x)=w\cdot{x}+b$。</p><p>感知机其实就是寻找一个超平面$w\cdot{x}+b=0$将特征空间划分成为两个部分。位于超平面两侧的点分别被分为正负两类。</p><h1 id="感知机学习策略"><a href="#感知机学习策略" class="headerlink" title="感知机学习策略"></a>感知机学习策略</h1><h2 id="数据集的线性可分性定义"><a href="#数据集的线性可分性定义" class="headerlink" title="数据集的线性可分性定义"></a>数据集的线性可分性定义</h2><p>给定一个数据集   </p><p>$$<br>T={(x_1,y_1),(x_2,y_2),\cdots,(x_N,y_N)},<br>$$</p><p>其中，$x_i\in{X}=R^n, y_i\in{Y}={+1,-1}, i=1,2,\cdots,N$，如果存在某个超平面能够将数据集的正实例点和负实例点完全正确地划分到超平面的两侧，即对所有$y_i=+1$的实例$i$，有$w\cdot{x}+b&gt;0$；对所有$y_i=-1$的实例$i$，有$w\cdot{x}+b&lt;0$，则称数据集$T$是线性可分数据集(linear separable data set)；否则称数据集$T$线性不可分。</p><h2 id="学习策略"><a href="#学习策略" class="headerlink" title="学习策略"></a>学习策略</h2><p>损失函数是误分类点到超平面$S$的总距离，首先写出输入空间$R^n$中任一点$x_0$到超平面$S$的距离：</p><p>$$<br>\frac{1}{||w||}|w\cdot{x_0}+b|<br>$$</p><p>其中，$||w||$是$w$的$L_2$范数。<br>其次，对于误分类的数据$(x_i,y_i)$来说，有$-y_i(w\cdot{x}+b)&gt;0$成立。因此误分类点$x_i$到超平面$S$的距离也可以表示成：</p><p>$$<br>-\frac{1}{||w||}y_i(w\cdot{x_i}+b)<br>$$</p><p>假设超平面$S$对应的误分类点集合为$M$，那么所有误分类点到超平面$S$的总距离为</p><p>$$<br>-\frac{1}{||w||}\sum_{x_i\in{M}}y_i(w\cdot{x_i}+b)<br>$$</p><p>不考虑$\frac{1}{||w||}$就得到了感知机学习的损失函数。  </p><p>给定训练数据集</p><p>$$<br>T={(x_1,y_1),(x_2,y_2),\cdots,(x_N,y_N)},<br>$$<br>其中，$x_i\in{X}=R^n, y_i\in{Y}={+1,-1}, i=1,2,\cdots,N$。感知机$sign(w\cdot{x}+b)$学习的损失函数定义为</p><p>$$<br>L(w,b)=-\sum_{x_i\in{M}}y_i(w\cdot{x_i}+b)<br>$$<br>其中，$M$是误分类点的集合。</p><h1 id="感知机学习算法"><a href="#感知机学习算法" class="headerlink" title="感知机学习算法"></a>感知机学习算法</h1><p>感知机学习算法有原始形式和对偶形式两种。</p><h2 id="原始形式"><a href="#原始形式" class="headerlink" title="原始形式"></a>原始形式</h2><p>感知机学习算法是对以下最优化问题的算法。给定一个训练数据集</p><p>$$<br>T={(x_1,y_1),(x_2,y_2),\cdots,(x_N,y_N)},<br>$$<br>其中，$x_i\in{X}=R^n, y_i\in{Y}={+1,-1}, i=1,2,\cdots,N$，求解参数$w,b$，使其为以下损失函数最小化问题的解  </p><p>$$<br>min_{w,b}L(w,b)=min_{w,b}-\sum_{x_i\in{M}}y_i(w\cdot{x_i}+b)<br>$$</p><p>其中，$M$是误分类点的集合。</p><p>感知机学习算法是误分类驱动的，具体采用随机梯度下降法（stochastic gradient descent）。</p><p><strong>感知机学习算法的原始形式</strong></p><p><strong>输入</strong>：训练数据集$T={(x_1,y_1),(x_2,y_2),\cdots,(x_N,y_N)}$，<br>其中，$x_i\in{X}=R^n, y_i\in{Y}={+1,-1}, i=1,2,\cdots,N$；学习率$\eta(0&lt;\eta\le{1})$；<br><strong>输出</strong>：$w,b$；感知机模型$f(x)=sign(w\cdot{x}+b)$。<br>（1） 选取初值$w_0,b_0$；<br>（2） 在训练集中选取数据$(x_i,y_i)$；<br>（3） 如果$y_i(w\cdot{x}+b)\le{0}$，即$x_i$是误分类的点，那么  </p><p>$$<br>w\leftarrow{w+\eta{y_ix_i}}\<br>b\leftarrow{b+\eta{y_i}}<br>$$</p><p>（4） 转至(2)，直至训练集中没有误分类点</p><h2 id="算法收敛性"><a href="#算法收敛性" class="headerlink" title="算法收敛性"></a>算法收敛性</h2><p>证明对于线性可分的数据集感知机学习算法原始形式收敛，即经过有限次迭代可以得到一个将训练数据集完全正确划分的分离超平面及感知机模型。</p><p><strong>定理</strong> 设训练数据集$T={(x_1,y_1),(x_2,y_2),\cdots,(x_N,y_N)}$是线性可分的，其中存在$x_i\in{X}=R^n, y_i\in{Y}={+1,-1}, i=1,2,\cdots,N$，则<br>（1）存在满足条件$||\hat{w}<em>{opt}||=1$的超平面$\hat{w}</em>{opt}\cdot{\hat{x}}=\hat{w}<em>{opt}\cdot{x}+b</em>{opt}$将训练数据集完全正确分开；且存在$\gamma&gt;0$，对所有$i=1,2,\cdots,N$  </p><p>$$<br>y_i(\hat{w}_{opt}\cdot{\hat{x_i}})=y_i(\hat{w}<em>{opt}\cdot{x}+b</em>{opt})\geq\gamma<br>$$</p><p>（2）令$R=max_{1\le{i}\le{N}}$，则感知机算法的原始形式在训练集上的误分类次数$k$满足不等式  </p><p>$$<br>k\le(\frac{R}{\gamma})^2<br>$$</p><p>即表示训练次数有上届，能够在有限次训练中找到将数据集完全正确划分的超平面。详细证明可以阅读《统计学习方法》。</p><h1 id="感知机学习算法的对偶形式"><a href="#感知机学习算法的对偶形式" class="headerlink" title="感知机学习算法的对偶形式"></a>感知机学习算法的对偶形式</h1><p>对偶形式的基本思想是将$w$和$b$表示成实例$x_i$和标记$y_i$的线性组合的形式，通过求解其系数而求得$w$和$b$。<br>对于误分类点，更新$w$和$b$如下：</p><p>$$<br>w\leftarrow{w+\eta{y_ix_i}}\<br>b\leftarrow{b+\eta{y_i}}<br>$$</p><p>逐步更新$w,b$，假设更新$n$次，则$w,b$关于$(x_i,y_i)$的增量分别是$\alpha_iy_ix_i$和$\alpha{y_i}$，这个$\alpha_i=n_i\eta$。这样从学习过程不难看出，最后学习到的$w,b$可以分别表示为</p><p>$$<br>w=\sum_{i=1}^N{\alpha_iy_ix_i}\<br>b=\sum_{i=1}^N{\alpha_iy_i}<br>$$</p><p>这里，$a_i\ge0,i=1,2,\cdots,N$，当$\eta=1$时，表示第$i$个实例点由于误分而进行更新的次数。实例点更新次数越多，意味着它距离分离超平面越近，也越难正确分类。</p><p><strong>感知机学习算法的对偶形式</strong></p><p><strong>输入</strong>：训练数据集$T={(x_1,y_1),(x_2,y_2),\cdots,(x_N,y_N)}$，<br>其中，$x_i\in{X}=R^n, y_i\in{Y}={+1,-1}, i=1,2,\cdots,N$；学习率$\eta(0&lt;\eta\le{1})$；<br><strong>输出</strong>：$\alpha,b$；感知机模型$f(x)=sign({\sum_{j=1}^N{\alpha_jy_jx_j}}\cdot{x}+b)$。其中，$\alpha=(\alpha_1,\alpha_2,\cdots,\alpha_N)^T$。<br>（1）$\alpha\leftarrow0,b\leftarrow0$<br>（2）在训练集中选取数据$(x_i,y_i)$<br>（3）如果$y_i({\sum_{j=1}^N{\alpha_jy_jx_j}}\cdot{x}+b)\le0$  </p><p>$$<br>\alpha_i\leftarrow\alpha_i+\eta \<br>b\leftarrow{b+\eta{y_i}}<br>$$</p><p>（4）转至（2）直到没有误分类数据。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;感知机（&lt;code&gt;perceptron&lt;/code&gt;）是二类分类的线性分类模型，其输入为实例的特征向量，输出为实例的类别，取$+1$和$-1$二值。感知机对应于输入空间（特征空间）中将实例划分为正负两类的分离超平面，属于判别模型。&lt;br&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="统计学习" scheme="http://yoursite.com/categories/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>统计学习三要素</title>
@@ -130,11 +150,11 @@
       <category term="科研" scheme="http://yoursite.com/categories/%E7%A7%91%E7%A0%94/"/>
     
     
-      <category term="图像识别" scheme="http://yoursite.com/tags/%E5%9B%BE%E5%83%8F%E8%AF%86%E5%88%AB/"/>
+      <category term="论文阅读" scheme="http://yoursite.com/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
     
       <category term="神经网络" scheme="http://yoursite.com/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"/>
     
-      <category term="论文阅读" scheme="http://yoursite.com/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
+      <category term="图像识别" scheme="http://yoursite.com/tags/%E5%9B%BE%E5%83%8F%E8%AF%86%E5%88%AB/"/>
     
       <category term="图文匹配" scheme="http://yoursite.com/tags/%E5%9B%BE%E6%96%87%E5%8C%B9%E9%85%8D/"/>
     
@@ -245,13 +265,13 @@
       <category term="科研" scheme="http://yoursite.com/categories/%E7%A7%91%E7%A0%94/"/>
     
     
-      <category term="图像识别" scheme="http://yoursite.com/tags/%E5%9B%BE%E5%83%8F%E8%AF%86%E5%88%AB/"/>
-    
-      <category term="残差网络" scheme="http://yoursite.com/tags/%E6%AE%8B%E5%B7%AE%E7%BD%91%E7%BB%9C/"/>
+      <category term="论文阅读" scheme="http://yoursite.com/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
     
       <category term="神经网络" scheme="http://yoursite.com/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"/>
     
-      <category term="论文阅读" scheme="http://yoursite.com/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
+      <category term="图像识别" scheme="http://yoursite.com/tags/%E5%9B%BE%E5%83%8F%E8%AF%86%E5%88%AB/"/>
+    
+      <category term="残差网络" scheme="http://yoursite.com/tags/%E6%AE%8B%E5%B7%AE%E7%BD%91%E7%BB%9C/"/>
     
   </entry>
   
@@ -540,38 +560,6 @@
       <category term="数据依赖性" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E4%BE%9D%E8%B5%96%E6%80%A7/"/>
     
       <category term="顺序一致性" scheme="http://yoursite.com/tags/%E9%A1%BA%E5%BA%8F%E4%B8%80%E8%87%B4%E6%80%A7/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java内存模型（一）</title>
-    <link href="http://yoursite.com/2019/02/18/Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%EF%BC%88%E4%B8%80%EF%BC%89/"/>
-    <id>http://yoursite.com/2019/02/18/Java内存模型（一）/</id>
-    <published>2019-02-18T06:54:08.000Z</published>
-    <updated>2019-02-18T08:13:46.911Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Java内存模型"><a href="#Java内存模型" class="headerlink" title="Java内存模型"></a>Java内存模型</h1><h2 id="Java内存模型的基础"><a href="#Java内存模型的基础" class="headerlink" title="Java内存模型的基础"></a>Java内存模型的基础</h2><h3 id="并发编程模型的两个关键问题"><a href="#并发编程模型的两个关键问题" class="headerlink" title="并发编程模型的两个关键问题"></a>并发编程模型的两个关键问题</h3><ol><li>线程之间如何通信？</li><li>线程之间如何同步？</li></ol><p>通信是指线程之间以何种机制交换信息，在命令式编程中线程之间的通信机制有两种：共享内存和消息传递。在共享内存模型中，线程之间共享程序的公共状态，通过读写内存中的公共状态进行隐式通信；而在消息传递的并发模型中，线程之间没有公共状态，线程之间必须通过发送消息来显式进行通信。<br><a id="more"></a><br>同步是指程序中用来控制不同线程间操作发生的相对顺序的机制。在共享内存并发模型中，同步是显式进行的。程序员必须显式指定某个方法或某个代码段需要在线程之间互斥执行。在消息传递的并发模型中，由于消息的发送必须在消息的接收之前，因此同步是隐式进行的。<br>Java的并发采用的是共享内存模型，Java线程之间的通信总是隐式进行的，整个通信过程对于程序员完全透明。</p><h3 id="Java内存模型的抽象结构"><a href="#Java内存模型的抽象结构" class="headerlink" title="Java内存模型的抽象结构"></a>Java内存模型的抽象结构</h3><p>在Java中，所有实例域、静态域和数组元素都存储在堆内存中，堆内存在线程之间共享。局部变量（Local Variables），方法定义参数（Formal Method Parameters）和异常处理器参数（Exception Handler Parameters）不会在线程之间共享，它们不会有内存可见性问题，也不受内存模型的影响。<br>Java线程之间的通信由Java内存模型（JMM）控制，JMM决定一个线程对共享变量的写入何时对另一个线程可见。从抽象的角度来看，JMM定义了线程和主内存之间的抽象关系：线程之间的共享变量存储在主内存（Main Memory）中，每个线程都有一个私有的本地内存（Local Memory），本地内存中存储了该线程读写共享变量的副本。本地内存是JMM的一个抽象概念，它涵盖了缓存、写缓冲区、寄存器以及其他的硬件和编译器优化。</p><p><img src="/2019/02/18/Java内存模型（一）/jmm1.png" alt="image"></p><p>由上图看出线程A和线程B之间要通信的话，必须经历以下两个步骤：<br>1）.线程A把本地内存A中更新过的共享变量 刷新到主内存中去；<br>2）.线程B到主内存中去读取线程A之前已更新过的共享变量。</p><h3 id="指令重排序"><a href="#指令重排序" class="headerlink" title="指令重排序"></a>指令重排序</h3><p>在执行程序时，为了提高性能，编译器和处理器常常会对指令做重排序。重排序分为3种类型。<br>1）编译器优化的重排序。编译器再不改变单线程程序语义的前提下，可以重新安排语句的执行顺序。<br>2）指令级并行的重排序。现代处理器采用了指令级并行技术（Instruction-Level Parallelism，ILP）来将多条指令重叠执行。如果不存在数据依赖性，处理器可以改变语句对应机器指令的执行顺序。<br>3）内存系统的重排序。由于处理器使用缓存和读写缓冲区，这使得加载和存储操作看上去可能是乱序执行。</p><h2 id="happens-before"><a href="#happens-before" class="headerlink" title="happens-before"></a>happens-before</h2><p>在JMM中，如果一个操作执行的结果需要对另一个操作可见，那么这两个操作之间必须要存在happens-before关系。这里提到的两个操作，既可以在一个线程之内，也可以在不同线程之间。<br>与程序员密切相关的happens-before规则如下：  </p><ul><li>程序顺序规则：一个线程中的每个操作，happens-before于该线程中的任意后续操作。（也就是说一个线程中的每个操作的结果对于该线程中的其他操作都是可见的）</li><li>监视器锁规则：对一个锁的解锁，happens-before于随后对这个锁的加锁。（也就是说一个锁的解锁操作需要对该锁的解锁操作可见）</li><li>volatile变量规则：对一个volatile域的写，happens-before于任意后续对这个volatile域的读。</li><li>传递性：如果<code>A happens-before B</code>，且<code>B happens-before C</code>，那么<code>A happens-before C</code>。</li></ul>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Java内存模型&quot;&gt;&lt;a href=&quot;#Java内存模型&quot; class=&quot;headerlink&quot; title=&quot;Java内存模型&quot;&gt;&lt;/a&gt;Java内存模型&lt;/h1&gt;&lt;h2 id=&quot;Java内存模型的基础&quot;&gt;&lt;a href=&quot;#Java内存模型的基础&quot; class=&quot;headerlink&quot; title=&quot;Java内存模型的基础&quot;&gt;&lt;/a&gt;Java内存模型的基础&lt;/h2&gt;&lt;h3 id=&quot;并发编程模型的两个关键问题&quot;&gt;&lt;a href=&quot;#并发编程模型的两个关键问题&quot; class=&quot;headerlink&quot; title=&quot;并发编程模型的两个关键问题&quot;&gt;&lt;/a&gt;并发编程模型的两个关键问题&lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;线程之间如何通信？&lt;/li&gt;
-&lt;li&gt;线程之间如何同步？&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;通信是指线程之间以何种机制交换信息，在命令式编程中线程之间的通信机制有两种：共享内存和消息传递。在共享内存模型中，线程之间共享程序的公共状态，通过读写内存中的公共状态进行隐式通信；而在消息传递的并发模型中，线程之间没有公共状态，线程之间必须通过发送消息来显式进行通信。&lt;br&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Java并发编程" scheme="http://yoursite.com/categories/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/"/>
-    
-    
-      <category term="Java内存模型" scheme="http://yoursite.com/tags/Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/"/>
-    
-      <category term="共享内存" scheme="http://yoursite.com/tags/%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98/"/>
-    
-      <category term="happens-before" scheme="http://yoursite.com/tags/happens-before/"/>
-    
-      <category term="指令重排序" scheme="http://yoursite.com/tags/%E6%8C%87%E4%BB%A4%E9%87%8D%E6%8E%92%E5%BA%8F/"/>
     
   </entry>
   
